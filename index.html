@@ -15,97 +15,114 @@
             font-family: 'Inter', sans-serif; 
             margin: 0; 
             overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
         .font-brand { font-family: 'Rajdhani', sans-serif; }
 
-        /* Estilo Menú Lateral */
+        /* Menú Lateral Estilo Captura */
         #mobile-menu {
             position: fixed;
             top: 0; right: -100%;
-            width: 85%;
-            max-width: 320px;
+            width: 80%;
+            max-width: 300px;
             height: 100%;
-            background: #0a0a0a;
+            background: #0d0d0d;
             z-index: 100;
             transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border-left: 2px solid var(--cyan);
-            padding: 50px 30px;
+            border-left: 3px solid var(--cyan);
+            padding: 50px 25px;
         }
         #mobile-menu.open { right: 0; }
 
         .menu-link {
             display: block;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 800;
             text-transform: uppercase;
             margin-bottom: 25px;
             color: white;
             text-decoration: none;
             font-family: 'Rajdhani', sans-serif;
-            transition: 0.3s;
         }
         .menu-link:hover, .menu-link.active { color: var(--cyan); }
         .menu-link.discord-btn { color: #5865F2; }
 
-        /* Tarjetas de Juego */
+        /* Grid y Tarjetas */
         .game-card {
-            background: #0f0f0f;
-            border-radius: 24px;
-            height: 400px;
+            background: #111;
+            border-radius: 20px;
+            height: 380px;
             position: relative;
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.3s ease;
+            transition: 0.3s;
         }
-        .game-card:hover { border-color: var(--cyan); transform: translateY(-5px); }
-        .char-img { width: 100%; height: 100%; object-fit: cover; }
+        .game-card:active { transform: scale(0.95); }
+        .char-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
         .card-overlay {
             position: absolute; inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,1) 0%, transparent 70%);
+            background: linear-gradient(to top, rgba(0,0,0,1) 10%, transparent 80%);
         }
-        .card-content { position: absolute; bottom: 25px; left: 20px; z-index: 10; }
+        .card-content { position: absolute; bottom: 20px; left: 15px; z-index: 10; }
 
         /* Vistas */
         .view-section { display: none; }
-        .view-section.active { display: block; }
+        .view-section.active { display: block; animation: slideUp 0.3s ease; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Botones */
+        /* Botón de Acción */
         .btn-action {
             background: var(--cyan);
             color: black;
-            padding: 20px;
-            border-radius: 18px;
+            padding: 18px;
+            border-radius: 15px;
             font-weight: 900;
             text-transform: uppercase;
             width: 100%;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             border: none;
-            cursor: pointer;
-            box-shadow: 0 10px 20px rgba(0, 242, 255, 0.2);
+            box-shadow: 0 8px 15px rgba(0, 242, 255, 0.3);
+        }
+
+        /* Notificación de envío */
+        #toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            z-index: 1000;
+            display: none;
         }
     </style>
 </head>
 <body>
 
+    <div id="toast">Enviando a Discord...</div>
+
     <!-- Header -->
-    <header class="fixed top-0 w-full z-50 bg-black/95 border-b border-white/5 px-6 py-5 flex justify-between items-center">
-        <div class="flex items-center gap-3 cursor-pointer" onclick="showView('home')">
-            <div class="w-10 h-10 bg-[#00f2ff] rounded flex items-center justify-center">
-                <svg class="w-6 h-6 fill-black" viewBox="0 0 24 24"><path d="M12 2L4 7v10l8 5 8-5V7l-8-5z"/></svg>
+    <header class="fixed top-0 w-full z-50 bg-black border-b border-white/5 px-6 py-5 flex justify-between items-center">
+        <div class="flex items-center gap-3" onclick="showView('home')">
+            <div class="w-9 h-9 bg-[#00f2ff] rounded flex items-center justify-center">
+                <svg class="w-5 h-5 fill-black" viewBox="0 0 24 24"><path d="M12 2L4 7v10l8 5 8-5V7l-8-5z"/></svg>
             </div>
             <span class="font-brand text-xl font-bold italic uppercase tracking-tighter">EXCESSIVE PIRACY</span>
         </div>
         
         <button onclick="toggleMenu()" class="flex flex-col gap-1.5 focus:outline-none">
-            <div class="w-8 h-1 bg-white"></div>
-            <div class="w-8 h-1 bg-white"></div>
-            <div class="w-8 h-1 bg-white"></div>
+            <div class="w-7 h-1 bg-white"></div>
+            <div class="w-7 h-1 bg-white"></div>
+            <div class="w-7 h-1 bg-white"></div>
         </button>
     </header>
 
     <!-- Menú -->
     <nav id="mobile-menu">
-        <button onclick="toggleMenu()" class="text-[#00f2ff] font-bold mb-12 uppercase text-xs tracking-widest">CERRAR ✕</button>
+        <button onclick="toggleMenu()" class="text-[#00f2ff] font-bold mb-10 uppercase text-xs tracking-widest">Cerrar ✕</button>
         <a href="#" onclick="showView('home'); toggleMenu(); return false;" class="menu-link" id="link-home">Catálogo</a>
         <a href="https://discord.gg/bsfVCBarR" target="_blank" class="menu-link discord-btn">Discord Oficial</a>
         <a href="#" onclick="showView('request'); toggleMenu(); return false;" class="menu-link" id="link-request">Peticiones</a>
@@ -113,29 +130,28 @@
 
     <!-- Catálogo -->
     <main id="home-view" class="view-section active pt-32 px-6 pb-20 max-w-7xl mx-auto">
-        <h1 class="text-6xl font-black italic uppercase font-brand leading-none mb-10">BÓVEDA <br><span class="text-[#00f2ff]">PIRATA</span></h1>
-        <div id="gameGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        <h1 class="text-5xl font-black italic uppercase font-brand leading-none mb-8">NUESTRO <br><span class="text-[#00f2ff]">CATÁLOGO</span></h1>
+        <div id="gameGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
     </main>
 
     <!-- Peticiones -->
-    <section id="request-view" class="view-section pt-32 px-6 pb-20 max-w-2xl mx-auto text-center">
-        <h1 class="text-6xl font-black italic uppercase font-brand leading-none mb-6">HAZ TU <br><span class="text-[#00f2ff]">PETICIÓN</span></h1>
-        <div class="bg-white/5 p-8 rounded-[40px] border border-white/10">
-            <input type="text" id="requestInput" placeholder="Nombre del juego..." class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl mb-6 text-white outline-none focus:border-[#00f2ff]">
-            <button onclick="sendRequest()" class="btn-action">Enviar Solicitud</button>
-            <p id="reqStatus" class="mt-4 text-[#00f2ff] hidden italic font-bold">¡Petición enviada!</p>
+    <section id="request-view" class="view-section pt-32 px-6 pb-20 max-w-xl mx-auto text-center">
+        <h1 class="text-5xl font-black italic uppercase font-brand leading-none mb-6">HAZ TU <br><span class="text-[#00f2ff]">PEDIDO</span></h1>
+        <div class="bg-white/5 p-7 rounded-[30px] border border-white/10">
+            <input type="text" id="requestInput" placeholder="Nombre del juego..." class="w-full bg-black border border-white/10 p-5 rounded-xl mb-6 text-white outline-none focus:border-[#00f2ff]">
+            <button onclick="sendRequest()" class="btn-action">Enviar a Discord</button>
         </div>
     </section>
 
     <!-- Detalles -->
     <section id="detail-view" class="view-section pt-32 px-6 pb-20">
         <div class="max-w-4xl mx-auto">
-            <button onclick="showView('home')" class="mb-8 text-[#00f2ff] font-bold text-xs uppercase">← VOLVER</button>
-            <div class="flex flex-col md:flex-row gap-12 items-center">
-                <img id="detailImg" src="" class="w-full md:w-80 h-auto rounded-3xl border border-white/10">
-                <div class="flex-1">
+            <button onclick="showView('home')" class="mb-6 text-[#00f2ff] font-bold text-xs">← ATRÁS</button>
+            <div class="flex flex-col md:flex-row gap-10">
+                <img id="detailImg" src="" class="w-full md:w-72 h-auto rounded-2xl">
+                <div class="flex-1 text-center md:text-left">
                     <h2 id="detailTitle" class="text-5xl font-black italic uppercase font-brand mb-6">NOMBRE</h2>
-                    <button onclick="doDownload()" class="btn-action">DESCARGAR AHORA</button>
+                    <button onclick="doDownload()" class="btn-action">Descargar Archivo</button>
                 </div>
             </div>
         </div>
@@ -159,22 +175,35 @@
 
         function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('open'); }
 
+        function showToast(text) {
+            const t = document.getElementById('toast');
+            t.innerText = text;
+            t.style.display = 'block';
+            setTimeout(() => t.style.display = 'none', 3000);
+        }
+
         async function sendLog(title, action) {
-            try {
-                // Usamos 'no-cors' para evitar bloqueos del navegador
-                fetch(WEBHOOK_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        embeds: [{
-                            title: `🔔 LOG: ${action}`,
-                            description: `**Juego/Texto:** ${title}\n**Fecha:** ${new Date().toLocaleString()}`,
-                            color: 62207
-                        }]
-                    })
-                });
-            } catch(e) {}
+            showToast("Sincronizando con Discord...");
+            const data = {
+                content: null,
+                embeds: [{
+                    title: "Bóveda: " + action,
+                    description: "**Objetivo:** " + title,
+                    color: 65535,
+                    footer: { text: "Excessive Piracy Web" },
+                    timestamp: new Date()
+                }]
+            };
+
+            // Intentar envío directo
+            fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).catch(() => {
+                // Si falla el primero, intentar modo background
+                navigator.sendBeacon(WEBHOOK_URL, JSON.stringify(data));
+            });
         }
 
         function render() {
@@ -183,7 +212,7 @@
                     <div class="card-overlay"></div>
                     <img src="${g.img}" class="char-img">
                     <div class="card-content">
-                        <h3 class="text-2xl font-black italic uppercase font-brand leading-none">${g.title}</h3>
+                        <h3 class="text-xl font-black italic uppercase font-brand">${g.title}</h3>
                     </div>
                 </div>
             `).join('');
@@ -194,23 +223,22 @@
             document.getElementById('detailImg').src = selected.img;
             document.getElementById('detailTitle').innerText = selected.title;
             showView('detail');
-            sendLog(selected.title, "Viendo Información");
+            sendLog(selected.title, "Usuario interesado");
         }
 
         function doDownload() {
             if(selected) {
-                sendLog(selected.title, "Descarga Iniciada");
-                setTimeout(() => window.location.href = selected.link, 100);
+                sendLog(selected.title, "DESCARGA INICIADA");
+                setTimeout(() => window.location.href = selected.link, 500);
             }
         }
 
         function sendRequest() {
             const val = document.getElementById('requestInput').value;
             if(!val.trim()) return;
-            sendLog(val, "PETICIÓN RECIBIDA");
-            document.getElementById('reqStatus').classList.remove('hidden');
+            sendLog(val, "NUEVA PETICIÓN");
             document.getElementById('requestInput').value = "";
-            setTimeout(() => document.getElementById('reqStatus').classList.add('hidden'), 3000);
+            showToast("¡Petición enviada!");
         }
 
         function showView(v) {
@@ -221,7 +249,7 @@
 
         window.onload = () => {
             render();
-            sendLog("Bóveda", "Usuario Conectado");
+            sendLog("Acceso", "Alguien entró a la web");
         };
     </script>
 </body>
