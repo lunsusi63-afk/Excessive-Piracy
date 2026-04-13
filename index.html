@@ -19,7 +19,7 @@
         }
         .font-brand { font-family: 'Rajdhani', sans-serif; }
 
-        /* Menú Lateral Estilo Captura */
+        /* Menú Lateral */
         #mobile-menu {
             position: fixed;
             top: 0; right: -100%;
@@ -47,7 +47,7 @@
         .menu-link:hover, .menu-link.active { color: var(--cyan); }
         .menu-link.discord-btn { color: #5865F2; }
 
-        /* Grid y Tarjetas */
+        /* Tarjetas */
         .game-card {
             background: #111;
             border-radius: 20px;
@@ -70,7 +70,7 @@
         .view-section.active { display: block; animation: slideUp 0.3s ease; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Botón de Acción */
+        /* Botones */
         .btn-action {
             background: var(--cyan);
             color: black;
@@ -82,21 +82,24 @@
             font-size: 1.1rem;
             border: none;
             box-shadow: 0 8px 15px rgba(0, 242, 255, 0.3);
+            cursor: pointer;
         }
 
-        /* Notificación de envío */
         #toast {
             position: fixed;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: #333;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 0.8rem;
+            background: #1a1a1a;
+            color: var(--cyan);
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
             z-index: 1000;
             display: none;
+            border: 1px solid var(--cyan);
+            text-transform: uppercase;
         }
     </style>
 </head>
@@ -130,28 +133,29 @@
 
     <!-- Catálogo -->
     <main id="home-view" class="view-section active pt-32 px-6 pb-20 max-w-7xl mx-auto">
-        <h1 class="text-5xl font-black italic uppercase font-brand leading-none mb-8">NUESTRO <br><span class="text-[#00f2ff]">CATÁLOGO</span></h1>
+        <h1 class="text-5xl font-black italic uppercase font-brand leading-none mb-8">BÓVEDA <br><span class="text-[#00f2ff]">MASTER</span></h1>
         <div id="gameGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
     </main>
 
     <!-- Peticiones -->
     <section id="request-view" class="view-section pt-32 px-6 pb-20 max-w-xl mx-auto text-center">
-        <h1 class="text-5xl font-black italic uppercase font-brand leading-none mb-6">HAZ TU <br><span class="text-[#00f2ff]">PEDIDO</span></h1>
+        <h1 class="text-5xl font-black italic uppercase font-brand leading-none mb-6">NUEVA <br><span class="text-[#00f2ff]">PETICIÓN</span></h1>
         <div class="bg-white/5 p-7 rounded-[30px] border border-white/10">
-            <input type="text" id="requestInput" placeholder="Nombre del juego..." class="w-full bg-black border border-white/10 p-5 rounded-xl mb-6 text-white outline-none focus:border-[#00f2ff]">
-            <button onclick="sendRequest()" class="btn-action">Enviar a Discord</button>
+            <input type="text" id="requestInput" placeholder="¿Qué juego buscas?..." class="w-full bg-black border border-white/10 p-5 rounded-xl mb-6 text-white outline-none focus:border-[#00f2ff]">
+            <button onclick="sendRequest()" class="btn-action">Enviar Solicitud</button>
         </div>
     </section>
 
     <!-- Detalles -->
     <section id="detail-view" class="view-section pt-32 px-6 pb-20">
         <div class="max-w-4xl mx-auto">
-            <button onclick="showView('home')" class="mb-6 text-[#00f2ff] font-bold text-xs">← ATRÁS</button>
+            <button onclick="showView('home')" class="mb-6 text-[#00f2ff] font-bold text-xs">← VOLVER AL CATÁLOGO</button>
             <div class="flex flex-col md:flex-row gap-10">
-                <img id="detailImg" src="" class="w-full md:w-72 h-auto rounded-2xl">
+                <img id="detailImg" src="" class="w-full md:w-72 h-auto rounded-2xl border border-white/10">
                 <div class="flex-1 text-center md:text-left">
-                    <h2 id="detailTitle" class="text-5xl font-black italic uppercase font-brand mb-6">NOMBRE</h2>
-                    <button onclick="doDownload()" class="btn-action">Descargar Archivo</button>
+                    <h2 id="detailTitle" class="text-5xl font-black italic uppercase font-brand mb-6 leading-tight">NOMBRE</h2>
+                    <p class="text-white/40 italic mb-8">Enlace directo verificado. Sin virus ni publicidad engañosa.</p>
+                    <button onclick="doDownload()" class="btn-action">DESCARGAR AHORA</button>
                 </div>
             </div>
         </div>
@@ -183,27 +187,28 @@
         }
 
         async function sendLog(title, action) {
-            showToast("Sincronizando con Discord...");
+            showToast("Sincronizando...");
             const data = {
-                content: null,
                 embeds: [{
-                    title: "Bóveda: " + action,
-                    description: "**Objetivo:** " + title,
-                    color: 65535,
-                    footer: { text: "Excessive Piracy Web" },
+                    title: `🎮 EXCESSIVE: ${action}`,
+                    description: `**Detalle:** ${title}`,
+                    color: 62207,
+                    footer: { text: "Vault v4.0" },
                     timestamp: new Date()
                 }]
             };
 
-            // Intentar envío directo
+            // Intento con Beacon (más fiable para móviles y cierres de pestaña)
+            const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+            navigator.sendBeacon(WEBHOOK_URL, blob);
+
+            // Intento secundario con Fetch tradicional por si acaso
             fetch(WEBHOOK_URL, {
                 method: 'POST',
+                mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
-            }).catch(() => {
-                // Si falla el primero, intentar modo background
-                navigator.sendBeacon(WEBHOOK_URL, JSON.stringify(data));
-            });
+            }).catch(() => {});
         }
 
         function render() {
@@ -223,7 +228,7 @@
             document.getElementById('detailImg').src = selected.img;
             document.getElementById('detailTitle').innerText = selected.title;
             showView('detail');
-            sendLog(selected.title, "Usuario interesado");
+            sendLog(selected.title, "Interesado en Juego");
         }
 
         function doDownload() {
@@ -236,9 +241,9 @@
         function sendRequest() {
             const val = document.getElementById('requestInput').value;
             if(!val.trim()) return;
-            sendLog(val, "NUEVA PETICIÓN");
+            sendLog(val, "PETICIÓN DE JUEGO");
             document.getElementById('requestInput').value = "";
-            showToast("¡Petición enviada!");
+            showToast("Petición enviada");
         }
 
         function showView(v) {
@@ -249,7 +254,6 @@
 
         window.onload = () => {
             render();
-            sendLog("Acceso", "Alguien entró a la web");
         };
     </script>
 </body>
