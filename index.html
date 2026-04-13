@@ -1,0 +1,230 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excessive Piracy | Vault</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <style>
+        :root { --cyan: #00f2ff; --dark: #050505; }
+        body { 
+            background-color: var(--dark); 
+            color: #fff; 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; 
+            overflow-x: hidden;
+        }
+        .font-brand { font-family: 'Rajdhani', sans-serif; }
+
+        /* Estilo Menú Lateral */
+        #mobile-menu {
+            position: fixed;
+            top: 0; right: -100%;
+            width: 85%;
+            max-width: 320px;
+            height: 100%;
+            background: #0a0a0a;
+            z-index: 100;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 2px solid var(--cyan);
+            padding: 50px 30px;
+        }
+        #mobile-menu.open { right: 0; }
+
+        .menu-link {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            color: white;
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            transition: 0.3s;
+        }
+        .menu-link:hover, .menu-link.active { color: var(--cyan); }
+        .menu-link.discord-btn { color: #5865F2; }
+
+        /* Tarjetas de Juego */
+        .game-card {
+            background: #0f0f0f;
+            border-radius: 24px;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s ease;
+        }
+        .game-card:hover { border-color: var(--cyan); transform: translateY(-5px); }
+        .char-img { width: 100%; height: 100%; object-fit: cover; }
+        .card-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,1) 0%, transparent 70%);
+        }
+        .card-content { position: absolute; bottom: 25px; left: 20px; z-index: 10; }
+
+        /* Vistas */
+        .view-section { display: none; }
+        .view-section.active { display: block; }
+
+        /* Botones */
+        .btn-action {
+            background: var(--cyan);
+            color: black;
+            padding: 20px;
+            border-radius: 18px;
+            font-weight: 900;
+            text-transform: uppercase;
+            width: 100%;
+            font-size: 1.2rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0, 242, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-50 bg-black/95 border-b border-white/5 px-6 py-5 flex justify-between items-center">
+        <div class="flex items-center gap-3 cursor-pointer" onclick="showView('home')">
+            <div class="w-10 h-10 bg-[#00f2ff] rounded flex items-center justify-center">
+                <svg class="w-6 h-6 fill-black" viewBox="0 0 24 24"><path d="M12 2L4 7v10l8 5 8-5V7l-8-5z"/></svg>
+            </div>
+            <span class="font-brand text-xl font-bold italic uppercase tracking-tighter">EXCESSIVE PIRACY</span>
+        </div>
+        
+        <button onclick="toggleMenu()" class="flex flex-col gap-1.5 focus:outline-none">
+            <div class="w-8 h-1 bg-white"></div>
+            <div class="w-8 h-1 bg-white"></div>
+            <div class="w-8 h-1 bg-white"></div>
+        </button>
+    </header>
+
+    <!-- Menú -->
+    <nav id="mobile-menu">
+        <button onclick="toggleMenu()" class="text-[#00f2ff] font-bold mb-12 uppercase text-xs tracking-widest">CERRAR ✕</button>
+        <a href="#" onclick="showView('home'); toggleMenu(); return false;" class="menu-link" id="link-home">Catálogo</a>
+        <a href="https://discord.gg/bsfVCBarR" target="_blank" class="menu-link discord-btn">Discord Oficial</a>
+        <a href="#" onclick="showView('request'); toggleMenu(); return false;" class="menu-link" id="link-request">Peticiones</a>
+    </nav>
+
+    <!-- Catálogo -->
+    <main id="home-view" class="view-section active pt-32 px-6 pb-20 max-w-7xl mx-auto">
+        <h1 class="text-6xl font-black italic uppercase font-brand leading-none mb-10">BÓVEDA <br><span class="text-[#00f2ff]">PIRATA</span></h1>
+        <div id="gameGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+    </main>
+
+    <!-- Peticiones -->
+    <section id="request-view" class="view-section pt-32 px-6 pb-20 max-w-2xl mx-auto text-center">
+        <h1 class="text-6xl font-black italic uppercase font-brand leading-none mb-6">HAZ TU <br><span class="text-[#00f2ff]">PETICIÓN</span></h1>
+        <div class="bg-white/5 p-8 rounded-[40px] border border-white/10">
+            <input type="text" id="requestInput" placeholder="Nombre del juego..." class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl mb-6 text-white outline-none focus:border-[#00f2ff]">
+            <button onclick="sendRequest()" class="btn-action">Enviar Solicitud</button>
+            <p id="reqStatus" class="mt-4 text-[#00f2ff] hidden italic font-bold">¡Petición enviada!</p>
+        </div>
+    </section>
+
+    <!-- Detalles -->
+    <section id="detail-view" class="view-section pt-32 px-6 pb-20">
+        <div class="max-w-4xl mx-auto">
+            <button onclick="showView('home')" class="mb-8 text-[#00f2ff] font-bold text-xs uppercase">← VOLVER</button>
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+                <img id="detailImg" src="" class="w-full md:w-80 h-auto rounded-3xl border border-white/10">
+                <div class="flex-1">
+                    <h2 id="detailTitle" class="text-5xl font-black italic uppercase font-brand mb-6">NOMBRE</h2>
+                    <button onclick="doDownload()" class="btn-action">DESCARGAR AHORA</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1493029753462984724/W92Go_ww0kgsfZYXh-JBoo9MSJpVIXaoZTnqf61n5kRKGhnLGtTPOEtca9iVA8mzy44k";
+
+        const games = [
+            { id: 'p5', title: 'Poppy Chapter 5', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6NCirZXspnRehiwpdhsRa4wQ_ecXusChoiDMJ2oVLablQGCWjCBLlfG1Z&s=10', link: 'https://piro775.itch.io/toy-factory-chapter-5-fangame-unity?download' },
+            { id: 'p4', title: 'Poppy Chapter 4', img: 'https://assetsio.gnwcdn.com/Poppy-Playtime-Chapter-4-promo-image-showing-a-toy-character-extending-its-hand-towards-the-camera.jpg?width=1200&height=1200&fit=crop&quality=100&format=png&enable=upscale&auto=webp', link: 'https://piro775.itch.io/toy-factory-chapter-4' },
+            { id: 'p3', title: 'Poppy Chapter 3', img: 'https://http2.mlstatic.com/D_NQ_NP_615692-MLM96301603984_102025-O.webp', link: 'https://unreal-play-studio.com/games/poppy-playtime-chapter-3' },
+            { id: 'miles', title: 'Miles Morales', img: 'https://img.asmedia.epimg.net/resizer/v2/TBMDCLMAVRJ3LDXEPJECOUMMU4.jpg?auth=29ec0e8c2defd3ecfbd1fbb026e2529a134ac7a9c7a8fec750aedb5dc8ceb19f&width=1472&height=1104&smart=true', link: 'https://www.mediafire.com/file/kqarkaqmh0nhrtx/Spiderman_Miles_Morales_v1_[www.AndroSU.com].apk/file' },
+            { id: 'fnaf', title: 'FNaF Spanish', img: 'https://images.genius.com/b49240eb5e510bb0b56d5abd7b45270d.512x512x1.png', link: 'https://www.mediafire.com/file/7nysoswlpi8cm9l/Five_Nights_at_Freddy%25C2%25B4s_%2528Spanish%2529_-_espacioapk.com.apk/file?dkey=7nysoswlpi8cm9l' },
+            { id: 'cup', title: 'Cuphead DLC', img: 'https://image.api.playstation.com/vulcan/img/cfn/11307fllh6D-IvbpCa18N0vRggVeRYWA06paTNCj3DENJMScAzW2f3ry4IwFcXBAt9kWXdZGpGoOGjxJ_e9MdordMVAosNhZ.png', link: 'https://www.mediafire.com/file/vdlzhn68ru3nuo5/Cuphead+++DLC+-+v1.0.3+-+VPR.apk/file?dkey=ocmx5h85l1c&r=148' },
+            { id: 'hk', title: 'Hollow Knight', img: 'https://store-images.s-microsoft.com/image/apps.58959.13847644057609868.8865d2a2-5e11-4424-85ce-1db30a161bd9.41ca3834-331c-4d34-b2c9-7dfe318fd168', link: 'https://www.mediafire.com/file/bsqgq7dnvz6w187/HKVulkanV2.7z/file' },
+            { id: 'pes', title: 'PES 2019', img: 'https://oyster.ignimgs.com/mediawiki/apis.ign.com/pro-evolution-soccer-2019/0/08/Pes-2019---button-1525885009367.jpg', link: 'https://www.mediafire.com/file/dck5ouwiw2d62c0/Pro_Evolution_Soccer_2019_PSP_%2528USA%2529_%2528Lost_Media_C19%2529.iso/file' }
+        ];
+
+        let selected = null;
+
+        function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('open'); }
+
+        async function sendLog(title, action) {
+            try {
+                // Usamos 'no-cors' para evitar bloqueos del navegador
+                fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        embeds: [{
+                            title: `🔔 LOG: ${action}`,
+                            description: `**Juego/Texto:** ${title}\n**Fecha:** ${new Date().toLocaleString()}`,
+                            color: 62207
+                        }]
+                    })
+                });
+            } catch(e) {}
+        }
+
+        function render() {
+            document.getElementById('gameGrid').innerHTML = games.map(g => `
+                <div class="game-card" onclick="openGame('${g.id}')">
+                    <div class="card-overlay"></div>
+                    <img src="${g.img}" class="char-img">
+                    <div class="card-content">
+                        <h3 class="text-2xl font-black italic uppercase font-brand leading-none">${g.title}</h3>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openGame(id) {
+            selected = games.find(x => x.id === id);
+            document.getElementById('detailImg').src = selected.img;
+            document.getElementById('detailTitle').innerText = selected.title;
+            showView('detail');
+            sendLog(selected.title, "Viendo Información");
+        }
+
+        function doDownload() {
+            if(selected) {
+                sendLog(selected.title, "Descarga Iniciada");
+                setTimeout(() => window.location.href = selected.link, 100);
+            }
+        }
+
+        function sendRequest() {
+            const val = document.getElementById('requestInput').value;
+            if(!val.trim()) return;
+            sendLog(val, "PETICIÓN RECIBIDA");
+            document.getElementById('reqStatus').classList.remove('hidden');
+            document.getElementById('requestInput').value = "";
+            setTimeout(() => document.getElementById('reqStatus').classList.add('hidden'), 3000);
+        }
+
+        function showView(v) {
+            document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(v + '-view').classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        window.onload = () => {
+            render();
+            sendLog("Bóveda", "Usuario Conectado");
+        };
+    </script>
+</body>
+</html>
+
+```
