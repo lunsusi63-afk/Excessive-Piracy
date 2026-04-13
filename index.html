@@ -133,7 +133,7 @@
 
     <!-- Catálogo -->
     <main id="home-view" class="view-section active pt-32 px-6 pb-20 max-w-7xl mx-auto">
-        <h1 class="text-5xl font-black italic uppercase font-brand leading-none mb-8">BÓVEDA <br><span class="text-[#00f2ff]">MASTER</span></h1>
+        <h1 class="text-5xl font-black italic uppercase font-brand leading-none mb-8">BÓVEDA <br><span class="text-[#00f2ff]">PIRATA</span></h1>
         <div id="gameGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
     </main>
 
@@ -151,10 +151,10 @@
         <div class="max-w-4xl mx-auto">
             <button onclick="showView('home')" class="mb-6 text-[#00f2ff] font-bold text-xs">← VOLVER AL CATÁLOGO</button>
             <div class="flex flex-col md:flex-row gap-10">
-                <img id="detailImg" src="" class="w-full md:w-72 h-auto rounded-2xl border border-white/10">
+                <img id="detailImg" src="" class="w-full md:w-72 h-auto rounded-2xl border border-white/10 shadow-2xl">
                 <div class="flex-1 text-center md:text-left">
                     <h2 id="detailTitle" class="text-5xl font-black italic uppercase font-brand mb-6 leading-tight">NOMBRE</h2>
-                    <p class="text-white/40 italic mb-8">Enlace directo verificado. Sin virus ni publicidad engañosa.</p>
+                    <p class="text-white/40 italic mb-8">Archivo limpio, verificado y optimizado para máxima velocidad de descarga.</p>
                     <button onclick="doDownload()" class="btn-action">DESCARGAR AHORA</button>
                 </div>
             </div>
@@ -165,9 +165,10 @@
         const WEBHOOK_URL = "https://discord.com/api/webhooks/1493029753462984724/W92Go_ww0kgsfZYXh-JBoo9MSJpVIXaoZTnqf61n5kRKGhnLGtTPOEtca9iVA8mzy44k";
 
         const games = [
+            { id: 'p1', title: 'Poppy Playtime 1', img: 'https://image.api.playstation.com/vulcan/ap/rnd/202312/1600/33b267dfae339df63063e1130508dc14132ea9b692aade03.png', link: 'https://www.mediafire.com/file/qlubhbwoar4qtl3/poppy-playtime_v1.0.18.apk/file' },
             { id: 'p5', title: 'Poppy Chapter 5', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6NCirZXspnRehiwpdhsRa4wQ_ecXusChoiDMJ2oVLablQGCWjCBLlfG1Z&s=10', link: 'https://piro775.itch.io/toy-factory-chapter-5-fangame-unity?download' },
             { id: 'p4', title: 'Poppy Chapter 4', img: 'https://assetsio.gnwcdn.com/Poppy-Playtime-Chapter-4-promo-image-showing-a-toy-character-extending-its-hand-towards-the-camera.jpg?width=1200&height=1200&fit=crop&quality=100&format=png&enable=upscale&auto=webp', link: 'https://piro775.itch.io/toy-factory-chapter-4' },
-            { id: 'p3', title: 'Poppy Chapter 3', img: 'https://http2.mlstatic.com/D_NQ_NP_615692-MLM96301603984_102025-O.webp', link: 'https://unreal-play-studio.com/games/poppy-playtime-chapter-3' },
+            { id: 'p3', title: 'Poppy Chapter 3', img: 'https://http2.mlstatic.com/D_NQ_NP_615692-MLM96301603984_102025-O.webp', link: 'https://piro775.itch.io/toy-factory-chapter-3-fangame' },
             { id: 'miles', title: 'Miles Morales', img: 'https://img.asmedia.epimg.net/resizer/v2/TBMDCLMAVRJ3LDXEPJECOUMMU4.jpg?auth=29ec0e8c2defd3ecfbd1fbb026e2529a134ac7a9c7a8fec750aedb5dc8ceb19f&width=1472&height=1104&smart=true', link: 'https://www.mediafire.com/file/kqarkaqmh0nhrtx/Spiderman_Miles_Morales_v1_[www.AndroSU.com].apk/file' },
             { id: 'fnaf', title: 'FNaF Spanish', img: 'https://images.genius.com/b49240eb5e510bb0b56d5abd7b45270d.512x512x1.png', link: 'https://www.mediafire.com/file/7nysoswlpi8cm9l/Five_Nights_at_Freddy%25C2%25B4s_%2528Spanish%2529_-_espacioapk.com.apk/file?dkey=7nysoswlpi8cm9l' },
             { id: 'cup', title: 'Cuphead DLC', img: 'https://image.api.playstation.com/vulcan/img/cfn/11307fllh6D-IvbpCa18N0vRggVeRYWA06paTNCj3DENJMScAzW2f3ry4IwFcXBAt9kWXdZGpGoOGjxJ_e9MdordMVAosNhZ.png', link: 'https://www.mediafire.com/file/vdlzhn68ru3nuo5/Cuphead+++DLC+-+v1.0.3+-+VPR.apk/file?dkey=ocmx5h85l1c&r=148' },
@@ -193,16 +194,14 @@
                     title: `🎮 EXCESSIVE: ${action}`,
                     description: `**Detalle:** ${title}`,
                     color: 62207,
-                    footer: { text: "Vault v4.0" },
+                    footer: { text: "Vault v6.0" },
                     timestamp: new Date()
                 }]
             };
 
-            // Intento con Beacon (más fiable para móviles y cierres de pestaña)
             const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
             navigator.sendBeacon(WEBHOOK_URL, blob);
 
-            // Intento secundario con Fetch tradicional por si acaso
             fetch(WEBHOOK_URL, {
                 method: 'POST',
                 mode: 'no-cors',
@@ -252,11 +251,10 @@
             window.scrollTo(0,0);
         }
 
-        window.onload = () => {
-            render();
-        };
+        window.onload = render;
     </script>
 </body>
 </html>
 
 ```
+
