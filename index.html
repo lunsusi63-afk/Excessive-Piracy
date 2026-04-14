@@ -155,7 +155,7 @@
         </button>
     </header>
 
-    <!-- Menú Lateral (Actualizado) -->
+    <!-- Menú Lateral -->
     <nav id="mobile-menu">
         <button onclick="toggleMenu()" class="text-[#00f2ff] font-bold mb-12 uppercase text-xs tracking-widest flex items-center gap-2">
             CERRAR <span class="text-lg">✕</span>
@@ -168,8 +168,8 @@
         <div class="menu-sep"></div>
         
         <span class="menu-label">BÓVEDA ACTIVA</span>
-        <div class="w-full h-24 bg-gradient-to-br from-[#00f2ff]/10 to-transparent rounded-xl border border-[#00f2ff]/20 flex items-center justify-center">
-            <span class="text-[10px] text-[#00f2ff] font-bold tracking-widest opacity-50 uppercase text-center px-4">Estado del Servidor: Online</span>
+        <div class="w-full h-24 bg-gradient-to-br from-[#00f2ff]/10 to-transparent rounded-xl border border-[#00f2ff]/20 flex items-center justify-center text-center">
+            <span class="text-[10px] text-[#00f2ff] font-bold tracking-widest opacity-50 uppercase px-4 leading-tight">Estado del Servidor:<br>Online</span>
         </div>
     </nav>
 
@@ -255,7 +255,6 @@
         }
 
         async function sendLog(title, action) {
-            // Solo enviar a Discord si es Petición o Descarga
             if (action !== "PETICIÓN" && action !== "DESCARGA INICIADA") return;
 
             showToast("Sincronizando...");
@@ -263,7 +262,7 @@
                 embeds: [{
                     title: `🎮 EXCESSIVE: ${action}`,
                     description: `**Detalle:** ${title}`,
-                    color: action === "PETICIÓN" ? 15277667 : 62207, // Naranja para peticiones, Cian para descargas
+                    color: action === "PETICIÓN" ? 15277667 : 62207,
                     timestamp: new Date()
                 }]
             };
@@ -312,8 +311,6 @@
                 `;
             }
             showView('detail');
-            // sendLog ya no enviará nada aquí porque action no es PETICIÓN o DESCARGA
-            sendLog(selected.title, "Visualización"); 
         }
 
         function doDownload(url, label) {
@@ -342,4 +339,3 @@
 </html>
 
 ```
-
