@@ -19,35 +19,37 @@
         }
         .font-brand { font-family: 'Rajdhani', sans-serif; }
 
-        /* Menú Lateral */
+        /* Navegación Estilo Screenshot */
         #mobile-menu {
             position: fixed;
             top: 0; right: -100%;
-            width: 80%;
-            max-width: 300px;
+            width: 85%;
+            max-width: 320px;
             height: 100%;
-            background: #0d0d0d;
+            background: #080808;
             z-index: 100;
             transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border-left: 3px solid var(--cyan);
-            padding: 50px 25px;
+            border-left: 2px solid var(--cyan);
+            padding: 40px 30px;
         }
         #mobile-menu.open { right: 0; }
 
         .menu-link {
             display: block;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 800;
             text-transform: uppercase;
             margin-bottom: 25px;
             color: white;
             text-decoration: none;
             font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 1px;
         }
-        .menu-link:hover, .menu-link.active { color: var(--cyan); }
-        .menu-link.discord-btn { color: #5865F2; }
+        .menu-link:hover { color: var(--cyan); }
+        .menu-sep { border-top: 1px solid rgba(255,255,255,0.1); margin: 20px 0; width: 100%; }
+        .menu-label { color: rgba(255,255,255,0.3); font-size: 0.7rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; display: block; }
 
-        /* Tarjetas */
+        /* Tarjetas de Juego */
         .game-card {
             background: #111;
             border-radius: 20px;
@@ -61,9 +63,21 @@
         .char-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
         .card-overlay {
             position: absolute; inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,1) 10%, transparent 80%);
+            background: linear-gradient(to top, rgba(0,0,0,1) 15%, transparent 85%);
         }
-        .card-content { position: absolute; bottom: 20px; left: 15px; z-index: 10; }
+        .card-content { position: absolute; bottom: 20px; left: 15px; z-index: 10; width: calc(100% - 30px); }
+
+        .badge-versions {
+            background: var(--cyan);
+            color: black;
+            font-size: 0.65rem;
+            font-weight: 900;
+            padding: 3px 8px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
 
         /* Vistas */
         .view-section { display: none; }
@@ -74,15 +88,33 @@
         .btn-action {
             background: var(--cyan);
             color: black;
-            padding: 18px;
-            border-radius: 15px;
+            padding: 16px;
+            border-radius: 12px;
             font-weight: 900;
             text-transform: uppercase;
             width: 100%;
-            font-size: 1.1rem;
+            font-size: 1rem;
             border: none;
-            box-shadow: 0 8px 15px rgba(0, 242, 255, 0.3);
             cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-action:active { transform: scale(0.98); opacity: 0.9; }
+
+        .version-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .version-preview {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-top: 12px;
+            border: 1px solid rgba(0, 242, 255, 0.2);
         }
 
         #toast {
@@ -105,11 +137,11 @@
 </head>
 <body>
 
-    <div id="toast">Enviando a Discord...</div>
+    <div id="toast">Sincronizando...</div>
 
-    <!-- Header -->
+    <!-- Encabezado -->
     <header class="fixed top-0 w-full z-50 bg-black border-b border-white/5 px-6 py-5 flex justify-between items-center">
-        <div class="flex items-center gap-3" onclick="showView('home')">
+        <div class="flex items-center gap-3" onclick="showView('home')" style="cursor: pointer;">
             <div class="w-9 h-9 bg-[#00f2ff] rounded flex items-center justify-center">
                 <svg class="w-5 h-5 fill-black" viewBox="0 0 24 24"><path d="M12 2L4 7v10l8 5 8-5V7l-8-5z"/></svg>
             </div>
@@ -123,17 +155,27 @@
         </button>
     </header>
 
-    <!-- Menú -->
+    <!-- Menú Lateral (Actualizado) -->
     <nav id="mobile-menu">
-        <button onclick="toggleMenu()" class="text-[#00f2ff] font-bold mb-10 uppercase text-xs tracking-widest">Cerrar ✕</button>
-        <a href="#" onclick="showView('home'); toggleMenu(); return false;" class="menu-link" id="link-home">Catálogo</a>
-        <a href="https://discord.gg/bsfVCBarR" target="_blank" class="menu-link discord-btn">Discord Oficial</a>
-        <a href="#" onclick="showView('request'); toggleMenu(); return false;" class="menu-link" id="link-request">Peticiones</a>
+        <button onclick="toggleMenu()" class="text-[#00f2ff] font-bold mb-12 uppercase text-xs tracking-widest flex items-center gap-2">
+            CERRAR <span class="text-lg">✕</span>
+        </button>
+        
+        <a href="#" onclick="showView('home'); toggleMenu(); return false;" class="menu-link">CATÁLOGO</a>
+        <a href="https://discord.gg/bsfVCBarR" target="_blank" class="menu-link" style="color:#5865F2">DISCORD OFICIAL</a>
+        <a href="#" onclick="showView('request'); toggleMenu(); return false;" class="menu-link">PETICIONES</a>
+
+        <div class="menu-sep"></div>
+        
+        <span class="menu-label">BÓVEDA ACTIVA</span>
+        <div class="w-full h-24 bg-gradient-to-br from-[#00f2ff]/10 to-transparent rounded-xl border border-[#00f2ff]/20 flex items-center justify-center">
+            <span class="text-[10px] text-[#00f2ff] font-bold tracking-widest opacity-50 uppercase text-center px-4">Estado del Servidor: Online</span>
+        </div>
     </nav>
 
     <!-- Catálogo -->
     <main id="home-view" class="view-section active pt-32 px-6 pb-20 max-w-7xl mx-auto">
-        <h1 class="text-5xl font-black italic uppercase font-brand leading-none mb-8">BÓVEDA <br><span class="text-[#00f2ff]">PIRATA</span></h1>
+        <h1 class="text-5xl font-black italic uppercase font-brand leading-none mb-8">BÓVEDA <br><span class="text-[#00f2ff]">DE JUEGOS</span></h1>
         <div id="gameGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
     </main>
 
@@ -142,20 +184,21 @@
         <h1 class="text-5xl font-black italic uppercase font-brand leading-none mb-6">NUEVA <br><span class="text-[#00f2ff]">PETICIÓN</span></h1>
         <div class="bg-white/5 p-7 rounded-[30px] border border-white/10">
             <input type="text" id="requestInput" placeholder="¿Qué juego buscas?..." class="w-full bg-black border border-white/10 p-5 rounded-xl mb-6 text-white outline-none focus:border-[#00f2ff]">
-            <button onclick="sendRequest()" class="btn-action">Enviar Solicitud</button>
+            <button onclick="sendRequest()" class="btn-action">Enviar Petición</button>
         </div>
     </section>
 
-    <!-- Detalles -->
+    <!-- Vista de Detalles -->
     <section id="detail-view" class="view-section pt-32 px-6 pb-20">
         <div class="max-w-4xl mx-auto">
             <button onclick="showView('home')" class="mb-6 text-[#00f2ff] font-bold text-xs">← VOLVER AL CATÁLOGO</button>
             <div class="flex flex-col md:flex-row gap-10">
-                <img id="detailImg" src="" class="w-full md:w-72 h-auto rounded-2xl border border-white/10 shadow-2xl">
-                <div class="flex-1 text-center md:text-left">
-                    <h2 id="detailTitle" class="text-5xl font-black italic uppercase font-brand mb-6 leading-tight">NOMBRE</h2>
-                    <p class="text-white/40 italic mb-8">Archivo limpio, verificado y optimizado para máxima velocidad de descarga.</p>
-                    <button onclick="doDownload()" class="btn-action">DESCARGAR AHORA</button>
+                <div class="w-full md:w-72">
+                    <img id="detailImg" src="" class="w-full h-auto rounded-2xl border border-white/10 shadow-2xl">
+                </div>
+                <div class="flex-1">
+                    <h2 id="detailTitle" class="text-5xl font-black italic uppercase font-brand mb-4 leading-tight">CARGANDO...</h2>
+                    <div id="downloadContainer" class="mt-6"></div>
                 </div>
             </div>
         </div>
@@ -166,7 +209,32 @@
 
         const games = [
             { id: 'p1', title: 'Poppy Playtime 1', img: 'https://image.api.playstation.com/vulcan/ap/rnd/202312/1600/33b267dfae339df63063e1130508dc14132ea9b692aade03.png', link: 'https://www.mediafire.com/file/qlubhbwoar4qtl3/poppy-playtime_v1.0.18.apk/file' },
-            { id: 'p5', title: 'Poppy Chapter 5', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6NCirZXspnRehiwpdhsRa4wQ_ecXusChoiDMJ2oVLablQGCWjCBLlfG1Z&s=10', link: 'https://piro775.itch.io/toy-factory-chapter-5-fangame-unity?download' },
+            { 
+                id: 'p5', 
+                title: 'Poppy Playtime 5', 
+                hasVersions: true,
+                img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6NCirZXspnRehiwpdhsRa4wQ_ecXusChoiDMJ2oVLablQGCWjCBLlfG1Z&s=10', 
+                versions: [
+                    { 
+                        label: 'Versión 1 "La más completa"', 
+                        desc: 'Experiencia original de Itch.io', 
+                        link: 'https://piro775.itch.io/toy-factory-chapter-5-fangame-unity/download/eyJpZCI6NDM5NDI0NSwiZXhwaXJlcyI6MTc3NjEzODU0N30%3d%2eP8iiREKTV4PEqQTvigql1P77Lgg%3d',
+                        preview: 'https://i.ibb.co/bMqkkp93/image.png'
+                    },
+                    { 
+                        label: 'Versión 2 "Gráficos decentes"', 
+                        desc: 'Menos completa pero visualmente estable', 
+                        link: 'https://unreal-play-studio.com/games/poppy-playtime-chapter-5',
+                        preview: 'https://i.ibb.co/pv1GYkKZ/image.png'
+                    },
+                    { 
+                        label: 'Versión 3 "Mejores gráficos"', 
+                        desc: 'Interfaz superior pero la más corta', 
+                        link: 'https://www.mediafire.com/file/00g7j35tkc416g6/Poppy+Playtime+Chapter+5.apk/file?dkey=7flqwds3phl&r=518',
+                        preview: 'https://i.ibb.co/Gf72V0gf/image.png'
+                    }
+                ]
+            },
             { id: 'p4', title: 'Poppy Chapter 4', img: 'https://assetsio.gnwcdn.com/Poppy-Playtime-Chapter-4-promo-image-showing-a-toy-character-extending-its-hand-towards-the-camera.jpg?width=1200&height=1200&fit=crop&quality=100&format=png&enable=upscale&auto=webp', link: 'https://piro775.itch.io/toy-factory-chapter-4' },
             { id: 'p3', title: 'Poppy Chapter 3', img: 'https://http2.mlstatic.com/D_NQ_NP_615692-MLM96301603984_102025-O.webp', link: 'https://piro775.itch.io/toy-factory-chapter-3-fangame' },
             { id: 'miles', title: 'Miles Morales', img: 'https://img.asmedia.epimg.net/resizer/v2/TBMDCLMAVRJ3LDXEPJECOUMMU4.jpg?auth=29ec0e8c2defd3ecfbd1fbb026e2529a134ac7a9c7a8fec750aedb5dc8ceb19f&width=1472&height=1104&smart=true', link: 'https://www.mediafire.com/file/kqarkaqmh0nhrtx/Spiderman_Miles_Morales_v1_[www.AndroSU.com].apk/file' },
@@ -179,44 +247,40 @@
         let selected = null;
 
         function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('open'); }
-
+        
         function showToast(text) {
             const t = document.getElementById('toast');
-            t.innerText = text;
-            t.style.display = 'block';
+            t.innerText = text; t.style.display = 'block';
             setTimeout(() => t.style.display = 'none', 3000);
         }
 
         async function sendLog(title, action) {
+            // Solo enviar a Discord si es Petición o Descarga
+            if (action !== "PETICIÓN" && action !== "DESCARGA INICIADA") return;
+
             showToast("Sincronizando...");
             const data = {
                 embeds: [{
                     title: `🎮 EXCESSIVE: ${action}`,
                     description: `**Detalle:** ${title}`,
-                    color: 62207,
-                    footer: { text: "Vault v6.0" },
+                    color: action === "PETICIÓN" ? 15277667 : 62207, // Naranja para peticiones, Cian para descargas
                     timestamp: new Date()
                 }]
             };
-
             const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
             navigator.sendBeacon(WEBHOOK_URL, blob);
-
-            fetch(WEBHOOK_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            }).catch(() => {});
         }
 
         function render() {
             document.getElementById('gameGrid').innerHTML = games.map(g => `
-                <div class="game-card" onclick="openGame('${g.id}')">
+                <div class="game-card" onclick="openGame('${g.id}')" style="cursor: pointer;">
                     <div class="card-overlay"></div>
-                    <img src="${g.img}" class="char-img">
+                    <img src="${g.img}" class="char-img" alt="${g.title}">
                     <div class="card-content">
-                        <h3 class="text-xl font-black italic uppercase font-brand">${g.title}</h3>
+                        <h3 class="text-xl font-black italic uppercase font-brand leading-tight">
+                            ${g.title}
+                            ${g.hasVersions ? '<br><span class="badge-versions">3 Versiones</span>' : ''}
+                        </h3>
                     </div>
                 </div>
             `).join('');
@@ -226,23 +290,44 @@
             selected = games.find(x => x.id === id);
             document.getElementById('detailImg').src = selected.img;
             document.getElementById('detailTitle').innerText = selected.title;
+            const container = document.getElementById('downloadContainer');
+            container.innerHTML = '';
+
+            if (selected.versions) {
+                selected.versions.forEach(v => {
+                    const box = document.createElement('div');
+                    box.className = 'version-box';
+                    box.innerHTML = `
+                        <p class="text-[#00f2ff] font-bold text-sm mb-1">${v.label}</p>
+                        <p class="text-white/40 text-xs mb-3 italic">${v.desc}</p>
+                        <button onclick="doDownload('${v.link}', '${v.label}')" class="btn-action">Descargar</button>
+                        <img src="${v.preview}" class="version-preview" alt="Vista previa de ${v.label}">
+                    `;
+                    container.appendChild(box);
+                });
+            } else {
+                container.innerHTML = `
+                    <p class="text-white/40 italic mb-6">Archivo verificado sin virus.</p>
+                    <button onclick="doDownload('${selected.link}', 'Única')" class="btn-action">DESCARGAR AHORA</button>
+                `;
+            }
             showView('detail');
-            sendLog(selected.title, "Interesado en Juego");
+            // sendLog ya no enviará nada aquí porque action no es PETICIÓN o DESCARGA
+            sendLog(selected.title, "Visualización"); 
         }
 
-        function doDownload() {
-            if(selected) {
-                sendLog(selected.title, "DESCARGA INICIADA");
-                setTimeout(() => window.location.href = selected.link, 500);
-            }
+        function doDownload(url, label) {
+            const finalUrl = url || selected.link;
+            sendLog(`${selected.title} [${label}]`, "DESCARGA INICIADA");
+            setTimeout(() => window.location.href = finalUrl, 500);
         }
 
         function sendRequest() {
             const val = document.getElementById('requestInput').value;
             if(!val.trim()) return;
-            sendLog(val, "PETICIÓN DE JUEGO");
+            sendLog(val, "PETICIÓN");
             document.getElementById('requestInput').value = "";
-            showToast("Petición enviada");
+            showToast("¡Petición Enviada!");
         }
 
         function showView(v) {
