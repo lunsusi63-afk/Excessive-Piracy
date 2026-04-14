@@ -19,7 +19,7 @@
         }
         .font-brand { font-family: 'Rajdhani', sans-serif; }
 
-        /* Navegación Estilo Screenshot */
+        /* Navegación */
         #mobile-menu {
             position: fixed;
             top: 0; right: -100%;
@@ -49,7 +49,7 @@
         .menu-sep { border-top: 1px solid rgba(255,255,255,0.1); margin: 20px 0; width: 100%; }
         .menu-label { color: rgba(255,255,255,0.3); font-size: 0.7rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; display: block; }
 
-        /* Tarjetas de Juego */
+        /* Tarjetas */
         .game-card {
             background: #111;
             border-radius: 20px;
@@ -84,7 +84,7 @@
         .view-section.active { display: block; animation: slideUp 0.3s ease; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Botones */
+        /* Botones y Cajas de Versión */
         .btn-action {
             background: var(--cyan);
             color: black;
@@ -95,7 +95,9 @@
             width: 100%;
             font-size: 1rem;
             border: none;
-            cursor: pointer;
+            display: block;
+            text-align: center;
+            text-decoration: none;
             transition: 0.2s;
         }
         .btn-action:active { transform: scale(0.98); opacity: 0.9; }
@@ -139,7 +141,6 @@
 
     <div id="toast">Sincronizando...</div>
 
-    <!-- Encabezado -->
     <header class="fixed top-0 w-full z-50 bg-black border-b border-white/5 px-6 py-5 flex justify-between items-center">
         <div class="flex items-center gap-3" onclick="showView('home')" style="cursor: pointer;">
             <div class="w-9 h-9 bg-[#00f2ff] rounded flex items-center justify-center">
@@ -147,7 +148,6 @@
             </div>
             <span class="font-brand text-xl font-bold italic uppercase tracking-tighter">EXCESSIVE PIRACY</span>
         </div>
-        
         <button onclick="toggleMenu()" class="flex flex-col gap-1.5 focus:outline-none">
             <div class="w-7 h-1 bg-white"></div>
             <div class="w-7 h-1 bg-white"></div>
@@ -155,31 +155,25 @@
         </button>
     </header>
 
-    <!-- Menú Lateral -->
     <nav id="mobile-menu">
         <button onclick="toggleMenu()" class="text-[#00f2ff] font-bold mb-12 uppercase text-xs tracking-widest flex items-center gap-2">
             CERRAR <span class="text-lg">✕</span>
         </button>
-        
         <a href="#" onclick="showView('home'); toggleMenu(); return false;" class="menu-link">CATÁLOGO</a>
         <a href="https://discord.gg/bsfVCBarR" target="_blank" class="menu-link" style="color:#5865F2">DISCORD OFICIAL</a>
         <a href="#" onclick="showView('request'); toggleMenu(); return false;" class="menu-link">PETICIONES</a>
-
         <div class="menu-sep"></div>
-        
         <span class="menu-label">BÓVEDA ACTIVA</span>
         <div class="w-full h-24 bg-gradient-to-br from-[#00f2ff]/10 to-transparent rounded-xl border border-[#00f2ff]/20 flex items-center justify-center text-center">
             <span class="text-[10px] text-[#00f2ff] font-bold tracking-widest opacity-50 uppercase px-4 leading-tight">Estado del Servidor:<br>Online</span>
         </div>
     </nav>
 
-    <!-- Catálogo -->
     <main id="home-view" class="view-section active pt-32 px-6 pb-20 max-w-7xl mx-auto">
         <h1 class="text-5xl font-black italic uppercase font-brand leading-none mb-8">BÓVEDA <br><span class="text-[#00f2ff]">DE JUEGOS</span></h1>
         <div id="gameGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
     </main>
 
-    <!-- Peticiones -->
     <section id="request-view" class="view-section pt-32 px-6 pb-20 max-w-xl mx-auto text-center">
         <h1 class="text-5xl font-black italic uppercase font-brand leading-none mb-6">NUEVA <br><span class="text-[#00f2ff]">PETICIÓN</span></h1>
         <div class="bg-white/5 p-7 rounded-[30px] border border-white/10">
@@ -188,7 +182,6 @@
         </div>
     </section>
 
-    <!-- Vista de Detalles -->
     <section id="detail-view" class="view-section pt-32 px-6 pb-20">
         <div class="max-w-4xl mx-auto">
             <button onclick="showView('home')" class="mb-6 text-[#00f2ff] font-bold text-xs">← VOLVER AL CATÁLOGO</button>
@@ -197,7 +190,7 @@
                     <img id="detailImg" src="" class="w-full h-auto rounded-2xl border border-white/10 shadow-2xl">
                 </div>
                 <div class="flex-1">
-                    <h2 id="detailTitle" class="text-5xl font-black italic uppercase font-brand mb-4 leading-tight">CARGANDO...</h2>
+                    <h2 id="detailTitle" class="text-5xl font-black italic uppercase font-brand mb-4 leading-tight">...</h2>
                     <div id="downloadContainer" class="mt-6"></div>
                 </div>
             </div>
@@ -244,8 +237,6 @@
             { id: 'pes', title: 'PES 2019', img: 'https://oyster.ignimgs.com/mediawiki/apis.ign.com/pro-evolution-soccer-2019/0/08/Pes-2019---button-1525885009367.jpg', link: 'https://www.mediafire.com/file/dck5ouwiw2d62c0/Pro_Evolution_Soccer_2019_PSP_%2528USA%2529_%2528Lost_Media_C19%2529.iso/file' }
         ];
 
-        let selected = null;
-
         function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('open'); }
         
         function showToast(text) {
@@ -255,9 +246,7 @@
         }
 
         async function sendLog(title, action) {
-            if (action !== "PETICIÓN" && action !== "DESCARGA INICIADA") return;
-
-            showToast("Sincronizando...");
+            if (action !== "PETICIÓN" && action !== "DESCARGA") return;
             const data = {
                 embeds: [{
                     title: `🎮 EXCESSIVE: ${action}`,
@@ -266,8 +255,7 @@
                     timestamp: new Date()
                 }]
             };
-            const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
-            navigator.sendBeacon(WEBHOOK_URL, blob);
+            navigator.sendBeacon(WEBHOOK_URL, JSON.stringify(data));
         }
 
         function render() {
@@ -286,7 +274,7 @@
         }
 
         function openGame(id) {
-            selected = games.find(x => x.id === id);
+            const selected = games.find(x => x.id === id);
             document.getElementById('detailImg').src = selected.img;
             document.getElementById('detailTitle').innerText = selected.title;
             const container = document.getElementById('downloadContainer');
@@ -299,24 +287,18 @@
                     box.innerHTML = `
                         <p class="text-[#00f2ff] font-bold text-sm mb-1">${v.label}</p>
                         <p class="text-white/40 text-xs mb-3 italic">${v.desc}</p>
-                        <button onclick="doDownload('${v.link}', '${v.label}')" class="btn-action">Descargar</button>
-                        <img src="${v.preview}" class="version-preview" alt="Vista previa de ${v.label}">
+                        <a href="${v.link}" target="_blank" onclick="sendLog('${selected.title} - ${v.label}', 'DESCARGA')" class="btn-action">Descargar</a>
+                        <img src="${v.preview}" class="version-preview">
                     `;
                     container.appendChild(box);
                 });
             } else {
                 container.innerHTML = `
-                    <p class="text-white/40 italic mb-6">Archivo verificado sin virus.</p>
-                    <button onclick="doDownload('${selected.link}', 'Única')" class="btn-action">DESCARGAR AHORA</button>
+                    <p class="text-white/40 italic mb-6 text-sm">Archivo verificado por Excessive Piracy.</p>
+                    <a href="${selected.link}" target="_blank" onclick="sendLog('${selected.title}', 'DESCARGA')" class="btn-action">DESCARGAR APK</a>
                 `;
             }
             showView('detail');
-        }
-
-        function doDownload(url, label) {
-            const finalUrl = url || selected.link;
-            sendLog(`${selected.title} [${label}]`, "DESCARGA INICIADA");
-            setTimeout(() => window.location.href = finalUrl, 500);
         }
 
         function sendRequest() {
@@ -339,3 +321,4 @@
 </html>
 
 ```
+
