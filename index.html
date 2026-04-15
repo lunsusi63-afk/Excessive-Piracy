@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Excessive Piracy | Vault v19</title>
+    <title>Excessive Piracy | Vault v28</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&family=Inter:wght@400;900&display=swap" rel="stylesheet">
     <style>
@@ -17,15 +17,17 @@
             margin: 0; 
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: high-quality;
         }
         
         .font-brand { font-family: 'Rajdhani', sans-serif; }
 
-        /* Selector de Idioma */
+        /* Selector de Idioma Ultra Colorido */
         #language-overlay {
             position: fixed;
             inset: 0;
-            background: #000;
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
             z-index: 10000;
             display: flex;
             flex-direction: column;
@@ -38,28 +40,45 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
-            max-width: 600px;
+            max-width: 700px;
             width: 100%;
-            max-height: 75vh;
+            max-height: 70vh;
             overflow-y: auto;
-            padding: 10px;
+            padding: 20px;
         }
         @media (min-width: 640px) { .lang-grid { grid-template-columns: repeat(4, 1fr); } }
         
         .lang-btn {
-            background: #0a0a0a;
+            background: rgba(255,255,255,0.03);
             border: 1px solid rgba(255,255,255,0.1);
-            padding: 20px 10px;
-            border-radius: 18px;
+            padding: 25px 10px;
+            border-radius: 22px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
-            transition: 0.2s;
+            gap: 10px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
-        .lang-btn:active { background: var(--cyan); transform: scale(0.95); }
-        .lang-btn:active span { color: #000; }
+        
+        .lang-btn:hover {
+            transform: translateY(-5px);
+            border-color: var(--cyan);
+            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.2);
+        }
+
+        .lang-btn.active-es { background: linear-gradient(135deg, #ff0000 0%, #ffcc00 100%); color: black; }
+        .lang-btn.active-en { background: linear-gradient(135deg, #00247d 0%, #cf142b 100%); color: white; }
+        .lang-btn.active-pt { background: linear-gradient(135deg, #009c3b 0%, #ffdf00 100%); color: black; }
+        .lang-btn.active-ru { background: linear-gradient(135deg, #0039a6 0%, #d52b1e 100%); color: white; }
+        .lang-btn.active-fr { background: linear-gradient(135deg, #002395 0%, #ed2939 100%); color: white; }
+        .lang-btn.active-de { background: linear-gradient(135deg, #ffce00 0%, #dd0000 100%); color: black; }
+        .lang-btn.active-it { background: linear-gradient(135deg, #009246 0%, #ce2b37 100%); color: white; }
+        .lang-btn.active-jp { background: linear-gradient(135deg, #ffffff 0%, #bc002d 100%); color: black; }
+        .lang-btn.active-cn { background: linear-gradient(135deg, #ee1c25 0%, #ffff00 100%); color: black; }
+        .lang-btn.active-sa { background: linear-gradient(135deg, #006c35 0%, #ffffff 100%); color: white; }
 
         @keyframes fadeInUp { 
             from { opacity: 0; transform: translateY(10px); } 
@@ -70,19 +89,20 @@
         .game-card {
             background: #111;
             border-radius: 24px;
-            height: 400px;
+            height: 380px;
             position: relative;
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.05);
             cursor: pointer;
         }
-        .char-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: 0.5s; }
-        .game-card:hover .char-img { opacity: 0.9; transform: scale(1.05); }
-        .card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,1) 10%, transparent 80%); }
+        .char-img { 
+            width: 100%; height: 100%; object-fit: cover; 
+            opacity: 0.6; transition: 0.5s; 
+        }
 
         #mobile-menu {
             position: fixed; top: 0; right: -100%; width: 80%; max-width: 300px; height: 100%;
-            background: #050505; z-index: 100; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #050505; z-index: 100; transition: 0.4s;
             border-left: 1px solid var(--cyan); padding: 40px 30px;
         }
         #mobile-menu.open { right: 0; }
@@ -96,34 +116,44 @@
             display: block; border: none; font-size: 13px; letter-spacing: 1px; cursor: pointer;
         }
 
-        #toast {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-            background: #111; color: var(--cyan); padding: 14px 28px; border-radius: 50px;
-            z-index: 1000; display: none; border: 1px solid var(--cyan); font-weight: bold;
-        }
-
         .version-card {
             background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 20px;
             padding: 20px;
             margin-bottom: 20px;
         }
-        .preview-img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; margin-top: 15px; border: 1px solid rgba(255,255,255,0.1); background: #000; }
+        
+        .preview-img-box {
+            width: 100%; height: 200px; margin-top: 15px; border-radius: 12px;
+            overflow: hidden; background: #000; border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .preview-img { width: 100%; height: 100%; object-fit: contain; cursor: zoom-in; }
+
+        #image-viewer {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 11000;
+            display: none; align-items: center; justify-content: center; padding: 10px;
+            cursor: zoom-out;
+        }
+        #viewer-img { max-width: 100%; max-height: 90vh; border-radius: 8px; }
     </style>
 </head>
 <body>
 
     <div id="language-overlay">
-        <h2 class="font-brand text-3xl font-black italic uppercase text-center mb-8">Select Language<br><span class="text-[#00f2ff]">Excessive Vault</span></h2>
+        <h2 class="font-brand text-4xl font-black italic uppercase text-center mb-4">Select Region</h2>
+        <p class="text-white/40 uppercase text-[10px] tracking-[0.3em] mb-10 font-bold">Excessive Piracy Vault</p>
         <div class="lang-grid" id="langGrid"></div>
     </div>
 
-    <div id="toast">Sincronizado</div>
+    <div id="image-viewer" onclick="closeViewer()">
+        <img id="viewer-img" src="" alt="Cargando HD...">
+    </div>
 
     <header class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-lg border-b border-white/5 px-6 py-5 flex justify-between items-center">
         <div class="flex items-center gap-3 cursor-pointer" onclick="showView('home')">
-            <div class="w-9 h-9 bg-[#00f2ff] rounded-lg flex items-center justify-center">
+            <div class="w-9 h-9 bg-[#00f2ff] rounded-lg flex items-center justify-center shadow-[0_0_15px_rgba(0,242,255,0.3)]">
                 <svg class="w-5 h-5 fill-black" viewBox="0 0 24 24"><path d="M12 2L4 7v10l8 5 8-5V7l-8-5z"/></svg>
             </div>
             <span class="font-brand text-xl font-bold italic uppercase tracking-tighter">EXCESSIVE PIRACY</span>
@@ -135,7 +165,7 @@
     </header>
 
     <nav id="mobile-menu">
-        <button onclick="toggleMenu()" class="text-[#00f2ff] font-bold mb-12 uppercase text-xs tracking-widest">CERRAR ✕</button>
+        <button onclick="toggleMenu()" class="text-[#00f2ff] font-bold mb-12 uppercase text-xs tracking-widest" id="close-menu">CERRAR ✕</button>
         <a href="#" onclick="showView('home'); toggleMenu(); return false;" class="block text-xl font-bold uppercase mb-6" id="nav-home">Catálogo</a>
         <a href="https://discord.gg/bsfVCBarR" target="_blank" class="block text-xl font-bold uppercase mb-6">Discord</a>
         <a href="#" onclick="showView('request'); toggleMenu(); return false;" class="block text-xl font-bold uppercase mb-6" id="nav-request">Peticiones</a>
@@ -176,21 +206,55 @@
         const WEBHOOK_URL = "https://discord.com/api/webhooks/1493029753462984724/W92Go_ww0kgsfZYXh-JBoo9MSJpVIXaoZTnqf61n5kRKGhnLGtTPOEtca9iVA8mzy44k";
 
         const languages = [
-            { code: 'es', name: 'Español', flag: '🇪🇸', texts: { home: 'BÓVEDA <br><span class="text-[#00f2ff]">DE JUEGOS</span>', req: 'NUEVA <br><span class="text-[#00f2ff]">PETICIÓN</span>', navHome: 'Catálogo', navReq: 'Peticiones', navLang: 'Cambiar Idioma', reqBtn: 'Enviar Petición', back: '← VOLVER', download: 'DESCARGAR', dlNow: 'DESCARGAR APK', input: '¿Qué juego buscas?...' }},
-            { code: 'en', name: 'English', flag: '🇺🇸', texts: { home: 'GAME <br><span class="text-[#00f2ff]">VAULT</span>', req: 'NEW <br><span class="text-[#00f2ff]">REQUEST</span>', navHome: 'Catalog', navReq: 'Requests', navLang: 'Change Language', reqBtn: 'Send Request', back: '← BACK', download: 'DOWNLOAD', dlNow: 'DOWNLOAD APK', input: 'Search game...' }},
-            { code: 'pt', name: 'Português', flag: '🇧🇷', texts: { home: 'COFRE DE <br><span class="text-[#00f2ff]">JOGOS</span>', req: 'NOVO <br><span class="text-[#00f2ff]">PEDIDO</span>', navHome: 'Catálogo', navReq: 'Pedidos', navLang: 'Mudar Idioma', reqBtn: 'Enviar Pedido', back: '← VOLTAR', download: 'BAIXAR', dlNow: 'BAIXAR APK', input: 'Procurar juego...' }},
-            { code: 'ru', name: 'Русский', flag: '🇷🇺', texts: { home: 'ХРАНИЛИЩЕ <br><span class="text-[#00f2ff]">ИГР</span>', req: 'ЗАПРОС <br><span class="text-[#00f2ff]">ИГРЫ</span>', navHome: 'Каталог', navReq: 'Запросы', navLang: 'Сменить язык', reqBtn: 'Отправить', back: '← НАЗАД', download: 'СКАЧАТЬ', dlNow: 'СКАЧАТЬ APK', input: 'Поиск...' }},
-            { code: 'fr', name: 'Français', flag: '🇫🇷' }, { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
-            { code: 'it', name: 'Italiano', flag: '🇮🇹' }, { code: 'jp', name: '日本語', flag: '🇯🇵' },
-            { code: 'cn', name: '中文', flag: '🇨🇳' }, { code: 'kr', name: '한국어', flag: '🇰🇷' },
-            { code: 'ar', name: 'العربية', flag: '🇸🇦' }, { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
-            { code: 'in', name: 'Hindi', flag: '🇮🇳' }, { code: 'pl', name: 'Polski', flag: '🇵🇱' },
-            { code: 'nl', name: 'Nederlands', flag: '🇳🇱' }, { code: 'se', name: 'Svenska', flag: '🇸🇪' },
-            { code: 'gr', name: 'Ελληνικά', flag: '🇬🇷' }, { code: 'th', name: 'ไทย', flag: '🇹🇭' },
-            { code: 'vn', name: 'Tiếng Việt', flag: '🇻🇳' }, { code: 'ua', name: 'Українська', flag: '🇺🇦' }
+            { code: 'es', class: 'active-es', name: 'Español', flag: '🇪🇸', texts: { 
+                home: 'BÓVEDA <br><span class="text-[#00f2ff]">DE JUEGOS</span>', 
+                req: 'NUEVA <br><span class="text-[#00f2ff]">PETICIÓN</span>', 
+                navHome: 'Catálogo', navReq: 'Peticiones', navLang: 'Cambiar Idioma', 
+                reqBtn: 'Enviar Petición', back: '← VOLVER', download: 'DESCARGAR', 
+                dlNow: 'DESCARGAR APK', input: '¿Qué juego buscas?...', close: 'CERRAR ✕',
+                v1: 'V1 - EL MÁS COMPLETO', v2: 'V2 - GRÁFICOS DECENTES', v3: 'V3 - MEJORES GRÁFICOS'
+            }},
+            { code: 'en', class: 'active-en', name: 'English', flag: '🇺🇸', texts: { 
+                home: 'GAME <br><span class="text-[#00f2ff]">VAULT</span>', 
+                req: 'NEW <br><span class="text-[#00f2ff]">REQUEST</span>', 
+                navHome: 'Catalog', navReq: 'Requests', navLang: 'Change Language', 
+                reqBtn: 'Send Request', back: '← BACK', download: 'DOWNLOAD', 
+                dlNow: 'DOWNLOAD APK', input: 'Search game...', close: 'CLOSE ✕',
+                v1: 'V1 - THE MOST COMPLETE', v2: 'V2 - DECENT GRAPHICS', v3: 'V3 - BEST GRAPHICS'
+            }},
+            { code: 'pt', class: 'active-pt', name: 'Português', flag: '🇧🇷', texts: { 
+                home: 'COFRE DE <br><span class="text-[#00f2ff]">JOGOS</span>', 
+                req: 'NOVO <br><span class="text-[#00f2ff]">PEDIDO</span>', 
+                navHome: 'Catálogo', navReq: 'Pedidos', navLang: 'Mudar Idioma', 
+                reqBtn: 'Enviar Pedido', back: '← VOLTAR', download: 'BAIXAR', 
+                dlNow: 'BAIXAR APK', input: 'Procurar juego...', close: 'FECHAR ✕',
+                v1: 'V1 - O MAIS COMPLETO', v2: 'V2 - GRÁFICOS DECENTES', v3: 'V3 - MELHORES GRÁFICOS'
+            }},
+            { code: 'ru', class: 'active-ru', name: 'Русский', flag: '🇷🇺', texts: { 
+                home: 'ХРАНИЛИЩЕ <br><span class="text-[#00f2ff]">ИГР</span>', 
+                req: 'ЗАПРОС <br><span class="text-[#00f2ff]">ИГРЫ</span>', 
+                navHome: 'Каталог', navReq: 'Запросы', navLang: 'Сменить язык', 
+                reqBtn: 'Отправить', back: '← НАЗАД', download: 'СКАЧАТЬ', 
+                dlNow: 'СКАЧАТЬ APK', input: 'Поиск...', close: 'ЗАКРЫТЬ ✕',
+                v1: 'V1 - САМАЯ ПОЛНАЯ', v2: 'V2 - СРЕДНЯЯ ГРАФИКА', v3: 'V3 - ЛУЧШАЯ ГРАФИКА'
+            }}
         ];
 
-        languages.forEach(l => { if(!l.texts) l.texts = languages[1].texts; });
+        // Rellenar automáticamente los 20 idiomas con el fallback de inglés
+        const restCodes = [
+            {code:'fr', c:'active-fr', n:'Français', f:'🇫🇷'}, {code:'de', c:'active-de', n:'Deutsch', f:'🇩🇪'},
+            {code:'it', c:'active-it', n:'Italiano', f:'🇮🇹'}, {code:'jp', c:'active-jp', n:'日本語', f:'🇯🇵'},
+            {code:'cn', c:'active-cn', n:'中文', f:'🇨🇳'}, {code:'ar', c:'active-sa', n:'العربية', f:'🇸🇦'},
+            {code:'tr', c:'lang-btn', n:'Türkçe', f:'🇹🇷'}, {code:'in', c:'lang-btn', n:'Hindi', f:'🇮🇳'},
+            {code:'pl', c:'lang-btn', n:'Polski', f:'🇵🇱'}, {code:'nl', c:'lang-btn', n:'Nederlands', f:'🇳🇱'},
+            {code:'se', c:'lang-btn', n:'Svenska', f:'🇸🇪'}, {code:'gr', c:'lang-btn', n:'Ελληνικά', f:'🇬🇷'},
+            {code:'th', c:'lang-btn', n:'ไทย', f:'🇹🇭'}, {code:'vn', c:'lang-btn', n:'Tiếng Việt', f:'🇻🇳'},
+            {code:'ua', c:'lang-btn', n:'Українська', f:'🇺🇦'}
+        ];
+
+        restCodes.forEach(r => {
+            languages.push({ code: r.code, class: r.c, name: r.n, flag: r.f, texts: languages[1].texts });
+        });
 
         let currentLang = languages[0];
 
@@ -201,13 +265,14 @@
                 img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6NCirZXspnRehiwpdhsRa4wQ_ecXusChoiDMJ2oVLablQGCWjCBLlfG1Z&s=10', 
                 hasVersions: true, 
                 versions: [
-                    { vid: 'v1', label: 'V1 - EL MÁS COMPLETO', link: 'https://piro775.itch.io/toy-factory-chapter-5-fangame-unity/download', preview: 'https://i.ibb.co/bMqkkp93/image.png' },
-                    { vid: 'v2', label: 'V2 - GRÁFICOS DECENTES', link: 'https://unreal-play-studio.com/games/poppy-playtime-chapter-5', preview: 'https://i.ibb.co/pv1GYkKZ/image.png' },
-                    { vid: 'v3', label: 'V3 - MEJORES GRÁFICOS', link: 'https://www.mediafire.com/file/00g7j35tkc416g6/Poppy+Playtime+Chapter+5.apk/file', preview: 'https://i.ibb.co/Gf72V0gf/image.png' }
+                    { vid: 'v1', link: 'https://piro775.itch.io/toy-factory-chapter-5-fangame-unity/download', preview: 'https://i.ibb.co/bjvtp7Wx/v1.png' },
+                    { vid: 'v2', link: 'https://unreal-play-studio.com/games/poppy-playtime-chapter-5', preview: 'https://i.postimg.cc/fVMY07GV/v2.png' },
+                    { vid: 'v3', link: 'https://www.mediafire.com/file/00g7j35tkc416g6/Poppy+Playtime+Chapter+5.apk/file', preview: 'https://i.postimg.cc/RNBHjQVp/v3.png' }
                 ]
             },
             { id: 'p4', title: 'Poppy Playtime 4', img: 'https://assetsio.gnwcdn.com/Poppy-Playtime-Chapter-4-promo-image-showing-a-toy-character-extending-its-hand-towards-the-camera.jpg?width=1200&height=1200&fit=crop&quality=100&format=png&enable=upscale&auto=webp', link: 'https://piro775.itch.io/toy-factory-chapter-4' },
             { id: 'p3', title: 'Poppy Playtime 3', img: 'https://play-lh.googleusercontent.com/-4dSZjsh1LX-aczh0SrslsgUIH6s7qMOSLFcsTlNn1B6M4zSnm_IC5hw2xFcPH9Jhi4', link: 'https://unreal-play-studio.com/games/poppy-playtime-chapter-3' },
+            { id: 'descenders', title: 'Descenders', img: 'https://upload.wikimedia.org/wikipedia/en/8/8a/Descenders_cover.jpg', link: 'https://www.mediafire.com/file_premium/ctlrgu6xyb7ybtk/Descenders-v1.10.3-mod-apkvision.org.apk/file' },
             { id: 'miles', title: 'Miles Morales', img: 'https://img.asmedia.epimg.net/resizer/v2/TBMDCLMAVRJ3LDXEPJECOUMMU4.jpg?auth=29ec0e8c2defd3ecfbd1fbb026e2529a134ac7a9c7a8fec750aedb5dc8ceb19f&width=1472&height=1104&smart=true', link: 'https://www.mediafire.com/file/kqarkaqmh0nhrtx/Spiderman_Miles_Morales_v1_[www.AndroSU.com].apk/file' },
             { id: 'fnaf', title: 'FNaF Spanish', img: 'https://images.genius.com/b49240eb5e510bb0b56d5abd7b45270d.512x512x1.png', link: 'https://www.mediafire.com/file/7nysoswlpi8cm9l/Five_Nights_at_Freddy%25C2%25B4s_%2528Spanish%2529_-_espacioapk.com.apk/file?dkey=7nysoswlpi8cm9l' },
             { id: 'cuphead', title: 'Cuphead + DLC', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSToa5X0umhuLw7OvUtiq8Wu_XVqSPOhfHDYlgq1Be7kg&s=10', link: 'https://www.mediafire.com/file/vdlzhn68ru3nuo5/Cuphead+++DLC+-+v1.0.3+-+VPR.apk/file?dkey=ocmx5h85l1c&r=148' },
@@ -219,16 +284,20 @@
             const grid = document.getElementById('langGrid');
             languages.forEach(lang => {
                 const btn = document.createElement('div');
-                btn.className = 'lang-btn';
-                btn.innerHTML = `<span class="text-4xl">${lang.flag}</span><span class="text-[10px] font-black uppercase tracking-widest text-white/60">${lang.name}</span>`;
+                btn.className = `lang-btn ${lang.class || ''}`;
+                btn.innerHTML = `
+                    <span class="text-4xl">${lang.flag}</span>
+                    <span class="text-[10px] font-black uppercase tracking-widest opacity-80">${lang.name}</span>
+                `;
                 btn.onclick = () => selectLanguage(lang.code);
                 grid.appendChild(btn);
             });
         }
 
         function selectLanguage(code) {
-            currentLang = languages.find(l => l.code === code);
+            currentLang = languages.find(l => l.code === code) || languages[0];
             const t = currentLang.texts;
+            
             document.getElementById('home-title').innerHTML = t.home;
             document.getElementById('req-title').innerHTML = t.req;
             document.getElementById('nav-home').innerText = t.navHome;
@@ -237,6 +306,8 @@
             document.getElementById('req-btn').innerText = t.reqBtn;
             document.getElementById('back-btn').innerText = t.back;
             document.getElementById('requestInput').placeholder = t.input;
+            document.getElementById('close-menu').innerText = t.close;
+            
             document.getElementById('language-overlay').style.display = 'none';
             document.body.style.overflow = 'auto';
             renderCatalog();
@@ -245,8 +316,8 @@
         function renderCatalog() {
             document.getElementById('gameGrid').innerHTML = games.map((g, i) => `
                 <div class="game-card anim-fade-up" style="animation-delay: ${i*0.05}s" onclick="openGame('${g.id}')">
-                    <div class="card-overlay"></div>
                     <img src="${g.img}" class="char-img">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
                     <div class="absolute bottom-8 left-8 pr-8 text-left">
                         <h3 class="text-2xl font-black italic uppercase font-brand leading-none">${g.title}</h3>
                     </div>
@@ -261,22 +332,39 @@
             const container = document.getElementById('downloadContainer');
             container.innerHTML = '';
 
+            const t = currentLang.texts;
+
             if (g.hasVersions) {
                 g.versions.forEach((v, idx) => {
+                    const versionLabel = t[v.vid] || v.vid;
                     const card = document.createElement('div');
                     card.className = 'version-card anim-fade-up';
                     card.style.animationDelay = `${idx * 0.1}s`;
                     card.innerHTML = `
-                        <p class="text-[10px] font-bold text-white/30 uppercase mb-4 tracking-widest">${v.label}</p>
-                        <a href="${v.link}" target="_blank" onclick="sendLog('${g.title} [${v.label}]')" class="btn-action">${currentLang.texts.download}</a>
-                        <img src="${v.preview}" class="preview-img" alt="Previsualización">
+                        <p class="text-[10px] font-bold text-white/30 uppercase mb-4 tracking-widest">${versionLabel}</p>
+                        <a href="${v.link}" target="_blank" onclick="sendLog('${g.title} [${v.vid}]')" class="btn-action">${t.download}</a>
+                        <div class="preview-img-box">
+                            <img src="${v.preview}" class="preview-img" onclick="viewImage('${v.preview}')" alt="Preview HD">
+                        </div>
                     `;
                     container.appendChild(card);
                 });
             } else {
-                container.innerHTML = `<div class="anim-fade-up"><a href="${g.link}" target="_blank" onclick="sendLog('${g.title}')" class="btn-action">${currentLang.texts.dlNow}</a></div>`;
+                container.innerHTML = `<a href="${g.link}" target="_blank" onclick="sendLog('${g.title}')" class="btn-action">${t.dlNow}</a>`;
             }
             showView('detail');
+        }
+
+        function viewImage(src) {
+            const vi = document.getElementById('viewer-img');
+            vi.src = src;
+            document.getElementById('image-viewer').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeViewer() {
+            document.getElementById('image-viewer').style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
 
         function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('open'); }
@@ -294,12 +382,8 @@
         function sendRequest() {
             const val = document.getElementById('requestInput').value;
             if(!val.trim()) return;
-            const data = { embeds: [{ title: "🏴‍☠️ PETICIÓN", description: `**Usuario busca:** ${val}`, color: 16711680 }] };
-            navigator.sendBeacon(WEBHOOK_URL, JSON.stringify(data));
+            navigator.sendBeacon(WEBHOOK_URL, JSON.stringify({ embeds: [{ title: "🏴‍☠️ PETICIÓN", description: `**Busca:** ${val}`, color: 16711680 }] }));
             document.getElementById('requestInput').value = "";
-            const t = document.getElementById('toast');
-            t.style.display = 'block';
-            setTimeout(() => t.style.display = 'none', 3000);
         }
 
         window.onload = init;
@@ -308,4 +392,3 @@
 </html>
 
 ```
-
