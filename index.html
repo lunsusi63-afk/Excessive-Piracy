@@ -8,7 +8,8 @@
     <!-- ETIQUETAS DE PREVISUALIZACIÓN (OPEN GRAPH) -->
     <meta property="og:title" content="Excessive Piracy | Vault v28">
     <meta property="og:description" content="Descarga los mejores juegos portados y exclusivos: Poppy Playtime, Miles Morales, Descenders y más.">
-    <meta property="og:image" content="https://i.ibb.co/bjvtp7Wx/v1.png">
+    <!-- IMAGEN ACTUALIZADA -->
+    <meta property="og:image" content="https://i.ibb.co/ZRz5p51n/logo.png">
     <meta property="og:url" content="https://excessive-piracy.com">
     <meta name="theme-color" content="#00f2ff">
     <meta name="twitter:card" content="summary_large_image">
@@ -32,7 +33,6 @@
         
         .font-brand { font-family: 'Rajdhani', sans-serif; }
 
-        /* Pantalla de Selección de Idioma */
         #language-overlay {
             position: fixed;
             inset: 0;
@@ -76,7 +76,6 @@
             box-shadow: 0 10px 30px rgba(0, 242, 255, 0.2);
         }
 
-        /* Estilos de botones de idiomas */
         .active-es { background: linear-gradient(135deg, #ff0000 0%, #ffcc00 100%); color: black; }
         .active-en { background: linear-gradient(135deg, #00247d 0%, #cf142b 100%); color: white; }
         .active-pt { background: linear-gradient(135deg, #009c3b 0%, #ffdf00 100%); color: black; }
@@ -235,7 +234,7 @@
                 req: 'NOVO <br><span class="text-[#00f2ff]">PEDIDO</span>', 
                 navHome: 'Catálogo', navReq: 'Pedidos', navLang: 'Mudar Idioma', 
                 reqBtn: 'Enviar Pedido', back: '← VOLTAR', download: 'BAIXAR', 
-                dlNow: 'BAIXAR APK', input: 'Procurar jogo...', close: 'FECHAR ✕',
+                dlNow: 'BAIXAR APK', input: 'Procurar juego...', close: 'FECHAR ✕',
                 v1: 'V1 - O MAIS COMPLETO', v2: 'V2 - GRÁFICOS DECENTES', v3: 'V3 - MELHORES GRÁFICOS'
             }},
             { code: 'ru', class: 'active-ru', name: 'Русский', flag: '🇷🇺', texts: { 
@@ -248,7 +247,6 @@
             }}
         ];
 
-        // Rellenar dinámicamente el resto de los 20 idiomas con traducción inglesa base
         const restCodes = [
             {code:'fr', c:'active-fr', n:'Français', f:'🇫🇷'}, {code:'de', c:'active-de', n:'Deutsch', f:'🇩🇪'},
             {code:'it', c:'active-it', n:'Italiano', f:'🇮🇹'}, {code:'jp', c:'active-jp', n:'日本語', f:'🇯🇵'},
@@ -290,7 +288,7 @@
 
         function init() {
             const grid = document.getElementById('langGrid');
-            grid.innerHTML = ''; // Limpiar previo
+            grid.innerHTML = '';
             languages.forEach(lang => {
                 const btn = document.createElement('div');
                 btn.className = `lang-btn ${lang.class || ''}`;
@@ -307,7 +305,6 @@
             currentLang = languages.find(l => l.code === code) || languages[0];
             const t = currentLang.texts;
             
-            // Actualizar interfaz principal
             document.getElementById('home-title').innerHTML = t.home;
             document.getElementById('req-title').innerHTML = t.req;
             document.getElementById('nav-home').innerText = t.navHome;
@@ -318,7 +315,6 @@
             document.getElementById('requestInput').placeholder = t.input;
             document.getElementById('close-menu').innerText = t.close;
             
-            // Cerrar el overlay e iniciar catálogo
             document.getElementById('language-overlay').style.display = 'none';
             document.body.style.overflow = 'auto';
             renderCatalog();
@@ -361,9 +357,7 @@
                     container.appendChild(card);
                 });
             } else {
-                container.innerHTML = `
-                    <a href="${g.link}" target="_blank" onclick="sendLog('${g.title}')" class="btn-action">${t.dlNow}</a>
-                `;
+                container.innerHTML = `<a href="${g.link}" target="_blank" onclick="sendLog('${g.title}')" class="btn-action">${t.dlNow}</a>`;
             }
             showView('detail');
         }
@@ -405,4 +399,3 @@
 </html>
 
 ```
-
