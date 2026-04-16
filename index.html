@@ -7,7 +7,7 @@
     
     <!-- ETIQUETAS DE PREVISUALIZACIÓN (OPEN GRAPH) -->
     <meta property="og:title" content="Excessive Piracy | Vault v28">
-    <meta property="og:description" content="Descarga los mejores juegos portados y exclusivos: Poppy Playtime, Miles Morales, Security Breach y más.">
+    <meta property="og:description" content="Descarga los mejores juegos portados y exclusivos: Poppy Playtime, Miles Morales, Descenders y más.">
     <meta property="og:image" content="https://pin.it/2tVjR1wPr">
     <meta property="og:url" content="https://excessive-piracy.com">
     <meta name="theme-color" content="#00f2ff">
@@ -218,7 +218,7 @@
                 navHome: 'Catálogo', navReq: 'Peticiones', navLang: 'Cambiar Idioma', 
                 reqBtn: 'Enviar Petición', back: '← VOLVER', download: 'DESCARGAR', 
                 dlNow: 'DESCARGAR APK', input: '¿Qué juego buscas?...', close: 'CERRAR ✕',
-                v1: 'V1 - EL MÁS COMPLETO', v2: 'V2 - GRÁFICOS DECENTES', v3: 'V3 - MEJORES GRÁFICOS'
+                v1: 'V1 - EL MÁS COMPLETO'
             }},
             { code: 'en', class: 'active-en', name: 'English', flag: '🇺🇸', texts: { 
                 home: 'GAME <br><span class="text-[#00f2ff]">VAULT</span>', 
@@ -226,7 +226,7 @@
                 navHome: 'Catalog', navReq: 'Requests', navLang: 'Change Language', 
                 reqBtn: 'Send Request', back: '← BACK', download: 'DOWNLOAD', 
                 dlNow: 'DOWNLOAD APK', input: 'Search game...', close: 'CLOSE ✕',
-                v1: 'V1 - THE MOST COMPLETE', v2: 'V2 - DECENT GRAPHICS', v3: 'V3 - BEST GRAPHICS'
+                v1: 'V1 - THE MOST COMPLETE'
             }},
             { code: 'pt', class: 'active-pt', name: 'Português', flag: '🇧🇷', texts: { 
                 home: 'COFRE DE <br><span class="text-[#00f2ff]">JOGOS</span>', 
@@ -234,7 +234,7 @@
                 navHome: 'Catálogo', navReq: 'Pedidos', navLang: 'Mudar Idioma', 
                 reqBtn: 'Enviar Pedido', back: '← VOLTAR', download: 'BAIXAR', 
                 dlNow: 'BAIXAR APK', input: 'Procurar juego...', close: 'FECHAR ✕',
-                v1: 'V1 - O MAIS COMPLETO', v2: 'V2 - GRÁFICOS DECENTES', v3: 'V3 - MELHORES GRÁFICOS'
+                v1: 'V1 - O MAIS COMPLETO'
             }},
             { code: 'ru', class: 'active-ru', name: 'Русский', flag: '🇷🇺', texts: { 
                 home: 'ХРАНИЛИЩЕ <br><span class="text-[#00f2ff]">ИГР</span>', 
@@ -242,7 +242,7 @@
                 navHome: 'Каталог', navReq: 'Запросы', navLang: 'Сменить язык', 
                 reqBtn: 'Отправить', back: '← НАЗАД', download: 'СКАЧАТЬ', 
                 dlNow: 'СКАЧАТЬ APK', input: 'Поиск...', close: 'ЗАКРЫТЬ ✕',
-                v1: 'V1 - САМАЯ ПОЛНАЯ', v2: 'V2 - СРЕДНЯЯ ГРАФИКА', v3: 'V3 - ЛУЧШАЯ ГРАФИКА'
+                v1: 'V1 - САМАЯ ПОЛНАЯ'
             }}
         ];
 
@@ -265,22 +265,15 @@
 
         const games = [
             { 
-                id: 'sb', 
-                title: 'Security Breach', 
-                img: 'https://static.wikia.nocookie.net/freddy-fazbears-pizza/images/a/aa/FNaF_Security_Breach_%28Poster%29.jpeg/revision/latest?cb=20230417011733&path-prefix=es', 
-                link: 'https://www.mediafire.com/file/8tnjgy3i2u4ho60/fnaf+security+breach+v1.7.0.1+-+espacioapk.com.apk/file' 
-            },
-            { 
                 id: 'p5', 
                 title: 'Poppy Playtime 5', 
                 img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6NCirZXspnRehiwpdhsRa4wQ_ecXusChoiDMJ2oVLablQGCWjCBLlfG1Z&s=10', 
                 hasVersions: true, 
                 versions: [
-                    { vid: 'v1', link: 'https://piro775.itch.io/toy-factory-chapter-5-fangame-unity', preview: 'https://i.ibb.co/bjvtp7Wx/v1.png' },
-                    { vid: 'v2', link: 'https://unreal-play-studio.com/games/poppy-playtime-chapter-5', preview: 'https://i.postimg.cc/fVMY07GV/v2.png' },
-                    { vid: 'v3', link: 'https://www.mediafire.com/file/00g7j35tkc416g6/Poppy+Playtime+Chapter+5.apk/file', preview: 'https://i.postimg.cc/RNBHjQVp/v3.png' }
+                    { vid: 'v1', link: 'https://piro775.itch.io/toy-factory-chapter-5-fangame-unity/download', preview: 'https://i.ibb.co/bjvtp7Wx/v1.png' }
                 ]
             },
+            { id: 'fnaf_sb', title: 'FNaF Security Breach', img: 'https://static.wikia.nocookie.net/freddy-fazbears-pizza/images/a/aa/FNaF_Security_Breach_%28Poster%29.jpeg/revision/latest?cb=20230417011733&path-prefix=es', link: 'https://www.mediafire.com/file/8tnjgy3i2u4ho60/fnaf+security+breach+v1.7.0.1+-+espacioapk.com.apk/file' },
             { id: 'p4', title: 'Poppy Playtime 4', img: 'https://assetsio.gnwcdn.com/Poppy-Playtime-Chapter-4-promo-image-showing-a-toy-character-extending-its-hand-towards-the-camera.jpg?width=1200&height=1200&fit=crop&quality=100&format=png&enable=upscale&auto=webp', link: 'https://piro775.itch.io/toy-factory-chapter-4' },
             { id: 'p3', title: 'Poppy Playtime 3', img: 'https://play-lh.googleusercontent.com/-4dSZjsh1LX-aczh0SrslsgUIH6s7qMOSLFcsTlNn1B6M4zSnm_IC5hw2xFcPH9Jhi4', link: 'https://unreal-play-studio.com/games/poppy-playtime-chapter-3' },
             { id: 'descenders', title: 'Descenders', img: 'https://upload.wikimedia.org/wikipedia/en/8/8a/Descenders_cover.jpg', link: 'https://www.mediafire.com/file_premium/ctlrgu6xyb7ybtk/Descenders-v1.10.3-mod-apkvision.org.apk/file' },
