@@ -127,97 +127,45 @@
 
         const languages = {
             es: { 
-                name: 'Español', flag: '🇪🇸', 
-                home: 'BÓVEDA <br><span class="text-[#00f2ff]">DE APKS</span>', 
-                req: 'PETICIÓN', navHome: 'Catálogo', navReq: 'Peticiones', navLang: 'Cambiar Idioma', 
-                reqBtn: 'Enviar', back: '← VOLVER', dlNow: 'Descargar Apk', search: 'Buscar...', 
-                close: 'CERRAR ✕', warnTitle: '¡AVISO!', warnDesc: 'Recuerda que el juego tiene un retraso al saltar así que salta a tiempo.', 
-                warnBtn: 'ACEPTAR', loading: 'CARGANDO...', downloading: 'DESCARGANDO...', credits: 'Créditos', updated: 'Actualizado hace 1 día',
-                gameDescs: {
-                    hff: '¡Física loca y diversión sin fin! Controla a Bob en este divertido juego de puzzles donde la gravedad es tu mayor reto.',
-                    gtav: 'Explora Los Santos en la palma de tu mano. El mundo abierto definitivo ahora disponible para móviles.',
-                    p5: 'La entrega más aterradora hasta la fecha. Nuevos puzzles, enemigos más rápidos y una atmósfera que te dejará sin aliento.',
-                    fnaf_sb: 'Sobrevive a la noche en el Mega Pizzaplex. Corre, escóndete y burla a los animatrónicos.',
-                    p4: 'Continúa el misterio en la fábrica abandonada. Descubre los secretos que Playtime Co. ha intentado ocultar.',
-                    silksong: 'La esperada secuela de Hollow Knight. Juega como Hornet en un vasto reino nuevo.',
-                    p3: 'Enfréntate a CatNap en el orfanato. El capítulo más oscuro de la saga Poppy Playtime.',
-                    descenders: 'Ciclismo de montaña extremo con niveles generados por procedimientos.',
-                    miles: 'Colúmpiate por Nueva York como Miles Morales con gráficos increíbles.',
-                    fnaf: 'El clásico de terror totalmente traducido al español. Sobrevive a las cinco noches.',
-                    cuphead: 'Acción de disparos y plataformas con estilo de dibujos animados de los años 30. Incluye DLC.',
-                    hollow: 'Una aventura épica a través de un reino de insectos y héroes.',
-                    pes2019: 'Vive la emoción del fútbol con esta versión clásica para PSP compatible con emuladores.'
-                },
-                p5Features: ['Poppy playtime chapter 5 fangame unity', 'V1.5', 'Añadidos múltiples mapas', 'Añadida la ubicación del taller de ingeniería', 'Añadidos nuevos efectos de sonido (SFX)', 'Añadidas nuevas mecánicas', 'Añadida cinemática del Prototipo', 'Errores corregidos', 'Y más...', 'V1.5.1 Errores corregidos', 'V1.5.2 Más problemas solucionados']
+                name: 'Español', flag: '🇪🇸', home: 'BÓVEDA <br><span class="text-[#00f2ff]">DE APKS</span>', req: 'PETICIÓN', navHome: 'Catálogo', navReq: 'Peticiones', navLang: 'Idioma', reqBtn: 'Enviar', back: '← VOLVER', dlNow: 'Descargar Apk', search: 'Buscar...', close: 'CERRAR ✕', warnTitle: '¡AVISO!', warnDesc: 'El juego tiene retraso al saltar, salta a tiempo.', warnBtn: 'ACEPTAR', loading: 'CARGANDO...', downloading: 'DESCARGANDO...', credits: 'Créditos', updated: 'Actualizado hace 1 día', notifDl: '✅ DESCARGA SOLICITADA', notifReq: '❓ PETICIÓN RECIBIDA',
+                gameDescs: { hff: '¡Física loca!', gtav: 'Mundo abierto en móvil.', p5: 'Capítulo aterrador.', fnaf_sb: 'Security Breach móvil.', p4: 'Misterio en la fábrica.', silksong: 'Secuela Hollow Knight.', p3: 'CatNap en el orfanato.', descenders: 'Ciclismo extremo.', miles: 'Spider-Man Miles Morales.', fnaf: 'Clásico de terror.', cuphead: 'Acción años 30.', hollow: 'Aventura épica.', pes2019: 'Fútbol PSP clásico.' },
+                p5Features: ['V1.5 Mapas añadidos', 'Ubicación taller añadida', 'Nuevos efectos de sonido', 'Nuevas mecánicas', 'Errores corregidos']
             },
             en: { 
-                name: 'English', flag: '🇺🇸', 
-                home: 'APK <br><span class="text-[#00f2ff]">VAULT</span>', 
-                req: 'REQUEST', navHome: 'Catalog', navReq: 'Requests', navLang: 'Language', 
-                reqBtn: 'Send', back: '← BACK', dlNow: 'Download Apk', search: 'Search...', 
-                close: 'CLOSE ✕', warnTitle: 'WARNING!', warnDesc: 'The game has a jump delay, jump on time.', 
-                warnBtn: 'ACCEPT', loading: 'LOADING...', downloading: 'DOWNLOADING...', credits: 'Credits', updated: 'Updated 1 day ago',
-                gameDescs: {
-                    hff: 'Crazy physics and endless fun! Control Bob in this hilarious puzzle game.',
-                    gtav: 'Explore Los Santos in the palm of your hand. The ultimate open world on mobile.',
-                    p5: 'The most terrifying installment to date. New puzzles, faster enemies, and chilling atmosphere.',
-                    fnaf_sb: 'Survive the night at Mega Pizzaplex. Run, hide and outsmart the animatronics.',
-                    p4: 'Continue the mystery in the abandoned factory. Discover secrets Playtime Co. hid.',
-                    silksong: 'The long-awaited sequel to Hollow Knight. Play as Hornet in a vast new kingdom.',
-                    p3: 'Face CatNap in the orphanage. The darkest chapter of the Poppy Playtime saga.',
-                    descenders: 'Extreme mountain biking with procedurally generated levels.',
-                    miles: 'Swing through New York as Miles Morales with incredible graphics.',
-                    fnaf: 'The horror classic. Survive five nights at Freddy Fazbears Pizza.',
-                    cuphead: 'Run and gun action with 1930s cartoon style. Includes DLC.',
-                    hollow: 'An epic adventure through a kingdom of bugs and heroes.',
-                    pes2019: 'Experience the thrill of football with this classic PSP version.'
-                },
-                p5Features: ['Poppy playtime chapter 5 fangame unity', 'V1.5', 'Added multiple maps', 'Added Engineering workshop', 'New SFX', 'New Mechanics', 'Prototype cutscene', 'Bugs fixed', 'And more...', 'V1.5.1 Fixed bugs', 'V1.5.2 More fixes']
+                name: 'English', flag: '🇺🇸', home: 'APK <br><span class="text-[#00f2ff]">VAULT</span>', req: 'REQUEST', navHome: 'Catalog', navReq: 'Requests', navLang: 'Language', reqBtn: 'Send', back: '← BACK', dlNow: 'Download Apk', search: 'Search...', close: 'CLOSE ✕', warnTitle: 'WARNING!', warnDesc: 'Jump delay active, jump on time.', warnBtn: 'ACCEPT', loading: 'LOADING...', downloading: 'DOWNLOADING...', credits: 'Credits', updated: 'Updated 1 day ago', notifDl: '✅ DOWNLOAD REQUESTED', notifReq: '❓ REQUEST RECEIVED',
+                gameDescs: { hff: 'Crazy physics fun!', gtav: 'Los Santos on mobile.', p5: 'Terrifying installment.', fnaf_sb: 'Survive the night.', p4: 'Mystery continues.', silksong: 'Hollow Knight sequel.', p3: 'Face CatNap.', descenders: 'Extreme biking.', miles: 'Spider-Man on Android.', fnaf: 'Horror classic.', cuphead: '30s cartoon action.', hollow: 'Epic adventure.', pes2019: 'Classic PSP football.' },
+                p5Features: ['V1.5 New maps', 'New mechanics', 'Bugs fixed']
             },
             pt: { 
-                name: 'Português', flag: '🇧🇷', 
-                home: 'COFRE <br><span class="text-[#00f2ff]">DE APKS</span>', req: 'PEDIDO', navHome: 'Catálogo', navReq: 'Pedidos', navLang: 'Idioma', 
-                reqBtn: 'Enviar', back: '← VOLTAR', dlNow: 'Baixar Apk', search: 'Pesquisar...', close: 'FECHAR ✕', warnTitle: 'AVISO!', warnDesc: 'O jogo tem um atraso no salto, salte a tempo.', 
-                warnBtn: 'ACEITAR', loading: 'CARGANDO...', downloading: 'BAIXANDO...', credits: 'Créditos', updated: 'Actualizado há 1 dia',
-                gameDescs: { hff: 'Física louca e diversão sem fim!', gtav: 'Explore Los Santos no seu celular.', p5: 'O capítulo más assustador até agora.', fnaf_sb: 'Sobreviva à noite no Mega Pizzaplex.', p4: 'Descubra os segredos da Playtime Co.', silksong: 'A sequela de Hollow Knight.', p3: 'Enfrente o CatNap no orfanato.', descenders: 'Ciclismo de montanha extremo.', miles: 'Seja o Miles Morales no Android.', fnaf: 'O clássico do terror.', cuphead: 'Ação estilo anos 30.', hollow: 'Uma aventura épica.', pes2019: 'Futebol clássico no PSP.' },
-                p5Features: ['V1.5 Mapas adicionados', 'Oficina adicionada', 'Novas mecânicas', 'Bugs corrigidos']
+                name: 'Português', flag: '🇧🇷', home: 'COFRE <br><span class="text-[#00f2ff]">DE APKS</span>', req: 'PEDIDO', navHome: 'Catálogo', navReq: 'Pedidos', navLang: 'Idioma', reqBtn: 'Enviar', back: '← VOLTAR', dlNow: 'Baixar Apk', search: 'Pesquisar...', close: 'FECHAR ✕', warnTitle: 'AVISO!', warnDesc: 'O jogo tem atraso no salto.', warnBtn: 'ACEITAR', loading: 'CARGANDO...', downloading: 'BAIXANDO...', credits: 'Créditos', updated: 'Actualizado há 1 día', notifDl: '✅ DOWNLOAD SOLICITADO', notifReq: '❓ PEDIDO RECEBIDO',
+                gameDescs: { hff: 'Física louca!', gtav: 'Mundo aberto.', p5: 'Capítulo assustador.', fnaf_sb: 'Sobreviva.', p4: 'Mistério na fábrica.', silksong: 'Sequela Hollow Knight.', p3: 'CatNap.', descenders: 'Ciclismo extremo.', miles: 'Spider-Man Android.', fnaf: 'Clásico terror.', cuphead: 'Ação anos 30.', hollow: 'Aventura épica.', pes2019: 'PES 2019 PSP.' },
+                p5Features: ['V1.5 Mapas', 'Novas mecânicas']
             },
             fr: { 
-                name: 'Français', flag: '🇫🇷', home: 'COFFRE <br><span class="text-[#00f2ff]">APK</span>', req: 'REQUÊTE', navHome: 'Catalogue', navReq: 'Requêtes', navLang: 'Langue', 
-                reqBtn: 'Envoyer', back: '← RETOUR', dlNow: 'Télécharger', search: 'Chercher...', close: 'FERMER ✕', warnTitle: 'ATTENTION!', warnDesc: 'Le jeu a un délai de saut, sautez à temps.', 
-                warnBtn: 'ACCEPTER', loading: 'CHARGEMENT...', downloading: 'TÉLÉCHARGEMENT...', credits: 'Crédits', updated: 'Mis à jour il y a 1 jour',
-                gameDescs: { hff: 'Physique folle et amusement!', gtav: 'Explorez Los Santos sur mobile.', p5: 'Le chapitre le plus terrifiant.', fnaf_sb: 'Survivez au Mega Pizzaplex.', p4: 'Mystère à l\'usine Playtime.', silksong: 'La suite de Hollow Knight.', p3: 'Affrontez CatNap à l\'orphelinat.', descenders: 'VTT extrême.', miles: 'Spider-Man sur Android.', fnaf: 'Le classique de l\'horreur.', cuphead: 'Action style années 30.', hollow: 'Aventure épique.', pes2019: 'Football classique PSP.' },
-                p5Features: ['V1.5 Cartes ajoutées', 'Atelier ajouté', 'Mécaniques corrigées']
+                name: 'Français', flag: '🇫🇷', home: 'COFFRE <br><span class="text-[#00f2ff]">APK</span>', req: 'REQUÊTE', navHome: 'Catalogue', navReq: 'Requêtes', navLang: 'Langue', reqBtn: 'Envoyer', back: '← RETOUR', dlNow: 'Télécharger', search: 'Chercher...', close: 'FERMER ✕', warnTitle: 'ATTENTION!', warnDesc: 'Délai de saut, sautez à temps.', warnBtn: 'ACCEPTER', loading: 'CHARGEMENT...', downloading: 'TÉLÉCHARGEMENT...', credits: 'Crédits', updated: 'Mis à jour il y a 1 jour', notifDl: '✅ TÉLÉCHARGEMENT DEMANDÉ', notifReq: '❓ REQUÊTE REÇUE',
+                gameDescs: { hff: 'Physique folle!', gtav: 'GTA V Mobile.', p5: 'Chapitre effrayant.', fnaf_sb: 'Mega Pizzaplex.', p4: 'Mystère Playtime.', silksong: 'Suite Hollow Knight.', p3: 'Face à CatNap.', descenders: 'VTT extrême.', miles: 'Spider-Man Miles.', fnaf: 'Classique horreur.', cuphead: 'Action années 30.', hollow: 'Aventure épique.', pes2019: 'Foot PSP classique.' },
+                p5Features: ['V1.5 Cartes ajoutées']
             },
             it: { 
-                name: 'Italiano', flag: '🇮🇹', home: 'CAVEAU <br><span class="text-[#00f2ff]">APK</span>', req: 'RICHIESTA', navHome: 'Catalogo', navReq: 'Richieste', navLang: 'Lingua', 
-                reqBtn: 'Invia', back: '← INDIETRO', dlNow: 'Scarica', search: 'Cerca...', close: 'CHIUDI ✕', warnTitle: 'ATTENZIONE!', warnDesc: 'Il gioco ha un ritardo nel salto, salta in tempo.', 
-                warnBtn: 'ACCETTA', loading: 'CARICAMENTO...', downloading: 'SCARICAMENTO...', credits: 'Crediti', updated: 'Aggiornato 1 giorno fa',
-                gameDescs: { hff: 'Fisica folle e divertimento!', gtav: 'Esplora Los Santos su mobile.', p5: 'Il capitolo più spaventoso.', fnaf_sb: 'Sopravvivi al Mega Pizzaplex.', p4: 'Mistero alla fabbrica.', silksong: 'Il seguito di Hollow Knight.', p3: 'Affronta CatNap.', descenders: 'Mountain bike estrema.', miles: 'Miles Morales su Android.', fnaf: 'Il classico horror.', cuphead: 'Azione anni \'30.', hollow: 'Avventura epica.', pes2019: 'Calcio classico PSP.' },
-                p5Features: ['V1.5 Mappe aggiunte', 'Nuove meccaniche', 'Bug risolti']
+                name: 'Italiano', flag: '🇮🇹', home: 'CAVEAU <br><span class="text-[#00f2ff]">APK</span>', req: 'RICHIESTA', navHome: 'Catalogo', navReq: 'Richieste', navLang: 'Lingua', reqBtn: 'Invia', back: '← INDIETRO', dlNow: 'Scarica', search: 'Cerca...', close: 'CHIUDI ✕', warnTitle: 'ATTENZIONE!', warnDesc: 'Ritardo nel salto, salta in tempo.', warnBtn: 'ACCETTA', loading: 'CARICAMENTO...', downloading: 'SCARICAMENTO...', credits: 'Crediti', updated: 'Aggiornato 1 giorno fa', notifDl: '✅ DOWNLOAD RICHIESTO', notifReq: '❓ RICHIESTA RICEVUTA',
+                gameDescs: { hff: 'Fisica folle!', gtav: 'GTA V su cellulare.', p5: 'Capitolo spaventoso.', fnaf_sb: 'Mega Pizzaplex.', p4: 'Fabbrica Playtime.', silksong: 'Seguito Hollow Knight.', p3: 'Affronta CatNap.', descenders: 'Ciclismo estremo.', miles: 'Miles Morales.', fnaf: 'Classico horror.', cuphead: 'Azione anni 30.', hollow: 'Avventura epica.', pes2019: 'PES PSP classico.' },
+                p5Features: ['V1.5 Mappe aggiunte']
             },
             de: { 
-                name: 'Deutsch', flag: '🇩🇪', home: 'APK <br><span class="text-[#00f2ff]">TRESOR</span>', req: 'ANFRAGE', navHome: 'Katalog', navReq: 'Anfragen', navLang: 'Sprache', 
-                reqBtn: 'Senden', back: '← ZURÜCK', dlNow: 'Herunterladen', search: 'Suchen...', close: 'SCHLIESSEN ✕', warnTitle: 'WARNUNG!', warnDesc: 'Sprungverzögerung beachten, rechtzeitig springen.', 
-                warnBtn: 'AKZEPTIEREN', loading: 'LADEN...', downloading: 'LÄDT HERUNTER...', credits: 'Credits', updated: 'Vor 1 Tag aktualisiert',
-                gameDescs: { hff: 'Verrückte Physik!', gtav: 'Los Santos auf dem Handy.', p5: 'Das gruseligste Kapitel.', fnaf_sb: 'Überlebe im Mega Pizzaplex.', p4: 'Geheimnisse der Fabrik.', silksong: 'Hollow Knight Fortsetzung.', p3: 'Stelle dich CatNap.', descenders: 'Extremes Mountainbiking.', miles: 'Spider-Man auf Android.', fnaf: 'Horror-Klassiker.', cuphead: 'Action im 30er-Stil.', hollow: 'Episches Abenteuer.', pes2019: 'PSP Fußball Klassiker.' },
-                p5Features: ['V1.5 Neue Karten', 'Fehler behoben', 'Neue Mechanik']
+                name: 'Deutsch', flag: '🇩🇪', home: 'APK <br><span class="text-[#00f2ff]">TRESOR</span>', req: 'ANFRAGE', navHome: 'Katalog', navReq: 'Anfragen', navLang: 'Sprache', reqBtn: 'Senden', back: '← ZURÜCK', dlNow: 'Herunterladen', search: 'Suchen...', close: 'SCHLIESSEN ✕', warnTitle: 'WARNUNG!', warnDesc: 'Sprungverzögerung, rechtzeitig springen.', warnBtn: 'AKZEPTIEREN', loading: 'LADEN...', downloading: 'LÄDT HERUNTER...', credits: 'Credits', updated: 'Vor 1 Tag aktualisiert', notifDl: '✅ DOWNLOAD ANGEFORDERT', notifReq: '❓ ANFRAGE ERHALTEN',
+                gameDescs: { hff: 'Verrückte Physik!', gtav: 'GTA V mobil.', p5: 'Gruseliges Kapitel.', fnaf_sb: 'Security Breach.', p4: 'Fabrik-Geheimnis.', silksong: 'Hollow Knight 2.', p3: 'Gegen CatNap.', descenders: 'Extremsport.', miles: 'Miles Morales.', fnaf: 'Horror-Klassiker.', cuphead: '30er-Jahre Action.', hollow: 'Epische Reise.', pes2019: 'PSP Fußball.' },
+                p5Features: ['V1.5 Karten hinzugefügt']
             },
             ru: { 
-                name: 'Русский', flag: '🇷🇺', home: 'АРХИВ <br><span class="text-[#00f2ff]">ИГР</span>', req: 'ЗАПРОС', navHome: 'Каталог', navReq: 'Запросы', navLang: 'Язык', 
-                reqBtn: 'Отправить', back: '← НАЗАД', dlNow: 'Скачать', search: 'Поиск...', close: 'ЗАКРЫТЬ ✕', warnTitle: 'ВНИМАНИЕ!', warnDesc: 'Задержка прыжка, прыгайте вовремя.', 
-                warnBtn: 'ПРИНЯТЬ', loading: 'ЗАГРУЗКА...', downloading: 'СКАЧИВАНИЕ...', credits: 'Авторы', updated: 'Обновлено 1 день назад',
-                gameDescs: { hff: 'Безумная физика!', gtav: 'Лос-Сантос на мобильном.', p5: 'Самая страшная глава.', fnaf_sb: 'Выживи в Mega Pizzaplex.', p4: 'Тайны фабрики.', silksong: 'Продолжение Hollow Knight.', p3: 'Сразись con CatNap.', descenders: 'Экстремальный велоспорт.', miles: 'Майлз Моралес на Android.', fnaf: 'Классика хоррора.', cuphead: 'Экшен в стиле 30-х.', hollow: 'Эпическое приключение.', pes2019: 'Классика футбола PSP.' },
-                p5Features: ['V1.5 Новые карты', 'Баги исправлены', 'Новая механика']
+                name: 'Русский', flag: '🇷🇺', home: 'АРХИВ <br><span class="text-[#00f2ff]">ИГР</span>', req: 'ЗАПРОС', navHome: 'Каталог', navReq: 'Запросы', navLang: 'Язык', reqBtn: 'Отправить', back: '← НАЗАД', dlNow: 'Скачать', search: 'Поиск...', close: 'ЗАКРЫТЬ ✕', warnTitle: 'ВНИМАНИЕ!', warnDesc: 'Задержка прыжка, прыгайте вовремя.', warnBtn: 'ПРИНЯТЬ', loading: 'ЗАГРУЗКА...', downloading: 'СКАЧИВАНИЕ...', credits: 'Авторы', updated: 'Обновлено 1 день назад', notifDl: '✅ СКАЧИВАНИЕ ЗАПРОШЕНО', notifReq: '❓ ЗАПРОС ПОЛУЧЕН',
+                gameDescs: { hff: 'Безумная физика!', gtav: 'GTA V на мобильный.', p5: 'Страшная глава.', fnaf_sb: 'Security Breach.', p4: 'Тайны фабрики.', silksong: 'Сиквел Hollow Knight.', p3: 'Против КэтНапа.', descenders: 'Экстремальный велоспорт.', miles: 'Майлз Моралес.', fnaf: 'Хоррор классика.', cuphead: 'Экшен в стиле 30-х.', hollow: 'Эпик приключение.', pes2019: 'Футбол PSP.' },
+                p5Features: ['V1.5 Добавлены карты']
             },
             ja: { 
-                name: '日本語', flag: '🇯🇵', home: 'APK <br><span class="text-[#00f2ff]">保管庫</span>', req: 'リクエスト', navHome: 'カタログ', navReq: 'リクエスト', navLang: '言語', 
-                reqBtn: '送信', back: '← 戻る', dlNow: 'ダウンロード', search: '検索...', close: '閉じる ✕', warnTitle: '警告!', warnDesc: 'ジャンプが遅れるので、時間通りにジャンプしてください。', 
-                warnBtn: '同意', loading: '読み込み中...', downloading: 'ダウンロード中...', credits: 'クレジット', updated: '1日前に更新',
-                gameDescs: { hff: '物理パズルゲーム！', gtav: 'スマホでGTA V。', p5: '史上最恐のチャプター。', fnaf_sb: '夜を生き延びろ。', p4: '工場の謎を解け。', silksong: '待望の続編。', p3: 'CatNapに立ち向かえ。', descenders: '究極のマウンテンバイク。', miles: 'マイルズ・モラレス。', fnaf: 'ホラーの傑作。', cuphead: '30年代アニメ風アクション。', hollow: '虫たちの王国の冒険。', pes2019: 'PSPサッカー名作。' },
-                p5Features: ['V1.5 マップ追加', 'バグ修正', '新機能']
+                name: '日本語', flag: '🇯🇵', home: 'APK <br><span class="text-[#00f2ff]">保管庫</span>', req: 'リクエスト', navHome: 'カタログ', navReq: 'リクエスト', navLang: '言語', reqBtn: '送信', back: '← 戻る', dlNow: 'ダウンロード', search: '検索...', close: '閉じる ✕', warnTitle: '警告!', warnDesc: 'ジャンプ遅延あり、早めにジャンプ。', warnBtn: '同意', loading: '読み込み中...', downloading: 'ダウンロード中...', credits: 'クレジット', updated: '1日前に更新', notifDl: '✅ ダウンロードがリクエストされました', notifReq: '❓ リクエストを受信しました',
+                gameDescs: { hff: '物理パズル!', gtav: 'スマホでGTA V。', p5: '恐怖のチャプター。', fnaf_sb: 'Security Breach。', p4: '工場の謎。', silksong: '待望の続編。', p3: 'CatNapに挑む。', descenders: 'MTBダウンヒル。', miles: 'マイルズ・モラレス。', fnaf: 'ホラーの傑作。', cuphead: '30年代風アクション。', hollow: '虫の王国の冒険。', pes2019: '名作サッカーPSP。' },
+                p5Features: ['V1.5 マップ追加']
             }
-            // (Resto de idiomas omitidos por brevedad pero mantenidos en memoria lógica para el usuario final)
         };
 
         const games = [
@@ -262,8 +210,6 @@
             document.getElementById('catalogSearch').placeholder = t.search;
             document.getElementById('warn-title').innerText = t.warnTitle;
             document.getElementById('warn-btn').innerText = t.warnBtn;
-
-            if(currentGameId) openGame(currentGameId);
             renderCatalog();
         }
 
@@ -293,29 +239,18 @@
             let descHtml = "";
             if (g.id === 'p5') {
                 descHtml += `<ul class="list-disc list-inside mb-4 text-sm text-white/70 space-y-1">`;
-                t.p5Features.forEach(feat => {
-                    descHtml += `<li>${feat}</li>`;
-                });
+                (t.p5Features || []).forEach(feat => { descHtml += `<li>${feat}</li>`; });
                 descHtml += `</ul>`;
-                descHtml += `<p class="mt-4">${t.gameDescs.p5}</p>`;
-            } else {
-                const desc = t.gameDescs[g.id] || g.title + " Full Version";
-                descHtml += `<p class="mt-4">${desc}</p>`;
             }
+            const desc = t.gameDescs[g.id] || g.title + " Full Version";
+            descHtml += `<p class="mt-4">${desc}</p>`;
             
-            if (g.updated) {
-                descHtml += `<p class="mt-4 text-[#00f2ff] font-bold uppercase text-xs tracking-widest">${t.updated}</p>`;
-            }
-
+            if (g.updated) { descHtml += `<p class="mt-4 text-[#00f2ff] font-bold uppercase text-xs tracking-widest">${t.updated}</p>`; }
             document.getElementById('detailDesc').innerHTML = descHtml;
             
             let extra = '';
-            if (g.credits) {
-                extra = `<p class="text-xs font-bold text-white/40 uppercase tracking-widest mt-4">${t.credits}: ${g.credits}</p>`;
-            }
-            if (g.id === 'p5') {
-                extra += `<p class="text-lg font-black text-[#00f2ff] uppercase italic font-brand mt-4">⚠️ ${t.warnDesc}</p>`;
-            }
+            if (g.credits) { extra = `<p class="text-xs font-bold text-white/40 uppercase tracking-widest mt-4">${t.credits}: ${g.credits}</p>`; }
+            if (g.id === 'p5') { extra += `<p class="text-lg font-black text-[#00f2ff] uppercase italic font-brand mt-4">⚠️ ${t.warnDesc}</p>`; }
 
             document.getElementById('downloadContainer').innerHTML = `
                 <button onclick="handleDownload()" class="btn-action shadow-[0_0_20px_rgba(0,242,255,0.4)]">${t.dlNow}</button>
@@ -324,18 +259,28 @@
             showView('detail');
         }
 
-        async function sendToDiscord(title, isRequest = false) {
+        async function sendEmbedToDiscord(title, isRequest = false) {
             const langName = languages[currentLangCode].name;
-            
-            // Usamos saltos de línea dobles \n\n para separar bien los bloques de texto
-            const textMessage = `**${title}**\n\nProcesando APK.\n\n**Idioma:** ${langName}\n\n✅ **DESCARGA SOLICITADA**`;
-            const reqMessage = `**${title}**\n\nProcesando APK.\n\n**Idioma:** ${langName}\n\n❓ **PETICIÓN RECIBIDA**`;
+            const t = languages[currentLangCode];
+            const color = isRequest ? 16711680 : 62207;
+            const externalText = isRequest ? t.notifReq : t.notifDl;
 
-            fetch(WEBHOOK_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ content: isRequest ? reqMessage : textMessage })
-            });
+            const payload = {
+                content: externalText,
+                embeds: [{
+                    title: title,
+                    description: `Procesando APK.\n\n**Idioma:** ${langName}`,
+                    color: color
+                }]
+            };
+
+            try {
+                await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            } catch (e) { console.error("Discord error"); }
         }
 
         function handleDownload() {
@@ -349,9 +294,7 @@
             document.getElementById('warning-modal').style.display = 'none';
             document.getElementById('loading-text').innerText = languages[currentLangCode].downloading;
             document.getElementById('loading-screen').style.display = 'flex';
-            
-            sendToDiscord(pendingName);
-
+            sendEmbedToDiscord(pendingName);
             setTimeout(() => {
                 document.getElementById('loading-screen').style.display = 'none';
                 window.open(pendingUrl, '_blank');
@@ -362,12 +305,9 @@
         function sendRequest() {
             const val = document.getElementById('requestInput').value;
             if(!val.trim()) return;
-            
-            sendToDiscord(val, true);
-
+            sendEmbedToDiscord(val, true);
             document.getElementById('requestInput').value = "";
-            const successMsg = currentLangCode === 'es' ? "¡Petición enviada!" : "Request sent!";
-            alert(successMsg);
+            alert(currentLangCode === 'es' ? "¡Enviado!" : "Sent!");
         }
 
         function filterGames() { renderCatalog(); }
@@ -383,4 +323,3 @@
 </html>
 
 ```
-
