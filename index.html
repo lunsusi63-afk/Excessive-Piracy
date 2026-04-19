@@ -178,8 +178,8 @@
                 name: 'Português', flag: '🇧🇷', 
                 home: 'COFRE <br><span class="text-[#00f2ff]">DE APKS</span>', req: 'PEDIDO', navHome: 'Catálogo', navReq: 'Pedidos', navLang: 'Idioma', 
                 reqBtn: 'Enviar', back: '← VOLTAR', dlNow: 'Baixar Apk', search: 'Pesquisar...', close: 'FECHAR ✕', warnTitle: 'AVISO!', warnDesc: 'O jogo tem um atraso no salto, salte a tempo.', 
-                warnBtn: 'ACEITAR', loading: 'CARREGANDO...', downloading: 'BAIXANDO...', credits: 'Créditos', updated: 'Actualizado há 1 dia',
-                gameDescs: { hff: 'Física louca e diversão sem fim!', gtav: 'Explore Los Santos no seu celular.', p5: 'O capítulo mais assustador até agora.', fnaf_sb: 'Sobreviva à noite no Mega Pizzaplex.', p4: 'Descubra os segredos da Playtime Co.', silksong: 'A sequela de Hollow Knight.', p3: 'Enfrente o CatNap no orfanato.', descenders: 'Ciclismo de montanha extremo.', miles: 'Seja o Miles Morales no Android.', fnaf: 'O clássico do terror.', cuphead: 'Ação estilo anos 30.', hollow: 'Uma aventura épica.', pes2019: 'Futebol clássico no PSP.' },
+                warnBtn: 'ACEITAR', loading: 'CARGANDO...', downloading: 'BAIXANDO...', credits: 'Créditos', updated: 'Actualizado há 1 dia',
+                gameDescs: { hff: 'Física louca e diversão sem fim!', gtav: 'Explore Los Santos no seu celular.', p5: 'O capítulo más assustador até agora.', fnaf_sb: 'Sobreviva à noite no Mega Pizzaplex.', p4: 'Descubra os segredos da Playtime Co.', silksong: 'A sequela de Hollow Knight.', p3: 'Enfrente o CatNap no orfanato.', descenders: 'Ciclismo de montanha extremo.', miles: 'Seja o Miles Morales no Android.', fnaf: 'O clássico do terror.', cuphead: 'Ação estilo anos 30.', hollow: 'Uma aventura épica.', pes2019: 'Futebol clássico no PSP.' },
                 p5Features: ['V1.5 Mapas adicionados', 'Oficina adicionada', 'Novas mecânicas', 'Bugs corrigidos']
             },
             fr: { 
@@ -255,7 +255,7 @@
             pl: { 
                 name: 'Polski', flag: '🇵🇱', home: 'SKARBIEC <br><span class="text-[#00f2ff]">APK</span>', req: 'PROŚBA', navHome: 'Katalog', navReq: 'Prośby', navLang: 'Język', 
                 reqBtn: 'Wyślij', back: '← POWRÓT', dlNow: 'Pobierz', search: 'Szukaj...', close: 'ZAMKNIJ ✕', warnTitle: 'OSTRZEŻENIE!', warnDesc: 'Gra ma opóźnienie skoku, skacz na czas.', 
-                warnBtn: 'AKCEPTUJ', loading: 'ŁADOWANIE...', downloading: 'POBIERANIE...', credits: 'Twórcy', updated: 'Zaktualizowano 1 dzień temu',
+                warnBtn: 'AKCEPTUJ', loading: 'ŁADOWANIE...', downloading: 'POBIERANIE...', credits: 'Twórcy', updated: 'Zaktualizowano 1 día temu',
                 gameDescs: { hff: 'Szalona fizyka!', gtav: 'GTA V na telefon.', p5: 'Najstraszniejszy rozdział.', fnaf_sb: 'Przetrwaj noc.', p4: 'Tajemnica fabryki.', silksong: 'Kontynuacja Hollow Knight.', p3: 'Zmierz się con CatNap.', descenders: 'Ekstremalna jazda.', miles: 'Miles Morales Android.', fnaf: 'Klasyk horroru.', cuphead: 'Akcja w stylu lat 30.', hollow: 'Epicka przygoda.', pes2019: 'Klasyk piłki PSP.' },
                 p5Features: ['V1.5 Nowe mapy', 'Naprawione błędy', 'Nowe mechaniki']
             }
@@ -365,6 +365,29 @@
             showView('detail');
         }
 
+        // Nueva función para enviar el formato exacto de las capturas
+        async function sendToDiscord(title, isRequest = false, extraData = "") {
+            const langName = languages[currentLangCode].name;
+            let payload = {
+                content: null,
+                embeds: [{
+                    title: `**${title}**`,
+                    description: `Procesando APK.\n**Idioma:** ${langName}${isRequest ? `\n**Petición:** ${extraData}` : ""}`,
+                    color: 16711680 // Un color rojo/cyan similar al estilo
+                }]
+            };
+
+            // Para que se vea exactamente como el mensaje de la captura, usamos texto con formato
+            const textMessage = `✅ **DESCARGA SOLICITADA**\n\n**${title}**\nProcesando APK.\n**Idioma:** ${langName}`;
+            const reqMessage = `❓ **PETICIÓN RECIBIDA**\n\n**${title}**\nProcesando APK.\n**Idioma:** ${langName}`;
+
+            fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ content: isRequest ? reqMessage : textMessage })
+            });
+        }
+
         function handleDownload() {
             if (currentGameId === 'p5') {
                 document.getElementById('warn-desc').innerText = languages[currentLangCode].warnDesc;
@@ -377,11 +400,8 @@
             document.getElementById('loading-text').innerText = languages[currentLangCode].downloading;
             document.getElementById('loading-screen').style.display = 'flex';
             
-            fetch(WEBHOOK_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ content: `✅ DESCARGA: ${pendingName} (Lang: ${currentLangCode})` })
-            });
+            // Enviamos con el nuevo formato
+            sendToDiscord(pendingName);
 
             setTimeout(() => {
                 document.getElementById('loading-screen').style.display = 'none';
@@ -393,13 +413,13 @@
         function sendRequest() {
             const val = document.getElementById('requestInput').value;
             if(!val.trim()) return;
-            fetch(WEBHOOK_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ content: `❓ PETICIÓN: ${val} (Lang: ${currentLangCode})` })
-            });
+            
+            // Enviamos con el nuevo formato
+            sendToDiscord(val, true);
+
             document.getElementById('requestInput').value = "";
-            alert(currentLangCode === 'es' ? "¡Petición enviada!" : "Request sent!");
+            const successMsg = currentLangCode === 'es' ? "¡Petición enviada!" : "Request sent!";
+            alert(successMsg);
         }
 
         function filterGames() { renderCatalog(); }
@@ -413,7 +433,6 @@
     </script>
 </body>
 </html>
-
 
 ```
 
