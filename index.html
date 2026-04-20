@@ -79,6 +79,17 @@
         }
         .verified-tag { font-size: 7px; color: var(--cyan); font-weight: bold; margin-bottom: 4px; display: block; }
 
+        #warning-modal {
+            position: fixed; inset: 0; z-index: 5000;
+            background: rgba(0,0,0,0.9); backdrop-filter: blur(10px);
+            display: none; align-items: center; justify-content: center; padding: 20px;
+        }
+        .warning-box {
+            background: #0a0a0a; border: 2px solid #ff3333;
+            max-width: 400px; width: 100%; border-radius: 20px; padding: 25px;
+            text-align: center; box-shadow: 0 0 30px rgba(255, 51, 51, 0.2);
+        }
+
         #loading-screen {
             position: fixed; inset: 0; z-index: 10000;
             background: #000; display: none; align-items: center; justify-content: center;
@@ -106,7 +117,8 @@
         .view-section.active { display: block; opacity: 1; }
 
         #language-overlay { position: fixed; inset: 0; z-index: 9999; background: #000; display: flex; align-items: center; justify-content: center; }
-        .lang-container { background: #0a0a0a; padding: 1.5rem; border-radius: 20px; border: 1px solid #111; }
+        .lang-container { background: #0a0a0a; padding: 1.5rem; border-radius: 20px; border: 1px solid #111; max-width: 90%; }
+        .lang-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
         .lang-btn { background: #151515; width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; transition: 0.2s; border: 1px solid transparent; cursor: pointer; }
         .lang-btn:active { background: var(--cyan); transform: scale(0.9); }
         .lang-btn.selected { border-color: var(--cyan); background: rgba(0, 242, 255, 0.1); }
@@ -139,7 +151,12 @@
             transition: 0.2s;
             text-decoration: none;
         }
-        .download-btn:active { transform: scale(0.98); opacity: 0.9; }
+        .download-btn:disabled { background: #333; color: #666; cursor: not-allowed; }
+        .download-btn:active:not(:disabled) { transform: scale(0.98); opacity: 0.9; }
+
+        .warn-btn-confirm { background: #ff3333; color: white; padding: 12px; border-radius: 10px; font-family: 'Bebas Neue'; font-size: 1.1rem; width: 100%; transition: 0.2s; }
+        .warn-btn-confirm:disabled { background: #222; color: #555; }
+        .warn-btn-cancel { background: transparent; color: #666; padding: 10px; font-family: 'Rajdhani'; font-weight: 700; font-size: 12px; text-transform: uppercase; margin-top: 10px; width: 100%; }
     </style>
 </head>
 <body>
@@ -148,10 +165,20 @@
         <div class="loader-bar"><div class="loader-progress"></div></div>
     </div>
 
+    <!-- Modal de Advertencia -->
+    <div id="warning-modal">
+        <div class="warning-box">
+            <h3 class="text-white font-brand text-2xl mb-4" id="warn-title">⚠️ ADVERTENCIA</h3>
+            <p class="text-gray-400 text-sm mb-6" id="warn-text"></p>
+            <button id="warn-confirm" class="warn-btn-confirm" disabled>Aceptar (5)</button>
+            <button onclick="closeWarning()" class="warn-btn-cancel" id="warn-cancel">Volver</button>
+        </div>
+    </div>
+
     <div id="language-overlay">
         <div class="lang-container text-center">
             <h2 class="font-brand text-xl mb-4 text-cyan-400">IDIOMA / LANGUAGE</h2>
-            <div class="grid grid-cols-5 gap-2" id="langGrid"></div>
+            <div class="lang-grid" id="langGrid"></div>
         </div>
     </div>
 
@@ -218,179 +245,43 @@
     <script>
         const WEBHOOK_URL = "https://discord.com/api/webhooks/1493029753462984724/W92Go_ww0kgsfZYXh-JBoo9MSJpVIXaoZTnqf61n5kRKGhnLGtTPOEtca9iVA8mzy44k";
         let curLang = 'es';
+        let pendingGameId = null;
         
         const i18n = {
-            es: { search: "BUSCAR...", back: "VOLVER", catalog: "CATÁLOGO", request: "SOLICITAR", send: "ENVIAR", reqPlaceholder: "NOMBRE DEL JUEGO...", verified: "Verificado Por Ep team ✓", download: "DESCARGAR APK", reqTitle: "REQUISITOS DE SISTEMA", reqWarning: "Datos aproximados, No está garantizado estos requisitos" },
-            en: { search: "SEARCH...", back: "BACK", catalog: "CATALOG", request: "REQUEST", send: "SEND", reqPlaceholder: "GAME NAME...", verified: "Verified By Ep team ✓", download: "DOWNLOAD APK", reqTitle: "SYSTEM REQUIREMENTS", reqWarning: "Approximate data, these requirements are not guaranteed" },
-            pt: { search: "BUSCAR...", back: "VOLTAR", catalog: "CATÁLOGO", request: "SOLICITAR", send: "ENVIAR", reqPlaceholder: "NOME DO JOGO...", verified: "Verificado Por Ep team ✓", download: "BAIXAR APK", reqTitle: "REQUISITOS DO SISTEMA", reqWarning: "Dados aproximados, estes requisitos não são garantidos" },
-            fr: { search: "RECHERCHER...", back: "RETOUR", catalog: "CATALOGUE", request: "DEMANDER", send: "ENVOYER", reqPlaceholder: "NOM DU JEU...", verified: "Vérifié par l'équipe Ep ✓", download: "TÉLÉCHARGER L'APK", reqTitle: "CONFIGURATION REQUISE", reqWarning: "Données approximatives, ces exigences ne sont pas garanties" }
+            es: { search: "BUSCAR...", back: "VOLVER", catalog: "CATÁLOGO", request: "SOLICITAR", send: "ENVIAR", reqPlaceholder: "NOMBRE DEL JUEGO...", verified: "Verificado Por Ep team ✓", download: "DESCARGAR APK", reqTitle: "REQUISITOS DE SISTEMA", reqWarning: "Datos aproximados, No está garantizado estos requisitos", accept: "Aceptar", cancel: "Volver", wait: "Espera", warnTitle: "⚠️ ADVERTENCIA", warnText: "Este Juego tiene retraso al saltar asique salta antes, Recuerda que al darle a Nuevo juego tendras que esperar 1 minuto en esa interfaz sin cerrar y después cargara el anuncio y podrás jugar totalmente gratis", ram: "Ram: ", proc: "Procesador: ", disk: "Espacio: ", os: "Android: ", perf: "Rendimiento: " },
+            en: { search: "SEARCH...", back: "BACK", catalog: "CATALOG", request: "REQUEST", send: "SEND", reqPlaceholder: "GAME NAME...", verified: "Verified By Ep team ✓", download: "DOWNLOAD APK", reqTitle: "SYSTEM REQUIREMENTS", reqWarning: "Approximate data, these requirements are not guaranteed", accept: "Accept", cancel: "Back", wait: "Wait", warnTitle: "⚠️ WARNING", warnText: "This Game has jump lag so jump earlier. Remember that when clicking New Game you will have to wait 1 minute on that interface without closing and then the ad will load and you can play totally free", ram: "Ram: ", proc: "Processor: ", disk: "Disk space: ", os: "Android: ", perf: "Performance: " },
+            pt: { search: "BUSCAR...", back: "VOLTAR", catalog: "CATÁLOGO", request: "SOLICITAR", send: "ENVIAR", reqPlaceholder: "NOME DO JOGO...", verified: "Verificado Por Ep team ✓", download: "BAIXAR APK", reqTitle: "REQUISITOS DO SISTEMA", reqWarning: "Dados aproximados, estes requisitos não são garantidos", accept: "Aceitar", cancel: "Voltar", wait: "Espere", warnTitle: "⚠️ AVISO", warnText: "Este jogo tem atraso no salto, então salte mais cedo. Lembre-se que ao clicar em Novo Jogo você terá que esperar 1 minuto nessa interface sem fechar e então o anúncio carregará e você poderá jogar totalmente grátis", ram: "Ram: ", proc: "Processador: ", disk: "Espaço: ", os: "Android: ", perf: "Desempenho: " },
+            fr: { search: "RECHERCHER...", back: "RETOUR", catalog: "CATALOGUE", request: "DEMANDER", send: "ENVOYER", reqPlaceholder: "NOM DU JEU...", verified: "Vérifié par l'équipe Ep ✓", download: "TÉLÉCHARGER L'APK", reqTitle: "CONFIGURATION REQUISE", reqWarning: "Données approximatives, ces exigences ne sont pas garanties", accept: "Accepter", cancel: "Retour", wait: "Attendez", warnTitle: "⚠️ AVERTISSEMENT", warnText: "Ce jeu a un retard de saut, donc sautez plus tôt. N'oubliez pas qu'en cliquant sur Nouveau jeu, vous devrez attendre 1 minute sur cette interface sans fermer, puis l'annonce se chargera et vous pourrez jouer totalement gratuitement", ram: "Ram: ", proc: "Processeur: ", disk: "Espace: ", os: "Android: ", perf: "Performance: " },
+            ru: { search: "ПОИСК...", back: "НАЗАД", catalog: "КАТАЛОГ", request: "ЗАПРОСИТЬ", send: "ОТПРАВИТЬ", reqPlaceholder: "НАЗВАНИЕ ИГРЫ...", verified: "Проверено командой Ep ✓", download: "СКАЧАТЬ APK", reqTitle: "СИСТЕМНЫЕ ТРЕБОВАНИЯ", reqWarning: "Приблизительные данные, требования не гарантированы", accept: "Принять", cancel: "Назад", wait: "Подождите", warnTitle: "⚠️ ПРЕДУПРЕЖДЕНИЕ", warnText: "В этой игре есть задержка прыжка, поэтому прыгайте раньше. Помните, что при нажатии кнопки «Новая игра» вам придется подождать 1 минуту в этом интерфейсе, не закрывая его, после чего загрузится реклама, и вы сможете играть совершенно бесплатно.", ram: "ОЗУ: ", proc: "Процессор: ", disk: "Место: ", os: "Android: ", perf: "Производительность: " },
+            zh: { search: "搜索...", back: "返回", catalog: "目录", request: "请求", send: "发送", reqPlaceholder: "游戏名称...", verified: "由 Ep 团队验证 ✓", download: "下载 APK", reqTitle: "系统要求", reqWarning: "近似数据，不保证这些要求", accept: "接受", cancel: "返回", wait: "等待", warnTitle: "⚠️ 警告", warnText: "由于这款游戏跳跃延迟，建议提前跳跃。点击新游戏后需在界面停留1分钟不要关闭，广告加载后即可免费游玩。", ram: "内存: ", proc: "处理器: ", disk: "空间: ", os: "安卓版本: ", perf: "性能: " },
+            ja: { search: "検索...", back: "戻る", catalog: "カタログ", request: "リクエスト", send: "送信", reqPlaceholder: "ゲーム名...", verified: "Ep チームによる確認済み ✓", download: "APK をダウンロード", reqTitle: "システム要件", reqWarning: "概算データであり、要件は保証されません", accept: "同意する", cancel: "戻る", wait: "待機中", warnTitle: "⚠️ 警告", warnText: "このゲームはジャンプの遅延があるため、早めにジャンプしてください。新しいゲームをクリックした後、そのインターフェイスを閉じずに1分間待つ必要があります。その後、広告が読み込まれ、完全に無料でプレイできます。", ram: "メモリ: ", proc: "プロセッサ: ", disk: "容量: ", os: "Android: ", perf: "パフォーマンス: " },
+            ko: { search: "검색...", back: "뒤로", catalog: "카탈로그", request: "요청하기", send: "보내기", reqPlaceholder: "게임 이름...", verified: "Ep 팀 인증됨 ✓", download: "APK 다운로드", reqTitle: "시스템 요구 사항", reqWarning: "대략적인 데이터이며 요구 사항은 보장되지 않습니다", accept: "동의", cancel: "뒤로", wait: "대기", warnTitle: "⚠️ 경고", warnText: "이 게임은 점프 지연이 있으므로 더 일찍 점프하십시오. '새 게임'을 클릭한 후 닫지 않고 1분 동안 기다려야 광고가 로드되고 무료로 플레이할 수 있습니다.", ram: "램: ", proc: "프로세서: ", disk: "공간: ", os: "안드로이드: ", perf: "성능: " },
+            de: { search: "SUCHE...", back: "ZURÜCK", catalog: "KATALOG", request: "ANFORDERN", send: "SENDEN", reqPlaceholder: "SPIELNAME...", verified: "Verifiziert vom Ep-Team ✓", download: "APK HERUNTERLADEN", reqTitle: "SYSTEMANFORDERUNGEN", reqWarning: "Ungefähre Daten, Anforderungen nicht garantiert", accept: "Akzeptieren", cancel: "Zurück", wait: "Warten", warnTitle: "⚠️ WARNUNG", warnText: "Dieses Spiel hat eine Sprungverzögerung, springen Sie also früher. Wenn Sie auf 'Neues Spiel' klicken, müssen Sie 1 Minute in der Benutzeroberfläche warten, ohne sie zu schließen. Dann wird die Werbung geladen und Sie können kostenlos spielen.", ram: "RAM: ", proc: "Prozessor: ", disk: "Speicher: ", os: "Android: ", perf: "Leistung: " },
+            it: { search: "CERCA...", back: "INDIETRO", catalog: "CATALOGO", request: "RICHIEDI", send: "INVIA", reqPlaceholder: "NOME DEL GIOCO...", verified: "Verificato dal team Ep ✓", download: "SCARICA APK", reqTitle: "REQUISITI DI SISTEMA", reqWarning: "Dati approssimativi, requisiti non garantiti", accept: "Accetta", cancel: "Indietro", wait: "Attendi", warnTitle: "⚠️ AVVISO", warnText: "Questo gioco ha un ritardo nel salto, quindi salta in anticipo. Cliccando su Nuovo Gioco dovrai attendere 1 minuto nell'interfaccia senza chiuderla, poi l'annuncio verrà caricato e potrai giocare gratis.", ram: "Ram: ", proc: "Processore: ", disk: "Spazio: ", os: "Android: ", perf: "Prestazioni: " }
         };
 
-        const flags = { es: '🇪🇸', en: '🇺🇸', fr: '🇫🇷', pt: '🇧🇷', de: '🇩🇪', it: '🇮🇹', jp: '🇯🇵', kr: '🇰🇷', cn: '🇨🇳', ru: '🇷🇺', ar: '🇸🇦', tr: '🇹🇷', hi: '🇮🇳', nl: '🇳🇱', pl: '🇵🇱' };
+        const flags = { es: '🇪🇸', en: '🇺🇸', pt: '🇧🇷', fr: '🇫🇷', ru: '🇷🇺', zh: '🇨🇳', ja: '🇯🇵', ko: '🇰🇷', de: '🇩🇪', it: '🇮🇹' };
 
         const games = [
-            { 
-                id: 'subn_bz', 
-                title: 'Subnautica: Below Zero', 
-                poster: 'https://store-images.s-microsoft.com/image/apps.25913.13546341381523259.8f30b71b-aac8-4816-a999-212ef85f8876.1b6b3f4d-3d78-409e-acc2-57b4950505b7', 
-                screen: 'https://img.apkvision.org/subnautica-below-zero/subnautica-below-zero-1.webp', 
-                link: 'https://dl.apkvision.org/subnautica-below-zero/Subnautica-Below-Zero-v1.22.55044-full-apkvision.apk', 
-                desc: 'Regresa al planeta 4546B. Sobrevive a las gélidas temperaturas de una nueva región ártica en el mundo de Subnautica.',
-                reqs: ["Ram necesitada: 4 GB o 6 GB", "Procesador mínimo: Octa-Core 2.4 GHz (Gama Alta)", "Espacio en disco: 3 GB libres", "Versión de Android: Android 9.0 o superior", "Rendimiento: 10-20 FPS en dispositivos básicos"]
-            },
-            { 
-                id: 'hff', 
-                title: 'Human Fall Flat', 
-                poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLgujSbYHhalK_BA7ViEBzgbyTsdjquFxBPGz4AQROeG6t8fs_8Xo5-kmN&s=10', 
-                screen: 'https://img.apkvision.org/human-fall-flat/human-fall-flat-5.webp', 
-                link: 'https://download2391.mediafire.com/2kcvoi53mgfgVzmqGhzvxvAAvZcTfWuUEPCnVK3HPkDCkr0w_YLSaVq0HQ3-K7A7oxKYRxePFezi9JbYJMRU9D1-h9Oz8Tnz31qmUcfOiKlGny5CLhAf2ZAukuYQ0IFsoJXCeh-0d9oldtrmwajPPH0Q_yOP8PzT1mzb2ho7RoI32fB3/6gyc9xlhng29hps/Human-Fall-Flat-v2.5.1-full-apkvision.apk', 
-                desc: 'Un divertido juego de plataformas basado en la física donde controlas a un humano torpe en paisajes oníricos.',
-                reqs: ["Ram necesitada: 3 GB o más", "Procesador mínimo: Octa-Core 1.8 GHz (Gama Media)", "Espacio en disco: 800 MB libres", "Versión de Android: Android 9.0 o superior", "Rendimiento: 10-20 FPS en dispositivos básicos"]
-            },
-            { 
-                id: 'gtav', 
-                title: 'Grand Theft Auto V', 
-                poster: 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Grand_Theft_Auto_V.png/250px-Grand_Theft_Auto_V.png', 
-                screen: 'https://root-nation.com/wp-content/uploads/2021/08/GTA5-Mobile-APK-02.jpg', 
-                link: 'https://download2389.mediafire.com/ig7ltq1kyr3g7EA15H2gNUIKMsxA99n-qCelxoY5kSj2Nj4jPoT3cUtrkKX4-hYyH_2LMtL4R1cCNVNAmw2xXa2EKDRlS2LBaIjwM4rS-ZvXODXayKZU_S4GkkL7q9clJsBDejP3bisTDdG4RhK4XsxHGCa_SnFfuIqFevwZ4R19kUV-/hjoahu9to2lyal0/Grand+Theft+Auto+V+-+espacioapk.com.apk', 
-                desc: 'La mítica experiencia de mundo abierto de Rockstar Games, ahora adaptada para dispositivos móviles con gran optimización.',
-                reqs: ["Ram necesitada: 2 GB o 3 GB", "Procesador mínimo: Quad-Core 1.5 GHz (Gama Baja)", "Espacio en disco: 500 MB libres", "Versión de Android: Android 8.0 o superior", "Rendimiento: 10-20 FPS en dispositivos básicos"]
-            },
-            { 
-                id: 'p5', 
-                title: 'Poppy Playtime 5', 
-                poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6NCirZXspnRehiwpdhsRa4wQ_ecXusChoiDMJ2oVLablQGCWjCBLlfG1Z&s=10', 
-                screen: 'https://img.itch.zone/aW1hZ2UvNDM5NDI0NS8yNjU5MzQwNS5wbmc=/original/Rcedmc.png', 
-                link: 'https://download1078.mediafire.com/6ienyu7kxohgPuqiv2NJ_5pRxScbIu52Lsc2bFlthoQDvGKeTpprvHa9sWEKPuCTtGF267foMnRx1wcKeSHpnuT_hrFDold6f-4zNuiiUatRmh66gGOBVQ_NmuMldHHBOsH2OjRiCEgFpWw79wQS6QqvBCtfI6uZ-NkMNP_NZuKEUPAc/ouo5nqc2upq6w24/PoppyPlaytime5+%283%29.apk', 
-                desc: 'El capítulo más reciente del terror en la fábrica de juguetes. Nuevos puzzles y enemigos que te pondrán a prueba.',
-                reqs: ["Ram necesitada: 6 GB o 8 GB", "Procesador mínimo: Octa-Core 2.6 GHz (Gama Alta)", "Espacio en disco: 2.5 GB libres", "Versión de Android: Android 10 o superior", "Rendimiento: 10-20 FPS en dispositivos básicos"]
-            },
-            { 
-                id: 'fnaf_sb', 
-                title: 'FNaF Security Breach', 
-                poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlLcK2U0rmkMIKo7BDuYMM8vpJFmzJ68dJd7IuoRMO4ZLzi7qqlauQ7icKX7Y4gyKMKxi3a6WYA4QS5gEVPHvD7hIPuQh_ctq6LJZndg&s=10', 
-                screen: 'https://unreal-play-studio.com/asset/fnaf-security-breach-mobile/7xm6jD.webp', 
-                link: 'https://download2438.mediafire.com/56ifsear1lmgZIuxYn0wHhwuPy140vKz4hUZQQYPH_YcTUT0FsVdiqCRc94H70-atlT7xTqpBjlPb5FMqP4jt4kiXXfmJYhSpAFgbQqEgLfjEMp2HCJqy_xc-k17mWXXeY1sNtN8W5UGHK14T22nzlBPdQ7PPDQIkI0acmsccoteGUca/8tnjgy3i2u4ho60/fnaf+security+breach+v1.7.0.1+-+espacioapk.com.apk', 
-                desc: 'Sobrevive una noche en el Mega Pizzaplex de Freddy Fazbear como Gregory, el pequeño atrapado en el complejo.',
-                reqs: ["Ram necesitada: 4 GB o 6 GB", "Procesador mínimo: Octa-Core 2.0 GHz (Gama Media-Alta)", "Espacio en disco: 2 GB libres", "Versión de Android: Android 9.0 o superior", "Rendimiento: 10-20 FPS en dispositivos básicos"]
-            },
-            { 
-                id: 'p4', 
-                title: 'Poppy Playtime 4', 
-                poster: 'https://assetsio.gnwcdn.com/Poppy-Playtime-Chapter-4-promo-image-showing-a-toy-character-extending-its-hand-towards-the-camera.jpg?width=1200&height=1200&fit=crop&quality=100&format=png&enable=upscale&auto=webp', 
-                screen: 'https://img.itch.zone/aW1hZ2UvMzQxOTQ2MC8yMDg0MTc1Mi5wbmc=/original/N3fagg.png', 
-                link: 'https://piro775.itch.io/toy-factory-chapter-4', 
-                desc: 'Continúa la historia de la fábrica Playtime. Desvela los secretos oscuros que se ocultan en las profundidades.',
-                reqs: ["Ram necesitada: 6 GB o 8 GB", "Procesador mínimo: Octa-Core 2.8 GHz (Gama Alta)", "Espacio en disco: 2.0 GB libres", "Versión de Android: Android 10 o superior", "Rendimiento: 10-20 FPS en dispositivos básicos"]
-            },
-            { 
-                id: 'silksong', 
-                title: 'Hollow Knight Silksong', 
-                poster: 'https://m.media-amazon.com/images/M/MV5BMjA4NWE1YWMtNjQ4ZC00Y2Q3LWFjMGEtNGVhM2FmYzJjMzM1XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', 
-                screen: 'https://img.apkvision.org/hollow-knight-silksong/hollow-knight-silksong-2.webp', 
-                link: 'https://download2447.mediafire.com/8n258933j6igSJNM9bTQuOFxBFFhJ_DyZYb_mc7riZkAtv1X9ktFunUvEFwuYDJDnuWh89Oy4b456RdbqwAHRVkFkclTMI83fq6X9nQPXEuU_YYvT9t0SEXJe-FeeppgHJqmuIwZhZoptZzZQI1ZdsWrzL6uX_PDJZTQx3BRa62VluN3/h18frmho5yk6liy/HW+Silksing+v1.20+-+espacioapk.com.apk', 
-                desc: 'Juega como Hornet, la princesa de Hallownest, en un reino completamente nuevo plagado de seda y canciones.',
-                reqs: ["Ram necesitada: 4 GB o 6 GB", "Procesador mínimo: Octa-Core 2.0 GHz (Gama Media)", "Espacio en disco: 2.0 GB libres", "Versión de Android: Android 9.0 o superior", "Rendimiento: 10-20 FPS en dispositivos básicos"]
-            },
-            { 
-                id: 'p3', 
-                title: 'Poppy Playtime 3', 
-                poster: 'https://play-lh.googleusercontent.com/-4dSZjsh1LX-aczh0SrslsgUIH6s7qMOSLFcsTlNn1B6M4zSnm_IC5hw2xFcPH9Jhi4', 
-                screen: 'https://unreal-play-studio.com/asset/poppy-playtime-3/o4ozI7.webp', 
-                link: 'https://unreal-play-studio.com/games/poppy-playtime-chapter-3', 
-                desc: 'Un orfanato decrépito conocido como Playcare debajo de la fábrica. Deberás atravesar este lugar encantado.',
-                reqs: ["Qualcomm Snapdragon 855 o equivalente", "4 GB RAM Memoria mínima", "Android 8.0 o superior", "3 GB de espacio libre"]
-            },
-            { 
-                id: 'descenders', 
-                title: 'Descenders', 
-                poster: 'https://upload.wikimedia.org/wikipedia/en/8/8a/Descenders_cover.jpg', 
-                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlSbLwRzT8Cn947R3Ri4_XsF3XIxA9m7RRxKyTX_Ncp0b_ywc0ng6X7hbK&s=10', 
-                link: 'https://apks.trulhost.com/Descenders-v1.10.3-Mod.apk', 
-                desc: 'Ciclismo de montaña extremo con generación procedimental de mundos y donde los errores tienen consecuencias reales.',
-                reqs: ["Ram necesitada: 4 GB o 6 GB", "Procesador mínimo: Octa-Core 2.2 GHz (Gama Media-Alta)", "Espacio en disco: 2.5 GB libres", "Versión de Android: Android 9.0 o superior", "Rendimiento: 10-20 FPS en dispositivos básicos"]
-            },
-            { 
-                id: 'miles', 
-                title: 'Miles Morales', 
-                poster: 'https://img.asmedia.epimg.net/resizer/v2/TBMDCLMAVRJ3LDXEPJECOUMMU4.jpg?auth=29ec0e8c2defd3ecfbd1fbb026e2529a134ac7a9c7a8fec750aedb5dc8ceb19f&width=1472&height=1104&smart=true', 
-                screen: 'https://img.itch.zone/aW1hZ2UvMzA4ODY5MS8xODQ3MDY1OC5qcGc=/original/EOiKUx.jpg', 
-                link: 'https://download2448.mediafire.com/flardfv1eaugWiNAVIpBDlfD44n8IdUq6fOUqXL1GOnzjxtv9HGgltN5XvAEnp5sL1zzmA5FrxMvozmZ9HXG2AZhvh5S3m9OBaZvEfwrd5i-d79usTxxJXBBcY8y5LvPUUIWBrKp059qh59p5XlPi0YaU83dRn-IS69D-GTvKYdtWp1S/kqarkaqmh0nhrtx/Spiderman_Miles_Morales_v1_%5Bwww.AndroSU.com%5D.apk', 
-                desc: 'Siente el poder de Miles Morales mientras domina sus habilidades explosivas para convertirse en su propio Spider-Man.',
-                reqs: ["Ram necesitada: 2 GB o 3 GB", "Procesador mínimo: Quad-Core 1.8 GHz (Gama Baja)", "Espacio en disco: 400 MB libres", "Versión de Android: Android 8.0 o superior", "Rendimiento: 10-20 FPS en dispositivos básicos"]
-            },
-            { 
-                id: 'fnaf', 
-                title: 'FNaF Spanish', 
-                poster: 'https://images.genius.com/b49240eb5e510bb0b56d5abd7b45270d.512x512x1.png', 
-                screen: 'https://imag.malavida.com/mvimgbig/download-fs/five-nights-at-freddys-14759-1.jpg', 
-                link: 'https://download2391.mediafire.com/3adlnz5zrzgg13wEdyCDxs-PLBmusoVZH-IW9JU8_dG0BRxL8QgI54GfMV4d9gs5ghf0Tk_IOO7AYR7h_Viokruh4fZ1FJb2BgTQPuMDO6jbHd8COhIj5Fw0xFJ9xUt4VC1tmzdYoMMVwJRdwjSax8ibGzgEfaj4eeHT--HWtLJ9w68I/7nysoswlpi8cm9l/Five+Nights+at+Freddy%C2%B4s+%28Spanish%29+-+espacioapk.com.apk', 
-                desc: 'El clásico juego de terror donde eres el guardia nocturno de Freddy Fazbear Pizza. Edición completamente en español.',
-                reqs: ["Ram necesitada: 2 GB o 3 GB", "Procesador mínimo: Quad-Core 2.0 GHz (Gama Baja-Media)", "Espacio en disco: 1 GB libre", "Versión de Android: Android 8.0 o superior", "Rendimiento: 10-20 FPS en dispositivos básicos"]
-            },
-            { 
-                id: 'cuphead', 
-                title: 'Cuphead + DLC', 
-                poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSToa5X0umhuLw7OvUtiq8Wu_XVqSPOhfHDYlgq1Be7kg&s=10', 
-                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhyD7O9v9JpZqpkl9s6b0_h88E83M5HZeB_aUwaWcVmg&s', 
-                link: 'https://download2390.mediafire.com/hwz2k55t8rlg54nrK4Horbp1IALV7vRu3wS9V6D9Whux1qDHA0Sc1gju9LFxEIruGl8dayXmgz-Z3gcLpiPvaOSFLA81NIxVp5rcgPPV9EJ8U5xbmSPdzPo1SAGPIXl2wyymLX1K2CiiENMMmuQe7CO8ZFNfeTBUTcX3-WHzE6BsIvO4/vdlzhn68ru3nuo5/Cuphead+%2B+DLC+-+v1.0.3+-+VPR.apk', 
-                desc: 'Acción de correr y disparar con estética de dibujos animados de los años 30. Incluye el DLC "The Delicious Last Course".',
-                reqs: ["Ram necesitada: 3 GB o 4 GB", "Procesador mínimo: Octa-Core 2.0 GHz (Gama Media)", "Espacio en disco: 2.5 GB libres", "Versión de Android: Android 9.0 o superior", "Rendimiento: 10-20 FPS en dispositivos básicos"]
-            },
-            { 
-                id: 'hollow', 
-                title: 'Hollow Knight', 
-                poster: 'https://store-images.s-microsoft.com/image/apps.58959.13847644057609868.8865d2a2-5e11-4424-85ce-1db30a161bd9.41ca3834-331c-4d34-b2c9-7dfe318fd168', 
-                screen: 'https://i.ytimg.com/vi/KHsAue9ufQY/maxresdefault.jpg', 
-                link: 'https://download2447.mediafire.com/saztt5f99fogbb8f94SRFEJDbxJC5Bcgaaa8KxCCHwNXVewD7wg-bPLdGl_o9VGaMJXsPW7CuuT8P_Ayw9-x3ygklGXEqzd52o1KxX_k0vUimJPxQCjlioH-7o_IkASlN56O9ERT4aUgFuIrG2IMiG8zhKDc9Nw6wPqjVvWU_nZMqGIR/bsqgq7dnvz6w187/HKVulkanV2.7z', 
-                desc: 'Explora un vasto reino en ruinas de insectos y héroes en esta aventura épica de acción clásica en 2D.',
-                reqs: ["Ram necesitada: 3 GB o 4 GB", "Procesador mínimo: Octa-Core 2.0 GHz (Gama Media)", "Espacio en disco: 1.2 GB libres", "Versión de Android: Android 9.0 o superior", "Rendimiento: 10-20 FPS en dispositivos básicos"]
-            },
-            { 
-                id: 'pes2019', 
-                title: 'PES 2019 PSP', 
-                poster: 'https://oyster.ignimgs.com/mediawiki/apis.ign.com/pro-evolution-soccer-2019/0/08/Pes-2019---button-1525885009367.jpg', 
-                screen: 'https://i.ytimg.com/vi/KHsAue9ufQY/maxresdefault.jpg', 
-                link: 'https://download2302.mediafire.com/zt3swdmx5iwggX-YguJISo5OqQuIHcplIJd_b1vEHEtaOnBlpT71FRZOj2nh_oPGccO8DImQcmolOwmxwCq8SBpjzRDWHKionveAeEjek8LrIWxEy62SwxiU9zXjcXgiTEnSKLJSzEcChsjyJrHftMo5yXlARDURkA7mkz3HyGD8ychP/dck5ouwiw2d62c0/Pro+Evolution+Soccer+2019+PSP+%28USA%29+%28Lost+Media+C19%29.iso', 
-                desc: 'El simulador de fútbol definitivo para PSP, ahora disponible para jugar en tu móvil mediante emulación optimizada.',
-                reqs: ["Ram necesitada: 2 GB o 3 GB", "Procesador mínimo: Quad-Core 2.0 GHz (Gama Baja-Media)", "Espacio en disco: 1 GB libre", "Versión de Android: Android 8.0 o superior"]
-            },
-            { 
-                id: 'subnautica', 
-                title: 'Subnautica', 
-                poster: 'https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/subnautica_cover.JPG', 
-                screen: 'https://play-lh.googleusercontent.com/cNG4a8w8Ve05wIItXkxzhmw-Bw0uqA4t4t8LaxnFXR6klkTSe4YbNrALOCR-GI3lTw=w526-h296-rw', 
-                link: 'https://download2444.mediafire.com/sb20pfuhagpgfIyHgXhf1duPVyaL6OQ10WauQceUAnpppIrpdE7HQDpO62Y1M7njKf1PdUlL2MpbkOlTNHs5jNigDGR-2JgXpft6KvEUhGcuYuDLrvwVJPySSGx9nSCD_w0KQqwjpmBKkXfOQB5T1iUBxqefdba5_DU_sK-_gJfhu8Uu/yxk9uno0d6hq45c/Subnautica+v1.22.83315-espacioapk.com.apk', 
-                desc: 'Desciende a las profundidades de un mundo submarino alienígena lleno de maravillas y peligros. Sobrevive al océano.',
-                reqs: ["Ram necesitada: 4 GB o 6 GB", "Procesador mínimo: Octa-Core 2.2 GHz (Gama Media-Alta)", "Espacio en disco: 2.5 GB libres", "Versión de Android: Android 9.0 o superior", "Rendimiento: 10-20 FPS en dispositivos básicos"]
-            },
-            { 
-                id: 'p1', 
-                title: 'Poppy Playtime 1', 
-                poster: 'https://plusgami.store/cdn/shop/files/Poppy-Playtime-Chapter-1-Juego-Digital-600x748.webp?v=1755981188', 
-                screen: 'https://play-lh.googleusercontent.com/4ZxkngWs2YPRF2SdpEk3IL9fjbW5N2C2c7x7IC3Wg1X28dkGBDultx3EGIQkPViWig=w526-h296-rw', 
-                link: 'https://download2441.mediafire.com/ogxtoknngfbgeHe3ZfUfSUikwozUZ47h-9V5oY6JLm5bXNrCWYeug0N96YiuV3N23nOKSE4LqCYZUFqq-xVQUodqj0b7lg_Q0zGOKvZWG1kv9mM8eZ-9fiR2lfhAFjWZ-6ZAVq2q47nde-XIsGFqEn8PKjYP8QXxx28xcfRTgdv8JyGJ/cc1338960hyor1h/poppy+playtime+v1.0.18+-+espacioapk.com.apk', 
-                desc: '¿Dónde están los empleados? Investiga la fábrica de juguetes abandonada y no dejes que Huggy Wuggy te atrape.',
-                reqs: ["Ram necesitada: 3 GB o 4 GB", "Procesador mínimo: Octa-Core 2.0 GHz (Gama Media)", "Espacio en disco: 1.5 GB libres", "Versión de Android: Android 9.0 o superior"]
-            },
-            { 
-                id: 'p2', 
-                title: 'Poppy Playtime 2', 
-                poster: 'https://static.wikia.nocookie.net/doblaje-fanon/images/0/09/PoppyPlaytime2.webp/revision/latest?cb=20260220055258&path-prefix=es', 
-                screen: 'https://i.ytimg.com/vi/wvKlIelE9zM/maxresdefault.jpg', 
-                link: 'https://download2388.mediafire.com/rbsk5us3ilgglqyGycAq7WvwsAtSmAiLSu7wcJgR4CyZHGj_shvt_UZAfA-boWDzzva5JFfnW52vYTP3Prr4XCYirKVgn5v8ahmVM1uOaYEoJa-O6qGSztL0ubytKu-Ia6G95Twr9baVBjnLW2Fc7q-gSfzEY3ByTgPTyR3aMpW5EE2u/xnfqqjvb8gesqya/Poppy_Playtime_Chapter_2_1.42_1730227580_latestmodapks.com.apk', 
-                desc: 'Explora una de las instalaciones más populares de Playtime Co., la Estación de Juegos. Mommy Long Legs te espera.',
-                reqs: ["Ram necesitada: 4 GB o 6 GB", "Procesador mínimo: Octa-Core 2.0 GHz (Gama Media)", "Espacio en disco: 2 GB libres", "Versión de Android: Android 9.0 o superior", "Rendimiento: 10-20 FPS en dispositivos básicos"]
-            },
-            { 
-                id: 'fnaf2_lat', 
-                title: 'FNaF 2 Latino', 
-                poster: 'https://es.pickgamer.com/media/3888/Five-Nights-at-Freddy%27s-2-285x380.jpg', 
-                screen: 'https://play-lh.googleusercontent.com/LOc2pzjEn1nqtEOtfukauDtZJYMWYuE5VWTHVrsnqzCWqZ3qnBR23ELwfIrfoFfKsD9__B1hInQyZQUNgi6I=w526-h296-rw', 
-                link: 'https://download2284.mediafire.com/44chpiyx3phg4-Mmk21PLbxQ3X9-gK2Iwx6eLC0iDowVm3c-07sBfol6ODw0gc0omQrlXb6tkfemXitTB3DlqetnPxYpzBtgJdZGp9YKeCiirZAkuRTg-4EYYfCszOf78gx5GNafjdk8NTQ8vpK1q4OtRdlqC7CfDpFmX5GemqzYrxux/qxuqjfb86v0d5kd/Five+Nights+at+Freddys+2+%28Spanish%29+-+espacioapk.com.apk', 
-                desc: 'Vuelven los animatrónicos originales con nuevos amigos. Sobrevive al turno de noche con voces latinas.',
-                reqs: ["Ram necesitada: 2 GB", "Procesador mínimo: Quad-Core 1.5 GHz (Gama Baja)", "Espacio en disco: 400 MB libres", "Versión de Android: Android 8.0 o superior", "Rendimiento: 30-60 FPS en dispositivos básicos"]
-            }
+            { id: 'gtavc', title: 'Grand Theft Auto: Vice City', poster: 'https://static.wikia.nocookie.net/esgta/images/0/0f/Grand_Theft_Auto_Vice_City.JPG/revision/latest/scale-to-width-down/1200?cb=20161127222945', screen: 'https://img.apkvision.org/grand-theft-auto-vice-city/grand-theft-auto-vice-city-1.webp', link: 'https://dl.apkvision.org/grand-theft-auto-vice-city/GTA-VC-v1.12.259-full-apkvision.apk', desc: { es: 'Vive el ascenso de Tommy Vercetti en la ciudad del vicio de los años 80.', en: 'Experience Tommy Vercetti\'s rise in the vice city of the 80s.', pt: 'Experimente a ascensão de Tommy Vercetti na vice city dos anos 80.', fr: 'Vivez l\'ascension de Tommy Vercetti dans la vice city des années 80.', ru: 'Переживите восхождение Томми Версетти в городе порока 80-х.', zh: '体验汤米·维塞蒂在 80 年代罪恶之城的崛起。', ja: '80年代のバイスシティでトミー・ベルセッティの台頭を体験してください。', ko: '80년대 바이스 시티에서 토미 버세티의 부상을 경험해 보세요.', de: 'Erlebe Tommy Vercettis Aufstieg in der Vice City der 80er Jahre.', it: 'Vivi l\'ascesa di Tommy Vercetti nella vice city degli anni \'80.' }, reqs: ["2 GB / 3 GB", "Quad-Core 1.5 GHz", "1.5 GB", "8.0+", "30-60 FPS"] },
+            { id: 'subn_bz', title: 'Subnautica: Below Zero', poster: 'https://store-images.s-microsoft.com/image/apps.25913.13546341381523259.8f30b71b-aac8-4816-a999-212ef85f8876.1b6b3f4d-3d78-409e-acc2-57b4950505b7', screen: 'https://img.apkvision.org/subnautica-below-zero/subnautica-below-zero-1.webp', link: 'https://dl.apkvision.org/subnautica-below-zero/Subnautica-Below-Zero-v1.22.55044-full-apkvision.apk', desc: { es: 'Regresa al planeta 4546B. Sobrevive a las gélidas temperaturas.', en: 'Return to planet 4546B. Survive freezing temperatures.', pt: 'Retorne ao planeta 4546B. Sobreviva a temperaturas congelantes.', fr: 'Retournez sur la planète 4546B. Survivez aux températures glaciales.' }, reqs: ["4 GB / 6 GB", "Octa-Core 2.4 GHz", "3 GB", "9.0+"] },
+            { id: 'hff', title: 'Human Fall Flat', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLgujSbYHhalK_BA7ViEBzgbyTsdjquFxBPGz4AQROeG6t8fs_8Xo5-kmN&s=10', screen: 'https://img.apkvision.org/human-fall-flat/human-fall-flat-5.webp', link: 'https://download2391.mediafire.com/2kcvoi53mgfgVzmqGhzvxvAAvZcTfWuUEPCnVK3HPkDCkr0w_YLSaVq0HQ3-K7A7oxKYRxePFezi9JbYJMRU9D1-h9Oz8Tnz31qmUcfOiKlGny5CLhAf2ZAukuYQ0IFsoJXCeh-0d9oldtrmwajPPH0Q_yOP8PzT1mzb2ho7RoI32fB3/6gyc9xlhng29hps/Human-Fall-Flat-v2.5.1-full-apkvision.apk', desc: { es: 'Divertido juego de plataformas físico.', en: 'Fun physics-based platformer.', pt: 'Divertido jogo de plataforma física.', fr: 'Jeu de plateforme physique amusant.' }, reqs: ["3 GB+", "Octa-Core 1.8 GHz", "800 MB", "9.0+"] },
+            { id: 'gtav', title: 'Grand Theft Auto V', poster: 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Grand_Theft_Auto_V.png/250px-Grand_Theft_Auto_V.png', screen: 'https://root-nation.com/wp-content/uploads/2021/08/GTA5-Mobile-APK-02.jpg', link: 'https://download2389.mediafire.com/ig7ltq1kyr3g7EA15H2gNUIKMsxA99n-qCelxoY5kSj2Nj4jPoT3cUtrkKX4-hYyH_2LMtL4R1cCNVNAmw2xXa2EKDRlS2LBaIjwM4rS-ZvXODXayKZU_S4GkkL7q9clJsBDejP3bisTDdG4RhK4XsxHGCa_SnFfuIqFevwZ4R19kUV-/hjoahu9to2lyal0/Grand+Theft+Auto+V+-+espacioapk.com.apk', desc: { es: 'Mundo abierto de Rockstar Games en móvil.', en: 'Rockstar Games open world on mobile.', pt: 'Mundo aberto da Rockstar Games no celular.', fr: 'Monde ouvert de Rockstar Games sur mobile.' }, reqs: ["2 GB / 3 GB", "Quad-Core 1.5 GHz", "500 MB", "8.0+"] },
+            { id: 'p5', title: 'Poppy Playtime 5', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6NCirZXspnRehiwpdhsRa4wQ_ecXusChoiDMJ2oVLablQGCWjCBLlfG1Z&s=10', screen: 'https://img.itch.zone/aW1hZ2UvNDM5NDI0NS8yNjU5MzQwNS5wbmc=/original/Rcedmc.png', link: 'https://download1078.mediafire.com/6ienyu7kxohgPuqiv2NJ_5pRxScbIu52Lsc2bFlthoQDvGKeTpprvHa9sWEKPuCTtGF267foMnRx1wcKeSHpnuT_hrFDold6f-4zNuiiUatRmh66gGOBVQ_NmuMldHHBOsH2OjRiCEgFpWw79wQS6QqvBCtfI6uZ-NkMNP_NZuKEUPAc/ouo5nqc2upq6w24/PoppyPlaytime5+%283%29.apk', desc: { es: 'El capítulo más reciente del terror.', en: 'The latest chapter of horror.', pt: 'O capítulo mais recente do terror.', fr: 'Le dernier chapitre de l\'horreur.' }, reqs: ["6 GB / 8 GB", "Octa-Core 2.6 GHz", "2.5 GB", "10+"], hasWarning: true, hasWait: true },
+            { id: 'fnaf_sb', title: 'FNaF Security Breach', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlLcK2U0rmkMIKo7BDuYMM8vpJFmzJ68dJd7IuoRMO4ZLzi7qqlauQ7icKX7Y4gyKMKxi3a6WYA4QS5gEVPHvD7hIPuQh_ctq6LJZndg&s=10', screen: 'https://unreal-play-studio.com/asset/fnaf-security-breach-mobile/7xm6jD.webp', link: 'https://download2438.mediafire.com/56ifsear1lmgZIuxYn0wHhwuPy140vKz4hUZQQYPH_YcTUT0FsVdiqCRc94H70-atlT7xTqpBjlPb5FMqP4jt4kiXXfmJYhSpAFgbQqEgLfjEMp2HCJqy_xc-k17mWXXeY1sNtN8W5UGHK14T22nzlBPdQ7PPDQIkI0acmsccoteGUca/8tnjgy3i2u4ho60/fnaf+security+breach+v1.7.0.1+-+espacioapk.com.apk', desc: { es: 'Sobrevive en el Mega Pizzaplex.', en: 'Survive at the Mega Pizzaplex.', pt: 'Sobreviva no Mega Pizzaplex.', fr: 'Survivez au Mega Pizzaplex.' }, reqs: ["4 GB / 6 GB", "Octa-Core 2.0 GHz", "2 GB", "9.0+"] },
+            { id: 'p4', title: 'Poppy Playtime 4', poster: 'https://assetsio.gnwcdn.com/Poppy-Playtime-Chapter-4-promo-image-showing-a-toy-character-extending-its-hand-towards-the-camera.jpg?width=1200&height=1200&fit=crop&quality=100&format=png&enable=upscale&auto=webp', screen: 'https://img.itch.zone/aW1hZ2UvMzQxOTQ2MC8yMDg0MTc1Mi5wbmc=/original/N3fagg.png', link: 'https://piro775.itch.io/toy-factory-chapter-4', desc: { es: 'Continúa la historia de la fábrica Playtime.', en: 'Continue the Playtime factory story.', pt: 'Continue a história da fábrica Playtime.', fr: 'Continuez l\'histoire de l\'usine Playtime.' }, reqs: ["6 GB / 8 GB", "Octa-Core 2.8 GHz", "2.0 GB", "10+"] },
+            { id: 'silksong', title: 'Hollow Knight Silksong', poster: 'https://m.media-amazon.com/images/M/MV5BMjA4NWE1YWMtNjQ4ZC00Y2Q3LWFjMGEtNGVhM2FmYzJjMzM1XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://img.apkvision.org/hollow-knight-silksong/hollow-knight-silksong-2.webp', link: 'https://download2447.mediafire.com/8n258933j6igSJNM9bTQuOFxBFFhJ_DyZYb_mc7riZkAtv1X9ktFunUvEFwuYDJDnuWh89Oy4b456RdbqwAHRVkFkclTMI83fq6X9nQPXEuU_YYvT9t0SEXJe-FeeppgHJqmuIwZhZoptZzZQI1ZdsWrzL6uX_PDJZTQx3BRa62VluN3/h18frmho5yk6liy/HW+Silksing+v1.20+-+espacioapk.com.apk', desc: { es: 'Juega como Hornet en un reino nuevo.', en: 'Play as Hornet in a new kingdom.', pt: 'Jogue como Hornet em um novo reino.', fr: 'Incarnez Hornet dans un nouveau royaume.' }, reqs: ["4 GB / 6 GB", "Octa-Core 2.0 GHz", "2.0 GB", "9.0+"] },
+            { id: 'p3', title: 'Poppy Playtime 3', poster: 'https://play-lh.googleusercontent.com/-4dSZjsh1LX-aczh0SrslsgUIH6s7qMOSLFcsTlNn1B6M4zSnm_IC5hw2xFcPH9Jhi4', screen: 'https://unreal-play-studio.com/asset/poppy-playtime-3/o4ozI7.webp', link: 'https://unreal-play-studio.com/games/poppy-playtime-chapter-3', desc: { es: 'El orfanato Playcare debajo de la fábrica.', en: 'Playcare orphanage beneath the factory.', pt: 'Orfanato Playcare sob a fábrica.', fr: 'L\'orphelinat Playcare sous l\'usine.' }, reqs: ["Snapdragon 855+", "4 GB+", "3 GB", "8.0+"] },
+            { id: 'descenders', title: 'Descenders', poster: 'https://upload.wikimedia.org/wikipedia/en/8/8a/Descenders_cover.jpg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlSbLwRzT8Cn947R3Ri4_XsF3XIxA9m7RRxKyTX_Ncp0b_ywc0ng6X7hbK&s=10', link: 'https://apks.trulhost.com/Descenders-v1.10.3-Mod.apk', desc: { es: 'Ciclismo de montaña extremo.', en: 'Extreme mountain biking.', pt: 'Ciclismo de montanha extremo.', fr: 'VTT extrême.' }, reqs: ["4 GB / 6 GB", "Octa-Core 2.2 GHz", "2.5 GB", "9.0+"] },
+            { id: 'miles', title: 'Miles Morales', poster: 'https://img.asmedia.epimg.net/resizer/v2/TBMDCLMAVRJ3LDXEPJECOUMMU4.jpg?auth=29ec0e8c2defd3ecfbd1fbb026e2529a134ac7a9c7a8fec750aedb5dc8ceb19f&width=1472&height=1104&smart=true', screen: 'https://img.itch.zone/aW1hZ2UvMzA4ODY5MS8xODQ3MDY1OC5qcGc=/original/EOiKUx.jpg', link: 'https://download2448.mediafire.com/flardfv1eaugWiNAVIpBDlfD44n8IdUq6fOUqXL1GOnzjxtv9HGgltN5XvAEnp5sL1zzmA5FrxMvozmZ9HXG2AZhvh5S3m9OBaZvEfwrd5i-d79usTxxJXBBcY8y5LvPUUIWBrKp059qh59p5XlPi0YaU83dRn-IS69D-GTvKYdtWp1S/kqarkaqmh0nhrtx/Spiderman_Miles_Morales_v1_%5Bwww.AndroSU.com%5D.apk', desc: { es: 'Poder de Miles Morales en móvil.', en: 'Miles Morales power on mobile.', pt: 'Poder de Miles Morales no celular.', fr: 'Le pouvoir de Miles Morales sur mobile.' }, reqs: ["2 GB / 3 GB", "Quad-Core 1.8 GHz", "400 MB", "8.0+"] },
+            { id: 'fnaf', title: 'FNaF Spanish', poster: 'https://images.genius.com/b49240eb5e510bb0b56d5abd7b45270d.512x512x1.png', screen: 'https://imag.malavida.com/mvimgbig/download-fs/five-nights-at-freddys-14759-1.jpg', link: 'https://download2391.mediafire.com/3adlnz5zrzgg13wEdyCDxs-PLBmusoVZH-IW9JU8_dG0BRxL8QgI54GfMV4d9gs5ghf0Tk_IOO7AYR7h_Viokruh4fZ1FJb2BgTQPuMDO6jbHd8COhIj5Fw0xFJ9xUt4VC1tmzdYoMMVwJRdwjSax8ibGzgEfaj4eeHT--HWtLJ9w68I/7nysoswlpi8cm9l/Five+Nights+at+Freddy%C2%B4s+%28Spanish%29+-+espacioapk.com.apk', desc: { es: 'Clásico terror en español.', en: 'Classic horror in Spanish.', pt: 'Terror clásico em espanhol.', fr: 'Horreur classique en espagnol.' }, reqs: ["2 GB / 3 GB", "Quad-Core 2.0 GHz", "1 GB", "8.0+"] },
+            { id: 'cuphead', title: 'Cuphead + DLC', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSToa5X0umhuLw7OvUtiq8Wu_XVqSPOhfHDYlgq1Be7kg&s=10', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhyD7O9v9JpZqpkl9s6b0_h88E83M5HZeB_aUwaWcVmg&s', link: 'https://download2390.mediafire.com/hwz2k55t8rlg54nrK4Horbp1IALV7vRu3wS9V6D9Whux1qDHA0Sc1gju9LFxEIruGl8dayXmgz-Z3gcLpiPvaOSFLA81NIxVp5rcgPPV9EJ8U5xbmSPdzPo1SAGPIXl2wyymLX1K2CiiENMMmuQe7CO8ZFNfeTBUTcX3-WHzE6BsIvO4/vdlzhn68ru3nuo5/Cuphead+%2B+DLC+-+v1.0.3+-+VPR.apk', desc: { es: 'Acción con el DLC incluido.', en: 'Action with DLC included.', pt: 'Ação com o DLC incluído.', fr: 'Action avec le DLC inclus.' }, reqs: ["3 GB / 4 GB", "Octa-Core 2.0 GHz", "2.5 GB", "9.0+"] },
+            { id: 'hollow', title: 'Hollow Knight', poster: 'https://store-images.s-microsoft.com/image/apps.58959.13847644057609868.8865d2a2-5e11-4424-85ce-1db30a161bd9.41ca3834-331c-4d34-b2c9-7dfe318fd168', screen: 'https://i.ytimg.com/vi/KHsAue9ufQY/maxresdefault.jpg', link: 'https://download2447.mediafire.com/saztt5f99fogbb8f94SRFEJDbxJC5Bcgaaa8KxCCHwNXVewD7wg-bPLdGl_o9VGaMJXsPW7CuuT8P_Ayw9-x3ygklGXEqzd52o1KxX_k0vUimJPxQCjlioH-7o_IkASlN56O9ERT4aUgFuIrG2IMiG8zhKDc9Nw6wPqjVvWU_nZMqGIR/bsqgq7dnvz6w187/HKVulkanV2.7z', desc: { es: 'Explora un vasto reino en ruinas.', en: 'Explore a vast ruined kingdom.', pt: 'Explore um vasto reino em ruínas.', fr: 'Explorez un vaste royaume en ruines.' }, reqs: ["3 GB / 4 GB", "Octa-Core 2.0 GHz", "1.2 GB", "9.0+"] },
+            { id: 'pes2019', title: 'PES 2019 PSP', poster: 'https://oyster.ignimgs.com/mediawiki/apis.ign.com/pro-evolution-soccer-2019/0/08/Pes-2019---button-1525885009367.jpg', screen: 'https://i.ytimg.com/vi/KHsAue9ufQY/maxresdefault.jpg', link: 'https://download2302.mediafire.com/zt3swdmx5iwggX-YguJISo5OqQuIHcplIJd_b1vEHEtaOnBlpT71FRZOj2nh_oPGccO8DImQcmolOwmxwCq8SBpjzRDWHKionveAeEjek8LrIWxEy62SwxiU9zXjcXgiTEnSKLJSzEcChsjyJrHftMo5yXlARDURkA7mkz3HyGD8ychP/dck5ouwiw2d62c0/Pro+Evolution+Soccer+2019+PSP+%28USA%29+%28Lost+Media+C19%29.iso', desc: { es: 'Fútbol de PSP en tu móvil.', en: 'PSP soccer on your mobile.', pt: 'Futebol de PSP no seu celular.', fr: 'Football PSP sur votre mobile.' }, reqs: ["2 GB / 3 GB", "Quad-Core 2.0 GHz", "1 GB", "8.0+"] },
+            { id: 'subnautica', title: 'Subnautica', poster: 'https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/subnautica_cover.JPG', screen: 'https://play-lh.googleusercontent.com/cNG4a8w8Ve05wIItXkxzhmw-Bw0uqA4t4t8LaxnFXR6klkTSe4YbNrALOCR-GI3lTw=w526-h296-rw', link: 'https://download2444.mediafire.com/sb20pfuhagpgfIyHgXhf1duPVyaL6OQ10WauQceUAnpppIrpdE7HQDpO62Y1M7njKf1PdUlL2MpbkOlTNHs5jNigDGR-2JgXpft6KvEUhGcuYuDLrvwVJPySSGx9nSCD_w0KQqwjpmBKkXfOQB5T1iUBxqefdba5_DU_sK-_gJfhu8Uu/yxk9uno0d6hq45c/Subnautica+v1.22.83315-espacioapk.com.apk', desc: { es: 'Supervivencia submarina alienígena.', en: 'Alien underwater survival.', pt: 'Sobrevivência subaquática alienígena.', fr: 'Survie sous-marine extraterrestre.' }, reqs: ["4 GB / 6 GB", "Octa-Core 2.2 GHz", "2.5 GB", "9.0+"] },
+            { id: 'p1', title: 'Poppy Playtime 1', poster: 'https://plusgami.store/cdn/shop/files/Poppy-Playtime-Chapter-1-Juego-Digital-600x748.webp?v=1755981188', screen: 'https://play-lh.googleusercontent.com/4ZxkngWs2YPRF2SdpEk3IL9fjbW5N2C2c7x7IC3Wg1X28dkGBDultx3EGIQkPViWig=w526-h296-rw', link: 'https://download2441.mediafire.com/ogxtoknngfbgeHe3ZfUfSUikwozUZ47h-9V5oY6JLm5bXNrCWYeug0N96YiuV3N23nOKSE4LqCYZUFqq-xVQUodqj0b7lg_Q0zGOKvZWG1kv9mM8eZ-9fiR2lfhAFjWZ-6ZAVq2q47nde-XIsGFqEn8PKjYP8QXxx28xcfRTgdv8JyGJ/cc1338960hyor1h/poppy+playtime+v1.0.18+-+espacioapk.com.apk', desc: { es: 'Sobrevive a Huggy Wuggy.', en: 'Survive Huggy Wuggy.', pt: 'Sobreviva a Huggy Wuggy.', fr: 'Survivez à Huggy Wuggy.' }, reqs: ["3 GB / 4 GB", "Octa-Core 2.0 GHz", "1.5 GB", "9.0+"] },
+            { id: 'p2', title: 'Poppy Playtime 2', poster: 'https://static.wikia.nocookie.net/doblaje-fanon/images/0/09/PoppyPlaytime2.webp/revision/latest?cb=20260220055258&path-prefix=es', screen: 'https://i.ytimg.com/vi/wvKlIelE9zM/maxresdefault.jpg', link: 'https://download2388.mediafire.com/rbsk5us3ilgglqyGycAq7WvwsAtSmAiLSu7wcJgR4CyZHGj_shvt_UZAfA-boWDzzva5JFfnW52vYTP3Prr4XCYirKVgn5v8ahmVM1uOaYEoJa-O6qGSztL0ubytKu-Ia6G95Twr9baVBjnLW2Fc7q-gSfzEY3ByTgPTyR3aMpW5EE2u/xnfqqjvb8gesqya/Poppy_Playtime_Chapter_2_1.42_1730227580_latestmodapks.com.apk', desc: { es: 'Mamá Piernas Largas te espera.', en: 'Mommy Long Legs awaits you.', pt: 'Mamãe Pernas Longas espera por você.', fr: 'Mommy Long Legs vous attend.' }, reqs: ["4 GB / 6 GB", "Octa-Core 2.0 GHz", "2 GB", "9.0+"] },
+            { id: 'fnaf2_lat', title: 'FNaF 2 Latino', poster: 'https://es.pickgamer.com/media/3888/Five-Nights-at-Freddy%27s-2-285x380.jpg', screen: 'https://play-lh.googleusercontent.com/LOc2pzjEn1nqtEOtfukauDtZJYMWYuE5VWTHVrsnqzCWqZ3qnBR23ELwfIrfoFfKsD9__B1hInQyZQUNgi6I=w526-h296-rw', link: 'https://download2284.mediafire.com/44chpiyx3phg4-Mmk21PLbxQ3X9-gK2Iwx6eLC0iDowVm3c-07sBfol6ODw0gc0omQrlXb6tkfemXitTB3DlqetnPxYpzBtgJdZGp9YKeCiirZAkuRTg-4EYYfCszOf78gx5GNafjdk8NTQ8vpK1q4OtRdlqC7CfDpFmX5GemqzYrxux/qxuqjfb86v0d5kd/Five+Nights+at+Freddys+2+%28Spanish%29+-+espacioapk.com.apk', desc: { es: 'Animatrónicos con voces latinas.', en: 'Animatronics with Latin voices.', pt: 'Animatrônicos com vozes latinas.', fr: 'Animatroniques avec des voix latines.' }, reqs: ["2 GB", "Quad-Core 1.5 GHz", "400 MB", "8.0+"] }
         ];
 
         function init() {
@@ -402,10 +293,10 @@
         function setLang(code) {
             curLang = code;
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('selected'));
-            document.getElementById(`flag-${code}`).classList.add('selected');
+            const btn = document.getElementById(`flag-${code}`);
+            if(btn) btn.classList.add('selected');
             
             applyTranslations();
-            
             document.getElementById('language-overlay').style.display = 'none';
             render();
             setTimeout(() => { document.getElementById('mainBanner').classList.add('active-banner'); }, 300);
@@ -413,8 +304,6 @@
 
         function applyTranslations() {
             const dict = i18n[curLang] || i18n['en'];
-            
-            // Textos estáticos
             document.getElementById('catalogSearch').placeholder = dict.search;
             document.getElementById('menu-back').innerText = "← " + dict.back;
             document.getElementById('nav-catalog').innerText = dict.catalog;
@@ -424,15 +313,14 @@
             document.getElementById('req-btn').innerText = dict.send;
             document.getElementById('detail-back').innerText = "← " + dict.back;
             document.getElementById('verified-label').innerText = dict.verified;
-
-            // Si el detalle está abierto, actualizarlo también
-            if (document.getElementById('detail-view').classList.contains('active')) {
-                const reqTitleEl = document.querySelector('.req-title');
-                if (reqTitleEl) reqTitleEl.innerText = dict.reqTitle;
-                const reqWarnEl = document.querySelector('.req-warning');
-                if (reqWarnEl) reqWarnEl.innerText = dict.reqWarning;
-                const dlBtn = document.querySelector('.download-btn');
-                if (dlBtn) dlBtn.innerText = dict.download;
+            document.getElementById('warn-title').innerText = dict.warnTitle;
+            document.getElementById('warn-text').innerText = dict.warnText;
+            document.getElementById('warn-cancel').innerText = dict.cancel;
+            
+            const currentDetailId = document.getElementById('detailTitle').dataset.gameId;
+            if (currentDetailId) {
+                const g = games.find(x => x.id === currentDetailId);
+                updateGameDetails(g, dict);
             }
         }
 
@@ -440,11 +328,13 @@
             const s = document.getElementById('catalogSearch').value.toLowerCase();
             const grid = document.getElementById('gameGrid');
             const filt = games.filter(g => g.title.toLowerCase().includes(s));
+            const dict = i18n[curLang] || i18n['en'];
+
             grid.innerHTML = filt.map((g, i) => `
                 <div class="game-card" data-aos="fade-up" onclick="startLoading('${g.id}')">
                     <img src="${g.poster}" class="char-img">
                     <div class="game-title-badge">
-                        <span class="verified-tag">${i18n[curLang]?.verified || i18n['en'].verified}</span>
+                        <span class="verified-tag">${dict.verified}</span>
                         <span class="game-title-text">${g.title}</span>
                     </div>
                 </div>
@@ -459,34 +349,96 @@
                 if(gameId === 'home') showView('home');
                 else if(gameId === 'request') showView('request');
                 else openGame(gameId);
-            }, 650);
+            }, 500);
         }
 
         function openGame(id) {
             const g = games.find(x => x.id === id);
             const dict = i18n[curLang] || i18n['en'];
             
+            document.getElementById('detailTitle').dataset.gameId = id;
+            updateGameDetails(g, dict);
+            
+            const btnContainer = document.getElementById('downloadContainer');
+            
+            // Logic for wait (Poppy Playtime 5 only)
+            if (g.hasWait) {
+                btnContainer.innerHTML = `<button id="pre-download-btn" class="download-btn" disabled>${dict.wait} (5)</button>`;
+                showView('detail');
+                let count = 5;
+                const preBtn = document.getElementById('pre-download-btn');
+                const interval = setInterval(() => {
+                    count--;
+                    if(count > 0) {
+                        preBtn.innerText = `${dict.wait} (${count})`;
+                    } else {
+                        clearInterval(interval);
+                        preBtn.innerText = dict.download;
+                        preBtn.disabled = false;
+                        preBtn.onclick = () => {
+                            if(g.hasWarning) showWarning(g.link);
+                            else window.open(g.link, '_blank');
+                        };
+                    }
+                }, 1000);
+            } else {
+                // No wait for others (GTA VC included)
+                btnContainer.innerHTML = `<button id="pre-download-btn" class="download-btn">${dict.download}</button>`;
+                document.getElementById('pre-download-btn').onclick = () => {
+                    if(g.hasWarning) showWarning(g.link);
+                    else window.open(g.link, '_blank');
+                };
+                showView('detail');
+            }
+        }
+
+        function updateGameDetails(g, dict) {
             document.getElementById('detailImg').src = g.screen;
             document.getElementById('detailTitle').innerText = g.title;
-            document.getElementById('detailDesc').innerText = g.desc;
+            document.getElementById('detailDesc').innerText = g.desc[curLang] || g.desc['en'] || g.desc['es'];
             
-            let reqsHTML = '';
-            if(g.reqs) {
-                reqsHTML = `
-                    <div class="req-box">
-                        <div class="req-title uppercase tracking-[2px]">${dict.reqTitle}</div>
-                        ${g.reqs.map(r => `<span class="req-item">• ${r}</span>`).join('')}
-                        <p class="req-warning">${dict.reqWarning}</p>
-                    </div>
-                `;
-            }
+            let reqsHTML = `
+                <div class="req-box">
+                    <div class="req-title uppercase tracking-[2px]">${dict.reqTitle}</div>
+                    <span class="req-item">• ${dict.ram}${g.reqs[0]}</span>
+                    <span class="req-item">• ${dict.proc}${g.reqs[1]}</span>
+                    <span class="req-item">• ${dict.disk}${g.reqs[2]}</span>
+                    <span class="req-item">• ${dict.os}${g.reqs[3]}</span>
+                    ${g.reqs[4] ? `<span class="req-item">• ${dict.perf}${g.reqs[4]}</span>` : ''}
+                    <p class="req-warning">${dict.reqWarning}</p>
+                </div>`;
             document.getElementById('requirementsContainer').innerHTML = reqsHTML;
+        }
 
-            document.getElementById('downloadContainer').innerHTML = `
-                <a href="${g.link}" target="_blank" class="download-btn">
-                    ${dict.download}
-                </a>`;
-            showView('detail');
+        function showWarning(link) {
+            pendingGameId = link;
+            const modal = document.getElementById('warning-modal');
+            const btn = document.getElementById('warn-confirm');
+            const dict = i18n[curLang] || i18n['en'];
+            
+            modal.style.display = 'flex';
+            btn.disabled = true;
+            let count = 5;
+            btn.innerText = `${dict.accept} (5)`;
+            
+            const timer = setInterval(() => {
+                count--;
+                if(count > 0) {
+                    btn.innerText = `${dict.accept} (${count})`;
+                } else {
+                    clearInterval(timer);
+                    btn.innerText = dict.accept;
+                    btn.disabled = false;
+                    btn.onclick = () => {
+                        window.open(pendingGameId, '_blank');
+                        closeWarning();
+                    };
+                }
+            }, 1000);
+        }
+
+        function closeWarning() {
+            document.getElementById('warning-modal').style.display = 'none';
         }
 
         function showView(v) {
@@ -496,6 +448,7 @@
         }
 
         function navigate(viewName) {
+            if(viewName === 'home') document.getElementById('detailTitle').dataset.gameId = "";
             startLoading(viewName);
         }
 
@@ -511,10 +464,8 @@
             const btn = document.getElementById('req-btn');
             const dict = i18n[curLang] || i18n['en'];
             if(!val) return;
-            
-            btn.innerText = (curLang === 'es' ? "ENVIANDO..." : "SENDING...");
+            btn.innerText = "WAIT...";
             btn.disabled = true;
-
             try {
                 await fetch(WEBHOOK_URL, { 
                     method: 'POST', 
@@ -523,14 +474,8 @@
                 });
                 document.getElementById('requestInput').value = "";
                 btn.innerText = "✓";
-                setTimeout(() => {
-                    btn.innerText = dict.send;
-                    btn.disabled = false;
-                }, 3000);
-            } catch(e) {
-                btn.innerText = "ERROR";
-                btn.disabled = false;
-            }
+                setTimeout(() => { btn.innerText = dict.send; btn.disabled = false; }, 3000);
+            } catch(e) { btn.innerText = "ERROR"; btn.disabled = false; }
         }
 
         init();
@@ -539,4 +484,3 @@
 </html>
 
 ```
-
