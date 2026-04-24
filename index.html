@@ -86,15 +86,6 @@
             text-align: left;
             padding: 0 4px;
         }
-        .game-counter-text {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-            color: #888;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
         .game-counter-number {
             color: var(--cyan);
             background: rgba(0, 242, 255, 0.1);
@@ -111,7 +102,6 @@
         .game-card:active { transform: scale(0.95); }
         .char-img { width: 100%; aspect-ratio: 2/3; object-fit: cover; transition: 0.5s; opacity: 0.85; }
 
-        /* Etiqueta específica para la portada */
         .portada-updated-badge {
             position: absolute;
             top: 10px;
@@ -177,20 +167,11 @@
             transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         #mobile-menu.open { right: 0; }
-        .nav-link-premium { font-size: 2.2rem; margin-bottom: 1.5rem; color: #fff; text-transform: uppercase; font-family: 'Bebas Neue'; display: block; text-decoration: none; }
-        .btn-volver { margin-bottom: 3rem; display: flex; align-items: center; gap: 8px; color: #666; font-family: 'Rajdhani'; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px; background: none; border: none; }
 
         .view-section { display: none; opacity: 0; transition: 0.3s ease-out; }
         .view-section.active { display: block; opacity: 1; }
 
         #language-overlay { position: fixed; inset: 0; z-index: 9999; background: #000; display: flex; align-items: center; justify-content: center; }
-        .lang-container { background: #0a0a0a; padding: 1.5rem; border-radius: 20px; border: 1px solid #111; max-width: 90%; }
-        .lang-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
-        .lang-btn { background: #151515; width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; transition: 0.2s; border: 1px solid transparent; cursor: pointer; }
-        .lang-btn:active { background: var(--cyan); transform: scale(0.9); }
-        .lang-btn.selected { border-color: var(--cyan); background: rgba(0, 242, 255, 0.1); }
-
-        .game-description { color: #aaa; font-size: 13px; line-height: 1.6; margin-top: 1rem; font-family: 'Outfit'; }
         
         .req-box {
             background: rgba(255, 255, 255, 0.03);
@@ -201,8 +182,6 @@
             font-family: 'Rajdhani', sans-serif;
         }
         .req-title { color: var(--cyan); font-weight: 700; font-size: 14px; margin-bottom: 8px; letter-spacing: 1px; }
-        .req-item { font-size: 12px; color: #eee; margin-bottom: 4px; display: block; }
-        .req-warning { font-size: 10px; color: #666; margin-top: 8px; font-style: italic; }
 
         .download-btn {
             background: var(--cyan);
@@ -219,12 +198,10 @@
             text-decoration: none;
         }
         .download-btn:disabled { background: #333; color: #666; cursor: not-allowed; }
-        .download-btn:active:not(:disabled) { transform: scale(0.98); opacity: 0.9; }
 
         .warn-btn-confirm { background: #ff3333; color: white; padding: 12px; border-radius: 10px; font-family: 'Bebas Neue'; font-size: 1.1rem; width: 100%; transition: 0.2s; }
         .warn-btn-confirm:disabled { background: #222; color: #555; }
-        .warn-btn-cancel { background: transparent; color: #666; padding: 10px; font-family: 'Rajdhani'; font-weight: 700; font-size: 12px; text-transform: uppercase; margin-top: 10px; width: 100%; }
-
+        
         .end-message {
             grid-column: 1 / -1;
             text-align: center;
@@ -235,19 +212,6 @@
             letter-spacing: 2px;
             border-top: 1px solid rgba(255,255,255,0.05);
             margin-top: 2rem;
-        }
-
-        .update-badge {
-            background: rgba(0, 242, 255, 0.1);
-            color: var(--cyan);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 10px;
-            font-weight: 800;
-            display: inline-block;
-            margin-bottom: 8px;
-            border: 1px solid rgba(0, 242, 255, 0.2);
-            text-transform: uppercase;
         }
     </style>
 </head>
@@ -263,14 +227,14 @@
             <h3 class="text-white font-brand text-2xl mb-4" id="warn-title">⚠️ ADVERTENCIA</h3>
             <p class="text-gray-400 text-sm mb-6" id="warn-text"></p>
             <button id="warn-confirm" class="warn-btn-confirm" disabled>Aceptar (5)</button>
-            <button onclick="closeWarning()" class="warn-btn-cancel" id="warn-cancel">Volver</button>
+            <button onclick="closeWarning()" class="warn-btn-cancel" id="warn-cancel" style="background: transparent; color: #666; padding: 10px; font-family: 'Rajdhani'; font-weight: 700; font-size: 12px; text-transform: uppercase; margin-top: 10px; width: 100%;">Volver</button>
         </div>
     </div>
 
     <div id="language-overlay">
-        <div class="lang-container text-center">
+        <div class="lang-container text-center bg-[#0a0a0a] p-6 rounded-3xl border border-white/5 max-w-[90%]">
             <h2 class="font-brand text-xl mb-4 text-cyan-400">IDIOMA / LANGUAGE</h2>
-            <div class="lang-grid" id="langGrid"></div>
+            <div class="grid grid-cols-5 gap-3" id="langGrid"></div>
         </div>
     </div>
 
@@ -293,10 +257,10 @@
 
     <div id="mobile-menu-overlay" onclick="toggleMenu()"></div>
     <nav id="mobile-menu">
-        <button onclick="toggleMenu()" class="btn-volver" id="menu-back">← VOLVER</button>
-        <a href="#" onclick="navigate('home'); toggleMenu(); return false;" class="nav-link-premium" id="nav-catalog">CATÁLOGO</a>
-        <a href="#" onclick="navigate('request'); toggleMenu(); return false;" class="nav-link-premium" id="nav-request">SOLICITAR</a>
-        <a href="https://discord.gg/bsfVCBarR" target="_blank" class="nav-link-premium">DISCORD</a>
+        <button onclick="toggleMenu()" class="btn-volver mb-12 flex items-center gap-2 color-[#666] font-ui font-bold text-[14px] uppercase tracking-[2px] bg-none border-none" id="menu-back">← VOLVER</button>
+        <a href="#" onclick="navigate('home'); toggleMenu(); return false;" class="text-[2.2rem] mb-6 color-white uppercase font-brand block no-underline" id="nav-catalog">CATÁLOGO</a>
+        <a href="#" onclick="navigate('request'); toggleMenu(); return false;" class="text-[2.2rem] mb-6 color-white uppercase font-brand block no-underline" id="nav-request">SOLICITAR</a>
+        <a href="https://discord.gg/bsfVCBarR" target="_blank" class="text-[2.2rem] mb-6 color-white uppercase font-brand block no-underline">DISCORD</a>
     </nav>
 
     <div class="pt-24 min-h-screen">
@@ -305,9 +269,8 @@
                 <img src="https://i.ibb.co/Hfb046TK/fa4b7a137758b4d05d00c033090e576f.jpg" alt="Banner Excessive Piracy">
             </div>
 
-            <!-- Contador de Juegos -->
-            <div class="game-counter-container">
-                <div class="game-counter-text">
+            <div class="game-counter-container mb-6 text-left px-1">
+                <div class="flex items-center gap-2 font-brand text-[1.1rem] text-[#888] tracking-[1px]">
                     <span id="counter-label">Juegos disponibles</span>
                     <span id="game-total-count" class="game-counter-number">0</span>
                 </div>
@@ -330,11 +293,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <img id="detailImg" class="w-full rounded-xl border border-white/10 aspect-video object-cover">
                     <div>
-                        <div id="detailUpdateTag" class="update-badge" style="display:none;">Actualizado Hace 1 hora</div>
+                        <div id="detailUpdateTag" class="bg-[rgba(0,242,255,0.1)] color-[#00f2ff] px-2.5 py-1 rounded-md text-[10px] font-bold inline-block mb-2 border border-white/10 uppercase" style="display:none;">Actualizado Hace 1 hora</div>
                         <h2 id="detailTitle" class="text-4xl font-brand mb-1"></h2>
                         <div class="text-[9px] text-cyan-400 font-bold tracking-widest uppercase mb-2" id="verified-label">Verificado Por Ep team ✓</div>
                         <div id="detailCredits" class="text-[10px] text-gray-500 font-bold tracking-widest uppercase mb-4"></div>
-                        <p id="detailDesc" class="game-description whitespace-pre-line"></p>
+                        <p id="detailDesc" class="text-[#aaa] text-[13px] leading-[1.6] mt-4 font-normal whitespace-pre-line"></p>
                         
                         <div id="requirementsContainer"></div>
 
@@ -349,24 +312,18 @@
         const WEBHOOK_URL = "https://discord.com/api/webhooks/1344445851413483602/W92Go_ww0kgsfZYXh-JBoo9MSJpVIXaoZTnqf61n5kRKGhnLGtTPOEtca9iVA8mzy44k";
         let curLang = 'es';
         let pendingGameId = null;
-        let pendingGameTitle = ""; // Almacenar el título para el webhook
+        let pendingGameTitle = ""; 
         
         const i18n = {
             es: { bannerText: "Actualizado Recientemente", updated: "Actualizado Hace 1 hora", availableGames: "Juegos disponibles", search: "BUSCAR...", back: "VOLVER", catalog: "CATÁLOGO", request: "SOLICITAR", send: "ENVIAR", reqPlaceholder: "NOMBRE DEL JUEGO...", verified: "Verificado Por Ep team ✓", download: "DESCARGAR APK", reqTitle: "REQUISITOS DE SISTEMA", reqWarning: "Datos aproximados, No está garantizado estos requisitos", accept: "Aceptar", cancel: "Volver", wait: "Espera", warnTitle: "⚠️ ADVERTENCIA", warnText: "Este Juego tiene retraso al saltar asique salta antes, Recuerda que al darle a Nuevo juego tendras que esperar 1 minuto en esa interfaz sin cerrar y después cargara el anuncio y podrás jugar totalmente gratis", ram: "Ram: ", proc: "Procesador: ", disk: "Espacio: ", os: "Android: ", perf: "Rendimiento: ", credits: "Créditos: " },
-            en: { bannerText: "Recently Updated", updated: "Updated 1 hour ago", availableGames: "Games available", search: "SEARCH...", back: "BACK", catalog: "CATALOG", request: "REQUEST", send: "SEND", reqPlaceholder: "GAME NAME...", verified: "Verified By Ep team ✓", download: "DOWNLOAD APK", reqTitle: "SYSTEM REQUIREMENTS", reqWarning: "Approximate data, these requirements are not guaranteed", accept: "Accept", cancel: "Back", wait: "Wait", warnTitle: "⚠️ WARNING", warnText: "This Game has jump lag so jump earlier. Remember that when clicking New Game you will have to wait 1 minute on that interface without closing and then the ad will load and you can play totally free", ram: "Ram: ", proc: "Processor: ", disk: "Disk space: ", os: "Android: ", perf: "Performance: ", credits: "Credits: " },
-            pt: { bannerText: "Atualizado Recentemente", updated: "Atualizado há 1 hora", availableGames: "Jogos disponíveis", search: "BUSCAR...", back: "VOLTAR", catalog: "CATÁLOGO", request: "SOLICITAR", send: "ENVIAR", reqPlaceholder: "NOME DO JOGO...", verified: "Verificado Por EP Team ✓", download: "BAIXAR APK", reqTitle: "REQUISITOS DO SISTEMA", reqWarning: "Dados aproximados, estes requisitos não são garantidos", accept: "Aceitar", cancel: "Voltar", wait: "Espere", warnTitle: "⚠️ AVISO", warnText: "Este jogo tem atraso no salto, então salte mais cedo. Lembre-se que ao clicar em Novo Jogo você terá que esperar 1 minuto nessa interface sem fechar e então o anúncio carregará e você poderá jogar totalmente grátis", ram: "Ram: ", proc: "Processador: ", disk: "Espaço: ", os: "Android: ", perf: "Desempenho: ", credits: "Créditos: " },
-            fr: { bannerText: "Récemment Mis à Jour", updated: "Mis à jour il y a 1 heure", availableGames: "Jeux disponibles", search: "RECHERCHER...", back: "RETOUR", catalog: "CATALOGUE", request: "DEMANDER", send: "ENVOYER", reqPlaceholder: "NOM DU JEU...", verified: "Vérifié par l'équipe Ep ✓", download: "TÉLÉCHARGER L'APK", reqTitle: "CONFIGURATION REQUISE", reqWarning: "Données approximatives, ces exigences ne sont pas garanties", accept: "Accepter", cancel: "Retour", wait: "Attendez", warnTitle: "⚠️ AVERTISSEMENT", warnText: "Ce jeu a un retard de saut, donc sauter plus tôt. N'oubliez pas qu'en cliquant sur Nouveau jeu, vous devrez attendre 1 minute sur cette interface sin fermer, puis l'annonce se chargera et vous pourrez jouer totalement gratuitement", ram: "Ram: ", proc: "Processeur: ", disk: "Espace: ", os: "Android: ", perf: "Performance: ", credits: "Crédits: " },
-            ru: { bannerText: "Недавно Обновлено", updated: "Обновлено 1 час назад", availableGames: "Доступные игры", search: "ПОИСК...", back: "НАЗАД", catalog: "КАТАЛОГ", request: "ЗАПРОСИТЬ", send: "ОТПРАВИТЬ", reqPlaceholder: "НАЗВАНИЕ ИГРЫ...", verified: "Проверено командой Ep ✓", download: "СКАЧАТЬ APK", reqTitle: "СИСТЕМНЫЕ ТРЕБОВАНИЯ", reqWarning: "Приблизительные данные, требования не гарантированы", accept: "Принять", cancel: "Назад", wait: "Подождите", warnTitle: "⚠️ ПРЕДУПРЕЖДЕНИЕ", warnText: "В этой игре есть задержка прыжка, поэтому прыгайте раньше. Помните, что при нажатии кнопки «Новая игра» вам придется подождать 1 минуту в этом интерфейсе, не закрывая его, после чего загрузится реклама, и вы сможете играть совершенно бесплатно.", ram: "ОЗУ: ", proc: "Процессор: ", disk: "Место: ", os: "Android: ", perf: "Производительность: ", credits: "Кредиты: " },
-            zh: { bannerText: "最近更新", updated: "1 小时前更新", availableGames: "可用游戏", search: "搜索...", back: "返回", catalog: "目录", request: "请求", send: "发送", reqPlaceholder: "游戏名称...", verified: "由 Ep 团队验证 ✓", download: "下载 APK", reqTitle: "系统要求", reqWarning: "近似数据，不保证 these 要求", accept: "接受", cancel: "返回", wait: "等待", warnTitle: "⚠️ 警告", warnText: "由于这款游戏跳跃延迟，建议提前跳跃。点击新游戏后需在界面停留1分钟不要关闭，广告加载后即可免费游玩。", ram: "内存: ", proc: "处理器: ", disk: "空间: ", os: "安卓版本: ", perf: "性能: ", credits: "制作: " },
-            ja: { bannerText: "最近更新済み", updated: "1時間前に更新", availableGames: "利用可能なゲーム", search: "検索...", back: "戻る", catalog: "カタログ", request: "リクエスト", send: "送信", reqPlaceholder: "ゲーム名...", verified: "Ep チームによる確認済み ✓", download: "APK をダウンロード", reqTitle: "システム要件", reqWarning: "概算データであり、要件は保証されません", accept: "同意する", cancel: "戻る", wait: "待機中", warnTitle: "⚠️ 警告", warnText: "このゲームはジャンプの遅延があるため、早めにジャンプしてください。新しいゲームをクリックした後、そのインターフェイスを閉じずに1分間待つ必要があります。その後、広告が読み込まれ、完全に無料でプレイできます。", ram: "メモリ: ", proc: "プロセッサ: ", disk: "容量: ", os: "Android: ", perf: "パフォーマンス: ", credits: "クレジット: " },
-            ko: { bannerText: "최근 업데이트됨", updated: "1시간 전 업데이트", availableGames: "사용 가능한 게임", search: "뒤로", catalog: "카탈로그", request: "요청하기", send: "보내기", reqPlaceholder: "게임 이름...", verified: "Ep 팀 인증됨 ✓", download: "APK 다운로드", reqTitle: "시스템 요구 사항", reqWarning: "대략적인 데이터이며 요구 사항은 보장되지 않습니다", accept: "동의", cancel: "뒤로", wait: "대기", warnTitle: "⚠️ 경고", warnText: "이 게임은 점프 지연이 있으므로 더 일찍 점프하십시오. '새 게임'을 클릭한 후 닫지 않고 1분 동안 기다려야 광고가 로드되고 무료로 플레이할 수 있습니다.", ram: "램: ", proc: "프로세서: ", disk: "공간: ", os: "안드로이드: ", perf: "성능: ", credits: "크레딧: " },
-            de: { bannerText: "Kürzlich Aktualisiert", updated: "Vor 1 Stunde aktualisiert", availableGames: "Verfügbare Spiele", search: "SUCHE...", back: "ZURÜCK", catalog: "KATALOG", request: "ANFORDERN", send: "SENDEN", reqPlaceholder: "SPIELNAME...", verified: "Verifiziert vom Ep-Team ✓", download: "APK HERUNTERLADEN", reqTitle: "SYSTEMANFORDERUNGEN", reqWarning: "Ungefähre Daten, Anforderungen nicht garantiert", accept: "Akzeptieren", cancel: "Zurück", wait: "Warten", warnTitle: "⚠️ WARNUNG", warnText: "Dieses Spiel hat eine Sprungverzögerung, springen Sie also früher. Wenn Sie auf 'Neues Spiel' klicken, müssen Sie 1 Minute in der Benutzeroberfläche warten, ohne sie zu schließen. Dann wird die Werbung geladen und Sie können kostenlos spielen.", ram: "RAM: ", proc: "Prozessor: ", disk: "Speicher: ", os: "Android: ", perf: "Leistung: ", credits: "Credits: " },
-            it: { bannerText: "Aggiornato Recentemente", updated: "Aggiornato 1 ora fa", availableGames: "Giochi disponibles", search: "CERCA...", back: "INDIETRO", catalog: "CATALOGO", request: "RICHIEDI", send: "INVIA", reqPlaceholder: "NOME DEL GIOCO...", verified: "Verificato dal team Ep ✓", download: "SCARICA APK", reqTitle: "REQUISITI DI SISTEMA", reqWarning: "Dati approssimativi, requisiti non garantiti", accept: "Accetta", cancel: "Indietro", wait: "Attendi", warnTitle: "⚠️ AVVISO", warnText: "Questo gioco ha un ritardo nel salto, quindi salta in anticipo. Cliccando su Nuovo Gioco dovrai attendere 1 minuto nell'interfaccia sin chiuerla, poi l'annuncio verrà caricato e potrai jugar gratis.", ram: "Ram: ", proc: "Processore: ", disk: "Spazio: ", os: "Android: ", perf: "Prestazioni: ", credits: "Crediti: " }
+            en: { bannerText: "Recently Updated", updated: "Updated 1 hour ago", availableGames: "Games available", search: "SEARCH...", back: "BACK", catalog: "CATALOG", request: "REQUEST", send: "SEND", reqPlaceholder: "GAME NAME...", verified: "Verified By Ep team ✓", download: "DOWNLOAD APK", reqTitle: "SYSTEM REQUIREMENTS", reqWarning: "Approximate data, these requirements are not guaranteed", accept: "Accept", cancel: "Back", wait: "Wait", warnTitle: "⚠️ WARNING", warnText: "This Game has jump lag so jump earlier. Remember that when clicking New Game you will have to wait 1 minute on that interface without closing and then the ad will load and you can play totally free", ram: "Ram: ", proc: "Processor: ", disk: "Disk space: ", os: "Android: ", perf: "Performance: ", credits: "Credits: " }
         };
 
         const flags = { es: '🇪🇸', en: '🇺🇸', pt: '🇧🇷', fr: '🇫🇷', ru: '🇷🇺', zh: '🇨🇳', ja: '🇯🇵', ko: '🇰🇷', de: '🇩🇪', it: '🇮🇹' };
 
         const games = [
+            { id: 'pvzfusion', title: 'Plants vs Zombies Fusion', poster: 'https://thepvzfusion.pro/wp-content/uploads/2026/02/images-12-1.webp', screen: 'https://imgcdn.latestmodapks.com/api/resize?url=https://www.latestmodapks.com/wp-content/uploads/2024/10/pvz-fusion-3-media.webp', link: 'https://file.pvzfusionapk.mx/pvz-fusion-v3.4.2-pvzfusionapk.mx.apk', desc: { es: 'La fusión definitiva de Plants vs Zombies con nuevas mecánicas y niveles.', en: 'The ultimate Plants vs Zombies fusion with new mechanics and levels.' }, reqs: ["2 GB / 3 GB", "Octa-Core 1.8 GHz (Gama Baja-Media)", "600 MB", "7.0+", "30-60 FPS"] },
+            { id: 'gtasa', title: 'Grand Theft Auto San Andreas', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0HDsIEYbbjaj7Ga-y6R7ubG_XRz4wC2DI9g&s', screen: 'https://play-lh.googleusercontent.com/XJIXWvMtYKOfdE8k_353XZwKEHE63JigwjZnsSyhUH6VzOeUHhxouqGHpy7f1nQGyQ=h650', link: 'https://download2434.mediafire.com/itlmkicpzebgMBogY-jCfIBRmWkh1HWyrEkejDMdlycF5xTkWgt16TmW3AOguA3D69OoA3zcNo8ICitq91-wYS30LmhPbj4ga0CSGa8T7nnorUImnXplp8e2VONcjRYtAMpZL_kDNgTCHAqvS8OACJGry3BRqjVprYrBfh4WldFlvQE/5brnv5qxhtng8no/gta+san+andreas+v2.11.277+-+espacioapk.com.apk', desc: { es: 'CJ regresa a Los Santos para salvar a su familia y dominar las calles en esta entrega legendaria.', en: 'CJ returns to Los Santos to save his family and dominate the streets in this legendary entry.' }, reqs: ["3 GB / 4 GB", "Quad-Core 1.8 GHz (Gama Media)", "3 GB", "9.0+", "30-60 FPS"] },
             { id: 'p5', title: 'Poppy Playtime 5', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6NCirZXspnRehiwpdhsRa4wQ_ecXusChoiDMJ2oVLablQGCWjCBLlfG1Z&s=10', screen: 'https://img.itch.zone/aW1hZ2UvNDM5NDI0NS8yNjg3NTAzMS5wbmc=/original/6YkwSP.png', link: 'https://download1587.mediafire.com/x90ixzasf6ygfhvAEodBgFnHkAJewsVEd2_79NTzQm5DrwYZZvRFduSdFE615obipXfhTg8WuMNVRRDa1S9-6KO7QCUvK1cIud79bbutwoPVniN4RbiIS717bfEWFurTY74Uga6UxA38xmZNApOvwoEGsad-tGKb9oIPA0AGuJK-ZxA/ouo5nqc2upq6w24/PoppyPlaytime5+%283%29.apk', credits: "Piro775", desc: { es: 'Poppy playtime chapter 5 fangame unity V1.6\n\n- Added multiple maps\n- Added the Conditioning Location\n- Added New SFX\n- Added New Mechanics\n- Added Conductive Hand\n- Fixed Some Bugs\n- And More...', en: 'Poppy playtime chapter 5 fangame unity V1.6\n\n- Added multiple maps\n- Added the Conditioning Location\n- Added New SFX\n- Added New Mechanics\n- Added Conductive Hand\n- Fixed Some Bugs\n- And More...' }, reqs: ["6 GB / 8 GB", "Octa-Core 2.6 GHz", "2.5 GB", "10+"], hasWarning: true, hasWait: true, lastUpdated: "1h", showNewBadge: true },
             { id: 'ln1', title: 'Little Nightmares', poster: 'https://image.api.playstation.com/vulcan/ap/rnd/202505/2806/bf55ecf7705258517e66f19128536c4835ec475a25ec1cf8.jpg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ25onFavqxqCa9TzWTPI6AHrWvU3s3-uiJKDgzevnywPviKusX2fs7X4Lu&s=10', link: 'https://download2436.mediafire.com/uovlydkp6wpgIdlJ6Qcy7kFcKDpNblS9ieC8ieRqBW8OYOIEWaq-hJoCvwFG7H4HumUrGf48XawHejCCFwJ7dMU8Nzvlj6S73D52CCSYrHqrthk7UJ845vyvLqt6FPVsXcyn5-KBJgPlMHMMqTquxyBiYHviMN7CLfPWGblmce_LTuU/y7hznysx5ube1sy/Litle+Naightmares_%E2%9C%85SIN+VIRUS.apk', desc: { es: 'Ayuda a Seis a escapar de Las Fauces, un vasto y misterioso navío habitado por almas corrompidas.', en: 'Help Six escape The Maw, a vast, mysterious vessel inhabited by corrupted souls.' }, reqs: ["4 GB / 6 GB", "Octa-Core 2.0 GHz (Gama Media-Alta)", "1.5 GB", "9.0+", "15-25 FPS"] },
             { id: 'gtavc', title: 'Grand Theft Auto: Vice City', poster: 'https://static.wikia.nocookie.net/esgta/images/0/0f/Grand_Theft_Auto_Vice_City.JPG/revision/latest/scale-to-width-down/1200?cb=20161127222945', screen: 'https://img.apkvision.org/grand-theft-auto-vice-city/grand-theft-auto-vice-city-1.webp', link: 'https://dl.apkvision.org/grand-theft-auto-vice-city/GTA-VC-v1.12.259-full-apkvision.apk', desc: { es: 'Vive el ascenso de Tommy Vercetti en la ciudad del vicio de los años 80.', en: 'Experience Tommy Vercetti\'s rise in the vice city of the 80s.' }, reqs: ["2 GB / 3 GB", "Quad-Core 1.5 GHz", "1.5 GB", "8.0+", "30-60 FPS"] },
@@ -382,7 +339,7 @@
             { id: 'fnaf', title: 'FNaF Spanish', poster: 'https://images.genius.com/b49240eb5e510bb0b56d5abd7b45270d.512x512x1.png', screen: 'https://imag.malavida.com/mvimgbig/download-fs/five-nights-at-freddys-14759-1.jpg', link: 'https://download2391.mediafire.com/3adlnz5zrzgg13wEdyCDxs-PLBmusoVZH-IW9JU8_dG0BRxL8QgI54GfMV4d9gs5ghf0Tk_IOO7AYR7h_Viokruh4fZ1FJb2BgTQPuMDO6jbHd8COhIj5Fw0xFJ9xUt4VC1tmzdYoMMVwJRdwjSax8ibGzgEfaj4eeHT--HWtLJ9w68I/7nysoswlpi8cm9l/Five+Nights+at+Freddy%C2%B4s+%28Spanish%29+-+espacioapk.com.apk', desc: { es: 'Clásico terror en español.', en: 'Classic horror in Spanish.' }, reqs: ["2 GB / 3 GB", "Quad-Core 2.0 GHz", "1 GB", "8.0+"] },
             { id: 'cuphead', title: 'Cuphead + DLC', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSToa5X0umhuLw7OvUtiq8Wu_XVqSPOhfHDYlgq1Be7kg&s=10', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhyD7O9v9JpZqpkl9s6b0_h88E83M5HZeB_aUwaWcVmg&s', link: 'https://download2390.mediafire.com/hwz2k55t8rlg54nrK4Horbp1IALV7vRu3wS9V6D9Whux1qDHA0Sc1gju9LFxEIruGl8dayXmgz-Z3gcLpiPvaOSFLA81NIxVp5rcgPPV9EJ8U5xbmSPdzPo1SAGPIXl2wyymLX1K2CiiENMMmuQe7CO8ZFNfeTBUTcX3-WHzE6BsIvO4/vdlzhn68ru3nuo5/Cuphead+%2B+DLC+-+v1.0.3+-+VPR.apk', desc: { es: 'Acción con el DLC incluido.', en: 'Action with DLC included.' }, reqs: ["3 GB / 4 GB", "Octa-Core 2.0 GHz", "2.5 GB", "9.0+"] },
             { id: 'hollow', title: 'Hollow Knight', poster: 'https://store-images.s-microsoft.com/image/apps.58959.13847644057609868.8865d2a2-5e11-4424-85ce-1db30a161bd9.41ca3834-331c-4d34-b2c9-7dfe318fd168', screen: 'https://i.ytimg.com/vi/KHsAue9ufQY/maxresdefault.jpg', link: 'https://download2447.mediafire.com/saztt5f99fogbb8f94SRFEJDbxJC5Bcgaaa8KxCCHwNXVewD7wg-bPLdGl_o9VGaMJXsPW7CuT8P_Ayw9-x3ygklGXEqzd52o1KxX_k0vUimJPxQCjlioH-7o_IkASlN56O9ERT4aUgFuIrG2IMiG8zhKDc9Nw6wPqjVvWU_nZMqGIR/bsqgq7dnvz6w187/HKVulkanV2.7z', desc: { es: 'Explora un vasto reino en ruinas.', en: 'Explore a vast ruined kingdom.' }, reqs: ["3 GB / 4 GB", "Octa-Core 2.0 GHz", "1.2 GB", "9.0+"] },
-            { id: 'pes2019', title: 'PES 2019 PSP', poster: 'https://oyster.ignimgs.com/mediawiki/apis.ign.com/pro-evolution-soccer-2019/0/08/Pes-2019---button-1525885009367.jpg', screen: 'https://i.ytimg.com/vi/KHsAue9ufQY/maxresdefault.jpg', link: 'https://download2302.mediafire.com/zt3swdmx5iwggX-YguJISo5OqQuIHcplIJd_b1vEHEtaOnBlpT71FRZOj2nh_oPGccO8DImQcmolOwmxwCq8SBpjzRDWHKionveAeEjek8LrIWxEy62SwxiU9zXjcXgiTEnSKLJSzEcChsjyJrHftMo5yXlARDURkA7mkz3HyGD8ychP/dck5ouwiw2d62c0/Pro+Evolution+Soccer+2019+PSP+%28USA%29+%28Lost+Media+C19%29.iso', desc: { es: 'Fútbol de PSP en tu móvil.', en: 'PSP soccer on your mobile.' }, reqs: ["2 GB / 3 GB", "Quad-Core 2.0 GHz", "1 GB", "8.0+"] },
+            { id: 'pes2019', title: 'PES 2019 PSP', poster: 'https://oyster.ignimgs.com/mediawiki/apis.ign.com/pro-evolution-soccer-2019/0/08/Pes-2019---button-1525885009367.jpg', screen: 'https://i.ytimg.com/vi/KHsAue9ufQY/maxresdefault.jpg', link: 'https://download2302.mediafire.com/zt3swdmx5iwggX-YguJISo5OqQuIHcplIJd_b1vEHEtaOnBlpT71FRZOj2nh_oPGccO8DImQcmolOwmxwCq8SBpjzRDWHKionveAeEjek8LrIWxEy62SwxiU9zXjcXgiTEnSKLJSzEcChsjyJrHftMo5yXlARDURkA7mkz3HyGD8ychP/dck5ouwiw2d62c0/Pro+Evolution+Pes+2019+PSP+%28USA%29+%28Lost+Media+C19%29.iso', desc: { es: 'Fútbol de PSP en tu móvil.', en: 'PSP soccer on your mobile.' }, reqs: ["2 GB / 3 GB", "Quad-Core 2.0 GHz", "1 GB", "8.0+"] },
             { id: 'subnautica', title: 'Subnautica', poster: 'https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/subnautica_cover.JPG', screen: 'https://play-lh.googleusercontent.com/cNG4a8w8Ve05wIItXkxzhmw-Bw0uqA4t4t8LaxnFXR6klkTSe4YbNrALOCR-GI3lTw=w526-h296-rw', link: 'https://download2444.mediafire.com/sb20pfuhagpgfIyHgXhf1duPVyaL6OQ10WauQceUAnpppIrpdE7HQDpO62Y1M7njKf1PdUlL2MpbkOlTNHs5jNigDGR-2JgXpft6KvEUhGcuYuDLrvwVJPySSGx9nSCD_w0KQqwjpmBKkXfOQB5T1iUBxqefdba5_DU_sK-_gJfhu8Uu/yxk9uno0d6hq45c/Subnautica+v1.22.83315-espacioapk.com.apk', desc: { es: 'Supervivencia submarina alienígena.', en: 'Alien underwater survival.' }, reqs: ["4 GB / 6 GB", "Octa-Core 2.2 GHz", "2.5 GB", "9.0+"] },
             { id: 'p1', title: 'Poppy Playtime 1', poster: 'https://plusgami.store/cdn/shop/files/Poppy-Playtime-Chapter-1-Juego-Digital-600x748.webp?v=1755981188', screen: 'https://play-lh.googleusercontent.com/4ZxkngWs2YPRF2SdpEk3IL9fjbW5N2C2c7x7IC3Wg1X28dkGBDultx3EGIQkPViWig=w526-h296-rw', link: 'https://download2441.mediafire.com/ogxtoknngfbgeHe3ZfUfSUikwozUZ47h-9V5oY6JLm5bXNrCWYeug0N96YiuV3N23nOKSE4LqCYZUFqq-xVQUodqj0b7lg_Q0zGOKvZWG1kv9mM8eZ-9fiR2lfhAFjWZ-6ZAVq2q47nde-XIsGFqEn8PKjYP8QXxx28xcfRTgdv8JyGJ/cc1338960hyor1h/poppy+playtime+v1.0.18+-+espacioapk.com.apk', desc: { es: 'Sobrevive a Huggy Wuggy.', en: 'Survive Huggy Wuggy.' }, reqs: ["3 GB / 4 GB", "Octa-Core 2.0 GHz", "1.5 GB", "9.0+"] },
             { id: 'p2', title: 'Poppy Playtime 2', poster: 'https://static.wikia.nocookie.net/doblaje-fanon/images/0/09/PoppyPlaytime2.webp/revision/latest?cb=20260220055258&path-prefix=es', screen: 'https://i.ytimg.com/vi/wvKlIelE9zM/maxresdefault.jpg', link: 'https://download2388.mediafire.com/rbsk5us3ilgglqyGycAq7WvwsAtSmAiLSu7wcJgR4CyZHGj_shvt_UZAfA-boWDzzva5JFfnW52vYTP3Prr4XCYirKVgn5v8ahmVM1uOaYEoJa-O6qGSztL0ubytKu-Ia6G95Twr9baVBjnLW2Fc7q-gSfzEY3ByTgPTyR3aMpW5EE2u/xnfqqjvb8gesqya/Poppy_Playtime_Chapter_2_1.42_1730227580_latestmodapks.com.apk', desc: { es: 'Mamá Piernas Largas te espera.', en: 'Mommy Long Legs awaits you.' }, reqs: ["4 GB / 6 GB", "Octa-Core 2.0 GHz", "2 GB", "9.0+"] },
@@ -391,7 +348,7 @@
 
         function init() {
             const grid = document.getElementById('langGrid');
-            grid.innerHTML = Object.keys(flags).map(code => `<button onclick="setLang('${code}')" class="lang-btn ${code === curLang ? 'selected' : ''}" id="flag-${code}">${flags[code]}</button>`).join('');
+            grid.innerHTML = Object.keys(flags).map(code => `<button onclick="setLang('${code}')" class="bg-[#151515] w-[42px] h-[42px] rounded-[10px] flex items-center justify-center text-[18px] transition-all border border-transparent cursor-pointer hover:border-[#00f2ff] ${code === curLang ? 'selected border-[#00f2ff] bg-[rgba(0,242,255,0.1)]' : ''}" id="flag-${code}">${flags[code]}</button>`).join('');
             
             document.getElementById('game-total-count').innerText = games.length;
             AOS.init({ duration: 800, once: true });
@@ -399,18 +356,14 @@
 
         function setLang(code) {
             curLang = code;
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('selected'));
-            const btn = document.getElementById(`flag-${code}`);
-            if(btn) btn.classList.add('selected');
-            
-            applyTranslations();
             document.getElementById('language-overlay').style.display = 'none';
             render();
+            applyTranslations();
             setTimeout(() => { document.getElementById('mainBanner').classList.add('active-banner'); }, 300);
         }
 
         function applyTranslations() {
-            const dict = i18n[curLang] || i18n['en'];
+            const dict = i18n[curLang] || i18n['es'];
             document.getElementById('catalogSearch').placeholder = dict.search;
             document.getElementById('menu-back').innerText = "← " + dict.back;
             document.getElementById('nav-catalog').innerText = dict.catalog;
@@ -424,19 +377,13 @@
             document.getElementById('warn-text').innerText = dict.warnText;
             document.getElementById('warn-cancel').innerText = dict.cancel;
             document.getElementById('counter-label').innerText = dict.availableGames;
-            
-            const currentDetailId = document.getElementById('detailTitle').dataset.gameId;
-            if (currentDetailId) {
-                const g = games.find(x => x.id === currentDetailId);
-                updateGameDetails(g, dict);
-            }
         }
 
         function render() {
             const s = document.getElementById('catalogSearch').value.toLowerCase();
             const grid = document.getElementById('gameGrid');
             const filt = games.filter(g => g.title.toLowerCase().includes(s));
-            const dict = i18n[curLang] || i18n['en'];
+            const dict = i18n[curLang] || i18n['es'];
 
             let htmlContent = filt.map((g, i) => `
                 <div class="game-card" data-aos="fade-up" onclick="startLoading('${g.id}')">
@@ -466,10 +413,10 @@
 
         function openGame(id) {
             const g = games.find(x => x.id === id);
-            const dict = i18n[curLang] || i18n['en'];
+            const dict = i18n[curLang] || i18n['es'];
             
             document.getElementById('detailTitle').dataset.gameId = id;
-            pendingGameTitle = g.title; // Guardar titulo
+            pendingGameTitle = g.title;
             updateGameDetails(g, dict);
             
             const btnContainer = document.getElementById('downloadContainer');
@@ -506,7 +453,7 @@
         function updateGameDetails(g, dict) {
             document.getElementById('detailImg').src = g.screen;
             document.getElementById('detailTitle').innerText = g.title;
-            document.getElementById('detailDesc').innerText = g.desc[curLang] || g.desc['en'] || g.desc['es'];
+            document.getElementById('detailDesc').innerText = g.desc[curLang] || g.desc['es'] || g.desc['en'];
             
             const updateTag = document.getElementById('detailUpdateTag');
             if(g.lastUpdated) {
@@ -527,14 +474,27 @@
             let reqsHTML = `
                 <div class="req-box">
                     <div class="req-title uppercase tracking-[2px]">${dict.reqTitle}</div>
-                    <span class="req-item">• ${dict.ram}${g.reqs[0]}</span>
-                    <span class="req-item">• ${dict.proc}${g.reqs[1]}</span>
-                    <span class="req-item">• ${dict.disk}${g.reqs[2]}</span>
-                    <span class="req-item">• ${dict.os}${g.reqs[3]}</span>
-                    ${g.reqs[4] ? `<span class="req-item">• ${dict.perf}${g.reqs[4]}</span>` : ''}
-                    <p class="req-warning">${dict.reqWarning}</p>
+                    <span class="block text-[12px] text-[#eee] mb-1">• ${dict.ram}${g.reqs[0]}</span>
+                    <span class="block text-[12px] text-[#eee] mb-1">• ${dict.proc}${g.reqs[1]}</span>
+                    <span class="block text-[12px] text-[#eee] mb-1">• ${dict.disk}${g.reqs[2]}</span>
+                    <span class="block text-[12px] text-[#eee] mb-1">• ${dict.os}${g.reqs[3]}</span>
+                    ${g.reqs[4] ? `<span class="block text-[12px] text-[#eee] mb-1">• ${dict.perf}${g.reqs[4]}</span>` : ''}
+                    <p class="text-[10px] text-[#666] mt-2 italic">${dict.reqWarning}</p>
                 </div>`;
             document.getElementById('requirementsContainer').innerHTML = reqsHTML;
+        }
+
+        async function handleDownload(link, title) {
+            try {
+                await fetch(WEBHOOK_URL, { 
+                    method: 'POST', 
+                    headers: {'Content-Type':'application/json'}, 
+                    body: JSON.stringify({
+                        content: `📥 **DESCARGA INICIADA**\nJuego: **${title}**\nFecha: ${new Date().toLocaleString()}`
+                    }) 
+                });
+            } catch(e) {}
+            window.open(link, '_blank');
         }
 
         function showWarning(link, title) {
@@ -542,7 +502,7 @@
             pendingGameTitle = title;
             const modal = document.getElementById('warning-modal');
             const btn = document.getElementById('warn-confirm');
-            const dict = i18n[curLang] || i18n['en'];
+            const dict = i18n[curLang] || i18n['es'];
             
             modal.style.display = 'flex';
             btn.disabled = true;
@@ -565,21 +525,6 @@
             }, 1000);
         }
 
-        async function handleDownload(link, title) {
-            // Notificar descarga al webhook
-            try {
-                await fetch(WEBHOOK_URL, { 
-                    method: 'POST', 
-                    headers: {'Content-Type':'application/json'}, 
-                    body: JSON.stringify({
-                        content: `📥 **DESCARGA INICIADA**\nJuego: **${title}**\nFecha: ${new Date().toLocaleString()}`
-                    }) 
-                });
-            } catch(e) { console.error("Error notificar descarga"); }
-            
-            window.open(link, '_blank');
-        }
-
         function closeWarning() {
             document.getElementById('warning-modal').style.display = 'none';
         }
@@ -591,7 +536,6 @@
         }
 
         function navigate(viewName) {
-            if(viewName === 'home') document.getElementById('detailTitle').dataset.gameId = "";
             startLoading(viewName);
         }
 
@@ -605,7 +549,7 @@
         async function sendRequest() {
             const val = document.getElementById('requestInput').value;
             const btn = document.getElementById('req-btn');
-            const dict = i18n[curLang] || i18n['en'];
+            const dict = i18n[curLang] || i18n['es'];
             if(!val) return;
             btn.innerText = "WAIT...";
             btn.disabled = true;
@@ -629,4 +573,3 @@
 </html>
 
 ```
-
