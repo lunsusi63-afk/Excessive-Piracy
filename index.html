@@ -346,21 +346,22 @@
     </div>
 
     <script>
-        const WEBHOOK_URL = "https://discord.com/api/webhooks/1493029753462984724/W92Go_ww0kgsfZYXh-JBoo9MSJpVIXaoZTnqf61n5kRKGhnLGtTPOEtca9iVA8mzy44k";
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1344445851413483602/W92Go_ww0kgsfZYXh-JBoo9MSJpVIXaoZTnqf61n5kRKGhnLGtTPOEtca9iVA8mzy44k";
         let curLang = 'es';
         let pendingGameId = null;
+        let pendingGameTitle = ""; // Almacenar el título para el webhook
         
         const i18n = {
             es: { bannerText: "Actualizado Recientemente", updated: "Actualizado Hace 1 hora", availableGames: "Juegos disponibles", search: "BUSCAR...", back: "VOLVER", catalog: "CATÁLOGO", request: "SOLICITAR", send: "ENVIAR", reqPlaceholder: "NOMBRE DEL JUEGO...", verified: "Verificado Por Ep team ✓", download: "DESCARGAR APK", reqTitle: "REQUISITOS DE SISTEMA", reqWarning: "Datos aproximados, No está garantizado estos requisitos", accept: "Aceptar", cancel: "Volver", wait: "Espera", warnTitle: "⚠️ ADVERTENCIA", warnText: "Este Juego tiene retraso al saltar asique salta antes, Recuerda que al darle a Nuevo juego tendras que esperar 1 minuto en esa interfaz sin cerrar y después cargara el anuncio y podrás jugar totalmente gratis", ram: "Ram: ", proc: "Procesador: ", disk: "Espacio: ", os: "Android: ", perf: "Rendimiento: ", credits: "Créditos: " },
             en: { bannerText: "Recently Updated", updated: "Updated 1 hour ago", availableGames: "Games available", search: "SEARCH...", back: "BACK", catalog: "CATALOG", request: "REQUEST", send: "SEND", reqPlaceholder: "GAME NAME...", verified: "Verified By Ep team ✓", download: "DOWNLOAD APK", reqTitle: "SYSTEM REQUIREMENTS", reqWarning: "Approximate data, these requirements are not guaranteed", accept: "Accept", cancel: "Back", wait: "Wait", warnTitle: "⚠️ WARNING", warnText: "This Game has jump lag so jump earlier. Remember that when clicking New Game you will have to wait 1 minute on that interface without closing and then the ad will load and you can play totally free", ram: "Ram: ", proc: "Processor: ", disk: "Disk space: ", os: "Android: ", perf: "Performance: ", credits: "Credits: " },
             pt: { bannerText: "Atualizado Recentemente", updated: "Atualizado há 1 hora", availableGames: "Jogos disponíveis", search: "BUSCAR...", back: "VOLTAR", catalog: "CATÁLOGO", request: "SOLICITAR", send: "ENVIAR", reqPlaceholder: "NOME DO JOGO...", verified: "Verificado Por EP Team ✓", download: "BAIXAR APK", reqTitle: "REQUISITOS DO SISTEMA", reqWarning: "Dados aproximados, estes requisitos não são garantidos", accept: "Aceitar", cancel: "Voltar", wait: "Espere", warnTitle: "⚠️ AVISO", warnText: "Este jogo tem atraso no salto, então salte mais cedo. Lembre-se que ao clicar em Novo Jogo você terá que esperar 1 minuto nessa interface sem fechar e então o anúncio carregará e você poderá jogar totalmente grátis", ram: "Ram: ", proc: "Processador: ", disk: "Espaço: ", os: "Android: ", perf: "Desempenho: ", credits: "Créditos: " },
-            fr: { bannerText: "Récemment Mis à Jour", updated: "Mis à jour il y a 1 heure", availableGames: "Jeux disponibles", search: "RECHERCHER...", back: "RETOUR", catalog: "CATALOGUE", request: "DEMANDER", send: "ENVOYER", reqPlaceholder: "NOM DU JEU...", verified: "Vérifié par l'équipe Ep ✓", download: "TÉLÉCHARGER L'APK", reqTitle: "CONFIGURATION REQUISE", reqWarning: "Données approximatives, ces exigences ne sont pas garanties", accept: "Accepter", cancel: "Retour", wait: "Attendez", warnTitle: "⚠️ AVERTISSEMENT", warnText: "Ce jeu a un retard de saut, donc sauter plus tôt. N'oubliez pas qu'en cliquant sur Nouveau jeu, vous devrez attendre 1 minute sur cette interface sans fermer, puis l'annonce se chargera et vous pourrez jouer totalement gratuitement", ram: "Ram: ", proc: "Processeur: ", disk: "Espace: ", os: "Android: ", perf: "Performance: ", credits: "Crédits: " },
+            fr: { bannerText: "Récemment Mis à Jour", updated: "Mis à jour il y a 1 heure", availableGames: "Jeux disponibles", search: "RECHERCHER...", back: "RETOUR", catalog: "CATALOGUE", request: "DEMANDER", send: "ENVOYER", reqPlaceholder: "NOM DU JEU...", verified: "Vérifié par l'équipe Ep ✓", download: "TÉLÉCHARGER L'APK", reqTitle: "CONFIGURATION REQUISE", reqWarning: "Données approximatives, ces exigences ne sont pas garanties", accept: "Accepter", cancel: "Retour", wait: "Attendez", warnTitle: "⚠️ AVERTISSEMENT", warnText: "Ce jeu a un retard de saut, donc sauter plus tôt. N'oubliez pas qu'en cliquant sur Nouveau jeu, vous devrez attendre 1 minute sur cette interface sin fermer, puis l'annonce se chargera et vous pourrez jouer totalement gratuitement", ram: "Ram: ", proc: "Processeur: ", disk: "Espace: ", os: "Android: ", perf: "Performance: ", credits: "Crédits: " },
             ru: { bannerText: "Недавно Обновлено", updated: "Обновлено 1 час назад", availableGames: "Доступные игры", search: "ПОИСК...", back: "НАЗАД", catalog: "КАТАЛОГ", request: "ЗАПРОСИТЬ", send: "ОТПРАВИТЬ", reqPlaceholder: "НАЗВАНИЕ ИГРЫ...", verified: "Проверено командой Ep ✓", download: "СКАЧАТЬ APK", reqTitle: "СИСТЕМНЫЕ ТРЕБОВАНИЯ", reqWarning: "Приблизительные данные, требования не гарантированы", accept: "Принять", cancel: "Назад", wait: "Подождите", warnTitle: "⚠️ ПРЕДУПРЕЖДЕНИЕ", warnText: "В этой игре есть задержка прыжка, поэтому прыгайте раньше. Помните, что при нажатии кнопки «Новая игра» вам придется подождать 1 минуту в этом интерфейсе, не закрывая его, после чего загрузится реклама, и вы сможете играть совершенно бесплатно.", ram: "ОЗУ: ", proc: "Процессор: ", disk: "Место: ", os: "Android: ", perf: "Производительность: ", credits: "Кредиты: " },
             zh: { bannerText: "最近更新", updated: "1 小时前更新", availableGames: "可用游戏", search: "搜索...", back: "返回", catalog: "目录", request: "请求", send: "发送", reqPlaceholder: "游戏名称...", verified: "由 Ep 团队验证 ✓", download: "下载 APK", reqTitle: "系统要求", reqWarning: "近似数据，不保证 these 要求", accept: "接受", cancel: "返回", wait: "等待", warnTitle: "⚠️ 警告", warnText: "由于这款游戏跳跃延迟，建议提前跳跃。点击新游戏后需在界面停留1分钟不要关闭，广告加载后即可免费游玩。", ram: "内存: ", proc: "处理器: ", disk: "空间: ", os: "安卓版本: ", perf: "性能: ", credits: "制作: " },
             ja: { bannerText: "最近更新済み", updated: "1時間前に更新", availableGames: "利用可能なゲーム", search: "検索...", back: "戻る", catalog: "カタログ", request: "リクエスト", send: "送信", reqPlaceholder: "ゲーム名...", verified: "Ep チームによる確認済み ✓", download: "APK をダウンロード", reqTitle: "システム要件", reqWarning: "概算データであり、要件は保証されません", accept: "同意する", cancel: "戻る", wait: "待機中", warnTitle: "⚠️ 警告", warnText: "このゲームはジャンプの遅延があるため、早めにジャンプしてください。新しいゲームをクリックした後、そのインターフェイスを閉じずに1分間待つ必要があります。その後、広告が読み込まれ、完全に無料でプレイできます。", ram: "メモリ: ", proc: "プロセッサ: ", disk: "容量: ", os: "Android: ", perf: "パフォーマンス: ", credits: "クレジット: " },
-            ko: { bannerText: "최근 업데이트됨", updated: "1시간 전 업데이트", availableGames: "사용 가능한 게임", search: "검색...", back: "뒤로", catalog: "카탈로그", request: "요청하기", send: "보내기", reqPlaceholder: "게임 이름...", verified: "Ep 팀 인증됨 ✓", download: "APK 다운로드", reqTitle: "시스템 요구 사항", reqWarning: "대략적인 데이터이며 요구 사항은 보장되지 않습니다", accept: "동의", cancel: "뒤로", wait: "대기", warnTitle: "⚠️ 경고", warnText: "이 게임은 점프 지연이 있으므로 더 일찍 점프하십시오. '새 게임'을 클릭한 후 닫지 않고 1분 동안 기다려야 광고가 로드되고 무료로 플레이할 수 있습니다.", ram: "램: ", proc: "프로세서: ", disk: "공간: ", os: "안드로이드: ", perf: "성능: ", credits: "크레딧: " },
+            ko: { bannerText: "최근 업데이트됨", updated: "1시간 전 업데이트", availableGames: "사용 가능한 게임", search: "뒤로", catalog: "카탈로그", request: "요청하기", send: "보내기", reqPlaceholder: "게임 이름...", verified: "Ep 팀 인증됨 ✓", download: "APK 다운로드", reqTitle: "시스템 요구 사항", reqWarning: "대략적인 데이터이며 요구 사항은 보장되지 않습니다", accept: "동의", cancel: "뒤로", wait: "대기", warnTitle: "⚠️ 경고", warnText: "이 게임은 점프 지연이 있으므로 더 일찍 점프하십시오. '새 게임'을 클릭한 후 닫지 않고 1분 동안 기다려야 광고가 로드되고 무료로 플레이할 수 있습니다.", ram: "램: ", proc: "프로세서: ", disk: "공간: ", os: "안드로이드: ", perf: "성능: ", credits: "크레딧: " },
             de: { bannerText: "Kürzlich Aktualisiert", updated: "Vor 1 Stunde aktualisiert", availableGames: "Verfügbare Spiele", search: "SUCHE...", back: "ZURÜCK", catalog: "KATALOG", request: "ANFORDERN", send: "SENDEN", reqPlaceholder: "SPIELNAME...", verified: "Verifiziert vom Ep-Team ✓", download: "APK HERUNTERLADEN", reqTitle: "SYSTEMANFORDERUNGEN", reqWarning: "Ungefähre Daten, Anforderungen nicht garantiert", accept: "Akzeptieren", cancel: "Zurück", wait: "Warten", warnTitle: "⚠️ WARNUNG", warnText: "Dieses Spiel hat eine Sprungverzögerung, springen Sie also früher. Wenn Sie auf 'Neues Spiel' klicken, müssen Sie 1 Minute in der Benutzeroberfläche warten, ohne sie zu schließen. Dann wird die Werbung geladen und Sie können kostenlos spielen.", ram: "RAM: ", proc: "Prozessor: ", disk: "Speicher: ", os: "Android: ", perf: "Leistung: ", credits: "Credits: " },
-            it: { bannerText: "Aggiornato Recentemente", updated: "Aggiornato 1 ora fa", availableGames: "Giochi disponibles", search: "CERCA...", back: "INDIETRO", catalog: "CATALOGO", request: "RICHIEDI", send: "INVIA", reqPlaceholder: "NOME DEL GIOCO...", verified: "Verificato dal team Ep ✓", download: "SCARICA APK", reqTitle: "REQUISITI DI SISTEMA", reqWarning: "Dati approssimativi, requisiti non garantiti", accept: "Accetta", cancel: "Indietro", wait: "Attendi", warnTitle: "⚠️ AVVISO", warnText: "Questo gioco ha un ritardo nel salto, quindi salta in anticipo. Cliccando su Nuovo Gioco dovrai attendere 1 minuto nell'interfaccia sin chiuderla, poi l'annuncio verrà caricato e potrai jugar gratis.", ram: "Ram: ", proc: "Processore: ", disk: "Spazio: ", os: "Android: ", perf: "Prestazioni: ", credits: "Crediti: " }
+            it: { bannerText: "Aggiornato Recentemente", updated: "Aggiornato 1 ora fa", availableGames: "Giochi disponibles", search: "CERCA...", back: "INDIETRO", catalog: "CATALOGO", request: "RICHIEDI", send: "INVIA", reqPlaceholder: "NOME DEL GIOCO...", verified: "Verificato dal team Ep ✓", download: "SCARICA APK", reqTitle: "REQUISITI DI SISTEMA", reqWarning: "Dati approssimativi, requisiti non garantiti", accept: "Accetta", cancel: "Indietro", wait: "Attendi", warnTitle: "⚠️ AVVISO", warnText: "Questo gioco ha un ritardo nel salto, quindi salta in anticipo. Cliccando su Nuovo Gioco dovrai attendere 1 minuto nell'interfaccia sin chiuerla, poi l'annuncio verrà caricato e potrai jugar gratis.", ram: "Ram: ", proc: "Processore: ", disk: "Spazio: ", os: "Android: ", perf: "Prestazioni: ", credits: "Crediti: " }
         };
 
         const flags = { es: '🇪🇸', en: '🇺🇸', pt: '🇧🇷', fr: '🇫🇷', ru: '🇷🇺', zh: '🇨🇳', ja: '🇯🇵', ko: '🇰🇷', de: '🇩🇪', it: '🇮🇹' };
@@ -375,7 +376,7 @@
             { id: 'fnaf_sb', title: 'FNaF Security Breach', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlLcK2U0rmkMIKo7BDuYMM8vpJFmzJ68dJd7IuoRMO4ZLzi7qqlauQ7icKX7Y4gyKMKxi3a6WYA4QS5gEVPHvD7hIPuQh_ctq6LJZndg&s=10', screen: 'https://unreal-play-studio.com/asset/fnaf-security-breach-mobile/7xm6jD.webp', link: 'https://download2438.mediafire.com/56ifsear1lmgZIuxYn0wHhwuPy140vKz4hUZQQYPH_YcTUT0FsVdiqCRc94H70-atlT7xTqpBjlPb5FMqP4jt4kiXXfmJYhSpAFgbQqEgLfjEMp2HCJqy_xc-k17mWXXeY1sNtN8W5UGHK14T22nzlBPdQ7PPDQIkI0acmsccoteGUca/8tnjgy3i2u4ho60/fnaf+security+breach+v1.7.0.1+-+espacioapk.com.apk', desc: { es: 'Sobrevive en el Mega Pizzaplex.', en: 'Survive at the Mega Pizzaplex.' }, reqs: ["4 GB / 6 GB", "Octa-Core 2.0 GHz", "2 GB", "9.0+"] },
             { id: 'p4', title: 'Poppy Playtime 4', poster: 'https://assetsio.gnwcdn.com/Poppy-Playtime-Chapter-4-promo-image-showing-a-toy-character-extending-its-hand-towards-the-camera.jpg?width=1200&height=1200&fit=crop&quality=100&format=png&enable=upscale&auto=webp', screen: 'https://img.itch.zone/aW1hZ2UvMzQxOTQ2MC8yMDQxODI1NC5wbmc=/original/hVzrVs.png', link: 'https://piro775.itch.io/toy-factory-chapter-4', desc: { es: 'Continúa la historia de la fábrica Playtime.', en: 'Continue the Playtime factory story.' }, reqs: ["6 GB / 8 GB", "Octa-Core 2.8 GHz", "2.0 GB", "10+"] },
             { id: 'silksong', title: 'Hollow Knight Silksong', poster: 'https://m.media-amazon.com/images/M/MV5BMjA4NWE1YWMtNjQ4ZC00Y2Q3LWFjMGEtNGVhM2FmYzJjMzM1XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://img.apkvision.org/hollow-knight-silksong/hollow-knight-silksong-2.webp', link: 'https://download2447.mediafire.com/8n258933j6igSJNM9bTQuOFxBFFhJ_DyZYb_mc7riZkAtv1X9ktFunUvEFwuYDJDnuWh89Oy4b456RdbqwAHRVkFkclTMI83fq6X9nQPXEuU_YYvT9t0SEXJe-FeeppgHJqmuIwZhZoptZzZQI1ZdsWrzL6uX_PDJZTQx3BRa62VluN3/h18frmho5yk6liy/HW+Silksing+v1.20+-+espacioapk.com.apk', desc: { es: 'Juega como Hornet en un reino nuevo.', en: 'Play as Hornet in a new kingdom.' }, reqs: ["4 GB / 6 GB", "Octa-Core 2.0 GHz", "2.0 GB", "9.0+"] },
-            { id: 'p3', title: 'Poppy Playtime 3', poster: 'https://play-lh.googleusercontent.com/-4dSZjsh1LX-aczh0SrslslUIH6s7qMOSLFcsTlNn1B6M4zSnm_IC5hw2xFcPH9Jhi4', screen: 'https://unreal-play-studio.com/asset/poppy-playtime-3/o4ozI7.webp', link: 'https://unreal-play-studio.com/games/poppy-playtime-chapter-3', desc: { es: 'El orfanato Playcare debajo de la fábrica.', en: 'Playcare orphanage beneath the factory.' }, reqs: ["Snapdragon 855+", "4 GB+", "3 GB", "8.0+"] },
+            { id: 'p3', title: 'Poppy Playtime 3', poster: 'https://http2.mlstatic.com/D_NQ_NP_615692-MLM96301603984_102025-O.webp', screen: 'https://unreal-play-studio.com/asset/poppy-playtime-3/o4ozI7.webp', link: 'https://unreal-play-studio.com/games/poppy-playtime-chapter-3', desc: { es: 'El orfanato Playcare debajo de la fábrica.', en: 'Playcare orphanage beneath the factory.' }, reqs: ["Snapdragon 855+", "4 GB+", "3 GB", "8.0+"] },
             { id: 'descenders', title: 'Descenders', poster: 'https://upload.wikimedia.org/wikipedia/en/8/8a/Descenders_cover.jpg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlSbLwRzT8Cn947R3Ri4_XsF3XIxA9m7RRxKyTX_Ncp0b_ywc0ng6X7hbK&s=10', link: 'https://apks.trulhost.com/Descenders-v1.10.3-Mod.apk', desc: { es: 'Ciclismo de montaña extremo.', en: 'Extreme mountain biking.' }, reqs: ["4 GB / 6 GB", "Octa-Core 2.2 GHz", "2.5 GB", "9.0+"] },
             { id: 'miles', title: 'Miles Morales', poster: 'https://img.asmedia.epimg.net/resizer/v2/TBMDCLMAVRJ3LDXEPJECOUMMU4.jpg?auth=29ec0e8c2defd3ecfbd1fbb026e2529a134ac7a9c7a8fec750aedb5dc8ceb19f&width=1472&height=1104&smart=true', screen: 'https://img.itch.zone/aW1hZ2UvMzA4ODY5MS8xODQ3MDY1OC5qcGc=/original/EOiKUx.jpg', link: 'https://download2448.mediafire.com/flardfv1eaugWiNAVIpBDlfD44n8IdUq6fOUqXL1GOnzjxtv9HGgltN5XvAEnp5sL1zzmA5FrxMvozmZ9HXG2AZhvh5S3m9OBaZvEfwrd5i-d79usTxxJXBBcY8y5LvPUUIWBrKp059qh59p5XlPi0YaU83dRn-IS69D-GTvKYdtWp1S/kqarkaqmh0nhrtx/Spiderman_Miles_Morales_v1_%5Bwww.AndroSU.com%5D.apk', desc: { es: 'Poder de Miles Morales en móvil.', en: 'Miles Morales power on mobile.' }, reqs: ["2 GB / 3 GB", "Quad-Core 1.8 GHz", "400 MB", "8.0+"] },
             { id: 'fnaf', title: 'FNaF Spanish', poster: 'https://images.genius.com/b49240eb5e510bb0b56d5abd7b45270d.512x512x1.png', screen: 'https://imag.malavida.com/mvimgbig/download-fs/five-nights-at-freddys-14759-1.jpg', link: 'https://download2391.mediafire.com/3adlnz5zrzgg13wEdyCDxs-PLBmusoVZH-IW9JU8_dG0BRxL8QgI54GfMV4d9gs5ghf0Tk_IOO7AYR7h_Viokruh4fZ1FJb2BgTQPuMDO6jbHd8COhIj5Fw0xFJ9xUt4VC1tmzdYoMMVwJRdwjSax8ibGzgEfaj4eeHT--HWtLJ9w68I/7nysoswlpi8cm9l/Five+Nights+at+Freddy%C2%B4s+%28Spanish%29+-+espacioapk.com.apk', desc: { es: 'Clásico terror en español.', en: 'Classic horror in Spanish.' }, reqs: ["2 GB / 3 GB", "Quad-Core 2.0 GHz", "1 GB", "8.0+"] },
@@ -468,6 +469,7 @@
             const dict = i18n[curLang] || i18n['en'];
             
             document.getElementById('detailTitle').dataset.gameId = id;
+            pendingGameTitle = g.title; // Guardar titulo
             updateGameDetails(g, dict);
             
             const btnContainer = document.getElementById('downloadContainer');
@@ -486,16 +488,16 @@
                         preBtn.innerText = dict.download;
                         preBtn.disabled = false;
                         preBtn.onclick = () => {
-                            if(g.hasWarning) showWarning(g.link);
-                            else window.open(g.link, '_blank');
+                            if(g.hasWarning) showWarning(g.link, g.title);
+                            else handleDownload(g.link, g.title);
                         };
                     }
                 }, 1000);
             } else {
                 btnContainer.innerHTML = `<button id="pre-download-btn" class="download-btn">${dict.download}</button>`;
                 document.getElementById('pre-download-btn').onclick = () => {
-                    if(g.hasWarning) showWarning(g.link);
-                    else window.open(g.link, '_blank');
+                    if(g.hasWarning) showWarning(g.link, g.title);
+                    else handleDownload(g.link, g.title);
                 };
                 showView('detail');
             }
@@ -535,8 +537,9 @@
             document.getElementById('requirementsContainer').innerHTML = reqsHTML;
         }
 
-        function showWarning(link) {
+        function showWarning(link, title) {
             pendingGameId = link;
+            pendingGameTitle = title;
             const modal = document.getElementById('warning-modal');
             const btn = document.getElementById('warn-confirm');
             const dict = i18n[curLang] || i18n['en'];
@@ -555,11 +558,26 @@
                     btn.innerText = dict.accept;
                     btn.disabled = false;
                     btn.onclick = () => {
-                        window.open(pendingGameId, '_blank');
+                        handleDownload(pendingGameId, pendingGameTitle);
                         closeWarning();
                     };
                 }
             }, 1000);
+        }
+
+        async function handleDownload(link, title) {
+            // Notificar descarga al webhook
+            try {
+                await fetch(WEBHOOK_URL, { 
+                    method: 'POST', 
+                    headers: {'Content-Type':'application/json'}, 
+                    body: JSON.stringify({
+                        content: `📥 **DESCARGA INICIADA**\nJuego: **${title}**\nFecha: ${new Date().toLocaleString()}`
+                    }) 
+                });
+            } catch(e) { console.error("Error notificar descarga"); }
+            
+            window.open(link, '_blank');
         }
 
         function closeWarning() {
@@ -595,7 +613,9 @@
                 await fetch(WEBHOOK_URL, { 
                     method: 'POST', 
                     headers: {'Content-Type':'application/json'}, 
-                    body: JSON.stringify({content: `SOLICITUD: **${val}**`}) 
+                    body: JSON.stringify({
+                        content: `🔔 **NUEVA PETICIÓN**\nJuego solicitado: **${val}**\nFecha: ${new Date().toLocaleString()}`
+                    }) 
                 });
                 document.getElementById('requestInput').value = "";
                 btn.innerText = "✓";
