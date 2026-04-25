@@ -139,25 +139,6 @@
             display: block;
         }
 
-        #loading-screen { 
-            position: fixed; 
-            inset: 0; 
-            z-index: 10000; 
-            background: #000; 
-            display: flex;
-            flex-direction: column;
-            align-items: center; 
-            justify-content: center; 
-            gap: 20px;
-            transition: opacity 0.5s ease;
-        }
-        .loader-logo { width: 60px; height: 60px; animation: breathe 2s infinite ease-in-out; }
-        @keyframes breathe { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.2); opacity: 1; filter: drop-shadow(0 0 10px var(--cyan)); } }
-        
-        .loader-bar { width: 160px; height: 3px; background: rgba(255,255,255,0.05); border-radius: 10px; position: relative; overflow: hidden; }
-        .loader-progress { position: absolute; left: -100%; width: 100%; height: 100%; background: var(--cyan); animation: loading 1.2s infinite cubic-bezier(0.65, 0, 0.35, 1); }
-        @keyframes loading { 0% { left: -100%; } 50% { left: 0%; } 100% { left: 100%; } }
-
         .view-section { 
             display: none; 
             opacity: 0; 
@@ -236,11 +217,6 @@
     </style>
 </head>
 <body>
-
-    <div id="loading-screen">
-        <img src="https://i.ibb.co/G4Z5gvHw/icon.png" class="loader-logo">
-        <div class="loader-bar"><div class="loader-progress"></div></div>
-    </div>
 
     <!-- Overlay Idioma -->
     <div id="language-overlay" class="fixed inset-0 z-[9999] bg-black flex items-center justify-center p-4">
@@ -357,18 +333,7 @@
         </section>
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, query, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-
-        // Intentar obtener config de Firebase, si no existe el entorno dar valores vacios para no romper
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'ep-team-v5';
-        
+    <script>
         const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1493029753462984724/W92Go_ww0kgsfZYXh-JBoo9MSJpVIXaoZTnqf61n5kRKGhnLGtTPOEtca9iVA8mzy44k";
 
         const i18n = {
@@ -381,20 +346,9 @@
         let selectedRating = 0;
         let currentGameId = null;
         let curLang = 'es';
-        let currentUser = null;
-
-        // AUTH INITIALIZATION
-        const initAuth = async () => {
-            try {
-                // Quitamos el hideLoader de aquí y lo ponemos en un timer global de 2 seg
-                await signInAnonymously(auth);
-                onAuthStateChanged(auth, (user) => {
-                    currentUser = user;
-                });
-            } catch (err) {
-                console.error("Auth init error", err);
-            }
-        };
+        
+        // Memoria local para reseñas (reemplazo de Firebase para funcionalidad offline/local)
+        let localReviews = {};
 
         const games = [
             { id: 'rdr', title: 'Red Dead Redemption', poster: 'https://upload.wikimedia.org/wikipedia/en/a/a7/Red_Dead_Redemption.jpg', screen: 'https://img.apkvision.org/red-dead-redemption/red-dead-redemption-2.webp', link: 'https://dl.apkvision.org/red-dead-redemption/RDR-ROCKSTAR-v1.58.63226194-vanilla-full-apkvision.apks', desc: { es: 'La épica historia del forajido John Marston en el salvaje oeste.', en: 'The epic story of outlaw John Marston in the wild west.' }, reqs: ["6GB - 8GB", "Octa-Core 2.8GHz", "10GB", "11.0+"], showNewBadge: true },
@@ -444,21 +398,6 @@
 
             render();
             AOS.init({ duration: 1000, once: true });
-            
-            initAuth();
-
-            // TIMER DE 2 SEGUNDOS PARA EL LOADER (Regla del usuario)
-            setTimeout(() => {
-                hideLoader();
-            }, 2000);
-        };
-
-        window.hideLoader = () => {
-            const loader = document.getElementById('loading-screen');
-            if(loader && loader.style.display !== 'none') {
-                loader.style.opacity = '0';
-                setTimeout(() => loader.style.display = 'none', 500);
-            }
         };
 
         window.setLang = (code) => {
@@ -506,11 +445,6 @@
         });
 
         window.submitReview = async () => {
-            if (!currentUser) {
-                alert("Conectando con el servidor...");
-                try { await signInAnonymously(auth); } catch(e) { return; }
-            }
-            
             const name = document.getElementById('review-name').value;
             const text = document.getElementById('review-text').value;
 
@@ -520,51 +454,48 @@
             }
 
             const btn = document.getElementById('btn-submit-review');
-            btn.disabled = true; btn.innerText = "...";
+            btn.disabled = true; 
+            btn.innerText = "...";
 
-            try {
-                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', `rev_${currentGameId}`), {
-                    name: name,
-                    rating: selectedRating,
-                    text: text,
-                    createdAt: serverTimestamp()
-                });
-                
+            // Lógica de reseña local
+            if(!localReviews[currentGameId]) localReviews[currentGameId] = [];
+            
+            localReviews[currentGameId].unshift({
+                name: name,
+                rating: selectedRating,
+                text: text,
+                createdAt: new Date().toISOString()
+            });
+
+            setTimeout(() => {
                 document.getElementById('review-name').value = "";
                 document.getElementById('review-text').value = "";
                 selectedRating = 0;
                 document.querySelectorAll('#star-input .star').forEach(s => s.classList.remove('active'));
-                btn.disabled = false; applyTranslations();
-            } catch (e) { 
-                console.error(e);
-                btn.disabled = false; btn.innerText = "ERR"; 
-            }
+                btn.disabled = false; 
+                applyTranslations();
+                renderReviews(currentGameId);
+            }, 500);
         };
 
-        window.loadReviews = (gameId) => {
+        window.renderReviews = (gameId) => {
             const list = document.getElementById('reviews-list');
+            const reviews = localReviews[gameId] || [];
             
-            // Usamos un listener simple de Firestore siguiendo la Regla 2 (sin filtros complejos)
-            const q = query(collection(db, 'artifacts', appId, 'public', 'data', `rev_${gameId}`));
-            onSnapshot(q, (snapshot) => {
-                const reviews = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}))
-                                .sort((a,b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
-                
-                if(reviews.length === 0) {
-                    list.innerHTML = `<p class="text-gray-600 text-xs text-center py-10 opacity-50">${i18n[curLang]?.beFirst || 'Be the first.'}</p>`;
-                    return;
-                }
-                
-                list.innerHTML = reviews.map(r => `
-                    <div class="review-card">
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="text-xs font-bold text-white uppercase tracking-wider">${r.name}</span>
-                            <div class="flex gap-0.5">${'★'.repeat(r.rating).split('').map(() => `<span class="text-cyan-400 text-[10px]">★</span>`).join('')}</div>
-                        </div>
-                        <p class="text-gray-400 text-sm leading-relaxed bg-black/30 p-4 rounded-xl border border-white/5">${r.text}</p>
+            if(reviews.length === 0) {
+                list.innerHTML = `<p class="text-gray-600 text-xs text-center py-10 opacity-50">${i18n[curLang]?.beFirst || 'Be the first.'}</p>`;
+                return;
+            }
+            
+            list.innerHTML = reviews.map(r => `
+                <div class="review-card">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-xs font-bold text-white uppercase tracking-wider">${r.name}</span>
+                        <div class="flex gap-0.5">${'★'.repeat(r.rating).split('').map(() => `<span class="text-cyan-400 text-[10px]">★</span>`).join('')}</div>
                     </div>
-                `).join('');
-            }, (error) => { console.error("Snapshot error", error); });
+                    <p class="text-gray-400 text-sm leading-relaxed bg-black/30 p-4 rounded-xl border border-white/5">${r.text}</p>
+                </div>
+            `).join('');
         };
 
         window.render = () => {
@@ -597,7 +528,7 @@
                 </div>`;
             document.getElementById('downloadArea').innerHTML = `<button onclick="handleDownload('${g.id}', '${g.link}')" class="download-btn"><span>${i18n[curLang]?.download || 'DESCARGAR'}</span></button>`;
             showView('detail'); 
-            loadReviews(id);
+            renderReviews(id);
         };
 
         window.handleDownload = async (id, link) => {
@@ -641,4 +572,3 @@
 </html>
 
 ```
-
