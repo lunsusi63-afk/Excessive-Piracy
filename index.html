@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,7 +11,6 @@
     <meta name="theme-color" content="#00f2ff">
     <link rel="icon" type="image/png" href="https://i.ibb.co/G4Z5gvHw/icon.png">
 
-    <!-- Frameworks -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Bebas+Neue&family=Outfit:wght@300;900&family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -27,7 +25,7 @@
             margin: 0; 
             overflow-x: hidden; 
             -webkit-tap-highlight-color: transparent;
-            scroll-behavior: smooth;
+            scroll-behavior: auto;
         }
         .font-brand { font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; }
         .font-ui { font-family: 'Rajdhani', sans-serif; }
@@ -139,34 +137,6 @@
             display: block;
         }
 
-        /* Eliminamos el Loader visualmente para entrada instantánea */
-        #loading-screen { 
-            position: fixed; 
-            inset: 0; 
-            z-index: 10000; 
-            background: #000; 
-            display: none; /* Cambiado a none por defecto */
-            flex-direction: column;
-            align-items: center; 
-            justify-content: center; 
-            gap: 20px;
-        }
-        .loader-logo { width: 60px; height: 60px; animation: breathe 2s infinite ease-in-out; }
-        @keyframes breathe { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.2); opacity: 1; filter: drop-shadow(0 0 10px var(--cyan)); } }
-        
-        .loader-bar { width: 160px; height: 3px; background: rgba(255,255,255,0.05); border-radius: 10px; position: relative; overflow: hidden; }
-        .loader-progress { position: absolute; left: -100%; width: 100%; height: 100%; background: var(--cyan); animation: loading 1.2s infinite cubic-bezier(0.65, 0, 0.35, 1); }
-        @keyframes loading { 0% { left: -100%; } 50% { left: 0%; } 100% { left: 100%; } }
-
-        #detailImg {
-            transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
-        }
-        #detailImg:hover {
-            transform: scale(1.02);
-            filter: drop-shadow(0 15px 30px rgba(0, 242, 255, 0.2));
-        }
-
         .view-section { 
             display: none; 
             opacity: 0; 
@@ -195,27 +165,17 @@
             transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 4px 15px rgba(0, 242, 255, 0.3);
         }
-        .download-btn:hover { 
-            transform: scale(1.03); 
-            box-shadow: 0 8px 25px rgba(0, 242, 255, 0.5);
-            letter-spacing: 1px;
-        }
         
         .star { cursor: pointer; font-size: 28px; color: #222; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .star.active { color: var(--cyan); text-shadow: 0 0 15px var(--cyan); transform: scale(1.1); }
 
         .review-card { 
             background: rgba(255,255,255,0.02); 
-            border-radius: 16px; 
-            padding: 16px; 
-            margin-bottom: 12px; 
+            border-radius: 20px; 
+            padding: 24px; 
+            margin-bottom: 16px; 
             border: 1px solid rgba(255,255,255,0.05); 
         }
-
-        #mobile-menu { box-shadow: -10px 0 30px rgba(0,0,0,0.5); }
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 10px; }
 
         .lang-card {
             background: rgba(255, 255, 255, 0.03);
@@ -227,59 +187,51 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
             cursor: pointer;
         }
-        .lang-card:hover {
-            background: rgba(0, 242, 255, 0.05);
-            border-color: var(--cyan);
-            transform: translateY(-5px);
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
+
+        .input-ep {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: white;
+            width: 100%;
+            outline: none;
+            font-size: 14px;
+            font-family: 'Outfit', sans-serif;
         }
-        .lang-card:hover span.flag {
-            transform: scale(1.2);
-            filter: drop-shadow(0 0 10px var(--cyan));
+        .input-ep:focus { border-color: var(--cyan); }
+        
+        .label-ep {
+            font-size: 10px;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            display: block;
+            font-family: 'Space Grotesk', sans-serif;
         }
     </style>
 </head>
 <body>
 
-    <div id="loading-screen">
-        <img src="https://i.ibb.co/G4Z5gvHw/icon.png" class="loader-logo">
-        <div class="loader-bar"><div class="loader-progress"></div></div>
-    </div>
-
-    <!-- Overlay Idioma Mejorado -->
     <div id="language-overlay" class="fixed inset-0 z-[9999] bg-black flex items-center justify-center p-4">
-        <div class="bg-[#050505] p-6 sm:p-10 rounded-[3rem] border border-white/5 max-w-2xl w-full text-center shadow-[0_0_100px_rgba(0,0,0,1)] relative overflow-hidden" data-aos="zoom-in">
-            <div class="absolute -top-24 -left-24 w-48 h-48 bg-cyan-500/10 blur-[100px] rounded-full"></div>
-            <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-cyan-500/10 blur-[100px] rounded-full"></div>
-            
-            <div class="relative z-10">
-                <img src="https://i.ibb.co/G4Z5gvHw/icon.png" class="w-12 h-12 mx-auto mb-6 drop-shadow-[0_0_10px_rgba(0,242,255,0.5)]">
-                <h2 class="font-brand text-4xl mb-2 text-white tracking-[4px]">SELECT LANGUAGE</h2>
-                <p class="font-ui text-cyan-400/60 text-xs tracking-[2px] mb-10 uppercase">Choose your preferred experience</p>
-                
-                <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4 mb-10" id="langGrid"></div>
-                
-                <div class="flex flex-col items-center gap-6">
-                    <label class="flex items-center gap-3 cursor-pointer group">
-                        <div class="relative">
-                            <input type="checkbox" id="rememberLang" class="peer hidden">
-                            <div class="w-6 h-6 border-2 border-white/10 rounded-md peer-checked:bg-cyan-400 peer-checked:border-cyan-400 transition-all"></div>
-                            <svg class="absolute top-1 left-1 w-4 h-4 text-black opacity-0 peer-checked:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                        </div>
-                        <span id="label-no-ask" class="text-gray-500 font-ui text-xs group-hover:text-white transition-colors">No volver a preguntar / Don't ask again</span>
-                    </label>
-                </div>
-            </div>
+        <div class="bg-[#050505] p-6 sm:p-10 rounded-[3rem] border border-white/5 max-w-2xl w-full text-center shadow-[0_0_100px_rgba(0,0,0,1)] relative overflow-y-auto max-h-[95vh]">
+            <img src="https://i.ibb.co/G4Z5gvHw/icon.png" class="w-12 h-12 mx-auto mb-6">
+            <h2 class="font-brand text-4xl mb-2 text-white">SELECT LANGUAGE</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4 mb-10 mt-8" id="langGrid"></div>
+            <label class="flex items-center justify-center gap-3 cursor-pointer">
+                <input type="checkbox" id="rememberLang" class="peer hidden">
+                <div class="w-5 h-5 border border-white/20 rounded peer-checked:bg-cyan-400"></div>
+                <span id="label-no-ask" class="text-gray-500 font-ui text-sm">No volver a preguntar / Don't ask again</span>
+            </label>
         </div>
     </div>
 
-    <!-- Header -->
     <header id="main-header">
         <div class="flex items-center gap-3 cursor-pointer min-w-max" onclick="navigate('home')">
-            <img src="https://i.ibb.co/G4Z5gvHw/icon.png" class="w-10 h-10 rounded-xl shadow-lg shadow-cyan-400/10">
+            <img src="https://i.ibb.co/G4Z5gvHw/icon.png" class="w-10 h-10">
             <div class="flex flex-col leading-none">
                 <span class="font-brand text-lg text-white">EXCESSIVE</span>
                 <span class="font-brand text-lg text-cyan-400">PIRACY</span>
@@ -288,41 +240,27 @@
         <div class="flex-grow mx-4">
             <input type="text" id="catalogSearch" class="search-input font-ui" oninput="render()" placeholder="...">
         </div>
-        <button onclick="toggleMenu()" class="group flex flex-col gap-1.5 items-end p-2">
+        <button onclick="toggleMenu()" class="flex flex-col gap-1.5 items-end p-2">
             <div class="w-7 h-[2px] bg-cyan-400"></div>
             <div class="w-5 h-[2px] bg-white"></div>
         </button>
     </header>
 
-    <!-- Menu Lateral -->
     <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/70 backdrop-blur-md z-[1999] hidden opacity-0 transition-opacity duration-300" onclick="toggleMenu()"></div>
-    <nav id="mobile-menu" class="fixed top-0 right-[-100%] w-[80%] max-w-[320px] h-screen bg-[#050505]/95 backdrop-blur-2xl z-[2000] flex flex-col p-10 border-l border-white/5 transition-all duration-500">
-        <div id="user-profile" class="mb-12 flex items-center gap-4 p-4 bg-white/5 rounded-2xl border border-white/10 hidden">
-            <img id="user-photo" class="w-12 h-12 rounded-full border-2 border-cyan-400/40">
-            <div class="overflow-hidden">
-                <p id="user-name" class="text-sm font-bold text-white truncate"></p>
-                <p class="text-[11px] text-cyan-400 tracking-tighter" id="label-verified-user">VERIFIED USER</p>
-            </div>
-        </div>
-        
-        <button id="btn-login" onclick="login()" class="mb-10 w-full py-4 bg-white text-black font-brand text-xl rounded-2xl flex items-center justify-center gap-3">
-            GOOGLE LOGIN
-        </button>
-
+    <nav id="mobile-menu" class="fixed top-0 right-[-100%] w-[80%] max-w-[320px] h-screen bg-[#050505] z-[2000] flex flex-col p-10 border-l border-white/5 transition-all duration-500">
         <div class="flex flex-col gap-4">
-            <button onclick="navigate('home'); toggleMenu();" class="text-4xl text-white font-brand block text-left" id="nav-catalog">CATÁLOGO</button>
-            <button onclick="navigate('request'); toggleMenu();" class="text-4xl text-white font-brand block text-left" id="nav-request">SOLICITAR</button>
-            <button onclick="resetLanguage()" class="text-sm mt-6 text-cyan-400/70 font-ui font-bold tracking-[0.2em] text-left" id="nav-changelang">🌐 CAMBIAR IDIOMA</button>
+            <button onclick="navigate('home'); toggleMenu();" class="text-4xl text-white font-brand text-left" id="nav-catalog">CATÁLOGO</button>
+            <button onclick="navigate('request'); toggleMenu();" class="text-4xl text-white font-brand text-left" id="nav-request">SOLICITAR</button>
+            <button onclick="resetLanguage()" class="text-sm mt-6 text-cyan-400/70 font-ui font-bold text-left" id="nav-changelang">🌐 CAMBIAR IDIOMA</button>
         </div>
     </nav>
 
-    <!-- Contenido Principal -->
     <div class="pt-28 pb-16">
         <main id="home-view" class="view-section active px-4 max-w-7xl mx-auto">
             <div id="mainBanner" class="top-banner">
                 <img src="https://i.ibb.co/Hfb046TK/fa4b7a137758b4d05d00c033090e576f.jpg" class="w-full h-[180px] sm:h-[300px] object-cover">
             </div>
-            <div class="mb-8 flex items-center gap-3 font-brand text-xl text-gray-500" data-aos="fade-right">
+            <div class="mb-8 flex items-center gap-3 font-brand text-xl text-gray-500">
                 <span id="counter-label">Disponibles</span>
                 <span id="game-total-count" class="bg-cyan-400/10 text-cyan-400 px-3 py-1 rounded-lg border border-cyan-400/20">0</span>
             </div>
@@ -331,18 +269,18 @@
 
         <section id="detail-view" class="view-section px-4">
             <div class="max-w-5xl mx-auto">
-                <button onclick="navigate('home')" id="btn-back" class="group mb-8 text-cyan-400 font-ui text-sm tracking-widest uppercase flex items-center gap-2">
+                <button onclick="navigate('home')" id="btn-back" class="group mb-8 text-cyan-400 font-ui text-sm uppercase flex items-center gap-2">
                     <span>←</span> <span>VOLVER</span>
                 </button>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
-                    <div data-aos="fade-right">
-                        <img id="detailImg" class="w-full rounded-[2rem] border border-white/10 aspect-video object-cover shadow-2xl">
+                    <div>
+                        <img id="detailImg" class="w-full rounded-[2rem] border border-white/10 aspect-video object-cover">
                     </div>
-                    <div data-aos="fade-left" class="flex flex-col justify-center">
-                        <h2 id="detailTitle" class="text-5xl font-brand mb-2 text-white leading-tight"></h2>
+                    <div class="flex flex-col justify-center">
+                        <h2 id="detailTitle" class="text-5xl font-brand mb-2 text-white"></h2>
                         <div class="inline-flex items-center gap-2 text-[11px] text-cyan-400 font-bold uppercase mb-6 px-3 py-1 bg-cyan-400/5 rounded-full border border-cyan-400/10 self-start" id="verified-label">✓ Verificado</div>
-                        <p id="detailDesc" class="text-gray-400 text-base leading-relaxed mb-8"></p>
+                        <p id="detailDesc" class="text-gray-400 text-base mb-8"></p>
                         <div id="reqsContainer" class="space-y-4"></div>
                         <div id="downloadArea" class="mt-10"></div>
                     </div>
@@ -351,21 +289,29 @@
                 <div class="border-t border-white/5 pt-16">
                     <h3 class="font-brand text-3xl mb-10 text-white" id="label-reviews-title">RESEÑAS</h3>
                     <div id="review-form-container" class="mb-12 p-8 bg-[#0a0a0a] rounded-[2rem] border border-white/5">
-                        <div id="login-to-review" class="text-center py-6">
-                            <p class="text-gray-400 text-sm mb-6" id="msg-login-review"></p>
-                            <button onclick="login()" class="text-cyan-400 font-brand text-2xl" id="btn-login-review-text">LOGIN</button>
-                        </div>
-                        <div id="active-review-form" class="hidden">
-                            <p class="text-xs text-cyan-400 font-bold mb-4 uppercase tracking-widest" id="label-your-rating">Tu Calificación</p>
-                            <div class="star-rating flex gap-3 mb-6" id="star-input">
-                                <span class="star" data-value="1">★</span>
-                                <span class="star" data-value="2">★</span>
-                                <span class="star" data-value="3">★</span>
-                                <span class="star" data-value="4">★</span>
-                                <span class="star" data-value="5">★</span>
+                        <div id="active-review-form" class="space-y-6">
+                            <div>
+                                <label class="label-ep" id="lbl-user">Usuario:</label>
+                                <input type="text" id="review-name" class="input-ep" placeholder="Nombre...">
                             </div>
-                            <textarea id="review-text" class="w-full bg-black border border-white/10 p-5 rounded-2xl text-white text-sm h-32 resize-none"></textarea>
-                            <button onclick="submitReview()" id="btn-submit-review" class="mt-6 bg-cyan-400 text-black font-black px-12 py-4 rounded-2xl font-brand text-xl">PUBLICAR</button>
+
+                            <div>
+                                <p class="text-[10px] text-cyan-400 font-bold mb-4 uppercase tracking-widest" id="label-your-rating">Tu Calificación</p>
+                                <div class="star-rating flex gap-3" id="star-input">
+                                    <span class="star" data-value="1">★</span>
+                                    <span class="star" data-value="2">★</span>
+                                    <span class="star" data-value="3">★</span>
+                                    <span class="star" data-value="4">★</span>
+                                    <span class="star" data-value="5">★</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="label-ep" id="lbl-review">Reseña:</label>
+                                <textarea id="review-text" class="w-full bg-black/40 border border-white/10 p-5 rounded-2xl text-white text-sm h-32 resize-none outline-none focus:border-cyan-400" placeholder="..."></textarea>
+                            </div>
+                            
+                            <button onclick="submitReview()" id="btn-submit-review" class="bg-cyan-400 text-black font-black px-12 py-4 rounded-2xl font-brand text-xl w-full">PUBLICAR</button>
                         </div>
                     </div>
                     <div id="reviews-list" class="space-y-6 pb-24"></div>
@@ -375,8 +321,8 @@
 
         <section id="request-view" class="view-section px-6 text-center">
             <div class="max-w-2xl mx-auto py-10">
-                <h1 class="text-6xl font-brand mb-10 text-white" id="req-view-title" data-aos="zoom-out">SOLICITAR</h1>
-                <div class="bg-[#0a0a0a] p-10 rounded-[3rem] border border-white/5 shadow-2xl" data-aos="fade-up">
+                <h1 class="text-6xl font-brand mb-10 text-white" id="req-view-title">SOLICITAR</h1>
+                <div class="bg-[#0a0a0a] p-10 rounded-[3rem] border border-white/5 shadow-2xl">
                     <input type="text" id="requestInput" class="w-full bg-black border border-white/10 p-5 rounded-2xl mb-6 text-white outline-none font-ui text-lg" placeholder="...">
                     <button onclick="sendRequest()" class="bg-cyan-400 text-black font-black w-full py-5 rounded-2xl font-brand text-2xl" id="req-btn">ENVIAR</button>
                 </div>
@@ -384,38 +330,21 @@
         </section>
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-        import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, query, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-
-        const firebaseConfig = JSON.parse(__firebase_config);
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'ep-team-v4';
-        
+    <script>
         const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1493029753462984724/W92Go_ww0kgsfZYXh-JBoo9MSJpVIXaoZTnqf61n5kRKGhnLGtTPOEtca9iVA8mzy44k";
 
         const i18n = {
-            es: { search: "BUSCAR JUEGO...", catalog: "CATÁLOGO", request: "SOLICITAR", changelang: "🌐 CAMBIAR IDIOMA", available: "JUEGOS DISPONIBLES", loginMsg: "Inicia sesión para escribir reseñas", download: "DESCARGAR APK", back: "← VOLVER", send: "ENVIAR PETICIÓN", placeholder: "NOMBRE DEL JUEGO...", msgLogin: "Inicia sesión con Google...", post: "PUBLICAR", noAsk: "No volver a preguntar", new: "NUEVO", reqsTitle: "REQUISITOS", reviewsTitle: "RESEÑAS", yourRating: "TU CALIFICACIÓN", opinionPlh: "Tu opinión...", loginNow: "LOGIN AHORA", loadingCom: "Cargando...", beFirst: "Sé el primero.", verifiedBy: "✓ Verificado", verifiedUser: "USUARIO VERIFICADO", name: "Español" },
-            en: { search: "SEARCH GAME...", catalog: "CATALOG", request: "REQUEST", changelang: "🌐 CHANGE LANGUAGE", available: "AVAILABLE GAMES", loginMsg: "Log in to write reviews", download: "DOWNLOAD APK", back: "← BACK", send: "SEND REQUEST", placeholder: "GAME NAME...", msgLogin: "Login with Google...", post: "POST", noAsk: "Don't ask again", new: "NEW", reqsTitle: "REQUIREMENTS", reviewsTitle: "REVIEWS", yourRating: "YOUR RATING", opinionPlh: "Your opinion...", loginNow: "LOGIN NOW", loadingCom: "Loading...", beFirst: "Be the first.", verifiedBy: "✓ Verified", verifiedUser: "VERIFIED USER", name: "English" },
-            zh: { search: "搜索游戏...", catalog: "目录", request: "请求", changelang: "🌐 更改语言", available: "可用游戏", loginMsg: "登录以撰写评论", download: "下载 APK", back: "← 返回", send: "发送请求", placeholder: "游戏名称...", msgLogin: "谷歌登录...", post: "发布", noAsk: "不再询问", new: "新", reqsTitle: "要求", reviewsTitle: "评论", yourRating: "你的评分", opinionPlh: "你的意见...", loginNow: "立即登录", loadingCom: "加载中...", beFirst: "成为第一个。", verifiedBy: "✓ 已验证", verifiedUser: "已验证用户", name: "中文" },
-            ja: { search: "ゲームを検索...", catalog: "カタログ", request: "リクエスト", changelang: "🌐 言語を変更", available: "利用可能なゲーム", loginMsg: "レビューを書くにはログインしてください", download: "APKをダウンロード", back: "← 戻る", send: "リクエストを送信", placeholder: "ゲーム名...", msgLogin: "Googleでログイン...", post: "投稿", noAsk: "次回から表示しない", new: "新規", reqsTitle: "要件", reviewsTitle: "レビュー", yourRating: "あなたの評価", opinionPlh: "あなたの意見...", loginNow: "今すぐログイン", loadingCom: "読み込み中...", beFirst: "最初の一人になろう。", verifiedBy: "✓ 確認済み", verifiedUser: "認証済みユーザー", name: "日本語" },
-            ko: { search: "게임 검색...", catalog: "카탈로그", request: "요청", changelang: "🌐 언어 변경", available: "사용 가능한 게임", loginMsg: "리뷰를 쓰려면 로그인하세요", download: "APK 다운로드", back: "← 뒤로", send: "요청 보내기", placeholder: "게임 이름...", msgLogin: "Google 로그인...", post: "게시", noAsk: "다시 묻지 않음", new: "신규", reqsTitle: "요구 사항", reviewsTitle: "리뷰", yourRating: "내 평점", opinionPlh: "내 의견...", loginNow: "지금 로그인", loadingCom: "로딩 중...", beFirst: "첫 번째가 되세요.", verifiedBy: "✓ 인증됨", verifiedUser: "인증된 사용자", name: "한국어" },
-            fr: { search: "CHERCHER UN JEU...", catalog: "CATALOGUE", request: "DEMANDER", changelang: "🌐 CHANGER DE LANGUE", available: "JEUX DISPONIBLES", loginMsg: "Connectez-vous pour donner votre avis", download: "TÉLÉCHARGER APK", back: "← RETOUR", send: "ENVOYER LA DEMANDE", placeholder: "NOM DU JEU...", msgLogin: "Connexion avec Google...", post: "PUBLIER", noAsk: "Ne plus demander", new: "NOUVEAU", reqsTitle: "EXIGENCES", reviewsTitle: "AVIS", yourRating: "VOTRE NOTE", opinionPlh: "Votre avis...", loginNow: "SE CONNECTER", loadingCom: "Chargement...", beFirst: "Soyez le premier.", verifiedBy: "✓ Vérifié", verifiedUser: "UTILISATEUR VÉRIFIÉ", name: "Français" },
-            hi: { search: "खेल खोजें...", catalog: "कैटलॉग", request: "अनुरोध", changelang: "🌐 भाषा बदलें", available: "उपलब्ध खेल", loginMsg: "समीक्षा लिखने के लिए लॉग in करें", download: "APK डाउनलोड", back: "← वापस", send: "अनुरोध भेजें", placeholder: "खेल का नाम...", msgLogin: "Google से लॉगिन करें...", post: "पोस्ट करें", noAsk: "फिर से न पूछें", new: "नया", reqsTitle: "आवश्यकताएं", reviewsTitle: "समीक्षाएं", yourRating: "आपकी रेटिंग", opinionPlh: "आपकी राय...", loginNow: "अभी लॉगिन करें", loadingCom: "लोड हो रहा है...", beFirst: "पहले बनें।", verifiedBy: "✓ सत्यापित", verifiedUser: "सत्यापित उपयोगकर्ता", name: "हिन्दी" },
-            ru: { search: "ПОИСК ИГРЫ...", catalog: "КАТАЛОГ", request: "ЗАПРОСИТЬ", changelang: "🌐 СМЕНИТЬ ЯЗЫК", available: "ДОСТУПНЫЕ ИГРЫ", loginMsg: "Войдите, чтобы написать отзыв", download: "СКАЧАТЬ APK", back: "← НАЗАД", send: "ОТПРАВИТЬ ЗАПРОС", placeholder: "НАЗВАНИЕ ИГРЫ...", msgLogin: "Вход через Google...", post: "ОПУБЛИКОВАТЬ", noAsk: "Больше не спрашивать", new: "НОВОЕ", reqsTitle: "ТРЕБОВАНИЯ", reviewsTitle: "ОТЗЫВЫ", yourRating: "ВАША ОЦЕНКА", opinionPlh: "Ваше мнение...", loginNow: "ВОЙТИ СЕЙЧАС", loadingCom: "Загрузка...", beFirst: "Будьте первым.", verifiedBy: "✓ Проверено", verifiedUser: "ПРОВЕРЕННЫЙ ПОЛЬЗОВАТЕЛЬ", name: "Русский" },
-            pt: { search: "BUSCAR JOGO...", catalog: "CATÁLOGO", request: "SOLICITAR", changelang: "🌐 MUDAR IDIOMA", available: "JOGOS DISPONÍVEIS", loginMsg: "Faça login para escribir avaliações", download: "BAIXAR APK", back: "← VOLTAR", send: "ENVIAR PEDIDO", placeholder: "NOME DO JOGO...", msgLogin: "Login com Google...", post: "POSTAR", noAsk: "Não perguntar novamente", new: "NOVO", reqsTitle: "REQUISITOS", reviewsTitle: "AVALIAÇÕES", yourRating: "SUA NOTA", opinionPlh: "Sua opinião...", loginNow: "ENTRAR AGORA", loadingCom: "Carregando...", beFirst: "Seja o primeiro.", verifiedBy: "✓ Verificado", verifiedUser: "USUÁRIO VERIFICADO", name: "Português" },
-            id: { search: "CARI GAME...", catalog: "KATALOG", request: "PERMINTAAN", changelang: "🌐 UBAH BAHASA", available: "GAME TERSEDIA", loginMsg: "Masuk untuk menulis ulasan", download: "UNDUH APK", back: "← KEMBALI", send: "KIRIM PERMINTAAN", placeholder: "NAMA GAME...", msgLogin: "Login Google...", post: "PUBLIKASIKAN", noAsk: "Jangan tanya lagi", new: "BARU", reqsTitle: "PERSYARATAN", reviewsTitle: "ULASAN", yourRating: "RATING ANDA", opinionPlh: "Pendapat Anda...", loginNow: "LOGIN SEKARANG", loadingCom: "Memuat...", beFirst: "Jadilah yang primera.", verifiedBy: "✓ Diverifikasi", verifiedUser: "PENGGUNA TERVERIFIKASI", name: "Bahasa" }
+            es: { search: "BUSCAR JUEGO...", catalog: "CATÁLOGO", request: "SOLICITAR", changelang: "🌐 CAMBIAR IDIOMA", available: "JUEGOS DISPONIBLES", download: "DESCARGAR APK", back: "← VOLVER", send: "ENVIAR PETICIÓN", placeholder: "NOMBRE DEL JUEGO...", post: "PUBLICAR", noAsk: "No volver a preguntar / Don't ask again", new: "NUEVO", reqsTitle: "REQUISITOS", reviewsTitle: "RESEÑAS", yourRating: "TU CALIFICACIÓN", opinionPlh: "Tu opinión...", loadingCom: "Cargando...", beFirst: "Sé el primero.", verifiedBy: "✓ Verificado", name: "Español", userLabel: "Usuario:", reviewLabel: "Reseña:" },
+            en: { search: "SEARCH GAME...", catalog: "CATALOG", request: "REQUEST", changelang: "🌐 CHANGE LANGUAGE", available: "AVAILABLE GAMES", download: "DOWNLOAD APK", back: "← BACK", send: "SEND REQUEST", placeholder: "GAME NAME...", post: "POST", noAsk: "Don't ask again", new: "NEW", reqsTitle: "REQUIREMENTS", reviewsTitle: "REVIEWS", yourRating: "YOUR RATING", opinionPlh: "Your opinion...", loadingCom: "Loading...", beFirst: "Be the first.", verifiedBy: "✓ Verified", name: "English", userLabel: "User:", reviewLabel: "Review:" }
         };
 
-        const flags = { en: '🇺🇸', es: '🇪🇸', zh: '🇨🇳', hi: '🇮🇳', fr: '🇫🇷', pt: '🇧🇷', ru: '🇷🇺', ja: '🇯🇵', ko: '🇰🇷', id: '🇮🇩' };
+        const flags = { en: '🇺🇸', es: '🇪🇸' };
 
-        let currentUser = null;
         let selectedRating = 0;
         let currentGameId = null;
         let curLang = 'es';
+        
+        let localReviews = {};
 
         const games = [
             { id: 'rdr', title: 'Red Dead Redemption', poster: 'https://upload.wikimedia.org/wikipedia/en/a/a7/Red_Dead_Redemption.jpg', screen: 'https://img.apkvision.org/red-dead-redemption/red-dead-redemption-2.webp', link: 'https://dl.apkvision.org/red-dead-redemption/RDR-ROCKSTAR-v1.58.63226194-vanilla-full-apkvision.apks', desc: { es: 'La épica historia del forajido John Marston en el salvaje oeste.', en: 'The epic story of outlaw John Marston in the wild west.' }, reqs: ["6GB - 8GB", "Octa-Core 2.8GHz", "10GB", "11.0+"], showNewBadge: true },
@@ -452,19 +381,29 @@
                 curLang = savedLang;
                 document.getElementById('language-overlay').style.display = 'none';
                 applyTranslations();
-                setTimeout(() => {
-                    const banner = document.getElementById('mainBanner');
-                    if(banner) banner.classList.add('active-banner');
-                }, 100); // Reducido para mayor velocidad
+                setTimeout(() => { document.getElementById('mainBanner')?.classList.add('active-banner'); }, 100);
             }
 
             const grid = document.getElementById('langGrid');
             grid.innerHTML = Object.keys(flags).map(code => `
                 <div onclick="setLang('${code}')" class="lang-card">
-                    <span class="flag text-4xl transition-transform duration-300">${flags[code]}</span>
-                    <span class="font-ui text-[10px] text-white/40 uppercase tracking-widest">${i18n[code].name}</span>
+                    <span class="text-4xl">${flags[code]}</span>
+                    <span class="font-ui text-[9px] text-white/40 uppercase tracking-widest">${i18n[code]?.name || code}</span>
                 </div>
             `).join('');
+
+            // Agregado el listener de estrellas dentro de init
+            setTimeout(() => {
+                document.querySelectorAll('#star-input .star').forEach(star => {
+                    star.onclick = (e) => {
+                        const val = parseInt(e.target.dataset.value);
+                        selectedRating = val;
+                        document.querySelectorAll('#star-input .star').forEach(s =>
+                            s.classList.toggle('active', parseInt(s.dataset.value) <= val)
+                        );
+                    };
+                });
+            }, 0);
 
             render();
             AOS.init({ duration: 1000, once: true });
@@ -472,21 +411,14 @@
 
         window.setLang = (code) => {
             curLang = code;
-            if(document.getElementById('rememberLang').checked) {
-                localStorage.setItem('ep_lang', code);
-            }
-            document.getElementById('language-overlay').classList.add('opacity-0');
-            setTimeout(() => {
-                document.getElementById('language-overlay').style.display = 'none';
-                applyTranslations();
-                const banner = document.getElementById('mainBanner');
-                if(banner) banner.classList.add('active-banner');
-            }, 300);
+            if(document.getElementById('rememberLang').checked) localStorage.setItem('ep_lang', code);
+            document.getElementById('language-overlay').style.display = 'none';
+            applyTranslations();
+            document.getElementById('mainBanner')?.classList.add('active-banner');
         };
 
         window.resetLanguage = () => {
             localStorage.removeItem('ep_lang');
-            document.getElementById('language-overlay').classList.remove('opacity-0');
             document.getElementById('language-overlay').style.display = 'flex';
             toggleMenu();
         };
@@ -499,11 +431,8 @@
             document.getElementById('nav-changelang').innerText = t.changelang;
             document.getElementById('counter-label').innerText = t.available;
             document.getElementById('label-no-ask').innerText = t.noAsk;
-            document.getElementById('label-verified-user').innerText = t.verifiedUser;
-            document.getElementById('btn-back').innerHTML = `<span class="group-hover:-translate-x-2 transition-transform">←</span> <span class="group-hover:text-white transition-colors">${t.back}</span>`;
+            document.getElementById('btn-back').innerHTML = `<span>←</span> <span>${t.back}</span>`;
             document.getElementById('label-reviews-title').innerText = t.reviewsTitle;
-            document.getElementById('msg-login-review').innerText = t.loginMsg;
-            document.getElementById('btn-login-review-text').innerText = t.loginNow;
             document.getElementById('label-your-rating').innerText = t.yourRating;
             document.getElementById('review-text').placeholder = t.opinionPlh;
             document.getElementById('btn-submit-review').innerText = t.post;
@@ -511,113 +440,72 @@
             document.getElementById('req-view-title').innerText = t.request;
             document.getElementById('requestInput').placeholder = t.placeholder;
             document.getElementById('req-btn').innerText = t.send;
+            document.getElementById('lbl-user').innerText = t.userLabel;
+            document.getElementById('lbl-review').innerText = t.reviewLabel;
             render();
         }
 
-        window.login = async () => {
-            const provider = new GoogleAuthProvider();
-            try { await signInWithPopup(auth, provider); } catch (error) { console.error(error); }
-        };
-
-        onAuthStateChanged(auth, (user) => {
-            currentUser = user;
-            const profile = document.getElementById('user-profile');
-            const btnLogin = document.getElementById('btn-login');
-            const reviewLogin = document.getElementById('login-to-review');
-            const reviewForm = document.getElementById('active-review-form');
-
-            if(user) {
-                profile.classList.remove('hidden');
-                btnLogin.classList.add('hidden');
-                document.getElementById('user-photo').src = user.photoURL;
-                document.getElementById('user-name').innerText = user.displayName;
-                reviewLogin.classList.add('hidden');
-                reviewForm.classList.remove('hidden');
-            } else {
-                profile.classList.add('hidden');
-                btnLogin.classList.remove('hidden');
-                reviewLogin.classList.remove('hidden');
-                reviewForm.classList.add('hidden');
-            }
-        });
-
-        document.querySelectorAll('#star-input .star').forEach(star => {
-            star.onclick = (e) => {
-                const val = parseInt(e.target.dataset.value);
-                selectedRating = val;
-                updateStars(val);
-            };
-        });
-
-        function updateStars(val) {
-            document.querySelectorAll('#star-input .star').forEach(s => {
-                s.classList.toggle('active', parseInt(s.dataset.value) <= val);
-            });
-        }
-
         window.submitReview = async () => {
+            const name = document.getElementById('review-name').value;
             const text = document.getElementById('review-text').value;
-            if(selectedRating === 0 || !text.trim() || !currentUser) return;
+
+            if(!name.trim() || selectedRating === 0 || !text.trim()) {
+                alert("Completa todos los campos.");
+                return;
+            }
+
             const btn = document.getElementById('btn-submit-review');
-            btn.disabled = true;
+            btn.disabled = true; 
             btn.innerText = "...";
-            try {
-                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', `reviews_${currentGameId}`), {
-                    uid: currentUser.uid,
-                    name: currentUser.displayName,
-                    photo: currentUser.photoURL,
-                    rating: selectedRating,
-                    text: text,
-                    createdAt: serverTimestamp()
-                });
+
+            if(!localReviews[currentGameId]) localReviews[currentGameId] = [];
+            
+            localReviews[currentGameId].unshift({
+                name: name,
+                rating: selectedRating,
+                text: text,
+                createdAt: new Date().toISOString()
+            });
+
+            setTimeout(() => {
+                document.getElementById('review-name').value = "";
                 document.getElementById('review-text').value = "";
                 selectedRating = 0;
-                updateStars(0);
-                btn.disabled = false;
+                document.querySelectorAll('#star-input .star').forEach(s => s.classList.remove('active'));
+                btn.disabled = false; 
                 applyTranslations();
-            } catch (e) { btn.innerText = "ERR"; }
+                renderReviews(currentGameId);
+            }, 500);
         };
 
-        window.loadReviews = (gameId) => {
+        window.renderReviews = (gameId) => {
             const list = document.getElementById('reviews-list');
-            const t = i18n[curLang] || i18n.en;
-            list.innerHTML = `<p class="text-gray-600 text-xs text-center animate-pulse">${t.loadingCom || '...'}</p>`;
-            const q = collection(db, 'artifacts', appId, 'public', 'data', `reviews_${gameId}`);
-            onSnapshot(q, (snapshot) => {
-                const reviews = snapshot.docs.map(doc => doc.data()).sort((a,b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
-                if(reviews.length === 0) {
-                    list.innerHTML = `<p class="text-gray-600 text-xs text-center py-10 opacity-50">${t.beFirst || '...'}</p>`;
-                    return;
-                }
-                list.innerHTML = reviews.map((r, i) => `
-                    <div class="review-card">
-                        <div class="flex items-center gap-3 mb-3">
-                            <img src="${r.photo}" class="w-8 h-8 rounded-full border border-white/10">
-                            <div class="flex flex-col">
-                                <span class="text-xs font-bold text-white">${r.name}</span>
-                                <div class="flex gap-0.5">${'★'.repeat(r.rating).split('').map(() => `<span class="text-cyan-400 text-[10px]">★</span>`).join('')}</div>
-                            </div>
-                        </div>
-                        <p class="text-gray-400 text-sm leading-relaxed">${r.text}</p>
+            const reviews = localReviews[gameId] || [];
+            
+            if(reviews.length === 0) {
+                list.innerHTML = `<p class="text-gray-600 text-xs text-center py-10 opacity-50">${i18n[curLang]?.beFirst || 'Be the first.'}</p>`;
+                return;
+            }
+            
+            list.innerHTML = reviews.map(r => `
+                <div class="review-card">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-xs font-bold text-white uppercase tracking-wider">${r.name}</span>
+                        <div class="flex gap-0.5">${'★'.repeat(r.rating).split('').map(() => `<span class="text-cyan-400 text-[10px]">★</span>`).join('')}</div>
                     </div>
-                `).join('');
-            });
+                    <p class="text-gray-400 text-sm leading-relaxed bg-black/30 p-4 rounded-xl border border-white/5">${r.text}</p>
+                </div>
+            `).join('');
         };
 
         window.render = () => {
             const val = document.getElementById('catalogSearch').value.toLowerCase();
             const grid = document.getElementById('gameGrid');
-            const sortedGames = [...games].sort((a, b) => {
-                if (a.showNewBadge && !b.showNewBadge) return -1;
-                if (!a.showNewBadge && b.showNewBadge) return 1;
-                return 0;
-            });
-            const filtered = sortedGames.filter(g => g.title.toLowerCase().includes(val));
-            const t = i18n[curLang] || i18n.en;
+            const filtered = games.filter(g => g.title.toLowerCase().includes(val));
             document.getElementById('game-total-count').innerText = filtered.length;
             grid.innerHTML = filtered.map((g, i) => `
-                <div class="game-card" data-aos="fade-up" data-aos-delay="${(i % 5) * 100}" onclick="openGame('${g.id}')">
-                    ${g.showNewBadge ? `<div class="portada-updated-badge">${t.new || 'NEW'}</div>` : ''}
+                <div class="game-card" data-aos="fade-up" onclick="openGame('${g.id}')">
+                    ${g.showNewBadge ? `<div class="portada-updated-badge">${i18n[curLang]?.new || 'NEW'}</div>` : ''}
                     <img src="${g.poster}" class="char-img">
                     <div class="game-title-badge"><span class="game-title-text">${g.title}</span></div>
                 </div>
@@ -625,106 +513,61 @@
         };
 
         window.openGame = (id) => {
-            const g = games.find(x => x.id === id);
-            if(!g) return;
+            const g = games.find(x => x.id === id); if(!g) return;
             currentGameId = id;
-            const t = i18n[curLang] || i18n.en;
             document.getElementById('detailImg').src = g.screen;
             document.getElementById('detailTitle').innerText = g.title;
-            document.getElementById('detailDesc').innerText = g.desc[curLang] || g.desc.en || g.desc.es;
+            document.getElementById('detailDesc').innerText = g.desc[curLang] || g.desc.en;
             document.getElementById('reqsContainer').innerHTML = `
                 <div class="p-6 bg-[#0a0a0a] border-l-4 border-cyan-400 rounded-r-3xl">
-                    <p class="text-xs text-cyan-400 font-bold mb-4 uppercase tracking-widest">${t.reqsTitle || 'REQUIREMENTS'}</p>
-                    <div class="grid grid-cols-2 gap-4 text-xs text-gray-400 font-ui">
-                        <span>RAM: ${g.reqs[0]}</span>
-                        <span>CPU: ${g.reqs[1]}</span>
-                        <span>DISK: ${g.reqs[2]}</span>
-                        <span>ANDR: ${g.reqs[3]}</span>
+                    <p class="text-[10px] text-cyan-400 font-bold mb-4 uppercase tracking-widest">${i18n[curLang]?.reqsTitle || 'REQUISITOS'}</p>
+                    <div class="grid grid-cols-2 gap-4 text-xs text-gray-400 font-ui uppercase">
+                        <span>RAM: ${g.reqs[0]}</span> <span>CPU: ${g.reqs[1]}</span>
+                        <span>DISK: ${g.reqs[2]}</span> <span>ANDR: ${g.reqs[3]}</span>
                     </div>
-                </div>
-            `;
-            document.getElementById('downloadArea').innerHTML = `<button onclick="handleDownload('${g.id}', '${g.link}')" class="download-btn"><span>${t.download || 'DOWNLOAD'}</span></button>`;
-            showView('detail');
-            loadReviews(id);
+                </div>`;
+            document.getElementById('downloadArea').innerHTML = `<button onclick="handleDownload('${g.id}', '${g.link}')" class="download-btn"><span>${i18n[curLang]?.download || 'DESCARGAR'}</span></button>`;
+            showView('detail'); 
+            renderReviews(id);
         };
 
         window.handleDownload = async (id, link) => {
-            const g = games.find(x => x.id === id);
-            if(!g) return;
-            window.open(link, '_blank');
+            const g = games.find(x => x.id === id); window.open(link, '_blank');
             try {
-                const userData = currentUser ? { name: currentUser.displayName, email: currentUser.email } : { name: 'Usuario Anónimo', email: 'No logueado' };
-                const embed = {
-                    title: "🚀 Nueva Descarga",
-                    color: 62207,
-                    thumbnail: { url: g.poster },
-                    fields: [
-                        { name: "🎮 Juego", value: g.title, inline: true },
-                        { name: "👤 Usuario", value: userData.name, inline: true }
-                    ],
-                    footer: { text: "EP Team Official Logger" },
-                    timestamp: new Date().toISOString()
-                };
-                await fetch(DISCORD_WEBHOOK, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ embeds: [embed] }) });
+                await fetch(DISCORD_WEBHOOK, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ embeds: [{ title: "🚀 Descarga", color: 62207, fields: [{name:"🎮",value:g.title,inline:true}] }] }) });
             } catch (err) {}
         };
 
         window.showView = (v) => {
-            const sections = document.querySelectorAll('.view-section');
-            sections.forEach(s => { s.style.opacity = '0'; s.style.transform = 'translateY(15px)'; });
-            setTimeout(() => {
-                sections.forEach(s => s.classList.remove('active'));
-                const active = document.getElementById(v + '-view');
-                active.classList.add('active');
-                setTimeout(() => { active.style.opacity = '1'; active.style.transform = 'translateY(0)'; }, 50);
-                window.scrollTo(0,0);
-            }, 300);
+            document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
+            const active = document.getElementById(v + '-view'); 
+            active.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'instant' });
         };
 
-        window.navigate = (v) => {
-            // Animación suave entre vistas sin pantalla negra larga
-            showView(v);
-            if(v === 'home') currentGameId = null;
-        };
+        window.navigate = (v) => { showView(v === 'home' ? 'home' : v); };
 
         window.toggleMenu = () => {
             const menu = document.getElementById('mobile-menu');
             const overlay = document.getElementById('mobile-menu-overlay');
             const isOpen = menu.style.right === '0px';
-            if(isOpen) {
-                menu.style.right = '-100%';
-                overlay.style.opacity = '0';
-                setTimeout(() => overlay.classList.add('hidden'), 300);
-            } else {
-                overlay.classList.remove('hidden');
-                setTimeout(() => { overlay.style.opacity = '1'; menu.style.right = '0'; }, 10);
-            }
+            menu.style.right = isOpen ? '-100%' : '0';
+            overlay.classList.toggle('hidden', isOpen);
+            setTimeout(() => overlay.style.opacity = isOpen ? '0' : '1', 10);
         };
 
         window.sendRequest = async () => {
-            const val = document.getElementById('requestInput').value;
-            if(!val) return;
-            const btn = document.getElementById('req-btn');
-            btn.innerText = "...";
+            const val = document.getElementById('requestInput').value; if(!val) return;
+            const btn = document.getElementById('req-btn'); btn.innerText = "...";
             try {
-                const embed = {
-                    title: "📝 Nueva Petición",
-                    color: 16777215,
-                    fields: [{ name: "🕹️ Juego", value: val }, { name: "👤 Por", value: currentUser ? currentUser.displayName : "Anónimo" }],
-                    footer: { text: "EP Team Request System" },
-                    timestamp: new Date().toISOString()
-                };
-                await fetch(DISCORD_WEBHOOK, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ embeds: [embed] }) });
-                document.getElementById('requestInput').value = "";
-                btn.innerText = "¡ENVIADO!";
-                setTimeout(() => { applyTranslations(); }, 2000);
+                await fetch(DISCORD_WEBHOOK, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ embeds: [{ title: "📝 Petición", fields: [{ name: "🕹️", value: val }] }] }) });
+                document.getElementById('requestInput').value = ""; btn.innerText = "¡ENVIADO!";
+                setTimeout(() => applyTranslations(), 2000);
             } catch(e) { btn.innerText = "ERR"; }
         };
 
-        init();
+        window.onload = init;
     </script>
 </body>
 </html>
-
-```
 
