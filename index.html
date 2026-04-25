@@ -27,7 +27,7 @@
             margin: 0; 
             overflow-x: hidden; 
             -webkit-tap-highlight-color: transparent;
-            scroll-behavior: auto; /* Cambiado a auto para control preciso por JS */
+            scroll-behavior: auto;
         }
         .font-brand { font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; }
         .font-ui { font-family: 'Rajdhani', sans-serif; }
@@ -144,11 +144,12 @@
             inset: 0; 
             z-index: 10000; 
             background: #000; 
-            display: none;
+            display: flex;
             flex-direction: column;
             align-items: center; 
             justify-content: center; 
             gap: 20px;
+            transition: opacity 0.5s ease;
         }
         .loader-logo { width: 60px; height: 60px; animation: breathe 2s infinite ease-in-out; }
         @keyframes breathe { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.2); opacity: 1; filter: drop-shadow(0 0 10px var(--cyan)); } }
@@ -156,15 +157,6 @@
         .loader-bar { width: 160px; height: 3px; background: rgba(255,255,255,0.05); border-radius: 10px; position: relative; overflow: hidden; }
         .loader-progress { position: absolute; left: -100%; width: 100%; height: 100%; background: var(--cyan); animation: loading 1.2s infinite cubic-bezier(0.65, 0, 0.35, 1); }
         @keyframes loading { 0% { left: -100%; } 50% { left: 0%; } 100% { left: 100%; } }
-
-        #detailImg {
-            transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
-        }
-        #detailImg:hover {
-            transform: scale(1.02);
-            filter: drop-shadow(0 15px 30px rgba(0, 242, 255, 0.2));
-        }
 
         .view-section { 
             display: none; 
@@ -194,11 +186,6 @@
             transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 4px 15px rgba(0, 242, 255, 0.3);
         }
-        .download-btn:hover { 
-            transform: scale(1.03); 
-            box-shadow: 0 8px 25px rgba(0, 242, 255, 0.5);
-            letter-spacing: 1px;
-        }
         
         .star { cursor: pointer; font-size: 28px; color: #222; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .star.active { color: var(--cyan); text-shadow: 0 0 15px var(--cyan); transform: scale(1.1); }
@@ -209,14 +196,7 @@
             padding: 24px; 
             margin-bottom: 16px; 
             border: 1px solid rgba(255,255,255,0.05); 
-            transition: 0.3s;
         }
-        .review-card:hover { border-color: rgba(0, 242, 255, 0.2); background: rgba(255,255,255,0.03); }
-
-        #mobile-menu { box-shadow: -10px 0 30px rgba(0,0,0,0.5); }
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 10px; }
 
         .lang-card {
             background: rgba(255, 255, 255, 0.03);
@@ -228,21 +208,9 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
             cursor: pointer;
         }
-        .lang-card:hover {
-            background: rgba(0, 242, 255, 0.05);
-            border-color: var(--cyan);
-            transform: translateY(-5px);
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
-        }
-        .lang-card:hover span.flag {
-            transform: scale(1.2);
-            filter: drop-shadow(0 0 10px var(--cyan));
-        }
 
-        /* Review Form Styles */
         .input-ep {
             background: rgba(255,255,255,0.02);
             border: 1px solid rgba(255,255,255,0.08);
@@ -252,9 +220,9 @@
             width: 100%;
             outline: none;
             font-size: 14px;
-            transition: 0.3s;
+            font-family: 'Outfit', sans-serif;
         }
-        .input-ep:focus { border-color: var(--cyan); background: rgba(0, 242, 255, 0.03); }
+        .input-ep:focus { border-color: var(--cyan); }
         
         .label-ep {
             font-size: 10px;
@@ -263,20 +231,8 @@
             letter-spacing: 1px;
             margin-bottom: 6px;
             display: block;
+            font-family: 'Space Grotesk', sans-serif;
         }
-
-        .view-email-btn {
-            font-size: 10px;
-            color: var(--cyan);
-            background: rgba(0, 242, 255, 0.1);
-            padding: 4px 10px;
-            border-radius: 6px;
-            margin-top: 8px;
-            cursor: pointer;
-            border: 1px solid rgba(0, 242, 255, 0.2);
-            transition: 0.3s;
-        }
-        .view-email-btn:hover { background: var(--cyan); color: #000; }
     </style>
 </head>
 <body>
@@ -286,37 +242,23 @@
         <div class="loader-bar"><div class="loader-progress"></div></div>
     </div>
 
-    <!-- Overlay Idioma Mejorado -->
+    <!-- Overlay Idioma -->
     <div id="language-overlay" class="fixed inset-0 z-[9999] bg-black flex items-center justify-center p-4">
-        <div class="bg-[#050505] p-6 sm:p-10 rounded-[3rem] border border-white/5 max-w-2xl w-full text-center shadow-[0_0_100px_rgba(0,0,0,1)] relative overflow-y-auto max-h-[95vh]" data-aos="zoom-in">
-            <div class="absolute -top-24 -left-24 w-48 h-48 bg-cyan-500/10 blur-[100px] rounded-full"></div>
-            <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-cyan-500/10 blur-[100px] rounded-full"></div>
-            
-            <div class="relative z-10 py-4">
-                <img src="https://i.ibb.co/G4Z5gvHw/icon.png" class="w-12 h-12 mx-auto mb-6 drop-shadow-[0_0_10px_rgba(0,242,255,0.5)]">
-                <h2 class="font-brand text-4xl mb-2 text-white tracking-[4px]">SELECT LANGUAGE</h2>
-                <p class="font-ui text-cyan-400/60 text-xs tracking-[2px] mb-10 uppercase">Choose your preferred experience</p>
-                
-                <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4 mb-10" id="langGrid"></div>
-                
-                <div class="flex flex-col items-center gap-6 mt-6 pb-6">
-                    <label class="flex items-center gap-3 cursor-pointer group">
-                        <div class="relative">
-                            <input type="checkbox" id="rememberLang" class="peer hidden">
-                            <div class="w-6 h-6 border-2 border-white/20 rounded-md peer-checked:bg-cyan-400 peer-checked:border-cyan-400 transition-all"></div>
-                            <svg class="absolute top-1 left-1 w-4 h-4 text-black opacity-0 peer-checked:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                        </div>
-                        <span id="label-no-ask" class="text-gray-400 font-ui text-sm group-hover:text-white transition-colors">No volver a preguntar / Don't ask again</span>
-                    </label>
-                </div>
-            </div>
+        <div class="bg-[#050505] p-6 sm:p-10 rounded-[3rem] border border-white/5 max-w-2xl w-full text-center shadow-[0_0_100px_rgba(0,0,0,1)] relative overflow-y-auto max-h-[95vh]">
+            <img src="https://i.ibb.co/G4Z5gvHw/icon.png" class="w-12 h-12 mx-auto mb-6">
+            <h2 class="font-brand text-4xl mb-2 text-white">SELECT LANGUAGE</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4 mb-10 mt-8" id="langGrid"></div>
+            <label class="flex items-center justify-center gap-3 cursor-pointer">
+                <input type="checkbox" id="rememberLang" class="peer hidden">
+                <div class="w-5 h-5 border border-white/20 rounded peer-checked:bg-cyan-400"></div>
+                <span id="label-no-ask" class="text-gray-500 font-ui text-sm">No volver a preguntar / Don't ask again</span>
+            </label>
         </div>
     </div>
 
-    <!-- Header -->
     <header id="main-header">
         <div class="flex items-center gap-3 cursor-pointer min-w-max" onclick="navigate('home')">
-            <img src="https://i.ibb.co/G4Z5gvHw/icon.png" class="w-10 h-10 rounded-xl shadow-lg shadow-cyan-400/10">
+            <img src="https://i.ibb.co/G4Z5gvHw/icon.png" class="w-10 h-10">
             <div class="flex flex-col leading-none">
                 <span class="font-brand text-lg text-white">EXCESSIVE</span>
                 <span class="font-brand text-lg text-cyan-400">PIRACY</span>
@@ -325,29 +267,27 @@
         <div class="flex-grow mx-4">
             <input type="text" id="catalogSearch" class="search-input font-ui" oninput="render()" placeholder="...">
         </div>
-        <button onclick="toggleMenu()" class="group flex flex-col gap-1.5 items-end p-2">
+        <button onclick="toggleMenu()" class="flex flex-col gap-1.5 items-end p-2">
             <div class="w-7 h-[2px] bg-cyan-400"></div>
             <div class="w-5 h-[2px] bg-white"></div>
         </button>
     </header>
 
-    <!-- Menu Lateral -->
     <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/70 backdrop-blur-md z-[1999] hidden opacity-0 transition-opacity duration-300" onclick="toggleMenu()"></div>
-    <nav id="mobile-menu" class="fixed top-0 right-[-100%] w-[80%] max-w-[320px] h-screen bg-[#050505]/95 backdrop-blur-2xl z-[2000] flex flex-col p-10 border-l border-white/5 transition-all duration-500">
+    <nav id="mobile-menu" class="fixed top-0 right-[-100%] w-[80%] max-w-[320px] h-screen bg-[#050505] z-[2000] flex flex-col p-10 border-l border-white/5 transition-all duration-500">
         <div class="flex flex-col gap-4">
-            <button onclick="navigate('home'); toggleMenu();" class="text-4xl text-white font-brand block text-left" id="nav-catalog">CATÁLOGO</button>
-            <button onclick="navigate('request'); toggleMenu();" class="text-4xl text-white font-brand block text-left" id="nav-request">SOLICITAR</button>
-            <button onclick="resetLanguage()" class="text-sm mt-6 text-cyan-400/70 font-ui font-bold tracking-[0.2em] text-left" id="nav-changelang">🌐 CAMBIAR IDIOMA</button>
+            <button onclick="navigate('home'); toggleMenu();" class="text-4xl text-white font-brand text-left" id="nav-catalog">CATÁLOGO</button>
+            <button onclick="navigate('request'); toggleMenu();" class="text-4xl text-white font-brand text-left" id="nav-request">SOLICITAR</button>
+            <button onclick="resetLanguage()" class="text-sm mt-6 text-cyan-400/70 font-ui font-bold text-left" id="nav-changelang">🌐 CAMBIAR IDIOMA</button>
         </div>
     </nav>
 
-    <!-- Contenido Principal -->
     <div class="pt-28 pb-16">
         <main id="home-view" class="view-section active px-4 max-w-7xl mx-auto">
             <div id="mainBanner" class="top-banner">
                 <img src="https://i.ibb.co/Hfb046TK/fa4b7a137758b4d05d00c033090e576f.jpg" class="w-full h-[180px] sm:h-[300px] object-cover">
             </div>
-            <div class="mb-8 flex items-center gap-3 font-brand text-xl text-gray-500" data-aos="fade-right">
+            <div class="mb-8 flex items-center gap-3 font-brand text-xl text-gray-500">
                 <span id="counter-label">Disponibles</span>
                 <span id="game-total-count" class="bg-cyan-400/10 text-cyan-400 px-3 py-1 rounded-lg border border-cyan-400/20">0</span>
             </div>
@@ -356,18 +296,18 @@
 
         <section id="detail-view" class="view-section px-4">
             <div class="max-w-5xl mx-auto">
-                <button onclick="navigate('home')" id="btn-back" class="group mb-8 text-cyan-400 font-ui text-sm tracking-widest uppercase flex items-center gap-2">
+                <button onclick="navigate('home')" id="btn-back" class="group mb-8 text-cyan-400 font-ui text-sm uppercase flex items-center gap-2">
                     <span>←</span> <span>VOLVER</span>
                 </button>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
-                    <div data-aos="fade-right">
-                        <img id="detailImg" class="w-full rounded-[2rem] border border-white/10 aspect-video object-cover shadow-2xl">
+                    <div>
+                        <img id="detailImg" class="w-full rounded-[2rem] border border-white/10 aspect-video object-cover">
                     </div>
-                    <div data-aos="fade-left" class="flex flex-col justify-center">
-                        <h2 id="detailTitle" class="text-5xl font-brand mb-2 text-white leading-tight"></h2>
+                    <div class="flex flex-col justify-center">
+                        <h2 id="detailTitle" class="text-5xl font-brand mb-2 text-white"></h2>
                         <div class="inline-flex items-center gap-2 text-[11px] text-cyan-400 font-bold uppercase mb-6 px-3 py-1 bg-cyan-400/5 rounded-full border border-cyan-400/10 self-start" id="verified-label">✓ Verificado</div>
-                        <p id="detailDesc" class="text-gray-400 text-base leading-relaxed mb-8"></p>
+                        <p id="detailDesc" class="text-gray-400 text-base mb-8"></p>
                         <div id="reqsContainer" class="space-y-4"></div>
                         <div id="downloadArea" class="mt-10"></div>
                     </div>
@@ -376,31 +316,29 @@
                 <div class="border-t border-white/5 pt-16">
                     <h3 class="font-brand text-3xl mb-10 text-white" id="label-reviews-title">RESEÑAS</h3>
                     <div id="review-form-container" class="mb-12 p-8 bg-[#0a0a0a] rounded-[2rem] border border-white/5">
-                        <div id="active-review-form">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                                <div>
-                                    <label class="label-ep" id="lbl-user">Usuario:</label>
-                                    <input type="text" id="review-name" class="input-ep" placeholder="Tu nombre...">
-                                </div>
-                                <div>
-                                    <label class="label-ep" id="lbl-email">Correo Electrónico:</label>
-                                    <input type="email" id="review-email" class="input-ep" placeholder="Ejemplo:excessivepiracy@gmail.com">
+                        <div id="active-review-form" class="space-y-6">
+                            <div>
+                                <label class="label-ep" id="lbl-user">Usuario:</label>
+                                <input type="text" id="review-name" class="input-ep" placeholder="Nombre...">
+                            </div>
+
+                            <div>
+                                <p class="text-[10px] text-cyan-400 font-bold mb-4 uppercase tracking-widest" id="label-your-rating">Tu Calificación</p>
+                                <div class="star-rating flex gap-3" id="star-input">
+                                    <span class="star" data-value="1">★</span>
+                                    <span class="star" data-value="2">★</span>
+                                    <span class="star" data-value="3">★</span>
+                                    <span class="star" data-value="4">★</span>
+                                    <span class="star" data-value="5">★</span>
                                 </div>
                             </div>
 
-                            <p class="text-[10px] text-cyan-400 font-bold mb-4 uppercase tracking-widest" id="label-your-rating">Tu Calificación</p>
-                            <div class="star-rating flex gap-3 mb-6" id="star-input">
-                                <span class="star" data-value="1">★</span>
-                                <span class="star" data-value="2">★</span>
-                                <span class="star" data-value="3">★</span>
-                                <span class="star" data-value="4">★</span>
-                                <span class="star" data-value="5">★</span>
+                            <div>
+                                <label class="label-ep" id="lbl-review">Reseña:</label>
+                                <textarea id="review-text" class="w-full bg-black/40 border border-white/10 p-5 rounded-2xl text-white text-sm h-32 resize-none outline-none focus:border-cyan-400" placeholder="..."></textarea>
                             </div>
-
-                            <label class="label-ep" id="lbl-review">Reseña:</label>
-                            <textarea id="review-text" class="w-full bg-black/40 border border-white/10 p-5 rounded-2xl text-white text-sm h-32 resize-none outline-none focus:border-cyan-400 transition-colors"></textarea>
                             
-                            <button onclick="submitReview()" id="btn-submit-review" class="mt-6 bg-cyan-400 text-black font-black px-12 py-4 rounded-2xl font-brand text-xl w-full md:w-auto">PUBLICAR</button>
+                            <button onclick="submitReview()" id="btn-submit-review" class="bg-cyan-400 text-black font-black px-12 py-4 rounded-2xl font-brand text-xl w-full">PUBLICAR</button>
                         </div>
                     </div>
                     <div id="reviews-list" class="space-y-6 pb-24"></div>
@@ -410,26 +348,13 @@
 
         <section id="request-view" class="view-section px-6 text-center">
             <div class="max-w-2xl mx-auto py-10">
-                <h1 class="text-6xl font-brand mb-10 text-white" id="req-view-title" data-aos="zoom-out">SOLICITAR</h1>
-                <div class="bg-[#0a0a0a] p-10 rounded-[3rem] border border-white/5 shadow-2xl" data-aos="fade-up">
+                <h1 class="text-6xl font-brand mb-10 text-white" id="req-view-title">SOLICITAR</h1>
+                <div class="bg-[#0a0a0a] p-10 rounded-[3rem] border border-white/5 shadow-2xl">
                     <input type="text" id="requestInput" class="w-full bg-black border border-white/10 p-5 rounded-2xl mb-6 text-white outline-none font-ui text-lg" placeholder="...">
                     <button onclick="sendRequest()" class="bg-cyan-400 text-black font-black w-full py-5 rounded-2xl font-brand text-2xl" id="req-btn">ENVIAR</button>
                 </div>
             </div>
         </section>
-    </div>
-
-    <!-- Modal para Password de Email -->
-    <div id="email-modal" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-[10001] hidden flex items-center justify-center p-6">
-        <div class="bg-[#0a0a0a] border border-white/10 p-8 rounded-[2rem] w-full max-w-sm text-center">
-            <h4 class="font-brand text-2xl text-white mb-4">ACCESO RESTRINGIDO</h4>
-            <p class="text-xs text-gray-500 mb-6">Ingresa la contraseña para ver el correo electrónico.</p>
-            <input type="password" id="admin-pass" class="input-ep mb-6 text-center" placeholder="Contraseña...">
-            <div class="flex gap-3">
-                <button onclick="closeEmailModal()" class="flex-1 py-3 rounded-xl border border-white/10 text-xs text-gray-400">CANCELAR</button>
-                <button onclick="verifyEmailPass()" class="flex-1 py-3 rounded-xl bg-cyan-400 text-black font-bold text-xs">VER</button>
-            </div>
-        </div>
     </div>
 
     <script type="module">
@@ -441,42 +366,35 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'ep-team-v4';
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'ep-team-v5';
         
         const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1493029753462984724/W92Go_ww0kgsfZYXh-JBoo9MSJpVIXaoZTnqf61n5kRKGhnLGtTPOEtca9iVA8mzy44k";
-        const ADMIN_KEY = "bacNA261992HJEXCESSIVEPIRACY";
 
         const i18n = {
-            es: { search: "BUSCAR JUEGO...", catalog: "CATÁLOGO", request: "SOLICITAR", changelang: "🌐 CAMBIAR IDIOMA", available: "JUEGOS DISPONIBLES", download: "DESCARGAR APK", back: "← VOLVER", send: "ENVIAR PETICIÓN", placeholder: "NOMBRE DEL JUEGO...", post: "PUBLICAR", noAsk: "No volver a preguntar / Don't ask again", new: "NUEVO", reqsTitle: "REQUISITOS", reviewsTitle: "RESEÑAS", yourRating: "TU CALIFICACIÓN", opinionPlh: "Tu opinión...", loadingCom: "Cargando...", beFirst: "Sé el primero.", verifiedBy: "✓ Verificado", name: "Español" },
-            en: { search: "SEARCH GAME...", catalog: "CATALOG", request: "REQUEST", changelang: "🌐 CHANGE LANGUAGE", available: "AVAILABLE GAMES", download: "DOWNLOAD APK", back: "← BACK", send: "SEND REQUEST", placeholder: "GAME NAME...", post: "POST", noAsk: "Don't ask again", new: "NEW", reqsTitle: "REQUIREMENTS", reviewsTitle: "REVIEWS", yourRating: "YOUR RATING", opinionPlh: "Your opinion...", loadingCom: "Loading...", beFirst: "Be the first.", verifiedBy: "✓ Verified", name: "English" },
-            zh: { name: "Chinese", noAsk: "不再询问" },
-            hi: { name: "Hindi", noAsk: "दोबारा न पूछें" },
-            fr: { name: "French", noAsk: "Ne plus demander" },
-            pt: { name: "Portuguese", noAsk: "Não preguntar novamente" },
-            ru: { name: "Russian", noAsk: "Больше не спрашивать" },
-            ja: { name: "Japanese", noAsk: "二度と聞かないで" },
-            ko: { name: "Korean", noAsk: "다시 묻지 않음" },
-            id: { name: "Indonesian", noAsk: "Jangan tanya lagi" }
+            es: { search: "BUSCAR JUEGO...", catalog: "CATÁLOGO", request: "SOLICITAR", changelang: "🌐 CAMBIAR IDIOMA", available: "JUEGOS DISPONIBLES", download: "DESCARGAR APK", back: "← VOLVER", send: "ENVIAR PETICIÓN", placeholder: "NOMBRE DEL JUEGO...", post: "PUBLICAR", noAsk: "No volver a preguntar / Don't ask again", new: "NUEVO", reqsTitle: "REQUISITOS", reviewsTitle: "RESEÑAS", yourRating: "TU CALIFICACIÓN", opinionPlh: "Tu opinión...", loadingCom: "Cargando...", beFirst: "Sé el primero.", verifiedBy: "✓ Verificado", name: "Español", userLabel: "Usuario:", reviewLabel: "Reseña:" },
+            en: { search: "SEARCH GAME...", catalog: "CATALOG", request: "REQUEST", changelang: "🌐 CHANGE LANGUAGE", available: "AVAILABLE GAMES", download: "DOWNLOAD APK", back: "← BACK", send: "SEND REQUEST", placeholder: "GAME NAME...", post: "POST", noAsk: "Don't ask again", new: "NEW", reqsTitle: "REQUIREMENTS", reviewsTitle: "REVIEWS", yourRating: "YOUR RATING", opinionPlh: "Your opinion...", loadingCom: "Loading...", beFirst: "Be the first.", verifiedBy: "✓ Verified", name: "English", userLabel: "User:", reviewLabel: "Review:" }
         };
 
-        const flags = { en: '🇺🇸', es: '🇪🇸', zh: '🇨🇳', hi: '🇮🇳', fr: '🇫🇷', pt: '🇧🇷', ru: '🇷🇺', ja: '🇯🇵', ko: '🇰🇷', id: '🇮🇩' };
+        const flags = { en: '🇺🇸', es: '🇪🇸' };
 
         let selectedRating = 0;
         let currentGameId = null;
         let curLang = 'es';
-        let targetEmailToView = null;
-        let activeEmailId = null;
         let currentUser = null;
-        let lastScrollPosition = 0; // Guardar posición del scroll
 
-        // Iniciar Auth Automático
-        onAuthStateChanged(auth, (user) => {
-            if (!user) {
-                signInAnonymously(auth).catch(e => console.error("Auth error", e));
-            } else {
-                currentUser = user;
+        // AUTH INITIALIZATION
+        const initAuth = async () => {
+            try {
+                await signInAnonymously(auth);
+                onAuthStateChanged(auth, (user) => {
+                    currentUser = user;
+                    hideLoader();
+                });
+            } catch (err) {
+                console.error("Auth init error", err);
+                hideLoader();
             }
-        });
+        };
 
         const games = [
             { id: 'rdr', title: 'Red Dead Redemption', poster: 'https://upload.wikimedia.org/wikipedia/en/a/a7/Red_Dead_Redemption.jpg', screen: 'https://img.apkvision.org/red-dead-redemption/red-dead-redemption-2.webp', link: 'https://dl.apkvision.org/red-dead-redemption/RDR-ROCKSTAR-v1.58.63226194-vanilla-full-apkvision.apks', desc: { es: 'La épica historia del forajido John Marston en el salvaje oeste.', en: 'The epic story of outlaw John Marston in the wild west.' }, reqs: ["6GB - 8GB", "Octa-Core 2.8GHz", "10GB", "11.0+"], showNewBadge: true },
@@ -513,67 +431,64 @@
                 curLang = savedLang;
                 document.getElementById('language-overlay').style.display = 'none';
                 applyTranslations();
-                setTimeout(() => {
-                    const banner = document.getElementById('mainBanner');
-                    if(banner) banner.classList.add('active-banner');
-                }, 100);
+                setTimeout(() => { document.getElementById('mainBanner')?.classList.add('active-banner'); }, 100);
             }
 
             const grid = document.getElementById('langGrid');
             grid.innerHTML = Object.keys(flags).map(code => `
                 <div onclick="setLang('${code}')" class="lang-card">
-                    <span class="flag text-4xl transition-transform duration-300">${flags[code]}</span>
-                    <span class="font-ui text-[10px] text-white/40 uppercase tracking-widest">${i18n[code]?.name || code}</span>
+                    <span class="text-4xl">${flags[code]}</span>
+                    <span class="font-ui text-[9px] text-white/40 uppercase tracking-widest">${i18n[code]?.name || code}</span>
                 </div>
             `).join('');
 
             render();
             AOS.init({ duration: 1000, once: true });
+            
+            initAuth();
+        };
+
+        window.hideLoader = () => {
+            const loader = document.getElementById('loading-screen');
+            if(loader) {
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 500);
+            }
         };
 
         window.setLang = (code) => {
             curLang = code;
-            if(document.getElementById('rememberLang').checked) {
-                localStorage.setItem('ep_lang', code);
-            }
-            document.getElementById('language-overlay').classList.add('opacity-0');
-            setTimeout(() => {
-                document.getElementById('language-overlay').style.display = 'none';
-                applyTranslations();
-                const banner = document.getElementById('mainBanner');
-                if(banner) banner.classList.add('active-banner');
-            }, 300);
+            if(document.getElementById('rememberLang').checked) localStorage.setItem('ep_lang', code);
+            document.getElementById('language-overlay').style.display = 'none';
+            applyTranslations();
+            document.getElementById('mainBanner')?.classList.add('active-banner');
         };
 
         window.resetLanguage = () => {
             localStorage.removeItem('ep_lang');
-            document.getElementById('language-overlay').classList.remove('opacity-0');
             document.getElementById('language-overlay').style.display = 'flex';
             toggleMenu();
         };
 
         function applyTranslations() {
             const t = i18n[curLang] || i18n.en;
-            document.getElementById('catalogSearch').placeholder = t.search || i18n.en.search;
-            document.getElementById('nav-catalog').innerText = t.catalog || i18n.en.catalog;
-            document.getElementById('nav-request').innerText = t.request || i18n.en.request;
-            document.getElementById('nav-changelang').innerText = t.changelang || i18n.en.changelang;
-            document.getElementById('counter-label').innerText = t.available || i18n.en.available;
-            document.getElementById('label-no-ask').innerText = t.noAsk || i18n.en.noAsk;
-            document.getElementById('btn-back').innerHTML = `<span class="group-hover:-translate-x-2 transition-transform">←</span> <span class="group-hover:text-white transition-colors">${t.back || i18n.en.back}</span>`;
-            document.getElementById('label-reviews-title').innerText = t.reviewsTitle || i18n.en.reviewsTitle;
-            document.getElementById('label-your-rating').innerText = t.yourRating || i18n.en.yourRating;
-            document.getElementById('review-text').placeholder = t.opinionPlh || i18n.en.opinionPlh;
-            document.getElementById('btn-submit-review').innerText = t.post || i18n.en.post;
-            document.getElementById('verified-label').innerText = t.verifiedBy || i18n.en.verifiedBy;
-            document.getElementById('req-view-title').innerText = t.request || i18n.en.request;
-            document.getElementById('requestInput').placeholder = t.placeholder || i18n.en.placeholder;
-            document.getElementById('req-btn').innerText = t.send || i18n.en.send;
-            
-            document.getElementById('lbl-user').innerText = (curLang === 'en' ? 'User:' : 'Usuario:');
-            document.getElementById('lbl-email').innerText = (curLang === 'en' ? 'Email Address:' : 'Correo Electrónico:');
-            document.getElementById('lbl-review').innerText = (curLang === 'en' ? 'Review:' : 'Reseña:');
-            
+            document.getElementById('catalogSearch').placeholder = t.search;
+            document.getElementById('nav-catalog').innerText = t.catalog;
+            document.getElementById('nav-request').innerText = t.request;
+            document.getElementById('nav-changelang').innerText = t.changelang;
+            document.getElementById('counter-label').innerText = t.available;
+            document.getElementById('label-no-ask').innerText = t.noAsk;
+            document.getElementById('btn-back').innerHTML = `<span>←</span> <span>${t.back}</span>`;
+            document.getElementById('label-reviews-title').innerText = t.reviewsTitle;
+            document.getElementById('label-your-rating').innerText = t.yourRating;
+            document.getElementById('review-text').placeholder = t.opinionPlh;
+            document.getElementById('btn-submit-review').innerText = t.post;
+            document.getElementById('verified-label').innerText = t.verifiedBy;
+            document.getElementById('req-view-title').innerText = t.request;
+            document.getElementById('requestInput').placeholder = t.placeholder;
+            document.getElementById('req-btn').innerText = t.send;
+            document.getElementById('lbl-user').innerText = t.userLabel;
+            document.getElementById('lbl-review').innerText = t.reviewLabel;
             render();
         }
 
@@ -581,136 +496,81 @@
             star.onclick = (e) => {
                 const val = parseInt(e.target.dataset.value);
                 selectedRating = val;
-                updateStars(val);
+                document.querySelectorAll('#star-input .star').forEach(s => s.classList.toggle('active', parseInt(s.dataset.value) <= val));
             };
         });
 
-        function updateStars(val) {
-            document.querySelectorAll('#star-input .star').forEach(s => {
-                s.classList.toggle('active', parseInt(s.dataset.value) <= val);
-            });
-        }
-
         window.submitReview = async () => {
             if (!currentUser) {
-                alert("Esperando conexión...");
-                return;
+                alert("Iniciando sesión anónima...");
+                await signInAnonymously(auth);
             }
+            
             const name = document.getElementById('review-name').value;
-            const email = document.getElementById('review-email').value;
             const text = document.getElementById('review-text').value;
 
-            if(!name.trim() || !email.trim() || selectedRating === 0 || !text.trim()) {
-                const msg = curLang === 'en' ? "Please complete all fields" : "Por favor completa todos los campos";
-                alert(msg);
+            if(!name.trim() || selectedRating === 0 || !text.trim()) {
+                alert("Completa todos los campos.");
                 return;
             }
 
             const btn = document.getElementById('btn-submit-review');
-            btn.disabled = true;
-            btn.innerText = "...";
+            btn.disabled = true; btn.innerText = "...";
 
             try {
-                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', `reviews_${currentGameId}`), {
+                // RULE 1: Seguir el path estricto
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', `rev_${currentGameId}`), {
                     name: name,
-                    email: email,
                     rating: selectedRating,
                     text: text,
-                    createdAt: serverTimestamp(),
-                    uid: currentUser.uid
+                    createdAt: serverTimestamp()
                 });
                 
                 document.getElementById('review-name').value = "";
-                document.getElementById('review-email').value = "";
                 document.getElementById('review-text').value = "";
                 selectedRating = 0;
-                updateStars(0);
-                btn.disabled = false;
-                applyTranslations();
+                document.querySelectorAll('#star-input .star').forEach(s => s.classList.remove('active'));
+                btn.disabled = false; applyTranslations();
             } catch (e) { 
                 console.error(e);
-                btn.disabled = false;
-                btn.innerText = "ERR"; 
+                btn.disabled = false; btn.innerText = "ERR"; 
             }
         };
 
         window.loadReviews = (gameId) => {
             const list = document.getElementById('reviews-list');
-            const t = i18n[curLang] || i18n.en;
-            list.innerHTML = `<p class="text-gray-600 text-xs text-center animate-pulse">${t.loadingCom || '...'}</p>`;
-            
-            const q = query(collection(db, 'artifacts', appId, 'public', 'data', `reviews_${gameId}`));
-            
+            if(!currentUser) return;
+
+            const q = query(collection(db, 'artifacts', appId, 'public', 'data', `rev_${gameId}`));
             onSnapshot(q, (snapshot) => {
                 const reviews = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}))
                                 .sort((a,b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+                
                 if(reviews.length === 0) {
-                    list.innerHTML = `<p class="text-gray-600 text-xs text-center py-10 opacity-50">${t.beFirst || '...'}</p>`;
+                    list.innerHTML = `<p class="text-gray-600 text-xs text-center py-10 opacity-50">${i18n[curLang]?.beFirst || 'Be the first.'}</p>`;
                     return;
                 }
-                list.innerHTML = reviews.map((r, i) => `
+                
+                list.innerHTML = reviews.map(r => `
                     <div class="review-card">
                         <div class="flex justify-between items-start mb-4">
-                            <div class="flex flex-col">
-                                <span class="text-xs font-bold text-white uppercase tracking-wider">${r.name}</span>
-                                <div id="email-container-${r.id}">
-                                    <button onclick="requestEmailView('${r.id}', '${r.email}')" class="view-email-btn">VER CORREO ELECTRÓNICO</button>
-                                </div>
-                            </div>
-                            <div class="flex gap-0.5">${'★'.repeat(r.rating).split('').map(() => `<span class="text-cyan-400 text-xs">★</span>`).join('')}</div>
+                            <span class="text-xs font-bold text-white uppercase tracking-wider">${r.name}</span>
+                            <div class="flex gap-0.5">${'★'.repeat(r.rating).split('').map(() => `<span class="text-cyan-400 text-[10px]">★</span>`).join('')}</div>
                         </div>
-                        <p class="text-gray-400 text-sm leading-relaxed bg-black/20 p-4 rounded-xl border border-white/5">${r.text}</p>
+                        <p class="text-gray-400 text-sm leading-relaxed bg-black/30 p-4 rounded-xl border border-white/5">${r.text}</p>
                     </div>
                 `).join('');
-            }, (error) => {
-                console.error("Error fetching reviews:", error);
-                list.innerHTML = "";
-            });
-        };
-
-        window.requestEmailView = (id, email) => {
-            targetEmailToView = email;
-            activeEmailId = id;
-            document.getElementById('email-modal').classList.remove('hidden');
-            document.getElementById('admin-pass').value = "";
-            document.getElementById('admin-pass').focus();
-        };
-
-        window.closeEmailModal = () => {
-            document.getElementById('email-modal').classList.add('hidden');
-            targetEmailToView = null;
-            activeEmailId = null;
-        };
-
-        window.verifyEmailPass = () => {
-            const pass = document.getElementById('admin-pass').value;
-            if(pass === ADMIN_KEY) {
-                const container = document.getElementById(`email-container-${activeEmailId}`);
-                if(container) {
-                    container.innerHTML = `<span class="text-[10px] text-gray-500 lowercase mt-1 block">${targetEmailToView}</span>`;
-                }
-                closeEmailModal();
-            } else {
-                const input = document.getElementById('admin-pass');
-                input.style.borderColor = 'red';
-                setTimeout(() => input.style.borderColor = '', 1000);
-            }
+            }, (error) => { console.error("Snapshot error", error); });
         };
 
         window.render = () => {
             const val = document.getElementById('catalogSearch').value.toLowerCase();
             const grid = document.getElementById('gameGrid');
-            const sortedGames = [...games].sort((a, b) => {
-                if (a.showNewBadge && !b.showNewBadge) return -1;
-                if (!a.showNewBadge && b.showNewBadge) return 1;
-                return 0;
-            });
-            const filtered = sortedGames.filter(g => g.title.toLowerCase().includes(val));
-            const t = i18n[curLang] || i18n.en;
+            const filtered = games.filter(g => g.title.toLowerCase().includes(val));
             document.getElementById('game-total-count').innerText = filtered.length;
             grid.innerHTML = filtered.map((g, i) => `
-                <div class="game-card" data-aos="fade-up" data-aos-delay="${(i % 5) * 100}" onclick="openGame('${g.id}')">
-                    ${g.showNewBadge ? `<div class="portada-updated-badge">${t.new || 'NEW'}</div>` : ''}
+                <div class="game-card" data-aos="fade-up" onclick="openGame('${g.id}')">
+                    ${g.showNewBadge ? `<div class="portada-updated-badge">${i18n[curLang]?.new || 'NEW'}</div>` : ''}
                     <img src="${g.poster}" class="char-img">
                     <div class="game-title-badge"><span class="game-title-text">${g.title}</span></div>
                 </div>
@@ -718,124 +578,62 @@
         };
 
         window.openGame = (id) => {
-            const g = games.find(x => x.id === id);
-            if(!g) return;
-            
-            // BUG FIX: Guardar posición actual antes de entrar
-            lastScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-            
+            const g = games.find(x => x.id === id); if(!g) return;
             currentGameId = id;
-            const t = i18n[curLang] || i18n.en;
             document.getElementById('detailImg').src = g.screen;
             document.getElementById('detailTitle').innerText = g.title;
-            document.getElementById('detailDesc').innerText = g.desc[curLang] || g.desc.en || g.desc.es;
+            document.getElementById('detailDesc').innerText = g.desc[curLang] || g.desc.en;
             document.getElementById('reqsContainer').innerHTML = `
                 <div class="p-6 bg-[#0a0a0a] border-l-4 border-cyan-400 rounded-r-3xl">
-                    <p class="text-xs text-cyan-400 font-bold mb-4 uppercase tracking-widest">${t.reqsTitle || 'REQUIREMENTS'}</p>
-                    <div class="grid grid-cols-2 gap-4 text-xs text-gray-400 font-ui">
-                        <span>RAM: ${g.reqs[0]}</span>
-                        <span>CPU: ${g.reqs[1]}</span>
-                        <span>DISK: ${g.reqs[2]}</span>
-                        <span>ANDR: ${g.reqs[3]}</span>
+                    <p class="text-[10px] text-cyan-400 font-bold mb-4 uppercase tracking-widest">${i18n[curLang]?.reqsTitle || 'REQUISITOS'}</p>
+                    <div class="grid grid-cols-2 gap-4 text-xs text-gray-400 font-ui uppercase">
+                        <span>RAM: ${g.reqs[0]}</span> <span>CPU: ${g.reqs[1]}</span>
+                        <span>DISK: ${g.reqs[2]}</span> <span>ANDR: ${g.reqs[3]}</span>
                     </div>
-                </div>
-            `;
-            document.getElementById('downloadArea').innerHTML = `<button onclick="handleDownload('${g.id}', '${g.link}')" class="download-btn"><span>${t.download || 'DOWNLOAD'}</span></button>`;
-            
-            showView('detail');
+                </div>`;
+            document.getElementById('downloadArea').innerHTML = `<button onclick="handleDownload('${g.id}', '${g.link}')" class="download-btn"><span>${i18n[curLang]?.download || 'DESCARGAR'}</span></button>`;
+            showView('detail'); 
             loadReviews(id);
         };
 
         window.handleDownload = async (id, link) => {
-            const g = games.find(x => x.id === id);
-            if(!g) return;
-            window.open(link, '_blank');
+            const g = games.find(x => x.id === id); window.open(link, '_blank');
             try {
-                const embed = {
-                    title: "🚀 Nueva Descarga",
-                    color: 62207,
-                    thumbnail: { url: g.poster },
-                    fields: [
-                        { name: "🎮 Juego", value: g.title, inline: true },
-                        { name: "👤 Usuario", value: "Visitante", inline: true }
-                    ],
-                    footer: { text: "EP Team Official Logger" },
-                    timestamp: new Date().toISOString()
-                };
-                await fetch(DISCORD_WEBHOOK, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ embeds: [embed] }) });
+                await fetch(DISCORD_WEBHOOK, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ embeds: [{ title: "🚀 Descarga", color: 62207, fields: [{name:"🎮",value:g.title,inline:true}] }] }) });
             } catch (err) {}
         };
 
         window.showView = (v) => {
-            const sections = document.querySelectorAll('.view-section');
-            sections.forEach(s => { s.style.opacity = '0'; s.style.transform = 'translateY(15px)'; });
-            
-            setTimeout(() => {
-                sections.forEach(s => s.classList.remove('active'));
-                const active = document.getElementById(v + '-view');
-                active.classList.add('active');
-                
-                setTimeout(() => { 
-                    active.style.opacity = '1'; 
-                    active.style.transform = 'translateY(0)'; 
-                    
-                    // BUG FIX: Manejo inteligente de scroll
-                    if(v === 'home') {
-                        window.scrollTo({ top: lastScrollPosition, behavior: 'instant' });
-                    } else {
-                        window.scrollTo({ top: 0, behavior: 'instant' });
-                    }
-                }, 50);
-            }, 300);
+            document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
+            const active = document.getElementById(v + '-view'); 
+            active.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'instant' });
         };
 
-        window.navigate = (v) => {
-            if(v === 'home') {
-                showView('home');
-                currentGameId = null;
-            } else {
-                showView(v);
-            }
-        };
+        window.navigate = (v) => { showView(v === 'home' ? 'home' : v); };
 
         window.toggleMenu = () => {
             const menu = document.getElementById('mobile-menu');
             const overlay = document.getElementById('mobile-menu-overlay');
             const isOpen = menu.style.right === '0px';
-            if(isOpen) {
-                menu.style.right = '-100%';
-                overlay.style.opacity = '0';
-                setTimeout(() => overlay.classList.add('hidden'), 300);
-            } else {
-                overlay.classList.remove('hidden');
-                setTimeout(() => { overlay.style.opacity = '1'; menu.style.right = '0'; }, 10);
-            }
+            menu.style.right = isOpen ? '-100%' : '0';
+            overlay.classList.toggle('hidden', isOpen);
+            setTimeout(() => overlay.style.opacity = isOpen ? '0' : '1', 10);
         };
 
         window.sendRequest = async () => {
-            const val = document.getElementById('requestInput').value;
-            if(!val || !currentUser) return;
-            const btn = document.getElementById('req-btn');
-            btn.innerText = "...";
+            const val = document.getElementById('requestInput').value; if(!val) return;
+            const btn = document.getElementById('req-btn'); btn.innerText = "...";
             try {
-                const embed = {
-                    title: "📝 Nueva Petición",
-                    color: 16777215,
-                    fields: [{ name: "🕹️ Juego", value: val }],
-                    footer: { text: "EP Team Request System" },
-                    timestamp: new Date().toISOString()
-                };
-                await fetch(DISCORD_WEBHOOK, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ embeds: [embed] }) });
-                document.getElementById('requestInput').value = "";
-                btn.innerText = "¡ENVIADO!";
-                setTimeout(() => { applyTranslations(); }, 2000);
+                await fetch(DISCORD_WEBHOOK, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ embeds: [{ title: "📝 Petición", fields: [{ name: "🕹️", value: val }] }] }) });
+                document.getElementById('requestInput').value = ""; btn.innerText = "¡ENVIADO!";
+                setTimeout(() => applyTranslations(), 2000);
             } catch(e) { btn.innerText = "ERR"; }
         };
 
-        init();
+        window.onload = init;
     </script>
 </body>
 </html>
 
 ```
-
