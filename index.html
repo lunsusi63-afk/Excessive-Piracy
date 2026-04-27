@@ -7,7 +7,7 @@
     <meta name="google-site-verification" content="DpeRZ9_SRFu19zvGQZrZvuI9wQDQ6hjhnOaLVhxSODg" />
     
     <title>Excessive Piracy | EP Team Official</title>
-    <meta name="description" content="La biblioteca definitiva de juegos de paga pero gratis en esta página para Android. Descarga APKs verificadas por el EP Team.">
+    <meta name="description" content="La biblioteca definitiva de juegos de paga pero gratis en esta página para Android. Descarga APKs y ve películas gratis verificadas por el EP Team.">
     <meta property="og:image" content="https://i.ibb.co/G4Z5gvHw/icon.png">
     <meta name="theme-color" content="#00f2ff">
     <link rel="icon" type="image/png" href="https://i.ibb.co/G4Z5gvHw/icon.png">
@@ -107,7 +107,7 @@
         
         .top-banner { 
             width: 100%; 
-            margin: 0 auto 2.5rem auto; 
+            margin: 0 auto 1.5rem auto; 
             border-radius: 30px; 
             overflow: hidden; 
             border: 1px solid rgba(255, 255, 255, 0.05); 
@@ -245,24 +245,25 @@
 
         .report-btn:hover { color: #ff4d4d; }
 
-        .input-ep {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 16px;
-            padding: 16px;
-            color: white;
-            width: 100%;
-            outline: none;
-            font-size: 15px;
-            transition: 0.4s ease;
+        .category-tab {
+            padding: 12px 30px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.02);
+            color: rgba(255,255,255,0.4);
         }
 
-        .input-ep:focus { 
-            border-color: var(--cyan); 
-            background: rgba(255,255,255,0.05); 
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
+        .category-tab.active {
+            background: var(--cyan);
+            color: black;
+            box-shadow: 0 0 20px var(--glow);
+            border-color: var(--cyan);
         }
-        
+
         .skeleton {
             background: linear-gradient(90deg, #0d0d0d 25%, #1a1a1a 50%, #0d0d0d 75%);
             background-size: 200% 100%;
@@ -390,6 +391,12 @@
                 </div>
             </div>
 
+            <!-- Categorías -->
+            <div class="flex items-center gap-4 mb-10 overflow-x-auto pb-4 no-scrollbar">
+                <div id="tab-games" class="category-tab active" onclick="switchCategory('games')">JUEGOS</div>
+                <div id="tab-movies" class="category-tab" onclick="switchCategory('movies')">PELÍCULAS</div>
+            </div>
+
             <div class="md:hidden mb-10">
                 <input type="text" id="catalogSearchMobile" class="search-input font-ui" oninput="syncAndRender(this)" placeholder="...">
             </div>
@@ -461,35 +468,29 @@
         const WEBHOOK_DOWNLOADS = "https://discord.com/api/webhooks/1498103534795755554/euR5SIeFJmzNvusuJ9es2t_WY7RvVU7DHdqdcAzH_vQREkSq2Ou80HZW8rsIjxTfIdbG";
 
         const i18n = {
-            es: { search: "BUSCAR JUEGO...", catalog: "CATÁLOGO", request: "SOLICITAR", changelang: "🌐 CAMBIAR IDIOMA", available: "JUEGOS DISPONIBLES", download: "DESCARGAR APK", back: "← VOLVER", send: "ENVIAR PETICIÓN", placeholder: "NOMBRE DEL JUEGO...", noAsk: "• No volver a preguntar / Don't ask again", new: "NUEVO", reqsTitle: "REQUISITOS DEL SISTEMA", verifiedBy: "✓ ARCHIVO VERIFICADO", name: "Español" },
-            en: { search: "SEARCH GAME...", catalog: "CATALOG", request: "REQUEST", changelang: "🌐 CHANGE LANGUAGE", available: "AVAILABLE GAMES", download: "DOWNLOAD APK", back: "← BACK", send: "SEND REQUEST", placeholder: "GAME NAME...", noAsk: "• Don't ask again", new: "NEW", reqsTitle: "SYSTEM REQUIREMENTS", verifiedBy: "✓ VERIFIED FILE", name: "English" },
-            pt: { search: "BUSCAR JOGO...", catalog: "CATÁLOGO", request: "SOLICITAR", changelang: "🌐 MUDAR IDIOMA", available: "JOGOS DISPONÍVEIS", download: "BAIXAR APK", back: "← VOLTAR", send: "ENVIAR PEDIDO", placeholder: "NOME DO JOGO...", noAsk: "• Não perguntar novamente", new: "NOVO", reqsTitle: "REQUISITOS", verifiedBy: "✓ Verificado", name: "Português" },
-            fr: { search: "RECHERCHER...", catalog: "CATALOGUE", request: "DEMANDER", changelang: "🌐 LANGUE", available: "JEUX DISPONIBLES", download: "TÉLÉCHARGER", back: "← RETOUR", send: "ENVOYER", placeholder: "NOM DU JEU...", noAsk: "• Ne plus demander", new: "NOUVEAU", reqsTitle: "REQUIS", verifiedBy: "✓ Vérifié", name: "Français" },
-            de: { search: "SUCHEN...", catalog: "KATALOG", request: "ANFRAGE", changelang: "🌐 SPRACHE", available: "VERFÜGBARE SPIELE", download: "DOWNLOAD", back: "← ZURÜCK", send: "SENDEN", placeholder: "SPIELNAME...", noAsk: "• Nicht más fragen", new: "NEU", reqsTitle: "ANFORDERUNGEN", verifiedBy: "✓ Verifiziert", name: "Deutsch" },
-            it: { search: "CERCA...", catalog: "CATALOGO", request: "RICHIESTA", changelang: "🌐 LINGUA", available: "GIOCHI DISPONIBILI", download: "SCARICA", back: "← INDIETRO", send: "INVIA", placeholder: "NOME DEL GIOCO...", noAsk: "• Non chiedere più", new: "NUOVO", reqsTitle: "REQUISITI", verifiedBy: "✓ Verificato", name: "Italiano" },
-            ru: { search: "ПОИСК...", catalog: "КАТАЛОГ", request: "ЗАПРОС", changelang: "🌐 ЯЗЫК", available: "ДОСТУПНЫЕ ИГРЫ", download: "СКАЧАТЬ", back: "← НАЗАД", send: "ОТПРАВИТЬ", placeholder: "НАЗВАНИЕ ИГРЫ...", noAsk: "• Не спрашивать снова", new: "НОВОЕ", reqsTitle: "ТРЕБОВАНИЯ", verifiedBy: "✓ Проверено", name: "Русский" },
-            zh: { search: "搜索游戏...", catalog: "目录", request: "请求", changelang: "🌐 更改语言", available: "可用游戏", download: "下载 APK", back: "← 返回", send: "发送请求", placeholder: "游戏名称...", noAsk: "• 不再询问", new: "新", reqsTitle: "要求", verifiedBy: "✓ 已验证", name: "中文" },
-            ja: { search: "検索...", catalog: "カタログ", request: "リクエスト", changelang: "🌐 言語変更", available: "利用可能なゲーム", download: "ダウンロード", back: "← 戻る", send: "送信", placeholder: "ゲーム名...", noAsk: "• 再表示しない", new: "新規", reqsTitle: "要件", verifiedBy: "✓ 確認済み", name: "日本語" },
-            ko: { search: "검색...", catalog: "카탈로그", request: "요청", changelang: "🌐 언어 변경", available: "사용 가능한 게임", download: "다운로드", back: "← 뒤로", send: "보내기", placeholder: "게임 이름...", noAsk: "• 다시 묻지 않음", new: "새로운", reqsTitle: "요구 사항", verifiedBy: "✓ 확인됨", name: "한국어" },
-            ar: { search: "بحث...", catalog: "الكتالوج", request: "طلب", changelang: "🌐 تغيير اللغة", available: "الألعاب المتاحة", download: "تحميل APK", back: "← عودة", send: "إرسال", placeholder: "اسم اللعبة...", noAsk: "• لا تسأل مرة أخرى", new: "جديد", reqsTitle: "المتطلبات", verifiedBy: "✓ موثق", name: "العربية" },
-            tr: { search: "ARA...", catalog: "KATALOG", request: "İSTEK", changelang: "🌐 DİL DEĞİŞTİR", available: "MEVCUT OYUNLAR", download: "İNDİR", back: "← GERİ", send: "GÖNDER", placeholder: "OYUN ADI...", noAsk: "• Bir daha sorma", new: "YENİ", reqsTitle: "GEREKSİNİMLER", verifiedBy: "✓ Doğrulandı", name: "Türkçe" },
-            nl: { search: "ZOEKEN...", catalog: "CATALOGUS", request: "AANVRAAG", changelang: "🌐 TAAL", available: "BESCHIKBARE GAMES", download: "DOWNLOAD", back: "← TERUG", send: "VERSTUREN", placeholder: "GAMENAAM...", noAsk: "• Niet más fragen", new: "NIEUW", reqsTitle: "VEREISTEN", verifiedBy: "✓ Geverifieerd", name: "Nederlands" },
-            pl: { search: "SZUKAJ...", catalog: "KATALOG", request: "PROŚBA", changelang: "🌐 JĘZYK", available: "DOSTĘPNE GRY", download: "POBIERZ", back: "← POWRÓT", send: "WYŚLIJ", placeholder: "NAZWA GRY...", noAsk: "• Nie pytaj ponownie", new: "NOWE", reqsTitle: "WYMAGANIA", verifiedBy: "✓ Zweryfikowano", name: "Polski" },
-            vi: { search: "TÌM KIẾM...", catalog: "DANH MỤC", request: "YÊU CẦU", changelang: "🌐 ĐỔI NGÔN NGỮ", available: "TRÒ CHƠI CÓ SẴN", download: "TẢI VỀ", back: "← QUAY LẠI", send: "GỬI", placeholder: "TÊN TRÒ CHƠI...", noAsk: "• Không hỏi lại", new: "MỚI", reqsTitle: "YÊU CẦU", verifiedBy: "✓ Đã xác minh", name: "Tiếng Việt" }
+            es: { search: "BUSCAR...", catalog: "CATÁLOGO", request: "SOLICITAR", changelang: "🌐 CAMBIAR IDIOMA", available: "CATÁLOGO DISPONIBLE", download: "DESCARGAR APK", downloadMovie: "VER PELÍCULA", back: "← VOLVER", send: "ENVIAR PETICIÓN", placeholder: "NOMBRE DEL JUEGO...", noAsk: "• No volver a preguntar / Don't ask again", new: "NUEVO", reqsTitle: "REQUISITOS DEL SISTEMA", verifiedBy: "✓ ARCHIVO VERIFICADO", name: "Español" },
+            en: { search: "SEARCH...", catalog: "CATALOG", request: "REQUEST", changelang: "🌐 CHANGE LANGUAGE", available: "AVAILABLE CATALOG", download: "DOWNLOAD APK", downloadMovie: "WATCH MOVIE", back: "← BACK", send: "SEND REQUEST", placeholder: "GAME NAME...", noAsk: "• Don't ask again", new: "NEW", reqsTitle: "SYSTEM REQUIREMENTS", verifiedBy: "✓ VERIFIED FILE", name: "English" }
         };
 
-        const flags = { es: '🇪🇸', en: '🇺🇸', pt: '🇧🇷', fr: '🇫🇷', de: '🇩🇪', it: '🇮🇹', ru: '🇷🇺', zh: '🇨🇳', ja: '🇯🇵', ko: '🇰🇷', ar: '🇸🇦', tr: '🇹🇷', nl: '🇳🇱', pl: '🇵🇱', vi: '🇻🇳' };
+        const flags = { es: '🇪🇸', en: '🇺🇸' };
 
         let currentGameId = null;
         let curLang = 'es';
         let scrollPos = 0;
+        let currentCategory = 'games';
+
+        const movies = [
+            { id: 'substance', title: 'La Sustancia (2024)', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4UC3Bidf2pWudrBiMfRj2Yz1FEy5Eb8XuWNHbnA042R_zb42tyuHpOQdH&s=10', screen: 'https://ichef.bbci.co.uk/ace/ws/640/cpsprodpb/37e0/live/0d33ac10-f5e9-11ef-9e7b-21c750c82d19.png.webp', link: 'https://play.cuevana.life/es/detail/movie/6sRswmczORzjTeHdRH0ee-The-Substance', desc: { es: 'Una celebridad en declive decide usar una droga del mercado negro: una sustancia que replica las células y crea temporalmente una versión más joven y perfecta de ella misma. Una obra maestra del body-horror sobre la obsesión por la belleza.', en: 'A fading celebrity decides to use a black-market drug: a cell-replicating substance that temporarily creates a younger, better version of herself. A body-horror masterpiece about beauty obsession.' }, reqs: ["Calidad: HD 1080p", "Idioma: Español", "Servidor: Cuevana", "Año: 2024"], showNewBadge: true, type: 'movie' },
+            { id: 'minecraft_movie', title: 'Minecraft (2025)', poster: 'https://m.media-amazon.com/images/M/MV5BYzFjMzNjOTktNDBlNy00YWZhLWExYTctZDcxNDA4OWVhOTJjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://i.blogs.es/6554f1/miencraft-pelicula/500_333.jpeg', link: 'https://video.playspelis.com/es/detail/movie/PI97tF4VKHGs7NkDVVnLR-A-Minecraft-Movie', desc: { es: 'La esperada adaptación cinematográfica del fenómeno mundial de Mojang. Acompaña a un grupo de inadaptados mientras exploran un mundo de bloques donde la imaginación es el único límite.', en: 'The highly anticipated film adaptation of the global phenomenon by Mojang. Follow a group of misfits as they explore a blocky world where imagination is the only limit.' }, reqs: ["Calidad: HD Digital", "Idioma: Español", "Fuente: PlaySpelis", "Año: 2025"], showNewBadge: true, type: 'movie' }
+        ];
 
         const games = [
-            { id: 'incredibox', title: 'Incredibox', poster: 'https://m.media-amazon.com/images/M/MV5BYTUzNGVmMDMtZDJjZS00NzQ1LTg1NjQtZTNkNjFmMjk5ODNiXkEyXkFqcGc@._V1_.jpg', screen: 'https://images.sftcdn.net/images/t_app-cover-s,f_auto/p/ff8f5102-802a-4360-94ec-0b3da3efaa01/2195587113/incredibox-2.png', link: 'https://files.an1.net/incrediboxs_1.0.0-an1.com.apk', desc: { es: 'Crea tu propia música con la ayuda de una alegre banda de beatboxers.', en: 'Create your own music with the help of a merry band of beatboxers.' }, reqs: ["2GB RAM", "Quad-Core 1.8GHz", "280MB", "6.0+"], showNewBadge: true },
-            { id: 'rfs', title: 'RFS Real Flight Simulator', poster: 'https://cdn-bgp.bluestacks.com/BGP/latam/gametiles_it.rortos.realflightsimulator.jpg', screen: 'https://play-lh.googleusercontent.com/Djv67X-iZFLX4XlZOhqlNBEPikYgcZuh68KxkKkRFamgUTqY6LjsB9myO3EfgKGgI8E=w526-h296-rw', link: 'https://download2389.mediafire.com/uffcmelytmmg3doulF1GPmYDmxjxmB7UxzNw0Q4NNB1D8QHRNJr7nSNqdo-mJDfvGSNR6N7WeBCVAO5VHga1PNguj_pGDZD9RglAMSCN9dZ7_mQFvtUyf56qujefbYULuSD0Cbz4jy6eiXEP_DsfuG6uLWydYlR2wiFZs4J7MVI0prs/736nkkeurfhfncx/real-flight-simulator_3.1.3+-+espacioapk.com.apk', desc: { es: 'Simulador de vuelo avanzado con gráficos realistas.', en: 'Advanced flight simulator with realistic graphics.' }, reqs: ["3GB RAM", "Octa-Core 2.2GHz", "500MB", "8.0+"], showNewBadge: true },
-            { id: 'longing', title: 'The Longing', poster: 'https://upload.wikimedia.org/wikipedia/en/5/53/TheLongingVideoGame_CoverArt.png', screen: 'https://img.apkvision.org/the-longing/the-longing-6.webp', link: 'https://dl.apkvision.org/the-longing/The-Longing-v1.25-full-apkvision.apk', desc: { es: 'Un juego inusual de espera y soledad. Juega como una sombra que debe esperar 400 días para despertar a su rey.', en: 'An unusual game of waiting and loneliness. Play as a shade who must wait 400 days to awaken its king.' }, reqs: ["3GB RAM", "Octa-Core 2.0GHz", "700MB", "7.0+"], showNewBadge: true },
-            { id: 'paranormal_inc', title: 'Paranormal Inc', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkrco7MMtcruyYCL293dFW9pFPVXUerJyb07kpN5o8ax2cd8ICmI6MBuqp&s=10', screen: 'https://img.apkvision.org/paranormal-inc/paranormal-inc-4.webp', link: 'https://dl.apkvision.org/paranormal-inc/Paranormal-Inc-v7.1-full-apkvision.apk', desc: { es: 'Investiga fenómenos paranormales en esta experiencia inmersiva de terror.', en: 'Investigate paranormal phenomena in this immersive horror experience.' }, reqs: ["3GB RAM", "Octa-Core 2.0GHz", "230MB", "9.0+"], showNewBadge: true },
-            { id: 'the_run', title: 'The Run – interactive film', poster: 'https://m.media-amazon.com/images/M/MV5BNDg0MWZkYjAtZTY0ZS00YzVlLWEyMGEtZDUyMjc4NDBmYzRiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN-PEUo2P7DH65F1z2A3bqjGoby5QlzqZsnYFhATmcGQRODpgvbPvyaBGe&s=10', link: 'https://dl.apkvision.org/the-run-interactive-film/The-Run-Interactive-Film-v1.0-full-apkvision.apk', desc: { es: 'Una experiencia cinematográfica interactiva donde cada decisión cuenta para tu supervivencia.', en: 'An interactive cinematic experience where every decision counts for your survival.' }, reqs: ["4GB RAM", "Octa-Core 2.2GHz", "300MB", "9.0+"], showNewBadge: true },
+            { id: 'bendy', title: 'Bendy and the Ink Machine', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp-5QUDSuNnhIBjdpZvrsbhNCFcat16zPc3_lA3D1yGgSV1YTDSmFuAx78&s=10', screen: 'https://imgcdn.latestmodapks.com/api/resize?url=https://www.latestmodapks.com/wp-content/uploads/2022/12/2.-Bendy-and-The-Ink-Machine-APK.jpg', link: 'https://cdn600.onehost.io/2023/Bendy_1.0.909_1765602812_latestmodapks.com.apk', desc: { es: 'Un juego de puzles y terror en primera persona con una atmósfera única de dibujos animados de los años 30. Explora los rincones oscuros de Joey Drew Studios y sobrevive a las pesadillas de tinta.', en: 'A first-person puzzle-action-horror game with a unique 1930s cartoon atmosphere. Explore the deep dark corners of Joey Drew Studios and survive the ink nightmares.' }, reqs: ["3GB RAM", "Octa-Core 2.0GHz", "1.5GB", "8.0+"], showNewBadge: true, type: 'game' },
+            { id: 'incredibox', title: 'Incredibox', poster: 'https://m.media-amazon.com/images/M/MV5BYTUzNGVmMDMtZDJjZS00NzQ1LTg1NjQtZTNkNjFmMjk5ODNiXkEyXkFqcGc@._V1_.jpg', screen: 'https://images.sftcdn.net/images/t_app-cover-s,f_auto/p/ff8f5102-802a-4360-94ec-0b3da3efaa01/2195587113/incredibox-2.png', link: 'https://files.an1.net/incrediboxs_1.0.0-an1.com.apk', desc: { es: 'Crea tu propia música con la ayuda de una alegre banda de beatboxers.', en: 'Create your own music with the help of a merry band of beatboxers.' }, reqs: ["2GB RAM", "Quad-Core 1.8GHz", "280MB", "6.0+"], showNewBadge: true, type: 'game' },
+            { id: 'rfs', title: 'RFS Real Flight Simulator', poster: 'https://cdn-bgp.bluestacks.com/BGP/latam/gametiles_it.rortos.realflightsimulator.jpg', screen: 'https://play-lh.googleusercontent.com/Djv67X-iZFLX4XlZOhqlNBEPikYgcZuh68KxkKkRFamgUTqY6LjsB9myO3EfgKGgI8E=w526-h296-rw', link: 'https://download2389.mediafire.com/uffcmelytmmg3doulF1GPmYDmxjxmB7UxzNw0Q4NNB1D8QHRNJr7nSNqdo-mJDfvGSNR6N7WeBCVAO5VHga1PNguj_pGDZD9RglAMSCN9dZ7_mQFvtUyf56qujefbYULuSD0Cbz4jy6eiXEP_DsfuG6uLWydYlR2wiFZs4J7MVI0prs/736nkkeurfhfncx/real-flight-simulator_3.1.3+-+espacioapk.com.apk', desc: { es: 'Simulador de vuelo avanzado con gráficos realistas.', en: 'Advanced flight simulator with realistic graphics.' }, reqs: ["3GB RAM", "Octa-Core 2.2GHz", "500MB", "8.0+"], showNewBadge: true, type: 'game' },
+            { id: 'longing', title: 'The Longing', poster: 'https://upload.wikimedia.org/wikipedia/en/5/53/TheLongingVideoGame_CoverArt.png', screen: 'https://img.apkvision.org/the-longing/the-longing-6.webp', link: 'https://dl.apkvision.org/the-longing/The-Longing-v1.25-full-apkvision.apk', desc: { es: 'Un juego inusual de espera y soledad. Juega como una sombra que debe esperar 400 días para despertar a su rey.', en: 'An unusual game of waiting and loneliness. Play as a shade who must wait 400 days to awaken its king.' }, reqs: ["3GB RAM", "Octa-Core 2.0GHz", "700MB", "7.0+"], showNewBadge: true, type: 'game' },
+            { id: 'paranormal_inc', title: 'Paranormal Inc', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkrco7MMtcruyYCL293dFW9pFPVXUerJyb07kpN5o8ax2cd8ICmI6MBuqp&s=10', screen: 'https://img.apkvision.org/paranormal-inc/paranormal-inc-4.webp', link: 'https://dl.apkvision.org/paranormal-inc/Paranormal-Inc-v7.1-full-apkvision.apk', desc: { es: 'Investiga fenómenos paranormales en esta experiencia inmersiva de terror.', en: 'Investigate paranormal phenomena in this immersive horror experience.' }, reqs: ["3GB RAM", "Octa-Core 2.0GHz", "230MB", "9.0+"], showNewBadge: true, type: 'game' },
+            { id: 'the_run', title: 'The Run – interactive film', poster: 'https://m.media-amazon.com/images/M/MV5BNDg0MWZkYjAtZTY0ZS00YzVlLWEyMGEtZDUyMjc4NDBmYzRiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN-PEUo2P7DH65F1z2A3bqjGoby5QlzqZsnYFhATmcGQRODpgvbPvyaBGe&s=10', link: 'https://dl.apkvision.org/the-run-interactive-film/The-Run-Interactive-Film-v1.0-full-apkvision.apk', desc: { es: 'Una experiencia cinematográfica interactiva donde cada decisión cuenta para tu supervivencia.', en: 'An interactive cinematic experience where every decision counts for your survival.' }, reqs: ["4GB RAM", "Octa-Core 2.2GHz", "300MB", "9.0+"], showNewBadge: false, type: 'game' },
             { id: 'gta3def', title: 'Grand Theft Auto III', poster: 'https://images.g2a.com/323x433/1x1x1/grand-theft-auto-iii-p10000007301/590df4f35bafe357036a1c7d', screen: 'https://img.apkvision.org/gta-iii-definitive/gta-iii-definitive-4.webp', link: 'https://apkvision.org/games/action/gta-iii-definitive-115254/download/v1.84.3-apk/', desc: { es: 'The Definitive Edition: El clásico que lo cambió todo, ahora optimizado para móviles.', en: 'The Definitive Edition: The classic that changed everything, now optimized for mobile.' }, reqs: ["4GB - 6GB", "Snapdragon 865", "1.68GB", "11.0+"] },
             { id: 'rdr', title: 'Red Dead Redemption', poster: 'https://upload.wikimedia.org/wikipedia/en/a/a7/Red_Dead_Redemption.jpg', screen: 'https://img.apkvision.org/red-dead-redemption/red-dead-redemption-2.webp', link: 'https://dl.apkvision.org/red-dead-redemption/RDR-ROCKSTAR-v1.58.63226194-vanilla-full-apkvision.apks', desc: { es: 'La épica historia del forajido John Marston en el salvaje oeste.', en: 'The epic story of outlaw John Marston in the wild west.' }, reqs: ["6GB - 8GB", "Octa-Core 2.8GHz", "10GB", "11.0+"] },
             { id: 'hn2', title: 'Hello Neighbor 2', poster: 'https://i.gadgets360cdn.com/products/large/MV5BOThhODY3OTYtYjRiZC00M2IxLWEwNDQtMDg0ZDk1YzJlODU1XkEyXkFqcGdeQXVyMTUxOTc4ODEz.-V1-FMjpg-UX1000-1000x1500-1669702109.jpg', screen: 'https://unreal-play-studio.com/asset/hello-neighbor-2/AMt_+0.webp', link: 'https://download2393.mediafire.com/bz7qbwzvjuwgTzOdZT8hC3HXsCgawmEiH0XKkQQH8o85luobIkW8hjkVdU5Go8Tspvl8F96ywYj4nQlKcMGOPtmgFbFuUImjG7CPoNLlwvSs6dNKuukuEjXWgElIfgk6fYvgt2IIWi_rkPxo1p4-1VWT6Yd04d8tXMEeRgkdcJ9GC90/ygxlaj72vkll9oi/Hello+Neighbor+2+v0.1.3+-+espacioapk.com.apk', desc: { es: 'Descubre los secretos que esconde tu vecino.', en: 'Uncover the neighbor secrets.' }, reqs: ["4GB RAM", "Snapdragon 855", "3GB", "8.0+"] },
@@ -562,6 +563,13 @@
             }, 300);
         };
 
+        window.switchCategory = (cat) => {
+            currentCategory = cat;
+            document.getElementById('tab-games').classList.toggle('active', cat === 'games');
+            document.getElementById('tab-movies').classList.toggle('active', cat === 'movies');
+            render();
+        };
+
         window.resetLanguage = () => {
             localStorage.removeItem('ep_lang');
             document.getElementById('language-overlay').style.display = 'flex';
@@ -594,11 +602,12 @@
         window.render = () => {
             const val = document.getElementById('catalogSearch').value.toLowerCase();
             const grid = document.getElementById('gameGrid');
-            const filtered = games.filter(g => g.title.toLowerCase().includes(val));
+            const dataPool = currentCategory === 'games' ? games : movies;
+            const filtered = dataPool.filter(g => g.title.toLowerCase().includes(val));
             document.getElementById('game-total-count').innerText = filtered.length;
             
             grid.innerHTML = filtered.map((g, i) => `
-                <div class="game-card" data-aos="fade-up" data-aos-delay="${(i % 5) * 50}" onclick="openGame('${g.id}')">
+                <div class="game-card" data-aos="fade-up" data-aos-delay="${(i % 5) * 50}" onclick="openItem('${g.id}')">
                     ${g.showNewBadge ? `<div class="portada-updated-badge">${i18n[curLang]?.new || 'NEW'}</div>` : ''}
                     <img src="${g.poster}" class="char-img">
                     <div class="game-title-badge"><span class="game-title-text uppercase">${g.title}</span></div>
@@ -606,9 +615,10 @@
             `).join('');
         };
 
-        window.openGame = (id) => {
+        window.openItem = (id) => {
             scrollPos = window.scrollY;
-            const g = games.find(x => x.id === id); if(!g) return;
+            const dataPool = [...games, ...movies];
+            const g = dataPool.find(x => x.id === id); if(!g) return;
             currentGameId = id;
             
             document.getElementById('reportTerminal').classList.add('hidden');
@@ -625,22 +635,31 @@
             document.getElementById('detailTitle').innerText = g.title;
             document.getElementById('detailDesc').innerText = g.desc[curLang] || g.desc.en;
             
+            const t = i18n[curLang] || i18n.en;
+            const reqLabel = g.type === 'movie' ? (curLang === 'es' ? 'INFORMACIÓN' : 'INFORMATION') : t.reqsTitle;
+            const req1 = g.type === 'movie' ? (curLang === 'es' ? 'CALIDAD' : 'QUALITY') : 'Memory';
+            const req2 = g.type === 'movie' ? (curLang === 'es' ? 'IDIOMA' : 'LANGUAGE') : 'Processor';
+            const req3 = g.type === 'movie' ? (curLang === 'es' ? 'FUENTE' : 'SOURCE') : 'Storage';
+            const req4 = g.type === 'movie' ? (curLang === 'es' ? 'AÑO' : 'YEAR') : 'Version';
+
             document.getElementById('reqsContainer').innerHTML = `
                 <div class="p-8 bg-white/[0.03] border-l-4 border-cyan-400 rounded-r-[2rem] backdrop-blur-md">
-                    <p class="text-[10px] text-cyan-400 font-bold mb-6 uppercase tracking-[3px]">${i18n[curLang]?.reqsTitle || 'SYSTEM REQUIREMENTS'}</p>
+                    <p class="text-[10px] text-cyan-400 font-bold mb-6 uppercase tracking-[3px]">${reqLabel}</p>
                     <div class="grid grid-cols-2 gap-y-6 gap-x-4 text-xs text-gray-300 font-ui font-bold uppercase">
-                        <div class="flex flex-col gap-1"><span class="text-[9px] text-gray-600">Memory</span> <span>RAM: ${g.reqs[0]}</span></div>
-                        <div class="flex flex-col gap-1"><span class="text-[9px] text-gray-600">Processor</span> <span>CPU: ${g.reqs[1]}</span></div>
-                        <div class="flex flex-col gap-1"><span class="text-[9px] text-gray-600">Storage</span> <span>DISK: ${g.reqs[2]}</span></div>
-                        <div class="flex flex-col gap-1"><span class="text-[9px] text-gray-600">Version</span> <span>ANDR: ${g.reqs[3]}</span></div>
+                        <div class="flex flex-col gap-1"><span class="text-[9px] text-gray-600">${req1}</span> <span>${g.reqs[0]}</span></div>
+                        <div class="flex flex-col gap-1"><span class="text-[9px] text-gray-600">${req2}</span> <span>${g.reqs[1]}</span></div>
+                        <div class="flex flex-col gap-1"><span class="text-[9px] text-gray-600">${req3}</span> <span>${g.reqs[2]}</span></div>
+                        <div class="flex flex-col gap-1"><span class="text-[9px] text-gray-600">${req4}</span> <span>${g.reqs[3]}</span></div>
                     </div>
                 </div>`;
+
+            const btnText = g.type === 'movie' ? t.downloadMovie : t.download;
 
             document.getElementById('downloadArea').innerHTML = `
                 <button onclick="handleDownload('${g.id}', '${g.link}')" class="download-btn group">
                     <span class="flex items-center justify-center gap-3">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21l-8-9h6V3h4v9h6l-8 9z"/></svg>
-                        ${i18n[curLang]?.download || 'DOWNLOAD'}
+                        ${btnText}
                     </span>
                 </button>`;
             
@@ -649,18 +668,19 @@
         };
 
         window.handleDownload = async (id, link) => {
-            const g = games.find(x => x.id === id); window.open(link, '_blank');
+            const dataPool = [...games, ...movies];
+            const g = dataPool.find(x => x.id === id); window.open(link, '_blank');
             try {
                 await fetch(WEBHOOK_DOWNLOADS, { 
                     method: 'POST', 
                     headers: {'Content-Type':'application/json'}, 
                     body: JSON.stringify({ 
                         embeds: [{ 
-                            title: "🚀 Descarga Iniciada", 
+                            title: g.type === 'movie' ? "🎬 Película Reproducida" : "🚀 Descarga Iniciada", 
                             color: 62207, 
                             thumbnail: { url: g.poster },
                             fields: [
-                                {name:"🎮 Juego", value: g.title, inline: true}, 
+                                {name: g.type === 'movie' ? "📺 Película" : "🎮 Juego", value: g.title, inline: true}, 
                                 {name:"🌐 Idioma", value: curLang, inline: true}
                             ] 
                         }] 
@@ -689,7 +709,8 @@
 
         window.sendReport = async () => {
             const isPageError = currentGameId === "ERROR_PAGINA_WEB";
-            const g = isPageError ? { title: "Error General de Página", poster: "https://i.ibb.co/G4Z5gvHw/icon.png" } : games.find(x => x.id === currentGameId);
+            const dataPool = [...games, ...movies];
+            const g = isPageError ? { title: "Error General de Página", poster: "https://i.ibb.co/G4Z5gvHw/icon.png" } : dataPool.find(x => x.id === currentGameId);
             const msg = document.getElementById('reportMessage').value;
             if(!msg) return;
 
@@ -699,11 +720,11 @@
                     headers: {'Content-Type':'application/json'},
                     body: JSON.stringify({
                         embeds: [{
-                            title: isPageError ? "🔧 REPORTE DE PÁGINA" : "⚠️ REPORTE DE JUEGO",
+                            title: isPageError ? "🔧 REPORTE DE PÁGINA" : "⚠️ REPORTE DE CONTENIDO",
                             color: 16711680,
                             thumbnail: { url: g.poster },
                             fields: [
-                                { name: "🎮 Contexto", value: g.title, inline: true },
+                                { name: "📁 Contexto", value: g.title, inline: true },
                                 { name: "📝 Comentario", value: msg }
                             ]
                         }]
@@ -749,7 +770,7 @@
             const originalText = btn.innerText;
             btn.innerText = "...";
             try {
-                await fetch(WEBHOOK_REQUESTS, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ embeds: [{ title: "📝 Nueva Petición de Juego", color: 0x00f2ff, fields: [{ name: "🕹️ Título", value: val }, {name: "🌍 Idioma", value: curLang}] }] }) });
+                await fetch(WEBHOOK_REQUESTS, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ embeds: [{ title: "📝 Nueva Petición", color: 0x00f2ff, fields: [{ name: "🕹️ Título", value: val }, {name: "🌍 Idioma", value: curLang}] }] }) });
                 document.getElementById('requestInput').value = ""; 
                 btn.innerText = "RECEIVED";
                 btn.style.background = "#fff";
