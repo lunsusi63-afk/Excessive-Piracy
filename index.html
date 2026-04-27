@@ -6,23 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="google-site-verification" content="DpeRZ9_SRFu19zvGQZrZvuI9wQDQ6hjhnOaLVhxSODg" />
     
-    <!-- SEO OPTIMIZADO -->
     <title>Películas y Juegos APK Gratis | Excessive Piracy Official</title>
     <meta name="description" content="Descarga los mejores juegos APK premium y disfruta de películas gratis para Android. La biblioteca definitiva del EP Team con archivos verificados y seguros.">
     
-    <!-- FAVICON E ICONOS -->
-    <meta property="og:image" content="favicon.png">
-<meta name="theme-color" content="#00f2ff">
-<link rel="icon" type="image/png" href="./favicon.png">
-<link rel="apple-touch-icon" href="./favicon.png">
+    <meta property="og:image" content="https://i.ibb.co/G4Z5gvHw/icon.png">
+    <meta name="theme-color" content="#00f2ff">
+    <link rel="icon" type="image/png" href="https://i.ibb.co/G4Z5gvHw/icon.png">
 
     <link rel="canonical" href="https://lunsusi63-afk.github.io/Excessive-Piracy/" />
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://lunsusi63-afk.github.io/Excessive-Piracy/">
-<meta property="og:title" content="Películas y Juegos APK Gratis | Excessive Piracy Official">
-<meta property="og:description" content="Descarga los mejores juegos APK premium y disfruta de películas gratis para Android.">
-
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Bebas+Neue&family=Outfit:wght@300;400;700;900&family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -31,11 +22,18 @@
     <style>
         :root { 
             --cyan: #00f2ff; 
-            --dark: #050505; 
-            --card-bg: #0d0d0d;
-            --glow: rgba(0, 242, 255, 0.4); 
+            --dark: #020202; 
+            --card-bg: #0a0a0a;
+            --glow: rgba(0, 242, 255, 0.5); 
             --glass: rgba(255, 255, 255, 0.03);
+            --hot: #ff3e3e;
+            --neon-purple: #9d00ff;
         }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--dark); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
 
         body { 
             background-color: var(--dark); 
@@ -46,26 +44,14 @@
             -webkit-tap-highlight-color: transparent;
             scroll-behavior: smooth;
         }
-        
+
         .bg-mesh {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                radial-gradient(circle at 0% 0%, rgba(0, 242, 255, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 100% 100%, rgba(0, 242, 255, 0.05) 0%, transparent 40%);
-            pointer-events: none;
+                radial-gradient(circle at 0% 0%, rgba(0, 242, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(157, 0, 255, 0.05) 0%, transparent 50%);
             z-index: -1;
-        }
-
-        body::after {
-            content: " ";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
-            background-size: 100% 4px, 3px 100%;
-            pointer-events: none;
-            z-index: 999;
-            opacity: 0.3;
         }
 
         .font-brand { font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; }
@@ -73,416 +59,268 @@
         
         header { 
             position: fixed; 
-            top: 0; 
-            width: 100%; 
-            z-index: 1000; 
-            background: rgba(5, 5, 5, 0.8); 
-            backdrop-filter: blur(20px); 
+            top: 0; width: 100%; z-index: 1000; 
+            background: rgba(2, 2, 2, 0.3); 
+            backdrop-filter: blur(25px); 
             border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
             height: 80px; 
             display: flex; 
-            align-items: center; 
             padding: 0 1.5rem;
             transition: all 0.4s ease;
         }
         
         header.scrolled {
-            height: 70px;
-            background: rgba(5, 5, 5, 0.95);
-            border-bottom-color: var(--cyan);
+            height: 65px;
+            background: rgba(2, 2, 2, 0.9);
+            border-bottom: 1px solid rgba(0, 242, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .search-container {
             position: relative;
-            width: 100%;
+            flex-grow: 1;
+            max-width: 500px;
+            margin: 0 20px;
         }
 
         .search-input { 
             width: 100%; 
-            background: rgba(255, 255, 255, 0.03); 
-            border: 1px solid rgba(255, 255, 255, 0.08); 
-            padding: 12px 20px; 
-            border-radius: 100px; 
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            padding: 10px 20px; 
+            border-radius: 15px; 
             color: white; 
             outline: none; 
-            transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1); 
-            font-size: 14px; 
+            transition: all 0.3s ease; 
+            font-size: 14px;
         }
         
         .search-input:focus {
+            background: rgba(255, 255, 255, 0.08);
             border-color: var(--cyan);
-            background: rgba(255, 255, 255, 0.07);
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.15);
-            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
         }
-        
-        .top-banner { 
-            width: 100%; 
-            margin: 0 auto 1.5rem auto; 
-            border-radius: 30px; 
-            overflow: hidden; 
-            border: 1px solid rgba(255, 255, 255, 0.05); 
-            position: relative;
-            max-height: 0; 
-            opacity: 0; 
-            transform: translateY(10px);
-            transition: 0.8s cubic-bezier(0.19, 1, 0.22, 1); 
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-        }
-        
-        .top-banner::after {
-            content: "";
-            position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 60%;
-            background: linear-gradient(to top, var(--dark), transparent);
-        }
-
-        .top-banner.active-banner { max-height: 450px; opacity: 1; transform: translateY(0); }
         
         .game-card { 
-            background: var(--card-bg); 
-            border: 1px solid rgba(255,255,255,0.03); 
+            background: #080808; 
+            border: 1px solid rgba(255,255,255,0.05); 
             position: relative; 
             overflow: hidden; 
-            border-radius: 24px; 
-            transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1); 
-            cursor: pointer; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-radius: 20px; 
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            cursor: pointer;
         }
 
         .game-card:hover {
-            transform: translateY(-15px) scale(1.03);
+            transform: scale(1.05) translateY(-5px);
             border-color: var(--cyan);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 242, 255, 0.2);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8), 0 0 15px rgba(0, 242, 255, 0.2);
+            z-index: 10;
         }
 
-        .game-card:active { transform: scale(0.95); }
-        
         .char-img { 
             width: 100%; 
             aspect-ratio: 2/3; 
             object-fit: cover; 
-            filter: grayscale(20%);
-            transition: 1s cubic-bezier(0.19, 1, 0.22, 1);
+            transition: 0.7s ease;
         }
-        .game-card:hover .char-img { filter: grayscale(0%); transform: scale(1.15); }
+        
+        .game-card:hover .char-img { transform: scale(1.1); filter: brightness(1.1); }
 
-        .portada-updated-badge { 
-            position: absolute; 
-            top: 15px; 
-            right: 15px; 
-            background: var(--cyan); 
-            color: black; 
-            padding: 5px 12px; 
-            font-family: 'Bebas Neue', sans-serif; 
-            font-size: 0.8rem; 
-            border-radius: 8px; 
-            z-index: 10; 
-            box-shadow: 0 5px 15px rgba(0, 242, 255, 0.4);
-            animation: float-badge 3s ease-in-out infinite;
+        .badge-new, .badge-hot { 
+            position: absolute; top: 12px; padding: 4px 10px; 
+            font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 10px; 
+            border-radius: 6px; z-index: 10; letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .badge-new { right: 12px; background: var(--cyan); color: black; }
+        .badge-hot { left: 12px; background: var(--hot); color: white; animation: pulse 1.5s infinite; }
+
+        @keyframes pulse {
+            0% { opacity: 0.8; } 50% { opacity: 1; transform: scale(1.05); } 100% { opacity: 0.8; }
         }
 
-        @keyframes float-badge {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+        .card-info { 
+            position: absolute; bottom: 0; left: 0; width: 100%; 
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 20%, transparent); 
+            padding: 30px 15px 15px 15px;
         }
-
-        .game-title-badge { 
-            position: absolute; 
-            bottom: 0; 
-            left: 0; 
-            width: 100%; 
-            background: linear-gradient(to top, rgba(0,0,0,0.95) 20%, rgba(0,0,0,0.7) 60%, transparent); 
-            padding: 30px 15px 15px 15px; 
-        }
-
-        .game-title-text { 
-            color: #fff; 
-            font-weight: 800; 
-            font-family: 'Outfit'; 
-            letter-spacing: 0.5px;
-            font-size: 13px; 
-            display: block;
-            transition: 0.3s ease;
-        }
-
-        .view-section { 
-            display: none; 
-            opacity: 0; 
-            transition: 0.4s ease-out; 
-        }
-
-        .view-section.active { 
-            display: block; 
-            opacity: 1; 
-        }
-
-        .download-btn { 
-            background: var(--cyan); 
-            color: #000; 
-            font-weight: 900; 
-            width: 100%; 
-            padding: 1.3rem; 
-            border-radius: 20px; 
-            font-family: 'Bebas Neue', sans-serif; 
-            font-size: 1.6rem; 
-            text-align: center; 
-            display: block; 
-            border: none; 
-            cursor: pointer; 
-            transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-            box-shadow: 0 10px 25px rgba(0, 242, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .download-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 242, 255, 0.5);
-            background: #fff;
-        }
-
-        .report-btn {
-            background: transparent;
-            color: #666;
-            font-weight: bold;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 0.9rem;
-            text-decoration: underline;
-            margin-top: 1.5rem;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .report-btn:hover { color: #ff4d4d; }
 
         .category-tab {
-            padding: 12px 30px;
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.5rem;
-            border-radius: 15px;
+            padding: 8px 25px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.05);
-            background: rgba(255,255,255,0.02);
+            transition: 0.3s;
+            background: rgba(255,255,255,0.03);
             color: rgba(255,255,255,0.4);
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
-        .category-tab.active {
-            background: var(--cyan);
-            color: black;
-            box-shadow: 0 0 20px var(--glow);
+        .category-tab.active { 
+            background: var(--cyan); 
+            color: black; 
             border-color: var(--cyan);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
         }
 
-        .skeleton {
-            background: linear-gradient(90deg, #0d0d0d 25%, #1a1a1a 50%, #0d0d0d 75%);
-            background-size: 200% 100%;
-            animation: loading 2s infinite;
-            border-radius: 24px;
+        .download-btn {
+            background: var(--cyan); color: black; font-family: 'Bebas Neue'; font-size: 1.5rem;
+            width: 100%; padding: 1rem; border-radius: 15px; transition: 0.3s;
+            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.2);
+            position: relative; overflow: hidden;
+            text-align: center;
+        }
+        .download-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0, 242, 255, 0.4); }
+
+        .glass-panel {
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 25px;
         }
 
-        @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+        #home-banner {
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255,255,255,0.05);
+            height: 350px;
         }
 
-        .burger-line {
-            height: 2px;
-            background-color: var(--cyan);
-            border-radius: 10px;
-            transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        @media (max-width: 768px) {
+            #home-banner { height: 200px; }
+            .search-container { margin: 0 10px; }
+            header { padding: 0 1rem; }
         }
-
-        #detail-view::-webkit-scrollbar { width: 5px; }
-        #detail-view::-webkit-scrollbar-track { background: transparent; }
-        #detail-view::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 10px; }
-
-        .lang-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 1.5rem 1rem;
-            border-radius: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.75rem;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(10px);
-        }
-
-        .lang-card:hover {
-            background: rgba(0, 242, 255, 0.1);
-            border-color: var(--cyan);
-            transform: translateY(-8px) scale(1.05);
-            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.15);
-        }
-
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
+        .lock-scroll { overflow: hidden; }
     </style>
 </head>
-<body>
+<body class="lock-scroll">
 
     <div class="bg-mesh"></div>
 
     <!-- PANTALLA DE SELECCIÓN DE IDIOMA -->
-    <div id="language-overlay" class="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-3xl flex items-center justify-center p-4">
-        <div class="p-8 sm:p-12 rounded-[3rem] border border-white/5 max-w-5xl w-full text-center shadow-[0_0_150px_rgba(0,0,0,1)] relative overflow-y-auto max-h-[90vh]" data-aos="zoom-in">
-            <div class="relative inline-block mb-8">
-                <div class="absolute inset-0 bg-cyan-400 blur-2xl opacity-20 animate-pulse"></div>
-                <!-- FAVICON INTEGRADO -->
-                <img src="https://i.ibb.co/G4Z5gvHw/icon.png" class="w-20 h-20 relative z-10 mx-auto">
-            </div>
-            <h2 class="font-brand text-5xl mb-12 text-white uppercase tracking-wider">Select Language</h2>
-            
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-12" id="langGrid"></div>
-            
-            <div class="flex flex-col items-center gap-4">
-                <label class="flex items-center justify-center gap-3 cursor-pointer group p-4 bg-white/5 rounded-2xl border border-white/5">
-                    <input type="checkbox" id="rememberLang" class="peer hidden">
-                    <div class="w-6 h-6 border-2 border-white/10 rounded-lg peer-checked:bg-cyan-400 peer-checked:border-cyan-400 transition-all duration-300 flex items-center justify-center">
-                        <svg class="w-4 h-4 text-black opacity-0 peer-checked:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                    </div>
-                    <span id="label-no-ask" class="text-gray-400 group-hover:text-gray-200 font-ui text-sm transition-colors uppercase tracking-widest"></span>
-                </label>
-            </div>
+    <div id="language-overlay" class="fixed inset-0 z-[10000] bg-[#020202] flex items-center justify-center p-6 transition-all duration-700">
+        <div class="p-10 rounded-[35px] border border-white/5 max-w-4xl w-full text-center bg-white/[0.01] backdrop-blur-3xl" data-aos="zoom-in">
+            <img src="https://i.ibb.co/G4Z5gvHw/icon.png" class="w-20 h-20 mx-auto mb-8 drop-shadow-[0_0_15px_rgba(0,242,255,0.5)]">
+            <h2 class="font-brand text-6xl mb-2 text-white uppercase tracking-tight">EP TEAM</h2>
+            <p class="font-ui text-cyan-400 tracking-[0.3em] mb-12 text-xs opacity-70">ENCRYPTED ACCESS</p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10" id="langGrid"></div>
+            <label class="flex items-center justify-center gap-3 cursor-pointer opacity-50 hover:opacity-100 transition-opacity">
+                <input type="checkbox" id="rememberLang" class="hidden peer">
+                <div class="w-4 h-4 border border-white/20 rounded peer-checked:bg-cyan-400 peer-checked:border-cyan-400 transition-all"></div>
+                <span id="label-no-ask" class="text-gray-400 font-ui text-[10px] uppercase tracking-widest"></span>
+            </label>
         </div>
     </div>
 
     <!-- HEADER -->
     <header id="main-header">
-        <div class="flex items-center gap-4 cursor-pointer min-w-max group" onclick="navigate('home')">
-            <div class="relative">
-                <div class="absolute inset-0 bg-cyan-400 blur-lg opacity-0 group-hover:opacity-40 transition-opacity"></div>
-                <!-- FAVICON INTEGRADO -->
-                <img src="https://i.ibb.co/G4Z5gvHw/icon.png" class="w-12 h-12 relative">
+        <div class="flex items-center justify-between w-full max-w-[1500px] mx-auto">
+            <div class="flex items-center gap-3 cursor-pointer group" onclick="navigate('home')">
+                <img src="https://i.ibb.co/G4Z5gvHw/icon.png" class="w-9 h-9 group-hover:rotate-[360deg] transition-transform duration-700">
+                <div class="hidden sm:block leading-none">
+                    <p class="font-brand text-lg text-white">EXCESSIVE</p>
+                    <p class="font-brand text-lg text-cyan-400">PIRACY</p>
+                </div>
             </div>
-            <div class="flex flex-col leading-tight">
-                <span class="font-brand text-xl text-white">EXCESSIVE</span>
-                <span class="font-brand text-xl text-cyan-400">PIRACY</span>
-            </div>
-        </div>
-        
-        <div class="flex-grow mx-6 max-w-2xl hidden md:block">
+            
             <div class="search-container">
-                <input type="text" id="catalogSearch" class="search-input font-ui" oninput="render()" placeholder="...">
+                <input type="text" id="catalogSearch" class="search-input font-ui" oninput="render()" placeholder="SEARCH...">
             </div>
-        </div>
 
-        <div class="flex items-center gap-4 ml-auto">
-            <button onclick="toggleMenu()" class="group flex flex-col gap-1.5 items-end p-4 bg-white/5 hover:bg-cyan-400/10 rounded-2xl transition-colors">
-                <div class="w-8 burger-line"></div>
-                <div class="w-5 burger-line !bg-white group-hover:!bg-cyan-400"></div>
-                <div class="w-7 burger-line"></div>
+            <button onclick="toggleMenu()" class="w-10 h-10 flex flex-col items-center justify-center bg-white/5 rounded-xl border border-white/10 hover:border-cyan-400 transition-all group">
+                <div class="w-5 h-0.5 bg-cyan-400 mb-1 group-hover:w-3 transition-all"></div>
+                <div class="w-5 h-0.5 bg-white mb-1"></div>
+                <div class="w-5 h-0.5 bg-cyan-400 group-hover:w-3 transition-all"></div>
             </button>
         </div>
     </header>
 
-    <!-- MENÚ MÓVIL -->
-    <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/90 backdrop-blur-xl z-[1999] hidden opacity-0 transition-all duration-500" onclick="toggleMenu()"></div>
-    <nav id="mobile-menu" class="fixed top-0 right-[-100%] w-[85%] max-w-[400px] h-screen bg-black/50 z-[2000] flex flex-col p-12 border-l border-white/5 transition-all duration-700 ease-[cubic-bezier(0.19, 1, 0.22, 1)]">
-        <div class="mb-20">
-             <!-- FAVICON INTEGRADO -->
-             <img src="https://i.ibb.co/G4Z5gvHw/icon.png" class="w-20 h-20 mb-6">
-             <p class="text-cyan-400 font-brand text-3xl">EP TEAM OFFICIAL</p>
-             <p class="text-gray-500 font-ui text-xs tracking-[3px] uppercase mt-1">Secure Digital Library</p>
+    <!-- MENÚ LATERAL -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[1999] hidden opacity-0 transition-opacity" onclick="toggleMenu()"></div>
+    <nav id="mobile-menu" class="fixed top-0 right-[-100%] w-[85%] max-w-[350px] h-screen bg-[#050505] z-[2000] flex flex-col p-10 border-l border-white/5 transition-all duration-500 ease-out">
+        <div class="mb-16">
+             <img src="https://i.ibb.co/G4Z5gvHw/icon.png" class="w-12 h-12 mb-4">
+             <p class="text-white font-brand text-3xl">EP TERMINAL</p>
         </div>
-        <div class="flex flex-col gap-8">
-            <button onclick="navigate('home'); toggleMenu();" class="text-6xl text-white font-brand text-left hover:text-cyan-400 hover:translate-x-4 transition-all duration-300" id="nav-catalog"></button>
-            <button onclick="navigate('request'); toggleMenu();" class="text-6xl text-white font-brand text-left hover:text-cyan-400 hover:translate-x-4 transition-all duration-300" id="nav-request"></button>
-            <button onclick="showReportTerminalFromMenu(); toggleMenu();" class="text-2xl text-white font-brand text-left hover:text-red-400 transition-all duration-300 uppercase mt-4">Reportar error de página</button>
-            <div class="h-px bg-white/10 my-4"></div>
-            <button onclick="resetLanguage()" class="text-lg text-cyan-400/60 hover:text-cyan-400 font-ui font-bold text-left flex items-center gap-3 transition-colors" id="nav-changelang"></button>
+        <div class="flex flex-col gap-6">
+            <button onclick="navigate('home'); toggleMenu();" class="text-4xl text-white font-brand text-left hover:text-cyan-400 transition-all opacity-50 hover:opacity-100" id="nav-catalog"></button>
+            <button onclick="navigate('request'); toggleMenu();" class="text-4xl text-white font-brand text-left hover:text-cyan-400 transition-all opacity-50 hover:opacity-100" id="nav-request"></button>
+            <div class="h-px bg-white/5 my-4"></div>
+            <button onclick="showReportTerminalFromMenu(); toggleMenu();" class="text-xs text-white/30 font-ui font-bold text-left hover:text-red-500 uppercase transition-all tracking-widest" id="nav-report-page"></button>
+            <button onclick="resetLanguage()" class="text-[10px] text-cyan-400/50 font-ui font-bold text-left mt-10 tracking-widest hover:text-cyan-400" id="nav-changelang"></button>
         </div>
-        <div class="mt-auto opacity-20 text-[10px] uppercase tracking-[4px] text-white">© 2024 EP Team | Excessive Piracy</div>
     </nav>
 
-    <!-- VISTAS PRINCIPALES -->
-    <div class="pt-32 pb-20">
-        <!-- VISTA CATALOGO -->
-        <main id="home-view" class="view-section active px-6 max-w-7xl mx-auto">
-            <div id="mainBanner" class="top-banner">
-                <img src="https://i.ibb.co/Hfb046TK/fa4b7a137758b4d05d00c033090e576f.jpg" class="w-full h-[250px] sm:h-[400px] object-cover">
-                <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-center px-10">
-                    <div class="max-w-md" data-aos="fade-right">
-                        <span class="text-cyan-400 font-ui font-bold text-sm tracking-[5px] uppercase mb-4 block">Premium Release</span>
-                        <h1 class="text-6xl font-brand text-white leading-none mb-6">UNLIMITED EXPERIENCE</h1>
-                    </div>
+    <!-- MAIN CONTENT -->
+    <div class="pt-28 pb-20">
+        <main id="home-view" class="view-section active px-6 max-w-[1500px] mx-auto">
+            <div id="home-banner" data-aos="fade-down">
+                <img src="https://i.ibb.co/Hfb046TK/fa4b7a137758b4d05d00c033090e576f.jpg" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#020202] via-transparent to-transparent flex flex-col justify-end p-8 md:p-12">
+                    <p class="text-cyan-400 font-ui font-bold tracking-[0.4em] text-[10px] mb-2 uppercase" id="banner-tag">Highlight of the Week</p>
+                    <h1 class="text-4xl md:text-7xl font-brand text-white leading-none" id="banner-title">THE NEW ERA OF<br>FREE GAMING</h1>
                 </div>
             </div>
 
-            <!-- Categorías -->
-            <div class="flex items-center gap-4 mb-10 overflow-x-auto pb-4 no-scrollbar">
+            <div class="flex items-center gap-4 mb-10 overflow-x-auto no-scrollbar">
                 <div id="tab-games" class="category-tab active" onclick="switchCategory('games')">JUEGOS</div>
                 <div id="tab-movies" class="category-tab" onclick="switchCategory('movies')">PELÍCULAS</div>
             </div>
 
-            <div class="md:hidden mb-10">
-                <input type="text" id="catalogSearchMobile" class="search-input font-ui" oninput="syncAndRender(this)" placeholder="...">
-            </div>
-
-            <div class="mb-10 flex items-center justify-between">
-                <div class="flex items-center gap-4">
-                    <div class="w-1.5 h-8 bg-cyan-400 rounded-full"></div>
-                    <h2 class="font-brand text-3xl text-white" id="counter-label"></h2>
+            <div class="mb-8 flex items-center justify-between opacity-60">
+                <div class="flex items-center gap-2">
+                    <div class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></div>
+                    <span id="counter-label" class="font-ui font-bold text-[10px] tracking-widest"></span>
                 </div>
-                <span id="game-total-count" class="bg-cyan-400/10 text-cyan-400 font-bold px-5 py-2 rounded-2xl border border-cyan-400/20 text-lg">0</span>
+                <span id="game-total-count" class="font-brand text-xl text-white">0</span>
             </div>
 
-            <div id="gameGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 sm:gap-8">
-                <div class="skeleton aspect-[2/3] w-full"></div>
-            </div>
+            <div id="gameGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5"></div>
         </main>
 
-        <!-- VISTA DETALLE -->
-        <section id="detail-view" class="view-section px-6">
-            <div class="max-w-6xl mx-auto">
-                <button onclick="navigate('home')" id="btn-back" class="group mb-10 text-cyan-400 font-ui text-lg uppercase flex items-center gap-3 hover:text-white transition-colors">
-                    <span class="transition-transform group-hover:-translate-x-2 text-2xl">←</span> <span class="font-bold"></span>
-                </button>
+        <!-- DETALLE -->
+        <section id="detail-view" class="view-section hidden px-6 max-w-6xl mx-auto">
+            <button onclick="navigate('home')" id="btn-back" class="mb-10 flex items-center gap-3 text-white/30 hover:text-cyan-400 transition-all font-ui font-bold tracking-widest text-[10px] uppercase">
+                <!-- Se llena via JS -->
+            </button>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                <div class="lg:col-span-7">
+                    <img id="detailImg" class="w-full rounded-3xl border border-white/5 shadow-2xl aspect-video object-cover">
+                </div>
                 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20 pb-24">
-                    <div class="lg:col-span-7">
-                        <div class="relative group">
-                            <div class="absolute inset-0 bg-cyan-400/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                            <img id="detailImg" class="w-full rounded-[3rem] border border-white/5 aspect-video object-cover shadow-[0_40px_80px_rgba(0,0,0,0.6)] relative z-10">
-                        </div>
-                    </div>
-                    <div class="lg:col-span-5 flex flex-col justify-center">
-                        <div class="inline-flex items-center gap-3 text-xs text-cyan-400 font-bold uppercase mb-6 px-4 py-2 bg-cyan-400/10 rounded-xl border border-cyan-400/20 self-start" id="verified-label"></div>
-                        <h2 id="detailTitle" class="text-7xl font-brand mb-6 text-white leading-none"></h2>
-                        <p id="detailDesc" class="text-gray-400 text-lg leading-relaxed mb-10"></p>
-                        
-                        <div id="reqsContainer" class="mb-10"></div>
-                        <div id="downloadArea"></div>
-
-                        <!-- Botón Reportar -->
-                        <div class="text-center">
-                            <button id="reportBtn" onclick="toggleReportTerminal()" class="report-btn">REPORTAR ERROR</button>
-                            <div id="reportTerminal" class="hidden mt-4 p-6 bg-black/60 border border-red-500/20 rounded-3xl animate-in slide-in-from-top-4 duration-300">
-                                <textarea id="reportMessage" class="w-full bg-black/40 border border-white/10 rounded-xl p-3 text-sm text-white outline-none focus:border-red-500 mb-3" rows="2" placeholder="Describa el problema..."></textarea>
-                                <button onclick="sendReport()" class="w-full py-2 bg-red-500 text-white font-bold rounded-xl hover:bg-red-600 transition-colors text-xs uppercase tracking-widest">Enviar Reporte</button>
-                            </div>
-                        </div>
+                <div class="lg:col-span-5">
+                    <span class="px-2 py-1 bg-cyan-400/10 text-cyan-400 font-ui font-bold text-[9px] rounded mb-4 inline-block border border-cyan-400/20" id="verified-label"></span>
+                    <h2 id="detailTitle" class="text-5xl md:text-6xl font-brand mb-6 text-white"></h2>
+                    <p id="detailDesc" class="text-white/50 text-sm leading-relaxed mb-8"></p>
+                    
+                    <div id="reqsContainer" class="mb-8"></div>
+                    <div id="downloadArea"></div>
+                    
+                    <button id="reportBtn" onclick="toggleReportTerminal()" class="mt-8 text-[9px] font-bold tracking-[0.3em] text-white/20 hover:text-red-500 uppercase transition-all"></button>
+                    
+                    <div id="reportTerminal" class="hidden mt-4 p-6 glass-panel border-red-500/20">
+                        <textarea id="reportMessage" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white text-xs mb-3 outline-none" rows="3"></textarea>
+                        <button onclick="sendReport()" class="w-full py-3 bg-red-600/20 text-red-500 font-bold rounded-xl text-[10px] uppercase border border-red-600/20" id="report-send-btn"></button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- VISTA PETICIONES -->
-        <section id="request-view" class="view-section px-6">
-            <div class="max-w-3xl mx-auto py-20 text-center">
-                <h1 class="text-8xl font-brand mb-6 text-white" id="req-view-title" data-aos="fade-down"></h1>
-                <p class="text-gray-500 font-ui text-xl uppercase tracking-[10px] mb-16" data-aos="fade-up">Input Target Data</p>
-                
-                <div class="bg-white/[0.02] p-12 rounded-[4rem] border border-white/5 shadow-2xl backdrop-blur-xl relative" data-aos="zoom-in">
-                    <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-cyan-400 text-black font-bold px-6 py-1 rounded-full text-xs uppercase tracking-tighter">Request Terminal</div>
-                    <input type="text" id="requestInput" class="w-full bg-black/40 border border-white/10 p-7 rounded-3xl mb-8 text-white outline-none font-ui text-2xl text-center focus:border-cyan-400 transition-all" placeholder="...">
-                    <button onclick="sendRequest()" class="download-btn text-3xl py-6" id="req-btn"></button>
-                </div>
+        <!-- SOLICITUDES -->
+        <section id="request-view" class="view-section hidden px-6 max-w-2xl mx-auto py-10">
+            <div class="text-center mb-12">
+                <h1 class="text-6xl font-brand text-white" id="req-view-title"></h1>
+                <p class="text-cyan-400 font-ui tracking-[0.3em] text-[10px] uppercase" id="req-view-tag">Direct connection to EP Team</p>
+            </div>
+            <div class="glass-panel p-10 text-center">
+                <input type="text" id="requestInput" class="w-full bg-transparent border-b border-white/10 p-4 mb-8 text-white text-xl text-center outline-none focus:border-cyan-400 transition-all">
+                <button onclick="sendRequest()" class="download-btn" id="req-btn"></button>
             </div>
         </section>
     </div>
@@ -493,100 +331,158 @@
         const WEBHOOK_DOWNLOADS = "https://discord.com/api/webhooks/1498103534795755554/euR5SIeFJmzNvusuJ9es2t_WY7RvVU7DHdqdcAzH_vQREkSq2Ou80HZW8rsIjxTfIdbG";
 
         const i18n = {
-            es: { search: "BUSCAR...", catalog: "CATÁLOGO", request: "SOLICITAR", changelang: "🌐 CAMBIAR IDIOMA", available: "CATÁLOGO DISPONIBLE", download: "DESCARGAR APK", downloadMovie: "VER PELÍCULA", back: "← VOLVER", send: "ENVIAR PETICIÓN", placeholder: "NOMBRE DEL JUEGO...", noAsk: "• No volver a preguntar / Don't ask again", new: "NUEVO", reqsTitle: "REQUISITOS DEL SISTEMA", verifiedBy: "✓ ARCHIVO VERIFICADO", name: "Español" },
-            en: { search: "SEARCH...", catalog: "CATALOG", request: "REQUEST", changelang: "🌐 CHANGE LANGUAGE", available: "AVAILABLE CATALOG", download: "DOWNLOAD APK", downloadMovie: "WATCH MOVIE", back: "← BACK", send: "SEND REQUEST", placeholder: "GAME NAME...", noAsk: "• Don't ask again", new: "NEW", reqsTitle: "SYSTEM REQUIREMENTS", verifiedBy: "✓ VERIFIED FILE", name: "English" }
+            es: { 
+                search: "BUSCAR...", catalog: "CATÁLOGO", request: "SOLICITAR", changelang: "🌐 CAMBIAR IDIOMA", 
+                available: "UNIDADES VERIFICADAS", download: "DESCARGAR APK", downloadMovie: "VER PELÍCULA", 
+                back: "VOLVER", send: "ENVIAR PETICIÓN", placeholder: "NOMBRE DEL JUEGO...", 
+                noAsk: "Recordar identidad", new: "NUEVO", reqsTitle: "REQUISITOS", 
+                verifiedBy: "✓ ARCHIVO SEGURO", name: "Español", wanted: "HOT", 
+                report: "REPORTAR ERROR", reportPage: "ERROR DE SISTEMA", reportSend: "ENVIAR INFORME", 
+                reportPlace: "DESCRIBA LA FALLA...", bannerTag: "LO MEJOR DE LA SEMANA",
+                bannerTitle: "LA NUEVA ERA DEL<br>JUEGO GRATIS", reqTag: "CONEXIÓN DIRECTA CON EP TEAM",
+                gamesTab: "JUEGOS", moviesTab: "PELÍCULAS", ram: "RAM", cpu: "CPU", storage: "ESPACIO", 
+                version: "VERSIÓN", res: "RESOLUCIÓN", lang: "IDIOMA", source: "FUENTE", year: "AÑO"
+            },
+            en: { 
+                search: "SEARCH...", catalog: "CATALOG", request: "REQUEST", changelang: "🌐 CHANGE LANGUAGE", 
+                available: "VERIFIED UNITS", download: "DOWNLOAD APK", downloadMovie: "WATCH MOVIE", 
+                back: "BACK", send: "SEND REQUEST", placeholder: "GAME NAME...", 
+                noAsk: "Remember identity", new: "NEW", reqsTitle: "REQUIREMENTS", 
+                verifiedBy: "✓ SECURE FILE", name: "English", wanted: "HOT", 
+                report: "REPORT ERROR", reportPage: "SYSTEM ERROR", reportSend: "SEND REPORT", 
+                reportPlace: "DESCRIBE FAILURE...", bannerTag: "HIGHLIGHT OF THE WEEK",
+                bannerTitle: "THE NEW ERA OF<br>FREE GAMING", reqTag: "DIRECT CONNECTION TO EP TEAM",
+                gamesTab: "GAMES", moviesTab: "MOVIES", ram: "RAM", cpu: "CPU", storage: "STORAGE", 
+                version: "VERSION", res: "RESOLUTION", lang: "LANGUAGE", source: "SOURCE", year: "YEAR"
+            },
+            pt: { 
+                search: "BUSCAR...", catalog: "CATÁLOGO", request: "PEDIR", changelang: "🌐 MUDAR IDIOMA", 
+                available: "UNIDADES VERIFICADAS", download: "BAIXAR APK", downloadMovie: "VER FILME", 
+                back: "VOLTAR", send: "ENVIAR PEDIDO", placeholder: "NOME DO JOGO...", 
+                noAsk: "Lembrar identidade", new: "NOVO", reqsTitle: "REQUISITOS", 
+                verifiedBy: "✓ ARQUIVO SEGURO", name: "Português", wanted: "HOT", 
+                report: "REPORTAR ERRO", reportPage: "ERRO DE SISTEMA", reportSend: "ENVIAR INFORME", 
+                reportPlace: "DESCREVA A FALHA...", bannerTag: "DESTAQUE DA SEMANA",
+                bannerTitle: "A NOVA ERA DO<br>JOGO GRÁTIS", reqTag: "CONEXÃO DIRETA COM A EQUIPE EP",
+                gamesTab: "JOGOS", moviesTab: "FILMES", ram: "RAM", cpu: "CPU", storage: "ESPAÇO", 
+                version: "VERSÃO", res: "RESOLUÇÃO", lang: "IDIOMA", source: "FONTE", year: "ANO"
+            }
         };
 
-        const flags = { es: '🇪🇸', en: '🇺🇸' };
-
-        let currentGameId = null;
-        let curLang = 'es';
-        let scrollPos = 0;
-        let currentCategory = 'games';
+        const flags = { es: '🇪🇸', en: '🇺🇸', pt: '🇧🇷' };
+        let currentGameId = null, curLang = 'es', scrollPos = 0, currentCategory = 'games';
 
         const movies = [
-            { id: 'substance', title: 'La Sustancia (2024)', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4UC3Bidf2pWudrBiMfRj2Yz1FEy5Eb8XuWNHbnA042R_zb42tyuHpOQdH&s=10', screen: 'https://ichef.bbci.co.uk/ace/ws/640/cpsprodpb/37e0/live/0d33ac10-f5e9-11ef-9e7b-21c750c82d19.png.webp', link: 'https://play.cuevana.life/es/detail/movie/6sRswmczORzjTeHdRH0ee-The-Substance', desc: { es: 'Una celebridad en declive decide usar una droga del mercado negro: una sustancia que replica las células y crea temporalmente una versión más joven y perfecta de ella misma. Una obra maestra del body-horror sobre la obsesión por la belleza.', en: 'A fading celebrity decides to use a black-market drug: a cell-replicating substance that temporarily creates a younger, better version of herself. A body-horror masterpiece about beauty obsession.' }, reqs: ["Calidad: HD 1080p", "Idioma: Español", "Servidor: Cuevana", "Año: 2024"], showNewBadge: true, type: 'movie' },
-            { id: 'minecraft_movie', title: 'Minecraft (2025)', poster: 'https://m.media-amazon.com/images/M/MV5BYzFjMzNjOTktNDBlNy00YWZhLWExYTctZDcxNDA4OWVhOTJjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://i.blogs.es/6554f1/miencraft-pelicula/500_333.jpeg', link: 'https://video.playspelis.com/es/detail/movie/PI97tF4VKHGs7NkDVVnLR-A-Minecraft-Movie', desc: { es: 'La esperada adaptación cinematográfica del fenómeno mundial de Mojang. Acompaña a un grupo de inadaptados mientras exploran un mundo de bloques donde la imaginación es el único límite.', en: 'The highly anticipated film adaptation of the global phenomenon by Mojang. Follow a group of misfits as they explore a blocky world where imagination is the only limit.' }, reqs: ["Calidad: HD Digital", "Idioma: Español", "Fuente: PlaySpelis", "Año: 2025"], showNewBadge: true, type: 'movie' }
+            { id: 'substance', title: 'La Sustancia (2024)', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4UC3Bidf2pWudrBiMfRj2Yz1FEy5Eb8XuWNHbnA042R_zb42tyuHpOQdH&s=10', screen: 'https://ichef.bbci.co.uk/ace/ws/640/cpsprodpb/37e0/live/0d33ac10-f5e9-11ef-9e7b-21c750c82d19.png.webp', link: 'https://play.cuevana.life/es/detail/movie/6sRswmczORzjTeHdRH0ee-The-Substance', desc: { es: 'Una celebridad en declive decide usar una droga del mercado negro.', en: 'A fading celebrity decides to use a black-market drug.', pt: 'Uma celebridade em declínio decide usar uma droga.' }, reqs: ["1080p", "Latino", "Cuevana", "2024"], showNewBadge: true, type: 'movie' },
+            { id: 'minecraft_movie', title: 'Minecraft (2025)', poster: 'https://m.media-amazon.com/images/M/MV5BYzFjMzNjOTktNDBlNy00YWZhLWExYTctZDcxNDA4OWVhOTJjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://i.blogs.es/6554f1/miencraft-pelicula/500_333.jpeg', link: 'https://video.playspelis.com/es/detail/movie/PI97tF4VKHGs7NkDVVnLR-A-Minecraft-Movie', desc: { es: 'La esperada adaptación cinematográfica.', en: 'The film adaptation.', pt: 'A adaptação cinematográfica.' }, reqs: ["HD Digital", "Español", "PlaySpelis", "2025"], showNewBadge: true, type: 'movie' }
         ];
 
         const games = [
-            { id: 'bendy', title: 'Bendy and the Ink Machine', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp-5QUDSuNnhIBjdpZvrsbhNCFcat16zPc3_lA3D1yGgSV1YTDSmFuAx78&s=10', screen: 'https://imgcdn.latestmodapks.com/api/resize?url=https://www.latestmodapks.com/wp-content/uploads/2022/12/2.-Bendy-and-The-Ink-Machine-APK.jpg', link: 'https://cdn600.onehost.io/2023/Bendy_1.0.909_1765602812_latestmodapks.com.apk', desc: { es: 'Un juego de puzles y terror en primera persona con una atmósfera única de dibujos animados de los años 30. Explora los rincones oscuros de Joey Drew Studios y sobrevive a las pesadillas de tinta.', en: 'A first-person puzzle-action-horror game with a unique 1930s cartoon atmosphere. Explore the deep dark corners of Joey Drew Studios and survive the ink nightmares.' }, reqs: ["3GB RAM", "Octa-Core 2.0GHz", "1.5GB", "8.0+"], showNewBadge: true, type: 'game' },
-            { id: 'incredibox', title: 'Incredibox', poster: 'https://m.media-amazon.com/images/M/MV5BYTUzNGVmMDMtZDJjZS00NzQ1LTg1NjQtZTNkNjFmMjk5ODNiXkEyXkFqcGc@._V1_.jpg', screen: 'https://images.sftcdn.net/images/t_app-cover-s,f_auto/p/ff8f5102-802a-4360-94ec-0b3da3efaa01/2195587113/incredibox-2.png', link: 'https://files.an1.net/incrediboxs_1.0.0-an1.com.apk', desc: { es: 'Crea tu propia música con la ayuda de una alegre banda de beatboxers.', en: 'Create your own music with the help of a merry band of beatboxers.' }, reqs: ["2GB RAM", "Quad-Core 1.8GHz", "280MB", "6.0+"], showNewBadge: true, type: 'game' },
-            { id: 'rfs', title: 'RFS Real Flight Simulator', poster: 'https://cdn-bgp.bluestacks.com/BGP/latam/gametiles_it.rortos.realflightsimulator.jpg', screen: 'https://play-lh.googleusercontent.com/Djv67X-iZFLX4XlZOhqlNBEPikYgcZuh68KxkKkRFamgUTqY6LjsB9myO3EfgKGgI8E=w526-h296-rw', link: 'https://download2389.mediafire.com/uffcmelytmmg3doulF1GPmYDmxjxmB7UxzNw0Q4NNB1D8QHRNJr7nSNqdo-mJDfvGSNR6N7WeBCVAO5VHga1PNguj_pGDZD9RglAMSCN9dZ7_mQFvtUyf56qujefbYULuSD0Cbz4jy6eiXEP_DsfuG6uLWydYlR2wiFZs4J7MVI0prs/736nkkeurfhfncx/real-flight-simulator_3.1.3+-+espacioapk.com.apk', desc: { es: 'Simulador de vuelo avanzado con gráficos realistas.', en: 'Advanced flight simulator with realistic graphics.' }, reqs: ["3GB RAM", "Octa-Core 2.2GHz", "500MB", "8.0+"], showNewBadge: true, type: 'game' },
-            { id: 'longing', title: 'The Longing', poster: 'https://upload.wikimedia.org/wikipedia/en/5/53/TheLongingVideoGame_CoverArt.png', screen: 'https://img.apkvision.org/the-longing/the-longing-6.webp', link: 'https://dl.apkvision.org/the-longing/The-Longing-v1.25-full-apkvision.apk', desc: { es: 'Un juego inusual de espera y soledad. Juega como una sombra que debe esperar 400 días para despertar a su rey.', en: 'An unusual game of waiting and loneliness. Play as a shade who must wait 400 days to awaken its king.' }, reqs: ["3GB RAM", "Octa-Core 2.0GHz", "700MB", "7.0+"], showNewBadge: true, type: 'game' },
-            { id: 'paranormal_inc', title: 'Paranormal Inc', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkrco7MMtcruyYCL293dFW9pFPVXUerJyb07kpN5o8ax2cd8ICmI6MBuqp&s=10', screen: 'https://img.apkvision.org/paranormal-inc/paranormal-inc-4.webp', link: 'https://dl.apkvision.org/paranormal-inc/Paranormal-Inc-v7.1-full-apkvision.apk', desc: { es: 'Investiga fenómenos paranormales en esta experiencia inmersiva de terror.', en: 'Investigate paranormal phenomena in this immersive horror experience.' }, reqs: ["3GB RAM", "Octa-Core 2.0GHz", "230MB", "9.0+"], showNewBadge: true, type: 'game' },
-            { id: 'the_run', title: 'The Run – interactive film', poster: 'https://m.media-amazon.com/images/M/MV5BNDg0MWZkYjAtZTY0ZS00YzVlLWEyMGEtZDUyMjc4NDBmYzRiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN-PEUo2P7DH65F1z2A3bqjGoby5QlzqZsnYFhATmcGQRODpgvbPvyaBGe&s=10', link: 'https://dl.apkvision.org/the-run-interactive-film/The-Run-Interactive-Film-v1.0-full-apkvision.apk', desc: { es: 'Una experiencia cinematográfica interactiva donde cada decisión cuenta para tu supervivencia.', en: 'An interactive cinematic experience where every decision counts for your survival.' }, reqs: ["4GB RAM", "Octa-Core 2.2GHz", "300MB", "9.0+"], showNewBadge: false, type: 'game' },
-            { id: 'gta3def', title: 'Grand Theft Auto III', poster: 'https://images.g2a.com/323x433/1x1x1/grand-theft-auto-iii-p10000007301/590df4f35bafe357036a1c7d', screen: 'https://img.apkvision.org/gta-iii-definitive/gta-iii-definitive-4.webp', link: 'https://apkvision.org/games/action/gta-iii-definitive-115254/download/v1.84.3-apk/', desc: { es: 'The Definitive Edition: El clásico que lo cambió todo, ahora optimizado para móviles.', en: 'The Definitive Edition: The classic that changed everything, now optimized for mobile.' }, reqs: ["4GB - 6GB", "Snapdragon 865", "1.68GB", "11.0+"] },
-            { id: 'rdr', title: 'Red Dead Redemption', poster: 'https://upload.wikimedia.org/wikipedia/en/a/a7/Red_Dead_Redemption.jpg', screen: 'https://img.apkvision.org/red-dead-redemption/red-dead-redemption-2.webp', link: 'https://dl.apkvision.org/red-dead-redemption/RDR-ROCKSTAR-v1.58.63226194-vanilla-full-apkvision.apks', desc: { es: 'La épica historia del forajido John Marston en el salvaje oeste.', en: 'The epic story of outlaw John Marston in the wild west.' }, reqs: ["6GB - 8GB", "Octa-Core 2.8GHz", "10GB", "11.0+"] },
-            { id: 'hn2', title: 'Hello Neighbor 2', poster: 'https://i.gadgets360cdn.com/products/large/MV5BOThhODY3OTYtYjRiZC00M2IxLWEwNDQtMDg0ZDk1YzJlODU1XkEyXkFqcGdeQXVyMTUxOTc4ODEz.-V1-FMjpg-UX1000-1000x1500-1669702109.jpg', screen: 'https://unreal-play-studio.com/asset/hello-neighbor-2/AMt_+0.webp', link: 'https://download2393.mediafire.com/bz7qbwzvjuwgTzOdZT8hC3HXsCgawmEiH0XKkQQH8o85luobIkW8hjkVdU5Go8Tspvl8F96ywYj4nQlKcMGOPtmgFbFuUImjG7CPoNLlwvSs6dNKuukuEjXWgElIfgk6fYvgt2IIWi_rkPxo1p4-1VWT6Yd04d8tXMEeRgkdcJ9GC90/ygxlaj72vkll9oi/Hello+Neighbor+2+v0.1.3+-+espacioapk.com.apk', desc: { es: 'Descubre los secretos que esconde tu vecino.', en: 'Uncover the neighbor secrets.' }, reqs: ["4GB RAM", "Snapdragon 855", "3GB", "8.0+"] },
-            { id: 're4beta', title: 'Resident evil 4 BETA', poster: 'https://m.media-amazon.com/images/M/MV5BZWY3ZjRiNTctYzU2My00NDIwLWI3NTAtNmUwZDBlZjlhYjI4XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://i.redd.it/resident-evil-4-mobile-hd-android-v0-r45d7j5wvhhc1.jpg?width=1001&format=pjpg&auto=webp&s=22ab2d8a664fb14eed998c9ec4e596d0671f152e', link: 'https://download2444.mediafire.com/ur8khq91qaogWIJ85ZTUbLTeIl0KrfSDzK8O0-jnwOyE0eWs-g411i4eRLlylZsNi_9ECtlaiiM7gYskQ4VFiz1L0hrkDfBzBdLtf-iU0T5R8goyzU36_TsOK8ElnM0vuzDwGBThgJrOe7iES0f6EJ-mdhTA2zvC7bv-Hiwyk2SMZoQ/resen04k0nveqp8/RESDT+EVIL+4+BETA_%E2%9C%85SIN+VIRUS.apk', desc: { es: 'Beta clásica de supervivencia y terror.', en: 'Classic survival horror Beta.' }, reqs: ["3GB RAM", "Octa-Core 2.0", "350MB", "8.0+"] },
-            { id: 'fnafsotm', title: 'FNaF Secret of the Mimic', poster: 'https://static.wikia.nocookie.net/triple-a-fazbear/images/c/cb/SecretoftheMimic_CoverKeyArt.jpg/revision/latest?cb=20250213034421', screen: 'https://img.apkvision.org/five-nights-at-freddys-secret-of-the-mimic/five-nights-at-freddys-secret-of-the-mimic-10.webp', link: 'https://download2389.mediafire.com/blz1demeye5gZAQRqphYEvnLNNVOXtfSksNDmRP8p0JJUNjt9jVxVycFot2-Xx-NSIxv5scmz0tRtHpM_dmj1gMtYuyivW_u48wTDjsyZz9pIovlHBetV6kHibY4MOKMSyaTpOJdpH_8_qNDPaSkARhHCSimVpOz7HISKdBt0WvTgV8/q73wqvyyjisxaqw/fnaf+sotm+mobile+v0.1.9+-+espacioapk.com.apk', desc: { es: 'Explora secretos del Mimic.', en: 'Explore Mimic secrets.' }, reqs: ["4GB RAM", "Octa-Core 2.4", "2.5GB", "10+"] },
-            { id: 'ln1', title: 'Little Nightmares', poster: 'https://image.api.playstation.com/vulcan/ap/rnd/202505/2806/bf55ecf7705258517e66f19128536c4835ec475a25ec1cf8.jpg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ25onFavqxqCa9TzWTPI6AHrWvU3s3-uiJKDgzevnywPviKusX2fs7X4Lu&s=10', link: 'https://download2436.mediafire.com/06npzj2kkyogijmvX5Z3GlkhrR4d-zRP31vdhVT2OncmDk7UZ3l4i73JWUp6tuEP_kQ8fi4GD2QyvbF2n9DTPT5fi0yH7GiOqn6PdlIYEGmfAABh2J5ZAyBL89vGdc1sEHEDE4-gLyjgjeUdyNguN3q_2mMj3Q1X3WH3mO3zXYBvkuU/y7hznysx5ube1sy/Litle+Naightmares_%E2%9C%85SIN+VIRUS.apk', desc: { es: 'Ayuda a Seis a escapar.', en: 'Help Six escape.' }, reqs: ["4GB RAM", "Octa-Core 2.0", "1.5GB", "9.0+"] },
-            { id: 'hff', title: 'Human Fall Flat', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLgujSbYHhalK_BA7ViEBzgbyTsdjquFxBPGz4AQROeG6t8fs_8Xo5-kmN&s=10', screen: 'https://img.apkvision.org/human-fall-flat/human-fall-flat-5.webp', link: 'https://download2393.mediafire.com/juxht3ku9fog1zmPAw5vWZv1ANuUbywxhMUOn8tVXhQbGVNaAKrVy5XnxrN19GRqXKYYHeA9-xgNIMOQNND3EQUsaT7yeLE_7Whbp4b81vL2BZDcUjnX7dZ9Kv6WnuE4flns3Lb-jXJmj-WPVRNP2f2KnW4fBoWJna93huuxUYtU5ME/6gyc9xlhng29hps/Human-Fall-Flat-v2.5.1-full-apkvision.apk', desc: { es: 'Física y plataformas.', en: 'Physics and platforms.' }, reqs: ["3GB RAM", "1.8GHz", "800MB", "9.0+"] },
-            { id: 'gtav', title: 'Grand Theft Auto V', poster: 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Grand_Theft_Auto_V.png/250px-Grand_Theft_Auto_V.png', screen: 'https://root-nation.com/wp-content/uploads/2021/08/GTA5-Mobile-APK-02.jpg', link: 'https://download2389.mediafire.com/u6d6yje090tgoxg5iijecH20XypblqLzfwYFryiMeozS6bD76PnGqyUzIiwS2NzQUmmTid5W16mKLjAZx86uoDY7UcG4WV0ZyQ9QmTR2reFn17mILLv_b6tu8eGIyHkOPE55nq_36iqv2ZGodDn5EPtZ-ux8xJ5rFDUI-3KroBbnGoc/hjoahu9to2lyal0/Grand+Theft+Auto+V+-+espacioapk.com.apk', desc: { es: 'Mundo abierto Rockstar.', en: 'Rockstar open world.' }, reqs: ["2GB RAM", "1.5GHz", "500MB", "8.0+"] },
-            { id: 'fnafsb', title: 'FNaF Security Breach', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlLcK2U0rmkMIKo7BDuYMM8vpJFmzJ68dJd7IuoRMO4ZLzi7qqlauQ7icKX7Y4gyKMKxi3a6WYA4QS5gEVPHvD7hIPuQh_ctq6LJZndg&s=10', screen: 'https://unreal-play-studio.com/asset/fnaf-security-breach-mobile/7xm6jD.webp', link: 'https://download2438.mediafire.com/c41li4v2ttpgq7IP0SzVJl8i78LJ0Lll2Vvc_fqUmP4yknc2FtxatDge2OHDSvVbjXfm9uG2nnEo79Gzx_PDh4M5_6v3V1gNGyAx8K6EkILfgB7VVhryzyyrbfIaVtJXL6XMnMprDgnthlaEJ8DJeY9DClUw3KGSql_7fcv1oFxDZn0/8tnjgy3i2u4ho60/fnaf+security+breach+v1.7.0.1+-+espacioapk.com.apk', desc: { es: 'Pizzaplex terror.', en: 'Pizzaplex horror.' }, reqs: ["4GB RAM", "2.0GHz", "2GB", "9.0+"] },
-            { id: 'pvzfusion', title: 'Plants vs Zombies Fusion', poster: 'https://thepvzfusion.pro/wp-content/uploads/2026/02/images-12-1.webp', screen: 'https://imgcdn.latestmodapks.com/api/resize?url=https://www.latestmodapks.com/wp-content/uploads/2024/10/pvz-fusion-3-media.webp', link: 'https://file.pvzfusionapk.mx/pvz-fusion-v3.4.2-pvzfusionapk.mx.apk', desc: { es: 'Fusión definitiva con nuevas mecánicas.', en: 'Ultimate fusion with new mechanics.' }, reqs: ["2GB RAM", "Octa-Core 1.8", "600MB", "7.0+"] },
-            { id: 'gtasa', title: 'Grand Theft Auto San Andreas', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0HDsIEYbbjaj7Ga-y6R7ubG_XRz4wC2DI9g&s', screen: 'https://play-lh.googleusercontent.com/XJIXWvMtYKOfdE8k_353XZwKEHE63JigwjZnsSyhUH6VzOeUHhxouqGHpy7f1nQGyQ=h650', link: 'https://download2434.mediafire.com/itlmicpzebgMBogY-jCfIBRmWkh1HWyrEkejDMdlycF5xTkWgt16TmW3AOguA3D69OoA3zcNo8ICitq91-wYS30LmhPbj4ga0CSGa8T7nnorUImnXplp8e2VONcjRYtAMpZL_kDNgTCHAqvS8OACJGry3BRqjVprYrBfh4WldFlvQE/5brnv5qxhtng8no/gta+san+andreas+v2.11.277+-+espacioapk.com.apk', desc: { es: 'CJ regresa a Los Santos.', en: 'CJ returns to Los Santos.' }, reqs: ["3GB RAM", "Quad-Core 1.8", "3GB", "9.0+"] },
-            { id: 'p5', title: 'Poppy Playtime 5', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6NCirZXspnRehiwpdhsRa4wQ_ecXusChoiDMJ2oVLablQGCWjCBLlfG1Z&s=10', screen: 'https://img.itch.zone/aW1hZ2UvNDM5NDI0NS8yNjg3NTAzMS5wbmc=/original/6YkwSP.png', link: 'https://download1587.mediafire.com/x90ixzasf6ygfhvAEodBgFnHkAJewsVEd2_79NTzQm5DrwYZZvRFduSdFE615obipXfhTg8WuMNVRRDa1S9-6KO7QCUvK1cIud79bbutwoPVniN4RbiIS717bfEWFurTY74Uga6UxA38xmZNApOvwoEGsad-tGKb9oIPA0AGuJK-ZxA/ouo5nqc2upq6w24/PoppyPlaytime5+%283%29.apk', desc: { es: 'V1.6: Nuevos mapas y mecánicas.', en: 'V1.6: New maps and mechanics.' }, reqs: ["6GB RAM", "Octa-Core 2.6", "2.5GB", "10+"] },
-            { id: 'gtavc', title: 'Grand Theft Auto: Vice City', poster: 'https://static.wikia.nocookie.net/esgta/images/0/0f/Grand_Theft_Auto_Vice_City.JPG/revision/latest/scale-to-width-down/1200?cb=20161127222945', screen: 'https://img.apkvision.org/grand-theft-auto-vice-city/grand-theft-auto-vice-city-1.webp', link: 'https://dl.apkvision.org/grand-theft-auto-vice-city/GTA-VC-v1.12.259-full-apkvision.apk', desc: { es: 'Los 80 en Vice City.', en: 'The 80s in Vice City.' }, reqs: ["2GB RAM", "1.5GHz", "1.5GB", "8.0+"] },
-            { id: 'subn_bz', title: 'Subnautica: Below Zero', poster: 'https://store-images.s-microsoft.com/image/apps.25913.13546341381523259.8f30b71b-aac8-4816-a999-212ef85f8876.1b6b3f4d-3d78-409e-acc2-57b4950505b7', screen: 'https://img.apkvision.org/subnautica-below-zero/subnautica-below-zero-1.webp', link: 'https://dl.apkvision.org/subnautica-below-zero/Subnautica-Below-Zero-v1.22.55044-full-apkvision.apk', desc: { es: 'Gélida supervivencia.', en: 'Frozen survival.' }, reqs: ["4GB RAM", "2.4GHz", "3GB", "9.0+"] },
-            { id: 'p4', title: 'Poppy Playtime 4', poster: 'https://assetsio.gnwcdn.com/Poppy-Playtime-Chapter-4-promo-image-showing-a-toy-character-extending-its-hand-towards-the-camera.jpg?width=1200&height=1200&fit=crop&quality=100&format=png&enable=upscale&auto=webp', screen: 'https://img.itch.zone/aW1hZ2UvMzQxOTQ2MC8yMDQxODI1NC5wbmc=/original/hVzrVs.png', link: 'https://piro775.itch.io/toy-factory-chapter-4', desc: { es: 'Playtime historia.', en: 'Playtime story.' }, reqs: ["6GB RAM", "2.8GHz", "2GB", "10+"] },
-            { id: 'silksong', title: 'Hollow Knight Silksong', poster: 'https://m.media-amazon.com/images/M/MV5BMjA4NWE1YWMtNjQ4ZC00Y2Q3LWFjMGEtNGVhM2FmYzJjMzM1XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://img.apkvision.org/hollow-knight-silksong/hollow-knight-silksong-2.webp', link: 'https://download2447.mediafire.com/w84peg5sx8fgBc-7cVVmCeWeTHT7srV5XEq4NbfMtzlim6gxgE54Vr-cxARCyg2zmDRL5j6HiNz_i9PGgKqstW7i9WWZow41PaBe8omyaRLz7n8BeztpmXVbOQMB2-2soj3Z3mjB1Tu100nj-S6iMiqkIH5w3aDUGplF1Y7s_4zHS4I/h18frmho5yk6liy/HW+Silksing+v1.20+-+espacioapk.com.apk', desc: { es: 'Hornet en reino nuevo.', en: 'Hornet in new kingdom.' }, reqs: ["4GB RAM", "2.0GHz", "2GB", "9.0+"] },
-            { id: 'p3', title: 'Poppy Playtime 3', poster: 'https://http2.mlstatic.com/D_NQ_NP_615692-MLM96301603984_102025-O.webp', screen: 'https://unreal-play-studio.com/asset/poppy-playtime-3/o4ozI7.webp', link: 'https://unreal-play-studio.com/games/poppy-playtime-chapter-3', desc: { es: 'Orfanato Playcare.', en: 'Playcare orphanage.' }, reqs: ["SD 855", "4GB RAM", "3GB", "8.0+"] },
-            { id: 'descenders', title: 'Descenders', poster: 'https://upload.wikimedia.org/wikipedia/en/8/8a/Descenders_cover.jpg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlSbLwRzT8Cn947R3Ri4_XsF3XIxA9m7RRxKyTX_Ncp0b_ywc0ng6X7hbK&s=10', link: 'https://apks.trulhost.com/Descenders-v1.10.3-Mod.apk', desc: { es: 'MTB extremo.', en: 'Extreme MTB.' }, reqs: ["4GB RAM", "2.2GHz", "2.5GB", "9.0+"] },
-            { id: 'miles', title: 'Miles Morales', poster: 'https://static.wikia.nocookie.net/ficcion-sin-limites/images/7/73/Miles_Morales.jpg/revision/latest?cb=20220320020218&path-prefix=es', screen: 'https://img.itch.zone/aW1hZ2UvMzA4ODY5MS8xODQ3MDY1OC5qcGc=/original/EOiKUx.jpg', link: 'https://download2448.mediafire.com/doaqi0p34hbgSi7mQcuB9wuZxs99BBxGjSznCCWArLig-alMXAYJ1289MM8fTj8lmAEVy47CyBZ9eRoboCUtyVFqs1I1zTuqOmVsfsrH7m9XUO5lnXwPK9DewQOm_w8vSTLkVYz5KOCfPa83rTTI2s-Gg1QoF3o-4ziGQgpfMtKAJnw/kqarkaqmh0nhrtx/Spiderman_Miles_Morales_v1_%5Bwww.AndroSU.com%5D.apk', desc: { es: 'Miles Morales móvil.', en: 'Miles Morales mobile.' }, reqs: ["2GB RAM", "1.8GHz", "400MB", "8.0+"] },
-            { id: 'fnaf', title: 'FNaF Spanish', poster: 'https://images.genius.com/b49240eb5e510bb0b56d5abd7b45270d.512x512x1.png', screen: 'https://imag.malavida.com/mvimgbig/download-fs/five-nights-at-freddys-14759-1.jpg', link: 'https://download2391.mediafire.com/4awsa1pfuqkg_ojkGcYFDme4_OXIyK-uykrHLpBkHiOAI8rIJOBB2iqmYFxLLMjIcEJYXvXELlHNavqV-7pg7Ey1fKuzwDK2_-VrYI2f3wbVKBc4JyLVNOPBgDKnmVTqgIuvVrgbv8in3yE9erjX7GMgZUOJD0CgDOOYlvCI7XjU6Ik/7nysoswlpi8cm9l/Five+Nights+at+Freddy%C2%B4s+%28Spanish%29+-+espacioapk.com.apk', desc: { es: 'Terror en español.', en: 'Horror in Spanish.' }, reqs: ["2GB RAM", "2.0GHz", "1GB", "8.0+"] },
-            { id: 'cuphead', title: 'Cuphead + DLC', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSToa5X0umhuLw7OvUtiq8Wu_XVqSPOhfHDYlgq1Be7kg&s=10', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhyD7O9v9JpZqpkl9s6b0_h88E83M5HZeB_aUwaWcVmg&s', link: 'https://download2390.mediafire.com/2apu3aa59cqgUW8WOTsFRW_CNVJY0mQbikGsRMsccfTvqx0mCA1VsOVFXpWHxy6-rjpxC8_t-EuexMVwQ4sy4PBUTuqFcGRcAGx0ZYHszUXnQbCtGC7y0RrkB5KUQsVHYURU8LRC09zUrxTOjL-MeeOO3yfMWCKne3w9LjJY7G88g7A/vdlzhn68ru3nuo5/Cuphead+%2B+DLC+-+v1.0.3+-+VPR.apk', desc: { es: 'Acción DLC incluido.', en: 'Action DLC included.' }, reqs: ["3GB RAM", "2.0GHz", "2.5GB", "9.0+"] },
-            { id: 'hollow', title: 'Hollow Knight', poster: 'https://store-images.s-microsoft.com/image/apps.58959.13847644057609868.8865d2a2-5e11-4424-85ce-1db30a161bd9.41ca3834-331c-4d34-b2c9-7dfe318fd168', screen: 'https://i.ytimg.com/vi/KHsAue9ufQY/maxresdefault.jpg', link: 'https://download2447.mediafire.com/6pwcinoz923g4rm5JW4aO8IZ_LGG0dAEVgbihR-sUpiB4F0lE7n6fdMoQGQARq9I5bs_sN36Jsr-FWjFeTkRQnYOJi-_gJO5PjE4_Aj1kh58gzoMnZG-KRhbPw99mpzUDNmnVM41SPbQHK8g-cmdjWolJi0kUlk7W3g7vxgPdIEXYP8/bsqgq7dnvz6w187/HKVulkanV2.7z', desc: { es: 'Explora reino ruinas.', en: 'Explore ruined kingdom.' }, reqs: ["3GB RAM", "2.0GHz", "1.2GB", "9.0+"] },
-            { id: 'pes2019', title: 'PES 2019 PSP', poster: 'https://oyster.ignimgs.com/mediawiki/apis.ign.com/pro-evolution-soccer-2019/0/08/Pes-2019---button-1525885009367.jpg', screen: 'https://i.ytimg.com/vi/KHsAue9ufQY/maxresdefault.jpg', link: 'https://download2302.mediafire.com/zt3swdmx5iwggX-YguJISo5OqQuIHcplIJd_b1vEHEtaOnBlpT71FRZOj2nh_oPGccO8DImQcmolOwmxwCq8SBpjzRDWHKionveAeEjek8LrIWxEy62SwxiU9zXjcXgiTEnSKLJSzEcChsjyJrHftMo5yXlARDURkA7mkz3HyGD8ychP/dck5ouwiw2d62c0/Pro+Evolution+Pes+2019+PSP+%28USA%29+%28Lost+Media+C19%29.iso', desc: { es: 'PES móvil PSP.', en: 'PSP mobile PES.' }, reqs: ["2GB RAM", "2.0GHz", "1GB", "8.0+"] },
-            { id: 'subnautica', title: 'Subnautica', poster: 'https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/subnautica_cover.JPG', screen: 'https://play-lh.googleusercontent.com/cNG4a8w8Ve05wIItXkxzhmw-Bw0uqA4t4t8LaxnFXR6klkTSe4YbNrALOCR-GI3lTw=w526-h296-rw', link: 'https://download2444.mediafire.com/7i63ty3ufoygSuk3mCe12Re1SXEgAcrulrZRKZXjof3D6ebEB6Lg8GRETd2-RrOl-yHYJ6RblW-LkwnHttGmSSv9wA3lz5bm6rRBywV9hem4mEZf4BUQHcPlh4OsT0KIsrCntqEKals7nOewT19kwsrxjpnPsDNk36ohAu1gxq4hP2g/yxk9uno0d6hq45c/Subnautica+v1.22.83315-espacioapk.com.apk', desc: { es: 'Marte submarino.', en: 'Alien underwater.' }, reqs: ["4GB RAM", "2.2GHz", "2.5GB", "9.0+"] },
-            { id: 'p1', title: 'Poppy Playtime 1', poster: 'https://plusgami.store/cdn/shop/files/Poppy-Playtime-Chapter-1-Juego-Digital-600x748.webp?v=1755981188', screen: 'https://play-lh.googleusercontent.com/4ZxkngWs2YPRF2SdpEk3IL9fjbW5N2C2c7x7IC3Wg1X28dkGBDultx3EGIQkPViWig=w526-h296-rw', link: 'https://download2441.mediafire.com/igmoapc1gtwgA-0TiHJ97w7lu_cCjFWdCe9UNvEtG0VjznLDpeUmlMdXWtKXi-MA8OUaT48VL8nPaWKlyfmepiGF8PILQsX1kaHSBCOnwBsQv5_XKqY6HFVBfK_Qz6n8nFbHHxUamAEqfsw3rbFKhCpcSdldZHtwdKTaEz9u_F9fCck/cc1338960hyor1h/poppy+playtime+v1.0.18+-+espacioapk.com.apk', desc: { es: 'Huggy Wuggy.', en: 'Huggy Wuggy.' }, reqs: ["3GB RAM", "2.0GHz", "1.5GB", "9.0+"] },
-            { id: 'p2', title: 'Poppy Playtime 2', poster: 'https://static.wikia.nocookie.net/doblaje-fanon/images/0/09/PoppyPlaytime2.webp/revision/latest?cb=20260220055258&path-prefix=es', screen: 'https://i.ytimg.com/vi/wvKlIelE9zM/maxresdefault.jpg', link: 'https://download2388.mediafire.com/nbcrjarfplbgTy39ADyYLCWpuQjg-_xOBex_ntmf9WP3kVeYbNhfr4R9gydkmVg3DZkC8HlJaqC6dd2gT2v43mKgYJ77TYZkn8xFAEikSzUZgqjT2hck6spxYkoYZkxwKawQ301GEcedDDNxYs7DKN6ZiLLI3nU6UO5zuLep0sOe8GU/xnfqqjvb8gesqya/Poppy_Playtime_Chapter_2_1.42_1730227580_latestmodapks.com.apk', desc: { es: 'Mommy Long Legs.', en: 'Mommy Long Legs.' }, reqs: ["4GB RAM", "2.0GHz", "2GB", "9.0+"] },
-            { id: 'fnaf2_lat', title: 'FNaF 2 Latino', poster: 'https://es.pickgamer.com/media/3888/Five-Nights-at-Freddy%27s-2-285x380.jpg', screen: 'https://play-lh.googleusercontent.com/LOc2pzjEn1nqtEOtfukauDtZJYMWYuE5VWTHVrsnqzCWqZ3qnBR23ELwfIrfoFfKsD9__B1hInQyZQUNgi6I=w526-h296-rw', link: 'https://download2443.mediafire.com/7yhnowyobazg12rakflefBZyxiYZw7oFyVsSFWTDlABYDmTtHtnDBday11_cNW22Can6iYDDGygPlX98cbsgGwQ8fQUt_QO1VEjEntucQYTSSne94csxl43JtmaAVirQ5zkrgSJCmwyMYsl3Dw8FSXoJilrqCEue6mYOL_yWvVFML0k/qxuqjfb86v0d5kd/Five+Nights+at+Freddys+2+%28Spanish%29+-+espacioapk.com.apk', desc: { es: 'Voces latinas.', en: 'Latin voices.' }, reqs: ["2GB RAM", "1.5GHz", "400MB", "8.0+"] }
+            { id: 'p5', title: 'Poppy Playtime 5', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6NCirZXspnRehiwpdhsRa4wQ_ecXusChoiDMJ2oVLablQGCWjCBLlfG1Z&s=10', screen: 'https://img.itch.zone/aW1hZ2UvNDM5NDI0NS8yNjg3NTAzMS5wbmc=/original/6YkwSP.png', link: 'https://download1587.mediafire.com/x90ixzasf6ygfhvAEodBgFnHkAJewsVEd2_79NTzQm5DrwYZZvRFduSdFE615obipXfhTg8WuMNVRRDa1S9-6KO7QCUvK1cIud79bbutwoPVniN4RbiIS717bfEWFurTY74Uga6UxA38xmZNApOvwoEGsad-tGKb9oIPA0AGuJK-ZxA/ouo5nqc2upq6w24/PoppyPlaytime5+%283%29.apk', desc: { es: 'V1.6: Capítulo más aterrador.', en: 'V1.6: Scariest chapter.', pt: 'V1.6: Capítulo assustador.' }, reqs: ["6GB RAM", "Octa-Core 2.6", "2.5GB", "10+"], showNewBadge: true, isMostWanted: true, type: 'game' },
+            { id: 'bendy', title: 'Bendy and the Ink Machine', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp-5QUDSuNnhIBjdpZvrsbhNCFcat16zPc3_lA3D1yGgSV1YTDSmFuAx78&s=10', screen: 'https://imgcdn.latestmodapks.com/api/resize?url=https://www.latestmodapks.com/wp-content/uploads/2022/12/2.-Bendy-and-The-Ink-Machine-APK.jpg', link: 'https://cdn600.onehost.io/2023/Bendy_1.0.909_1765602812_latestmodapks.com.apk', desc: { es: 'Terror en primera persona años 30.', en: 'Horror game 1930s style.', pt: 'Terror aos 30.' }, reqs: ["3GB RAM", "Octa-Core 2.0GHz", "1.5GB", "8.0+"], showNewBadge: true, type: 'game' },
+            { id: 'incredibox', title: 'Incredibox', poster: 'https://m.media-amazon.com/images/M/MV5BYTUzNGVmMDMtZDJjZS00NzQ1LTg1NjQtZTNkNjFmMjk5ODNiXkEyXkFqcGc@._V1_.jpg', screen: 'https://images.sftcdn.net/images/t_app-cover-s,f_auto/p/ff8f5102-802a-4360-94ec-0b3da3efaa01/2195587113/incredibox-2.png', link: 'https://files.an1.net/incrediboxs_1.0.0-an1.com.apk', desc: { es: 'Crea música con beatboxers.', en: 'Create music with beatboxers.', pt: 'Crie música.' }, reqs: ["2GB RAM", "Quad-Core 1.8GHz", "280MB", "6.0+"], type: 'game' },
+            { id: 'rfs', title: 'RFS Real Flight Simulator', poster: 'https://cdn-bgp.bluestacks.com/BGP/latam/gametiles_it.rortos.realflightsimulator.jpg', screen: 'https://play-lh.googleusercontent.com/Djv67X-iZFLX4XlZOhqlNBEPikYgcZuh68KxkKkRFamgUTqY6LjsB9myO3EfgKGgI8E=w526-h296-rw', link: 'https://download2389.mediafire.com/uffcmelytmmg3doulF1GPmYDmxjxmB7UxzNw0Q4NNB1D8QHRNJr7nSNqdo-mJDfvGSNR6N7WeBCVAO5VHga1PNguj_pGDZD9RglAMSCN9dZ7_mQFvtUyf56qujefbYULuSD0Cbz4jy6eiXEP_DsfuG6uLWydYlR2wiFZs4J7MVI0prs/736nkkeurfhfncx/real-flight-simulator_3.1.3+-+espacioapk.com.apk', desc: { es: 'Simulador de vuelo.', en: 'Flight simulator.', pt: 'Simulador de voo.' }, reqs: ["3GB RAM", "Octa-Core 2.2GHz", "500MB", "8.0+"], type: 'game' },
+            { id: 'longing', title: 'The Longing', poster: 'https://upload.wikimedia.org/wikipedia/en/5/53/TheLongingVideoGame_CoverArt.png', screen: 'https://img.apkvision.org/the-longing/the-longing-6.webp', link: 'https://dl.apkvision.org/the-longing/The-Longing-v1.25-full-apkvision.apk', desc: { es: 'Espera 400 días.', en: 'Wait 400 days.', pt: 'Espere 400 dias.' }, reqs: ["3GB RAM", "Octa-Core 2.0GHz", "700MB", "7.0+"], type: 'game' },
+            { id: 'paranormal_inc', title: 'Paranormal Inc', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkrco7MMtcruyYCL293dFW9pFPVXUerJyb07kpN5o8ax2cd8ICmI6MBuqp&s=10', screen: 'https://img.apkvision.org/paranormal-inc/paranormal-inc-4.webp', link: 'https://dl.apkvision.org/paranormal-inc/Paranormal-Inc-v7.1-full-apkvision.apk', desc: { es: 'Investiga fenómenos.', en: 'Investigate events.', pt: 'Investigue eventos.' }, reqs: ["3GB RAM", "Octa-Core 2.0GHz", "230MB", "9.0+"], type: 'game' },
+            { id: 'the_run', title: 'The Run', poster: 'https://m.media-amazon.com/images/M/MV5BNDg0MWZkYjAtZTY0ZS00YzVlLWEyMGEtZDUyMjc4NDBmYzRiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN-PEUo2P7DH65F1z2A3bqjGoby5QlzqZsnYFhATmcGQRODpgvbPvyaBGe&s=10', link: 'https://dl.apkvision.org/the-run-interactive-film/The-Run-Interactive-Film-v1.0-full-apkvision.apk', desc: { es: 'Película interactiva.', en: 'Interactive film.', pt: 'Filme interativo.' }, reqs: ["4GB RAM", "Octa-Core 2.2GHz", "300MB", "9.0+"], type: 'game' },
+            { id: 'gta3def', title: 'GTA III', poster: 'https://images.g2a.com/323x433/1x1x1/grand-theft-auto-iii-p10000007301/590df4f35bafe357036a1c7d', screen: 'https://img.apkvision.org/gta-iii-definitive/gta-iii-definitive-4.webp', link: 'https://apkvision.org/games/action/gta-iii-definitive-115254/download/v1.84.3-apk/', desc: { es: 'Definitive Edition.', en: 'Definitive Edition.', pt: 'Definitive Edition.' }, reqs: ["4GB RAM", "Snapdragon 865", "1.68GB", "11.0+"], type: 'game' },
+            { id: 'rdr', title: 'Red Dead Redemption', poster: 'https://upload.wikimedia.org/wikipedia/en/a/a7/Red_Dead_Redemption.jpg', screen: 'https://img.apkvision.org/red-dead-redemption/red-dead-redemption-2.webp', link: 'https://dl.apkvision.org/red-dead-redemption/RDR-ROCKSTAR-v1.58.63226194-vanilla-full-apkvision.apks', desc: { es: 'Épica historia oeste.', en: 'Epic wild west.', pt: 'História do oeste.' }, reqs: ["6GB RAM", "Octa-Core 2.8GHz", "10GB", "11.0+"], type: 'game' },
+            { id: 'hn2', title: 'Hello Neighbor 2', poster: 'https://i.gadgets360cdn.com/products/large/MV5BOThhODY3OTYtYjRiZC00M2IxLWEwNDQtMDg0ZDk1YzJlODU1XkEyXkFqcGdeQXVyMTUxOTc4ODEz.-V1-FMjpg-UX1000-1000x1500-1669702109.jpg', screen: 'https://unreal-play-studio.com/asset/hello-neighbor-2/AMt_+0.webp', link: 'https://download2393.mediafire.com/bz7qbwzvjuwgTzOdZT8hC3HXsCgawmEiH0XKkQQH8o85luobIkW8hjkVdU5Go8Tspvl8F96ywYj4nQlKcMGOPtmgFbFuUImjG7CPoNLlwvSs6dNKuukuEjXWgElIfgk6fYvgt2IIWi_rkPxo1p4-1VWT6Yd04d8tXMEeRgkdcJ9GC90/ygxlaj72vkll9oi/Hello+Neighbor+2+v0.1.3+-+espacioapk.com.apk', desc: { es: 'Secretos del vecino.', en: 'Neighbor secrets.', pt: 'Segredos do vizinho.' }, reqs: ["4GB RAM", "Snapdragon 855", "3GB", "8.0+"], type: 'game' },
+            { id: 're4beta', title: 'Resident evil 4 BETA', poster: 'https://m.media-amazon.com/images/M/MV5BZWY3ZjRiNTctYzU2My00NDIwLWI3NTAtNmUwZDBlZjlhYjI4XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://i.redd.it/resident-evil-4-mobile-hd-android-v0-r45d7j5wvhhc1.jpg?width=1001&format=pjpg&auto=webp&s=22ab2d8a664fb14eed998c9ec4e596d0671f152e', link: 'https://download2444.mediafire.com/ur8khq91qaogWIJ85ZTUbLTeIl0KrfSDzK8O0-jnwOyE0eWs-g411i4eRLlylZsNi_9ECtlaiiM7gYskQ4VFiz1L0hrkDfBzBdLtf-iU0T5R8goyzU36_TsOK8ElnM0vuzDwGBThgJrOe7iES0f6EJ-mdhTA2zvC7bv-Hiwyk2SMZoQ/resen04k0nveqp8/RESDT+EVIL+4+BETA_%E2%9C%85SIN+VIRUS.apk', desc: { es: 'Beta clásica.', en: 'Classic beta.', pt: 'Beta clássico.' }, reqs: ["3GB RAM", "Octa-Core 2.0", "350MB", "8.0+"], type: 'game' },
+            { id: 'fnafsotm', title: 'FNaF Secret of the Mimic', poster: 'https://static.wikia.nocookie.net/triple-a-fazbear/images/c/cb/SecretoftheMimic_CoverKeyArt.jpg/revision/latest?cb=20250213034421', screen: 'https://img.apkvision.org/five-nights-at-freddys-secret-of-the-mimic/five-nights-at-freddys-secret-of-the-mimic-10.webp', link: 'https://download2389.mediafire.com/blz1demeye5gZAQRqphYEvnLNNVOXtfSksNDmRP8p0JJUNjt9jVxVycFot2-Xx-NSIxv5scmz0tRtHpM_dmj1gMtYuyivW_u48wTDjsyZz9pIovlHBetV6kHibY4MOKMSyaTpOJdpH_8_qNDPaSkARhHCSimVpOz7HISKdBt0WvTgV8/q73wqvyyjisxaqw/fnaf+sotm+mobile+v0.1.9+-+espacioapk.com.apk', desc: { es: 'Secretos del Mimic.', en: 'Mimic secrets.', pt: 'Segredos do Mimic.' }, reqs: ["4GB RAM", "Octa-Core 2.4", "2.5GB", "10+"], type: 'game' },
+            { id: 'ln1', title: 'Little Nightmares', poster: 'https://image.api.playstation.com/vulcan/ap/rnd/202505/2806/bf55ecf7705258517e66f19128536c4835ec475a25ec1cf8.jpg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ25onFavqxqCa9TzWTPI6AHrWvU3s3-uiJKDgzevnywPviKusX2fs7X4Lu&s=10', link: 'https://download2436.mediafire.com/06npzj2kkyogijmvX5Z3GlkhrR4d-zRP31vdhVT2OncmDk7UZ3l4i73JWUp6tuEP_kQ8fi4GD2QyvbF2n9DTPT5fi0yH7GiOqn6PdlIYEGmfAABh2J5ZAyBL89vGdc1sEHEDE4-gLyjgjeUdyNguN3q_2mMj3Q1X3WH3mO3zXYBvkuU/y7hznysx5ube1sy/Litle+Naightmares_%E2%9C%85SIN+VIRUS.apk', desc: { es: 'Escapa de Seis.', en: 'Escape with Six.', pt: 'Fuja com Six.' }, reqs: ["4GB RAM", "Octa-Core 2.0", "1.5GB", "9.0+"], type: 'game' },
+            { id: 'hff', title: 'Human Fall Flat', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLgujSbYHhalK_BA7ViEBzgbyTsdjquFxBPGz4AQROeG6t8fs_8Xo5-kmN&s=10', screen: 'https://img.apkvision.org/human-fall-flat/human-fall-flat-5.webp', link: 'https://download2393.mediafire.com/juxht3ku9fog1zmPAw5vWZv1ANuUbywxhMUOn8tVXhQbGVNaAKrVy5XnxrN19GRqXKYYHeA9-xgNIMOQNND3EQUsaT7yeLE_7Whbp4b81vL2BZDcUjnX7dZ9Kv6WnuE4flns3Lb-jXJmj-WPVRNP2f2KnW4fBoWJna93huuxUYtU5ME/6gyc9xlhng29hps/Human-Fall-Flat-v2.5.1-full-apkvision.apk', desc: { es: 'Física y risas.', en: 'Physics fun.', pt: 'Física e risos.' }, reqs: ["3GB RAM", "1.8GHz", "800MB", "9.0+"], type: 'game' },
+            { id: 'gtav', title: 'Grand Theft Auto V', poster: 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Grand_Theft_Auto_V.png/250px-Grand_Theft_Auto_V.png', screen: 'https://root-nation.com/wp-content/uploads/2021/08/GTA5-Mobile-APK-02.jpg', link: 'https://download2389.mediafire.com/u6d6yje090tgoxg5iijecH20XypblqLzfwYFryiMeozS6bD76PnGqyUzIiwS2NzQUmmTid5W16mKLjAZx86uoDY7UcG4WV0ZyQ9QmTR2reFn17mILLv_b6tu8eGIyHkOPE55nq_36iqv2ZGodDn5EPtZ-ux8xJ5rFDUI-3KroBbnGoc/hjoahu9to2lyal0/Grand+Theft+Auto+V+-+espacioapk.com.apk', desc: { es: 'Rockstar Mobile.', en: 'Rockstar Mobile.', pt: 'Rockstar Mobile.' }, reqs: ["2GB RAM", "1.5GHz", "500MB", "8.0+"], type: 'game' },
+            { id: 'fnafsb', title: 'FNaF Security Breach', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlLcK2U0rmkMIKo7BDuYMM8vpJFmzJ68dJd7IuoRMO4ZLzi7qqlauQ7icKX7Y4gyKMKxi3a6WYA4QS5gEVPHvD7hIPuQh_ctq6LJZndg&s=10', screen: 'https://unreal-play-studio.com/asset/fnaf-security-breach-mobile/7xm6jD.webp', link: 'https://download2438.mediafire.com/c41li4v2ttpgq7IP0SzVJl8i78LJ0Lll2Vvc_fqUmP4yknc2FtxatDge2OHDSvVbjXfm9uG2nnEo79Gzx_PDh4M5_6v3V1gNGyAx8K6EkILfgB7VVhryzyyrbfIaVtJXL6XMnMprDgnthlaEJ8DJeY9DClUw3KGSql_7fcv1oFxDZn0/8tnjgy3i2u4ho60/fnaf+security+breach+v1.7.0.1+-+espacioapk.com.apk', desc: { es: 'Pizzaplex horror.', en: 'Pizzaplex horror.', pt: 'Pizzaplex horror.' }, reqs: ["4GB RAM", "2.0GHz", "2GB", "9.0+"], type: 'game' },
+            { id: 'pvzfusion', title: 'PvZ Fusion', poster: 'https://thepvzfusion.pro/wp-content/uploads/2026/02/images-12-1.webp', screen: 'https://imgcdn.latestmodapks.com/api/resize?url=https://www.latestmodapks.com/wp-content/uploads/2024/10/pvz-fusion-3-media.webp', link: 'https://file.pvzfusionapk.mx/pvz-fusion-v3.4.2-pvzfusionapk.mx.apk', desc: { es: 'Nuevas mecánicas.', en: 'New mechanics.', pt: 'Novas mecânicas.' }, reqs: ["2GB RAM", "Octa-Core 1.8", "600MB", "7.0+"], type: 'game' },
+            { id: 'gtasa', title: 'GTA San Andreas', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0HDsIEYbbjaj7Ga-y6R7ubG_XRz4wC2DI9g&s', screen: 'https://play-lh.googleusercontent.com/XJIXWvMtYKOfdE8k_353XZwKEHE63JigwjZnsSyhUH6VzOeUHhxouqGHpy7f1nQGyQ=h650', link: 'https://download2443.mediafire.com/itlmicpzebgMBogY-jCfIBRmWkh1HWyrEkejDMdlycF5xTkWgt16TmW3AOguA3D69OoA3zcNo8ICitq91-wYS30LmhPbj4ga0CSGa8T7nnorUImnXplp8e2VONcjRYtAMpZL_kDNgTCHAqvS8OACJGry3BRqjVprYrBfh4WldFlvQE/5brnv5qxhtng8no/gta+san+andreas+v2.11.277+-+espacioapk.com.apk', desc: { es: 'CJ en Los Santos.', en: 'CJ in Los Santos.', pt: 'CJ em Los Santos.' }, reqs: ["3GB RAM", "Quad-Core 1.8", "3GB", "9.0+"], type: 'game' },
+            { id: 'gtavc', title: 'GTA: Vice City', poster: 'https://static.wikia.nocookie.net/esgta/images/0/0f/Grand_Theft_Auto_Vice_City.JPG/revision/latest/scale-to-width-down/1200?cb=20161127222945', screen: 'https://img.apkvision.org/grand-theft-auto-vice-city/grand-theft-auto-vice-city-1.webp', link: 'https://dl.apkvision.org/grand-theft-auto-vice-city/GTA-VC-v1.12.259-full-apkvision.apk', desc: { es: 'Vice City 80s.', en: 'Vice City 80s.', pt: 'Vice City 80s.' }, reqs: ["2GB RAM", "1.5GHz", "1.5GB", "8.0+"], type: 'game' },
+            { id: 'subn_bz', title: 'Subnautica: BZ', poster: 'https://store-images.s-microsoft.com/image/apps.25913.13546341381523259.8f30b71b-aac8-4816-a999-212ef85f8876.1b6b3f4d-3d78-409e-acc2-57b4950505b7', screen: 'https://img.apkvision.org/subnautica-below-zero/subnautica-below-zero-1.webp', link: 'https://dl.apkvision.org/subnautica-below-zero/Subnautica-Below-Zero-v1.22.55044-full-apkvision.apk', desc: { es: 'Gélida supervivencia.', en: 'Frozen survival.', pt: 'Sobrevivência gelada.' }, reqs: ["4GB RAM", "2.4GHz", "3GB", "9.0+"], type: 'game' },
+            { id: 'p4', title: 'Poppy Playtime 4', poster: 'https://assetsio.gnwcdn.com/Poppy-Playtime-Chapter-4-promo-image-showing-a-toy-character-extending-its-hand-towards-the-camera.jpg?width=1200&height=1200&fit=crop&quality=100&format=png&enable=upscale&auto=webp', screen: 'https://img.itch.zone/aW1hZ2UvMzQxOTQ2MC8yMDQxODI1NC5wbmc=/original/hVzrVs.png', link: 'https://piro775.itch.io/toy-factory-chapter-4', desc: { es: 'Fábrica Playtime.', en: 'Playtime factory.', pt: 'Fábrica Playtime.' }, reqs: ["6GB RAM", "2.8GHz", "2GB", "10+"], type: 'game' },
+            { id: 'silksong', title: 'HK Silksong', poster: 'https://m.media-amazon.com/images/M/MV5BMjA4NWE1YWMtNjQ4ZC00Y2Q3LWFjMGEtNGVhM2FmYzJjMzM1XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://img.apkvision.org/hollow-knight-silksong/hollow-knight-silksong-2.webp', link: 'https://download2447.mediafire.com/w84peg5sx8fgBc-7cVVmCeWeTHT7srV5XEq4NbfMtzlim6gxgE54Vr-cxARCyg2zmDRL5j6HiNz_i9PGgKqstW7i9WWZow41PaBe8omyaRLz7n8BeztpmXVbOQMB2-2soj3Z3mjB1Tu100nj-S6iMiqkIH5w3aDUGplF1Y7s_4zHS4I/h18frmho5yk6liy/HW+Silksing+v1.20+-+espacioapk.com.apk', desc: { es: 'Hornet aventura.', en: 'Hornet adventure.', pt: 'Hornet aventura.' }, reqs: ["4GB RAM", "2.0GHz", "2GB", "9.0+"], type: 'game' },
+            { id: 'p3', title: 'Poppy Playtime 3', poster: 'https://http2.mlstatic.com/D_NQ_NP_615692-MLM96301603984_102025-O.webp', screen: 'https://unreal-play-studio.com/asset/poppy-playtime-3/o4ozI7.webp', link: 'https://unreal-play-studio.com/games/poppy-playtime-chapter-3', desc: { es: 'Orfanato Playcare.', en: 'Playcare orphanage.', pt: 'Orfanato Playcare.' }, reqs: ["SD 855", "4GB RAM", "3GB", "8.0+"], type: 'game' },
+            { id: 'descenders', title: 'Descenders', poster: 'https://upload.wikimedia.org/wikipedia/en/8/8a/Descenders_cover.jpg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlSbLwRzT8Cn947R3Ri4_XsF3XIxA9m7RRxKyTX_Ncp0b_ywc0ng6X7hbK&s=10', link: 'https://apks.trulhost.com/Descenders-v1.10.3-Mod.apk', desc: { es: 'MTB extremo.', en: 'Extreme MTB.', pt: 'MTB extremo.' }, reqs: ["4GB RAM", "2.2GHz", "2.5GB", "9.0+"], type: 'game' },
+            { id: 'miles', title: 'Miles Morales', poster: 'https://static.wikia.nocookie.net/ficcion-sin-limites/images/7/73/Miles_Morales.jpg/revision/latest?cb=20220320020218&path-prefix=es', screen: 'https://img.itch.zone/aW1hZ2UvMzA4ODY5MS8xODQ3MDY1OC5qcGc=/original/EOiKUx.jpg', link: 'https://download2448.mediafire.com/doaqi0p34hbgSi7mQcuB9wuZxs99BBxGjSznCCWArLig-alMXAYJ1289MM8fTj8lmAEVy47CyBZ9eRoboCUtyVFqs1I1zTuqOmVsfsrH7m9XUO5lnXwPK9DewQOm_w8vSTLkVYz5KOCfPa83rTTI2s-Gg1QoF3o-4ziGQgpfMtKAJnw/kqarkaqmh0nhrtx/Spiderman_Miles_Morales_v1_%5Bwww.AndroSU.com%5D.apk', desc: { es: 'Spiderman Mobile.', en: 'Spiderman Mobile.', pt: 'Spiderman Mobile.' }, reqs: ["2GB RAM", "1.8GHz", "400MB", "8.0+"], type: 'game' },
+            { id: 'fnaf', title: 'FNaF Spanish', poster: 'https://images.genius.com/b49240eb5e510bb0b56d5abd7b45270d.512x512x1.png', screen: 'https://imag.malavida.com/mvimgbig/download-fs/five-nights-at-freddys-14759-1.jpg', link: 'https://download2391.mediafire.com/4awsa1pfuqkg_ojkGcYFDme4_OXIyK-uykrHLpBkHiOAI8rIJOBB2iqmYFxLLMjIcEJYXvXELlHNavqV-7pg7Ey1fKuzwDK2_-VrYI2f3wbVKBc4JyLVNOPBgDKnmVTqgIuvVrgbv8in3yE9erjX7GMgZUOJD0CgDOOYlvCI7XjU6Ik/7nysoswlpi8cm9l/Five+Nights+at+Freddy%C2%B4s+%28Spanish%29+-+espacioapk.com.apk', desc: { es: 'Terror en español.', en: 'Horror in Spanish.', pt: 'Terror em espanhol.' }, reqs: ["2GB RAM", "2.0GHz", "1GB", "8.0+"], type: 'game' },
+            { id: 'cuphead', title: 'Cuphead + DLC', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSToa5X0umhuLw7OvUtiq8Wu_XVqSPOhfHDYlgq1Be7kg&s=10', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhyD7O9v9JpZqpkl9s6b0_h88E83M5HZeB_aUwaWcVmg&s', link: 'https://download2390.mediafire.com/2apu3aa59cqgUW8WOTsFRW_CNVJY0mQbikGsRMsccfTvqx0mCA1VsOVFXpWHxy6-rjpxC8_t-EuexMVwQ4sy4PBUTuqFcGRcAGx0ZYHszUXnQbCtGC7y0RrkB5KUQsVHYURU8LRC09zUrxTOjL-MeeOO3yfMWCKne3w9LjJY7G88g7A/vdlzhn68ru3nuo5/Cuphead+%2B+DLC+-+v1.0.3+-+VPR.apk', desc: { es: 'Acción retro.', en: 'Retro action.', pt: 'Ação retro.' }, reqs: ["3GB RAM", "2.0GHz", "2.5GB", "9.0+"], type: 'game' },
+            { id: 'hollow', title: 'Hollow Knight', poster: 'https://store-images.s-microsoft.com/image/apps.58959.13847644057609868.8865d2a2-5e11-4424-85ce-1db30a161bd9.41ca3834-331c-4d34-b2c9-7dfe318fd168', screen: 'https://i.ytimg.com/vi/KHsAue9ufQY/maxresdefault.jpg', link: 'https://download2447.mediafire.com/6pwcinoz923g4rm5JW4aO8IZ_LGG0dAEVgbihR-sUpiB4F0lE7n6fdMoQGQARq9I5bs_sN36Jsr-FWjFeTkRQnYOJi-_gJO5PjE4_Aj1kh58gzoMnZG-KRhbPw99mpzUDNmnVM41SPbQHK8g-cmdjWolJi0kUlk7W3g7vxgPdIEXYP8/bsqgq7dnvz6w187/HKVulkanV2.7z', desc: { es: 'Insectos épicos.', en: 'Epic bugs.', pt: 'Insetos épicos.' }, reqs: ["3GB RAM", "2.0GHz", "1.2GB", "9.0+"], type: 'game' },
+            { id: 'subnautica', title: 'Subnautica', poster: 'https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/subnautica_cover.JPG', screen: 'https://play-lh.googleusercontent.com/cNG4a8w8Ve05wIItXkxzhmw-Bw0uqA4t4t8LaxnFXR6klkTSe4YbNrALOCR-GI3lTw=w526-h296-rw', link: 'https://download2444.mediafire.com/7i63ty3ufoygSuk3mCe12Re1SXEgAcrulrZRKZXjof3D6ebEB6Lg8GRETd2-RrOl-yHYJ6RblW-LkwnHttGmSSv9wA3lz5bm6rRBywV9hem4mEZf4BUQHcPlh4OsT0KIsrCntqEKals7nOewT19kwsrxjpnPsDNk36ohAu1gxq4hP2g/yxk9uno0d6hq45c/Subnautica+v1.22.83315-espacioapk.com.apk', desc: { es: 'Mar alienígena.', en: 'Alien sea.', pt: 'Mar alienígena.' }, reqs: ["4GB RAM", "2.2GHz", "2.5GB", "9.0+"], type: 'game' },
+            { id: 'p1', title: 'Poppy Playtime 1', poster: 'https://plusgami.store/cdn/shop/files/Poppy-Playtime-Chapter-1-Juego-Digital-600x748.webp?v=1755981188', screen: 'https://play-lh.googleusercontent.com/4ZxkngWs2YPRF2SdpEk3IL9fjbW5N2C2c7x7IC3Wg1X28dkGBDultx3EGIQkPViWig=w526-h296-rw', link: 'https://download2441.mediafire.com/igmoapc1gtwgA-0TiHJ97w7lu_cCjFWdCe9UNvEtG0VjznLDpeUmlMdXWtKXi-MA8OUaT48VL8nPaWKlyfmepiGF8PILQsX1kaHSBCOnwBsQv5_XKqY6HFVBfK_Qz6n8nFbHHxUamAEqfsw3rbFKhCpcSdldZHtwdKTaEz9u_F9fCck/cc1338960hyor1h/poppy+playtime+v1.0.18+-+espacioapk.com.apk', desc: { es: 'Fábrica juguetes.', en: 'Toy factory.', pt: 'Fábrica juguetes.' }, reqs: ["3GB RAM", "2.0GHz", "1.5GB", "9.0+"], type: 'game' },
+            { id: 'fnaf2_lat', title: 'FNaF 2 Latino', poster: 'https://es.pickgamer.com/media/3888/Five-Nights-at-Freddy%27s-2-285x380.jpg', screen: 'https://play-lh.googleusercontent.com/LOc2pzjEn1nqtEOtfukauDtZJYMWYuE5VWTHVrsnqzCWqZ3qnBR23ELwfIrfoFfKsD9__B1hInQyZQUNgi6I=w526-h296-rw', link: 'https://download2443.mediafire.com/7yhnowyobazg12rakflefBZyxiYZw7oFyVsSFWTDlABYDmTtHtnDBday11_cNW22Can6iYDDGygPlX98cbsgGwQ8fQUt_QO1VEjEntucQYTSSne94csxl43JtmaAVirQ5zkrgSJCmwyMYsl3Dw8FSXoJilrqCEue6mYOL_yWvVFML0k/qxuqjfb86v0d5kd/Five+Nights+at+Freddys+2+%28Spanish%29+-+espacioapk.com.apk', desc: { es: 'Voces latinas.', en: 'Latin voices.', pt: 'Vozes latinas.' }, reqs: ["2GB RAM", "1.5GHz", "400MB", "8.0+"], type: 'game' }
         ];
 
         window.init = () => {
             const savedLang = localStorage.getItem('ep_lang');
             if(savedLang) {
                 curLang = savedLang;
-                document.getElementById('language-overlay').style.display = 'none';
+                document.getElementById('language-overlay').classList.add('opacity-0', 'pointer-events-none');
+                document.body.classList.remove('lock-scroll');
                 applyTranslations();
-                document.getElementById('mainBanner')?.classList.add('active-banner');
             }
 
             const grid = document.getElementById('langGrid');
             grid.innerHTML = Object.keys(i18n).map(code => `
-                <div onclick="setLang('${code}')" class="lang-card">
-                    <span class="text-4xl filter drop-shadow-md group-hover:scale-110 transition-transform">${flags[code] || '🌐'}</span>
-                    <span class="font-ui text-[10px] text-white/40 uppercase font-bold tracking-[2px]">${i18n[code]?.name || code}</span>
+                <div onclick="setLang('${code}')" class="group p-6 glass-panel cursor-pointer hover:border-cyan-400/50 hover:bg-cyan-400/5 transition-all">
+                    <span class="text-4xl block mb-2">${flags[code]}</span>
+                    <span class="font-ui text-[9px] text-white/30 uppercase tracking-[0.2em] group-hover:text-cyan-400">${i18n[code].name}</span>
                 </div>
             `).join('');
 
             window.addEventListener('scroll', () => {
-                const header = document.getElementById('main-header');
-                header.classList.toggle('scrolled', window.scrollY > 50);
+                document.getElementById('main-header').classList.toggle('scrolled', window.scrollY > 30);
             });
 
-            render();
-            
-            AOS.init({ 
-                duration: 1000, 
-                once: false,
-                easing: 'ease-out-cubic'
-            });
+            applyTranslations(); 
+            AOS.init({ duration: 400, once: true, offset: 50 }); 
         };
 
         window.setLang = (code) => {
             curLang = code;
             if(document.getElementById('rememberLang').checked) localStorage.setItem('ep_lang', code);
             applyTranslations(); 
-            document.getElementById('language-overlay').classList.add('opacity-0');
-            setTimeout(() => {
-                document.getElementById('language-overlay').style.display = 'none';
-                const banner = document.getElementById('mainBanner');
-                if (banner) banner.classList.add('active-banner');
-            }, 300);
+            document.getElementById('language-overlay').classList.add('opacity-0', 'pointer-events-none');
+            document.body.classList.remove('lock-scroll');
         };
+
+        function applyTranslations() {
+            const t = i18n[curLang];
+            // Header & Menu
+            document.getElementById('catalogSearch').placeholder = t.search;
+            document.getElementById('nav-catalog').innerText = t.catalog;
+            document.getElementById('nav-request').innerText = t.request;
+            document.getElementById('nav-changelang').innerText = t.changelang;
+            document.getElementById('nav-report-page').innerText = t.reportPage;
+            
+            // Home View
+            document.getElementById('banner-tag').innerText = t.bannerTag;
+            document.getElementById('banner-title').innerHTML = t.bannerTitle;
+            document.getElementById('tab-games').innerText = t.gamesTab;
+            document.getElementById('tab-movies').innerText = t.moviesTab;
+            document.getElementById('counter-label').innerText = t.available;
+            
+            // Detail View static components
+            document.getElementById('btn-back').innerHTML = `<span class="text-lg">←</span> ${t.back}`;
+            document.getElementById('verified-label').innerText = t.verifiedBy;
+            document.getElementById('reportBtn').innerText = t.report;
+            document.getElementById('reportMessage').placeholder = t.reportPlace;
+            document.getElementById('report-send-btn').innerText = t.reportSend;
+            
+            // Request View
+            document.getElementById('req-view-title').innerText = t.request;
+            document.getElementById('req-view-tag').innerText = t.reqTag;
+            document.getElementById('requestInput').placeholder = t.placeholder;
+            document.getElementById('req-btn').innerText = t.send;
+            
+            // Overlay
+            document.getElementById('label-no-ask').innerText = t.noAsk;
+
+            render();
+            
+            // Si estamos en la vista de detalle, refrescar etiquetas de requisitos
+            if(currentGameId && !document.getElementById('detail-view').classList.contains('hidden')) {
+                updateDetailLabels();
+            }
+        }
 
         window.switchCategory = (cat) => {
             currentCategory = cat;
@@ -595,188 +491,108 @@
             render();
         };
 
-        window.resetLanguage = () => {
-            localStorage.removeItem('ep_lang');
-            document.getElementById('language-overlay').style.display = 'flex';
-            document.getElementById('language-overlay').classList.remove('opacity-0');
-            toggleMenu();
-        };
-
-        function applyTranslations() {
-            const t = i18n[curLang] || i18n.en;
-            document.getElementById('catalogSearch').placeholder = t.search;
-            document.getElementById('catalogSearchMobile').placeholder = t.search;
-            document.getElementById('nav-catalog').innerText = t.catalog;
-            document.getElementById('nav-request').innerText = t.request;
-            document.getElementById('nav-changelang').innerText = t.changelang;
-            document.getElementById('counter-label').innerText = t.available;
-            document.getElementById('label-no-ask').innerText = t.noAsk;
-            document.getElementById('btn-back').querySelector('span:last-child').innerText = t.back;
-            document.getElementById('verified-label').innerText = t.verifiedBy;
-            document.getElementById('req-view-title').innerText = t.request;
-            document.getElementById('requestInput').placeholder = t.placeholder;
-            document.getElementById('req-btn').innerText = t.send;
-            render();
-        }
-
-        window.syncAndRender = (input) => {
-            document.getElementById('catalogSearch').value = input.value;
-            render();
-        };
-
         window.render = () => {
             const val = document.getElementById('catalogSearch').value.toLowerCase();
             const grid = document.getElementById('gameGrid');
-            const dataPool = currentCategory === 'games' ? games : movies;
-            const filtered = dataPool.filter(g => g.title.toLowerCase().includes(val));
+            const pool = currentCategory === 'games' ? games : movies;
+            const filtered = pool.filter(g => g.title.toLowerCase().includes(val));
             document.getElementById('game-total-count').innerText = filtered.length;
             
             grid.innerHTML = filtered.map((g, i) => `
-                <div class="game-card" data-aos="fade-up" data-aos-delay="${(i % 5) * 50}" onclick="openItem('${g.id}')">
-                    ${g.showNewBadge ? `<div class="portada-updated-badge">${i18n[curLang]?.new || 'NEW'}</div>` : ''}
-                    <img src="${g.poster}" class="char-img">
-                    <div class="game-title-badge"><span class="game-title-text uppercase">${g.title}</span></div>
+                <div class="game-card" data-aos="fade-up" data-aos-delay="${i * 20}" onclick="openItem('${g.id}')">
+                    ${g.isMostWanted ? `<div class="badge-hot">${i18n[curLang].wanted}</div>` : ''}
+                    ${g.showNewBadge && !g.isMostWanted ? `<div class="badge-new">${i18n[curLang].new}</div>` : ''}
+                    <img src="${g.poster}" class="char-img" loading="lazy">
+                    <div class="card-info">
+                        <p class="text-[10px] font-bold uppercase tracking-wider text-white truncate">${g.title}</p>
+                    </div>
                 </div>
             `).join('');
         };
 
-        window.openItem = (id) => {
-            scrollPos = window.scrollY;
-            const dataPool = [...games, ...movies];
-            const g = dataPool.find(x => x.id === id); if(!g) return;
-            currentGameId = id;
+        // Función auxiliar para actualizar etiquetas dentro del detalle basándose en el idioma actual
+        function updateDetailLabels() {
+            const g = [...games, ...movies].find(x => x.id === currentGameId);
+            if(!g) return;
+
+            const isMovie = g.type === 'movie';
+            const t = i18n[curLang];
             
-            document.getElementById('reportTerminal').classList.add('hidden');
-            document.getElementById('reportMessage').value = "";
-
-            const detailImg = document.getElementById('detailImg');
-            detailImg.style.opacity = '0';
-            detailImg.src = g.screen;
-            detailImg.onload = () => {
-                detailImg.style.opacity = '1';
-                detailImg.style.transition = 'opacity 0.3s ease';
-            };
-
-            document.getElementById('detailTitle').innerText = g.title;
-            document.getElementById('detailDesc').innerText = g.desc[curLang] || g.desc.en;
-            
-            const t = i18n[curLang] || i18n.en;
-            const reqLabel = g.type === 'movie' ? (curLang === 'es' ? 'INFORMACIÓN' : 'INFORMATION') : t.reqsTitle;
-            const req1 = g.type === 'movie' ? (curLang === 'es' ? 'CALIDAD' : 'QUALITY') : 'Memory';
-            const req2 = g.type === 'movie' ? (curLang === 'es' ? 'IDIOMA' : 'LANGUAGE') : 'Processor';
-            const req3 = g.type === 'movie' ? (curLang === 'es' ? 'FUENTE' : 'SOURCE') : 'Storage';
-            const req4 = g.type === 'movie' ? (curLang === 'es' ? 'AÑO' : 'YEAR') : 'Version';
-
+            document.getElementById('detailDesc').innerText = g.desc[curLang];
             document.getElementById('reqsContainer').innerHTML = `
-                <div class="p-8 bg-white/[0.03] border-l-4 border-cyan-400 rounded-r-[2rem] backdrop-blur-md">
-                    <p class="text-[10px] text-cyan-400 font-bold mb-6 uppercase tracking-[3px]">${reqLabel}</p>
-                    <div class="grid grid-cols-2 gap-y-6 gap-x-4 text-xs text-gray-300 font-ui font-bold uppercase">
-                        <div class="flex flex-col gap-1"><span class="text-[9px] text-gray-600">${req1}</span> <span>${g.reqs[0]}</span></div>
-                        <div class="flex flex-col gap-1"><span class="text-[9px] text-gray-600">${req2}</span> <span>${g.reqs[1]}</span></div>
-                        <div class="flex flex-col gap-1"><span class="text-[9px] text-gray-600">${req3}</span> <span>${g.reqs[2]}</span></div>
-                        <div class="flex flex-col gap-1"><span class="text-[9px] text-gray-600">${req4}</span> <span>${g.reqs[3]}</span></div>
-                    </div>
+                <div class="grid grid-cols-2 gap-4 p-4 glass-panel">
+                    <div><p class="text-[8px] opacity-30 font-bold tracking-widest uppercase mb-1">${isMovie ? t.res : t.ram}</p><p class="text-[10px] font-bold">${g.reqs[0]}</p></div>
+                    <div><p class="text-[8px] opacity-30 font-bold tracking-widest uppercase mb-1">${isMovie ? t.lang : t.cpu}</p><p class="text-[10px] font-bold">${g.reqs[1]}</p></div>
+                    <div><p class="text-[8px] opacity-30 font-bold tracking-widest uppercase mb-1">${isMovie ? t.source : t.storage}</p><p class="text-[10px] font-bold">${g.reqs[2]}</p></div>
+                    <div><p class="text-[8px] opacity-30 font-bold tracking-widest uppercase mb-1">${isMovie ? t.year : t.version}</p><p class="text-[10px] font-bold">${g.reqs[3]}</p></div>
                 </div>`;
 
-            const btnText = g.type === 'movie' ? t.downloadMovie : t.download;
-
             document.getElementById('downloadArea').innerHTML = `
-                <button onclick="handleDownload('${g.id}', '${g.link}')" class="download-btn group">
-                    <span class="flex items-center justify-center gap-3">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21l-8-9h6V3h4v9h6l-8 9z"/></svg>
-                        ${btnText}
-                    </span>
+                <button onclick="handleDownload('${g.id}', '${g.link}')" class="download-btn">
+                    ${isMovie ? t.downloadMovie : t.download}
                 </button>`;
+        }
+
+        window.openItem = (id) => {
+            scrollPos = window.scrollY;
+            const g = [...games, ...movies].find(x => x.id === id);
+            currentGameId = id;
+            document.getElementById('reportTerminal').classList.add('hidden');
+            document.getElementById('detailImg').src = g.screen;
+            document.getElementById('detailTitle').innerText = g.title;
+            
+            updateDetailLabels();
             
             showView('detail'); 
-            window.scrollTo({ top: 0, behavior: 'auto' });
-        };
-
-        window.handleDownload = async (id, link) => {
-            const dataPool = [...games, ...movies];
-            const g = dataPool.find(x => x.id === id); window.open(link, '_blank');
-            try {
-                await fetch(WEBHOOK_DOWNLOADS, { 
-                    method: 'POST', 
-                    headers: {'Content-Type':'application/json'}, 
-                    body: JSON.stringify({ 
-                        embeds: [{ 
-                            title: g.type === 'movie' ? "🎬 Película Reproducida" : "🚀 Descarga Iniciada", 
-                            color: 62207, 
-                            thumbnail: { url: g.poster },
-                            fields: [
-                                {name: g.type === 'movie' ? "📺 Película" : "🎮 Juego", value: g.title, inline: true}, 
-                                {name:"🌐 Idioma", value: curLang, inline: true}
-                            ] 
-                        }] 
-                    }) 
-                });
-            } catch (err) {}
-        };
-
-        window.toggleReportTerminal = () => {
-            document.getElementById('reportTerminal').classList.toggle('hidden');
-        };
-
-        window.showReportTerminalFromMenu = () => {
-            currentGameId = "ERROR_PAGINA_WEB";
-            const detailImg = document.getElementById('detailImg');
-            detailImg.src = "https://i.ibb.co/G4Z5gvHw/icon.png";
-            document.getElementById('detailTitle').innerText = "REPORTAR ERROR DE PÁGINA";
-            document.getElementById('detailDesc').innerText = "Utiliza el terminal de abajo para informar sobre un fallo general en la interfaz o funcionamiento del sitio.";
-            document.getElementById('reqsContainer').innerHTML = "";
-            document.getElementById('downloadArea').innerHTML = "";
-            
-            showView('detail');
-            document.getElementById('reportTerminal').classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         };
 
-        window.sendReport = async () => {
-            const isPageError = currentGameId === "ERROR_PAGINA_WEB";
-            const dataPool = [...games, ...movies];
-            const g = isPageError ? { title: "Error General de Página", poster: "https://i.ibb.co/G4Z5gvHw/icon.png" } : dataPool.find(x => x.id === currentGameId);
-            const msg = document.getElementById('reportMessage').value;
-            if(!msg) return;
+        window.handleDownload = (id, link) => {
+            const g = [...games, ...movies].find(x => x.id === id); 
+            window.open(link, '_blank');
+            fetch(WEBHOOK_DOWNLOADS, { 
+                method: 'POST', headers: {'Content-Type':'application/json'}, 
+                body: JSON.stringify({ embeds: [{ title: g.type === 'movie' ? "🎬 Play" : "🚀 Descarga", color: 62207, fields: [{name: "Item", value: g.title, inline: true}, {name:"Lang", value: curLang, inline: true}] }] }) 
+            }).catch(() => {});
+        };
 
-            try {
-                await fetch(WEBHOOK_REPORTS, {
-                    method: 'POST',
-                    headers: {'Content-Type':'application/json'},
-                    body: JSON.stringify({
-                        embeds: [{
-                            title: isPageError ? "🔧 REPORTE DE PÁGINA" : "⚠️ REPORTE DE CONTENIDO",
-                            color: 16711680,
-                            thumbnail: { url: g.poster },
-                            fields: [
-                                { name: "📁 Contexto", value: g.title, inline: true },
-                                { name: "📝 Comentario", value: msg }
-                            ]
-                        }]
-                    })
-                });
-                document.getElementById('reportMessage').value = "";
-                document.getElementById('reportTerminal').innerHTML = "<p class='text-red-500 font-bold text-center'>REPORTE ENVIADO</p>";
-                setTimeout(() => toggleReportTerminal(), 2000);
-            } catch(e) {}
+        window.toggleReportTerminal = () => document.getElementById('reportTerminal').classList.toggle('hidden');
+
+        window.showReportTerminalFromMenu = () => {
+            currentGameId = "WEB_ERROR";
+            document.getElementById('detailTitle').innerText = i18n[curLang].reportPage;
+            document.getElementById('detailDesc').innerText = "Report system malfunctions here.";
+            document.getElementById('reqsContainer').innerHTML = "";
+            document.getElementById('downloadArea').innerHTML = "";
+            showView('detail');
+            document.getElementById('reportTerminal').classList.remove('hidden');
+        };
+
+        window.sendReport = async () => {
+            const msg = document.getElementById('reportMessage').value; if(!msg) return;
+            await fetch(WEBHOOK_REPORTS, {
+                method: 'POST', headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({ embeds: [{ title: "⚠️ REPORTE", color: 16711680, fields: [{ name: "ID", value: currentGameId }, { name: "MSG", value: msg }] }] })
+            }).catch(() => {});
+            document.getElementById('reportMessage').value = "ENVIADO / SENT";
+            setTimeout(() => toggleReportTerminal(), 2000);
         };
 
         window.showView = (v) => {
             document.querySelectorAll('.view-section').forEach(s => {
-                s.classList.remove('active');
-                s.style.display = 'none';
+                s.classList.add('hidden');
+                s.classList.remove('block');
             });
-            const active = document.getElementById(v + '-view'); 
-            active.style.display = 'block';
-            setTimeout(() => active.classList.add('active'), 10);
+            const active = document.getElementById(v + '-view');
+            active.classList.remove('hidden');
+            active.classList.add('block');
         };
 
         window.navigate = (v) => { 
-            showView(v === 'home' ? 'home' : v); 
+            showView(v); 
             if(v === 'home') {
-                setTimeout(() => { window.scrollTo({ top: scrollPos, behavior: 'auto' }); }, 10);
-            } else {
-                window.scrollTo({ top: 0, behavior: 'auto' });
+                currentGameId = null; // Reset current detail id
+                setTimeout(() => window.scrollTo({ top: scrollPos, behavior: 'auto' }), 50);
             }
         };
 
@@ -791,20 +607,13 @@
 
         window.sendRequest = async () => {
             const val = document.getElementById('requestInput').value; if(!val) return;
-            const btn = document.getElementById('req-btn'); 
-            const originalText = btn.innerText;
-            btn.innerText = "...";
-            try {
-                await fetch(WEBHOOK_REQUESTS, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ embeds: [{ title: "📝 Nueva Petición", color: 0x00f2ff, fields: [{ name: "🕹️ Título", value: val }, {name: "🌍 Idioma", value: curLang}] }] }) });
-                document.getElementById('requestInput').value = ""; 
-                btn.innerText = "RECEIVED";
-                btn.style.background = "#fff";
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.style.background = "var(--cyan)";
-                }, 3000);
-            } catch(e) { btn.innerText = "ERROR"; }
+            await fetch(WEBHOOK_REQUESTS, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ embeds: [{ title: "📝 Petición", color: 0x00f2ff, fields: [{ name: "Título", value: val }] }] }) }).catch(() => {});
+            document.getElementById('requestInput').value = ""; 
+            document.getElementById('req-btn').innerText = "DONE / ENVIADO";
+            setTimeout(() => { document.getElementById('req-btn').innerText = i18n[curLang].send; }, 3000);
         };
+
+        window.resetLanguage = () => { localStorage.removeItem('ep_lang'); location.reload(); };
 
         window.onload = init;
     </script>
