@@ -10,9 +10,11 @@
     <title>Películas y Juegos APK Gratis | Excessive Piracy Official</title>
     <meta name="description" content="Descarga los mejores juegos APK premium y disfruta de películas gratis para Android. La biblioteca definitiva del EP Team con archivos verificados y seguros.">
     
+    <!-- FAVICON E ICONOS -->
     <meta property="og:image" content="https://i.ibb.co/G4Z5gvHw/icon.png">
     <meta name="theme-color" content="#00f2ff">
     <link rel="icon" type="image/png" href="https://i.ibb.co/G4Z5gvHw/icon.png">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/G4Z5gvHw/icon.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Bebas+Neue&family=Outfit:wght@300;400;700;900&family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
@@ -310,19 +312,24 @@
             box-shadow: 0 10px 30px rgba(0, 242, 255, 0.15);
         }
 
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
     </style>
 </head>
 <body>
 
     <div class="bg-mesh"></div>
 
+    <!-- PANTALLA DE SELECCIÓN DE IDIOMA -->
     <div id="language-overlay" class="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-3xl flex items-center justify-center p-4">
         <div class="p-8 sm:p-12 rounded-[3rem] border border-white/5 max-w-5xl w-full text-center shadow-[0_0_150px_rgba(0,0,0,1)] relative overflow-y-auto max-h-[90vh]" data-aos="zoom-in">
             <div class="relative inline-block mb-8">
                 <div class="absolute inset-0 bg-cyan-400 blur-2xl opacity-20 animate-pulse"></div>
-                <img src="https://i.ibb.co/G4Z5gvHw/icon.png" class="w-16 h-16 relative z-10">
+                <!-- FAVICON INTEGRADO -->
+                <img src="https://i.ibb.co/G4Z5gvHw/icon.png" class="w-20 h-20 relative z-10 mx-auto">
             </div>
-            <h2 class="font-brand text-5xl mb-12 text-white uppercase">Select Language</h2>
+            <h2 class="font-brand text-5xl mb-12 text-white uppercase tracking-wider">Select Language</h2>
             
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-12" id="langGrid"></div>
             
@@ -338,10 +345,12 @@
         </div>
     </div>
 
+    <!-- HEADER -->
     <header id="main-header">
         <div class="flex items-center gap-4 cursor-pointer min-w-max group" onclick="navigate('home')">
             <div class="relative">
                 <div class="absolute inset-0 bg-cyan-400 blur-lg opacity-0 group-hover:opacity-40 transition-opacity"></div>
+                <!-- FAVICON INTEGRADO -->
                 <img src="https://i.ibb.co/G4Z5gvHw/icon.png" class="w-12 h-12 relative">
             </div>
             <div class="flex flex-col leading-tight">
@@ -365,11 +374,14 @@
         </div>
     </header>
 
+    <!-- MENÚ MÓVIL -->
     <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/90 backdrop-blur-xl z-[1999] hidden opacity-0 transition-all duration-500" onclick="toggleMenu()"></div>
     <nav id="mobile-menu" class="fixed top-0 right-[-100%] w-[85%] max-w-[400px] h-screen bg-black/50 z-[2000] flex flex-col p-12 border-l border-white/5 transition-all duration-700 ease-[cubic-bezier(0.19, 1, 0.22, 1)]">
         <div class="mb-20">
-             <img src="https://i.ibb.co/G4Z5gvHw/icon.png" class="w-16 h-16 mb-4">
-             <p class="text-cyan-400 font-brand text-2xl">EP TEAM OFFICIAL</p>
+             <!-- FAVICON INTEGRADO -->
+             <img src="https://i.ibb.co/G4Z5gvHw/icon.png" class="w-20 h-20 mb-6">
+             <p class="text-cyan-400 font-brand text-3xl">EP TEAM OFFICIAL</p>
+             <p class="text-gray-500 font-ui text-xs tracking-[3px] uppercase mt-1">Secure Digital Library</p>
         </div>
         <div class="flex flex-col gap-8">
             <button onclick="navigate('home'); toggleMenu();" class="text-6xl text-white font-brand text-left hover:text-cyan-400 hover:translate-x-4 transition-all duration-300" id="nav-catalog"></button>
@@ -378,10 +390,12 @@
             <div class="h-px bg-white/10 my-4"></div>
             <button onclick="resetLanguage()" class="text-lg text-cyan-400/60 hover:text-cyan-400 font-ui font-bold text-left flex items-center gap-3 transition-colors" id="nav-changelang"></button>
         </div>
-        <div class="mt-auto opacity-20 text-[10px] uppercase tracking-[4px] text-white">© 2024 EP Team | Secure Library</div>
+        <div class="mt-auto opacity-20 text-[10px] uppercase tracking-[4px] text-white">© 2024 EP Team | Excessive Piracy</div>
     </nav>
 
+    <!-- VISTAS PRINCIPALES -->
     <div class="pt-32 pb-20">
+        <!-- VISTA CATALOGO -->
         <main id="home-view" class="view-section active px-6 max-w-7xl mx-auto">
             <div id="mainBanner" class="top-banner">
                 <img src="https://i.ibb.co/Hfb046TK/fa4b7a137758b4d05d00c033090e576f.jpg" class="w-full h-[250px] sm:h-[400px] object-cover">
@@ -416,6 +430,7 @@
             </div>
         </main>
 
+        <!-- VISTA DETALLE -->
         <section id="detail-view" class="view-section px-6">
             <div class="max-w-6xl mx-auto">
                 <button onclick="navigate('home')" id="btn-back" class="group mb-10 text-cyan-400 font-ui text-lg uppercase flex items-center gap-3 hover:text-white transition-colors">
@@ -439,7 +454,7 @@
 
                         <!-- Botón Reportar -->
                         <div class="text-center">
-                            <button id="reportBtn" onclick="toggleReportTerminal()" class="report-btn">REPORTAR</button>
+                            <button id="reportBtn" onclick="toggleReportTerminal()" class="report-btn">REPORTAR ERROR</button>
                             <div id="reportTerminal" class="hidden mt-4 p-6 bg-black/60 border border-red-500/20 rounded-3xl animate-in slide-in-from-top-4 duration-300">
                                 <textarea id="reportMessage" class="w-full bg-black/40 border border-white/10 rounded-xl p-3 text-sm text-white outline-none focus:border-red-500 mb-3" rows="2" placeholder="Describa el problema..."></textarea>
                                 <button onclick="sendReport()" class="w-full py-2 bg-red-500 text-white font-bold rounded-xl hover:bg-red-600 transition-colors text-xs uppercase tracking-widest">Enviar Reporte</button>
@@ -450,6 +465,7 @@
             </div>
         </section>
 
+        <!-- VISTA PETICIONES -->
         <section id="request-view" class="view-section px-6">
             <div class="max-w-3xl mx-auto py-20 text-center">
                 <h1 class="text-8xl font-brand mb-6 text-white" id="req-view-title" data-aos="fade-down"></h1>
