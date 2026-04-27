@@ -285,8 +285,8 @@
 
         <!-- DETALLE -->
         <section id="detail-view" class="view-section hidden px-6 max-w-6xl mx-auto">
-            <button onclick="navigate('home')" id="btn-back" class="mb-10 flex items-center gap-3 text-white/30 hover:text-cyan-400 transition-all font-ui font-bold tracking-widest text-[10px] uppercase">
-                <!-- Se llena via JS -->
+            <button id="btn-back-trigger" onclick="navigate('home')" class="mb-10 flex items-center gap-3 text-white/30 hover:text-cyan-400 transition-all font-ui font-bold tracking-widest text-[10px] uppercase">
+                <span class="text-lg">←</span> <span id="btn-back-text"></span>
             </button>
             
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
@@ -347,7 +347,7 @@
                 search: "SEARCH...", catalog: "CATALOG", request: "REQUEST", changelang: "🌐 CHANGE LANGUAGE", 
                 available: "VERIFIED UNITS", download: "DOWNLOAD APK", downloadMovie: "WATCH MOVIE", 
                 back: "BACK", send: "SEND REQUEST", placeholder: "GAME NAME...", 
-                noAsk: "Remember identity", new: "NEW", reqsTitle: "REQUIREMENTS", 
+                noAsk: "Remember identity", new: "NEW", reqsTitle: "REQUISITOS", 
                 verifiedBy: "✓ SECURE FILE", name: "English", wanted: "HOT", 
                 report: "REPORT ERROR", reportPage: "SYSTEM ERROR", reportSend: "SEND REPORT", 
                 reportPlace: "DESCRIBE FAILURE...", bannerTag: "HIGHLIGHT OF THE WEEK",
@@ -359,13 +359,13 @@
                 search: "BUSCAR...", catalog: "CATÁLOGO", request: "PEDIR", changelang: "🌐 MUDAR IDIOMA", 
                 available: "UNIDADES VERIFICADAS", download: "BAIXAR APK", downloadMovie: "VER FILME", 
                 back: "VOLTAR", send: "ENVIAR PEDIDO", placeholder: "NOME DO JOGO...", 
-                noAsk: "Lembrar identidade", new: "NOVO", reqsTitle: "REQUISITOS", 
+                noAsk: "Lembrar identidad", new: "NOVO", reqsTitle: "REQUISITOS", 
                 verifiedBy: "✓ ARQUIVO SEGURO", name: "Português", wanted: "HOT", 
                 report: "REPORTAR ERRO", reportPage: "ERRO DE SISTEMA", reportSend: "ENVIAR INFORME", 
                 reportPlace: "DESCREVA A FALHA...", bannerTag: "DESTAQUE DA SEMANA",
-                bannerTitle: "A NOVA ERA DO<br>JOGO GRÁTIS", reqTag: "CONEXÃO DIRETA COM A EQUIPE EP",
+                bannerTitle: "A NOVA ERA DO<br>JOGO GRÁTIS", reqTag: "CONEXÃO DIRETA CON A EQUIPE EP",
                 gamesTab: "JOGOS", moviesTab: "FILMES", ram: "RAM", cpu: "CPU", storage: "ESPAÇO", 
-                version: "VERSÃO", res: "RESOLUÇÃO", lang: "IDIOMA", source: "FONTE", year: "ANO"
+                version: "VERSIÓN", res: "RESOLUÇÃO", lang: "IDIOMA", source: "FONTE", year: "ANO"
             }
         };
 
@@ -373,8 +373,38 @@
         let currentGameId = null, curLang = 'es', scrollPos = 0, currentCategory = 'games';
 
         const movies = [
+            { 
+                id: 'the_boy', 
+                title: 'The Boy (2016)', 
+                poster: 'https://pics.filmaffinity.com/The_Boy-546295001-large.jpg', 
+                screen: 'https://static0.moviewebimages.com/wordpress/wp-content/uploads/article/QbU6ApkLKw9CLJDixRKePnTJjovX4M.jpg', 
+                link: 'https://ww1.123flmsfree.com/es/detail/movie/J9CnqU2NY2IaNU6FDaGgd-The-Boy', 
+                desc: { 
+                    es: 'Una niñera es contratada para cuidar a un muñeco de porcelana que los padres tratan como a un hijo real.', 
+                    en: 'A nanny is hired to care for a porcelain doll that the parents treat like a real son.', 
+                    pt: 'Uma babá é contratada para cuidar de um boneco de porcelana que os pais tratam como um filho real.' 
+                }, 
+                reqs: ["1080p", "Latino", "123Films", "2016"], 
+                showNewBadge: true, 
+                type: 'movie' 
+            },
             { id: 'substance', title: 'La Sustancia (2024)', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4UC3Bidf2pWudrBiMfRj2Yz1FEy5Eb8XuWNHbnA042R_zb42tyuHpOQdH&s=10', screen: 'https://ichef.bbci.co.uk/ace/ws/640/cpsprodpb/37e0/live/0d33ac10-f5e9-11ef-9e7b-21c750c82d19.png.webp', link: 'https://play.cuevana.life/es/detail/movie/6sRswmczORzjTeHdRH0ee-The-Substance', desc: { es: 'Una celebridad en declive decide usar una droga del mercado negro.', en: 'A fading celebrity decides to use a black-market drug.', pt: 'Uma celebridade em declínio decide usar uma droga.' }, reqs: ["1080p", "Latino", "Cuevana", "2024"], showNewBadge: true, type: 'movie' },
-            { id: 'minecraft_movie', title: 'Minecraft (2025)', poster: 'https://m.media-amazon.com/images/M/MV5BYzFjMzNjOTktNDBlNy00YWZhLWExYTctZDcxNDA4OWVhOTJjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://i.blogs.es/6554f1/miencraft-pelicula/500_333.jpeg', link: 'https://video.playspelis.com/es/detail/movie/PI97tF4VKHGs7NkDVVnLR-A-Minecraft-Movie', desc: { es: 'La esperada adaptación cinematográfica.', en: 'The film adaptation.', pt: 'A adaptação cinematográfica.' }, reqs: ["HD Digital", "Español", "PlaySpelis", "2025"], showNewBadge: true, type: 'movie' }
+            { id: 'minecraft_movie', title: 'Minecraft (2025)', poster: 'https://m.media-amazon.com/images/M/MV5BYzFjMzNjOTktNDBlNy00YWZhLWExYTctZDcxNDA4OWVhOTJjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://i.blogs.es/6554f1/miencraft-pelicula/500_333.jpeg', link: 'https://video.playspelis.com/es/detail/movie/PI97tF4VKHGs7NkDVVnLR-A-Minecraft-Movie', desc: { es: 'La esperada adaptación cinematográfica.', en: 'The film adaptation.', pt: 'A adaptação cinematográfica.' }, reqs: ["HD Digital", "Español", "PlaySpelis", "2025"], showNewBadge: true, type: 'movie' },
+            { 
+                id: 'interstellar', 
+                title: 'Interstellar (2014)', 
+                poster: 'https://m.media-amazon.com/images/M/MV5BYzdjMDAxZGItMjI2My00ODA1LTlkNzItOWFjMDU5ZDJlYWY3XkEyXkFqcGc@._V1_.jpg', 
+                screen: 'https://i.ytimg.com/vi/LYS2O1nl9iM/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCzlu90JKTvtmzzGeRJL_mF68dfqw', 
+                links: {
+                    mex: 'https://ww20.321moviesfree.com/es/detail/movie/bTfmR7SjycdIeayEJPdeq-Interstellar',
+                    usa: 'https://ww1.123flmsfree.com/es/detail/movie/Yi62KrQCdeBosqZi2kMuG-Interstellar'
+                },
+                desc: { es: 'Un equipo de exploradores viaja más allá de esta galaxia para descubrir si la humanidad tiene un futuro entre las estrellas.', en: 'A team of explorers travel beyond this galaxy to discover whether mankind has a future among the stars.', pt: 'Uma equipe de exploradores viaja além desta galáxia para descubrir se a humanidade tem um futuro entre as estrelas.' }, 
+                reqs: ["4K HDR", "Lat/Eng", "321Movies", "2014"], 
+                showNewBadge: true, 
+                type: 'movie',
+                multiVersion: true 
+            }
         ];
 
         const games = [
@@ -461,7 +491,7 @@
             document.getElementById('counter-label').innerText = t.available;
             
             // Detail View static components
-            document.getElementById('btn-back').innerHTML = `<span class="text-lg">←</span> ${t.back}`;
+            document.getElementById('btn-back-text').innerText = t.back;
             document.getElementById('verified-label').innerText = t.verifiedBy;
             document.getElementById('reportBtn').innerText = t.report;
             document.getElementById('reportMessage').placeholder = t.reportPlace;
@@ -510,7 +540,6 @@
             `).join('');
         };
 
-        // Función auxiliar para actualizar etiquetas dentro del detalle basándose en el idioma actual
         function updateDetailLabels() {
             const g = [...games, ...movies].find(x => x.id === currentGameId);
             if(!g) return;
@@ -527,10 +556,22 @@
                     <div><p class="text-[8px] opacity-30 font-bold tracking-widest uppercase mb-1">${isMovie ? t.year : t.version}</p><p class="text-[10px] font-bold">${g.reqs[3]}</p></div>
                 </div>`;
 
-            document.getElementById('downloadArea').innerHTML = `
-                <button onclick="handleDownload('${g.id}', '${g.link}')" class="download-btn">
-                    ${isMovie ? t.downloadMovie : t.download}
-                </button>`;
+            if (g.multiVersion) {
+                document.getElementById('downloadArea').innerHTML = `
+                    <div class="flex flex-col gap-3">
+                        <button onclick="handleDownload('${g.id}', '${g.links.mex}')" class="download-btn flex items-center justify-center gap-4">
+                            <span>🇲🇽</span> ${t.downloadMovie} (MEX)
+                        </button>
+                        <button onclick="handleDownload('${g.id}', '${g.links.usa}')" class="download-btn flex items-center justify-center gap-4 bg-white/10 text-white border border-white/20">
+                            <span>🇺🇸</span> ${t.downloadMovie} (USA)
+                        </button>
+                    </div>`;
+            } else {
+                document.getElementById('downloadArea').innerHTML = `
+                    <button onclick="handleDownload('${g.id}', '${g.link}')" class="download-btn">
+                        ${isMovie ? t.downloadMovie : t.download}
+                    </button>`;
+            }
         }
 
         window.openItem = (id) => {
@@ -591,7 +632,7 @@
         window.navigate = (v) => { 
             showView(v); 
             if(v === 'home') {
-                currentGameId = null; // Reset current detail id
+                currentGameId = null;
                 setTimeout(() => window.scrollTo({ top: scrollPos, behavior: 'auto' }), 50);
             }
         };
