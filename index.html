@@ -6,18 +6,18 @@
     <title>Plevark - Juegos y Películas</title>
 
     <!-- ==================== FAVICON ==================== -->
-    <link rel="icon" type="image/png" href="Favicon.png">
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/xdp1cQg6/favicon-72726451437860.png">
 
-    <!-- ==================== META TAGS ==================== -->
-    <meta property="og:title" content="Plevark - Juegos y Películas">
-    <meta property="og:description" content="Explora el mejor catálogo de películas y juegos. Nuevos estrenos, etiquetas especiales y mucho más.">
-    <meta property="og:image" content="https://i.ibb.co/BKd2BC9L/BKd2BC9L.png">
-    <meta property="og:url" content="https://tu-sitio-web.com">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
+    <!-- ==================== META TAGS ACTUALIZADAS ==================== -->
+    <meta property="og:title" content="Plevark - Juegos y Películas" />
+    <meta property="og:description" content="Disfruta de contenido premium: películas, series y los mejores juegos. ¡Encuentra tu próxima aventura!" />
+    <meta property="og:image" content="https://i.postimg.cc/k5CcmKvC/IMG-20260611-212526-modified.png" />
+    <meta property="og:url" content="https://plevark.github.io/Plevark/" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
 
     <style>
-        /* ===== RESET & PALETA ===== */
+        /* ===== RESET & PALETA (BLANCO Y NEGRO) ===== */
         * {
             margin: 0;
             padding: 0;
@@ -30,13 +30,13 @@
         }
 
         body {
-            background-image: url('https://wallpapers.com/images/hd/glossy-black-mig1ajt30o0nme9i.jpg');
+            background-image: url('https://i.postimg.cc/L5T78935/ae222d52c1f501d06caefbc46e09f1f3.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             background-repeat: no-repeat;
             background-color: #0a0a0a;
-            color: #faffff;
+            color: #d0d0d0;
             padding: 16px 16px 100px 16px;
             min-height: 100vh;
             animation: bodyFadeIn 0.8s ease;
@@ -52,15 +52,14 @@
             margin: 0 auto;
         }
 
-        /* --- HEADER CON TEMÁTICA PARAGUAYA --- */
+        /* --- HEADER SIN TEMÁTICA PARAGUAYA --- */
         header {
             text-align: center;
             margin-bottom: 20px;
             position: relative;
             animation: fadeDown 0.8s ease;
             padding: 20px 0 10px;
-            border-bottom: 3px solid transparent;
-            border-image: linear-gradient(90deg, #0033A0, #FFFFFF, #D52B1E) 1;
+            border-bottom: 1px solid #333;
         }
 
         @keyframes fadeDown {
@@ -74,14 +73,21 @@
             letter-spacing: -1px;
             text-shadow: 2px 2px 10px rgba(0,0,0,0.9);
             margin-bottom: 2px;
-            color: #faffff;
+            color: #e0e0e0;
+            animation: glowText 3s ease-in-out infinite;
+        }
+
+        @keyframes glowText {
+            0%, 100% { text-shadow: 2px 2px 10px rgba(0,0,0,0.9); }
+            50% { text-shadow: 2px 2px 20px rgba(200,200,200,0.15), 0 0 40px rgba(200,200,200,0.05); }
         }
 
         header p {
             font-size: 0.95rem;
-            color: #d6dfe5;
+            color: #aaa;
             font-weight: 300;
             margin-bottom: 10px;
+            animation: fadeUp 1.2s ease;
         }
 
         .logo-icon {
@@ -91,12 +97,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            animation: floatLogo 3s ease-in-out infinite;
+            animation: floatLogo 4s ease-in-out infinite;
         }
 
         @keyframes floatLogo {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
+            0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+            50% { transform: translateY(-8px) scale(1.02) rotate(-3deg); }
         }
 
         .logo-icon img {
@@ -104,11 +110,11 @@
             height: 100%;
             object-fit: contain;
             border: none;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .logo-icon img:hover {
-            transform: scale(1.08) rotate(-5deg);
+            transform: scale(1.1) rotate(-8deg);
         }
 
         /* --- SEARCH --- */
@@ -120,27 +126,32 @@
             animation: fadeUp 1s ease;
         }
 
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .search-container input {
             width: 100%;
             padding: 12px 20px 12px 45px;
-            background-color: rgba(20, 20, 20, 0.85);
-            border: 1px solid #bac1c8;
+            background-color: rgba(30, 30, 30, 0.9);
+            border: 1px solid #444;
             border-radius: 50px;
-            color: #faffff;
+            color: #d0d0d0;
             font-size: 0.95rem;
             outline: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 0 0 rgba(186, 193, 200, 0);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 0 0 0 rgba(200,200,200,0);
         }
 
         .search-container input::placeholder {
-            color: #b3c7d6;
+            color: #777;
         }
 
         .search-container input:focus {
-            border-color: #d0d7da;
-            background-color: rgba(30, 30, 30, 0.9);
-            box-shadow: 0 0 20px rgba(186, 193, 200, 0.2);
+            border-color: #888;
+            background-color: rgba(40, 40, 40, 0.95);
+            box-shadow: 0 0 20px rgba(200,200,200,0.1), 0 0 60px rgba(200,200,200,0.02);
             transform: scale(1.02);
         }
 
@@ -152,6 +163,11 @@
             transform: translateY(-50%);
             font-size: 1rem;
             opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .search-container:focus-within::before {
+            opacity: 1;
         }
 
         /* --- GRID ÚNICO --- */
@@ -170,22 +186,42 @@
             #main-grid { grid-template-columns: repeat(6, 1fr); }
         }
 
-        /* --- TARJETAS CON ANIMACIONES MEJORADAS --- */
+        /* --- TARJETAS CON ANIMACIONES ESCALONADAS Y NUEVOS EFECTOS --- */
         .card {
-            background: rgba(20, 20, 20, 0.85);
-            border: 1px solid rgba(186, 193, 200, 0.15);
+            background: rgba(25, 25, 25, 0.92);
+            border: 1px solid rgba(200, 200, 200, 0.10);
             border-radius: 16px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             cursor: pointer;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.7);
             position: relative;
-            animation: cardFadeUp 0.8s ease forwards;
+            animation: cardFadeUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
             opacity: 0;
             transform: translateY(30px) scale(0.96);
             will-change: transform, opacity;
+        }
+
+        /* Efecto de brillo en los bordes al hacer hover */
+        .card::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 18px;
+            background: linear-gradient(45deg, transparent, rgba(200,200,200,0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .card:hover::after {
+            opacity: 1;
         }
 
         .card:nth-child(1) { animation-delay: 0.05s; }
@@ -236,6 +272,38 @@
         .card:nth-child(46) { animation-delay: 2.30s; }
         .card:nth-child(47) { animation-delay: 2.35s; }
         .card:nth-child(48) { animation-delay: 2.40s; }
+        .card:nth-child(49) { animation-delay: 2.45s; }
+        .card:nth-child(50) { animation-delay: 2.50s; }
+        .card:nth-child(51) { animation-delay: 2.55s; }
+        .card:nth-child(52) { animation-delay: 2.60s; }
+        .card:nth-child(53) { animation-delay: 2.65s; }
+        .card:nth-child(54) { animation-delay: 2.70s; }
+        .card:nth-child(55) { animation-delay: 2.75s; }
+        .card:nth-child(56) { animation-delay: 2.80s; }
+        .card:nth-child(57) { animation-delay: 2.85s; }
+        .card:nth-child(58) { animation-delay: 2.90s; }
+        .card:nth-child(59) { animation-delay: 2.95s; }
+        .card:nth-child(60) { animation-delay: 3.00s; }
+        .card:nth-child(61) { animation-delay: 3.05s; }
+        .card:nth-child(62) { animation-delay: 3.10s; }
+        .card:nth-child(63) { animation-delay: 3.15s; }
+        .card:nth-child(64) { animation-delay: 3.20s; }
+        .card:nth-child(65) { animation-delay: 3.25s; }
+        .card:nth-child(66) { animation-delay: 3.30s; }
+        .card:nth-child(67) { animation-delay: 3.35s; }
+        .card:nth-child(68) { animation-delay: 3.40s; }
+        .card:nth-child(69) { animation-delay: 3.45s; }
+        .card:nth-child(70) { animation-delay: 3.50s; }
+        .card:nth-child(71) { animation-delay: 3.55s; }
+        .card:nth-child(72) { animation-delay: 3.60s; }
+        .card:nth-child(73) { animation-delay: 3.65s; }
+        .card:nth-child(74) { animation-delay: 3.70s; }
+        .card:nth-child(75) { animation-delay: 3.75s; }
+        .card:nth-child(76) { animation-delay: 3.80s; }
+        .card:nth-child(77) { animation-delay: 3.85s; }
+        .card:nth-child(78) { animation-delay: 3.90s; }
+        .card:nth-child(79) { animation-delay: 3.95s; }
+        .card:nth-child(80) { animation-delay: 4.00s; }
 
         @keyframes cardFadeUp {
             from { opacity: 0; transform: translateY(30px) scale(0.96); }
@@ -244,8 +312,8 @@
 
         .card:hover {
             transform: translateY(-12px) scale(1.03);
-            border-color: #bac1c8;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(186, 193, 200, 0.1);
+            border-color: #666;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(200, 200, 200, 0.08);
         }
 
         /* --- ESTRUCTURA DE LA IMAGEN Y TÍTULO SUPERPUESTO --- */
@@ -267,7 +335,7 @@
 
         .card:hover .card-img {
             transform: scale(1.08);
-            filter: brightness(1.05);
+            filter: brightness(1.1) contrast(1.05);
         }
 
         .card-title-overlay {
@@ -276,8 +344,8 @@
             left: 0;
             width: 100%;
             padding: 16px 12px 12px;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
-            color: #faffff;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0) 100%);
+            color: #e0e0e0;
             font-weight: 600;
             font-size: 0.9rem;
             line-height: 1.2;
@@ -295,7 +363,7 @@
             padding-bottom: 16px;
         }
 
-        /* Badges */
+        /* Badges - mantienen colores */
         .card-badge {
             position: absolute;
             top: 10px;
@@ -320,21 +388,21 @@
         .badge-hot { background: #ff4757; color: #fff; box-shadow: 0 0 25px rgba(255, 71, 87, 0.5); }
         .badge-new { background: #2ed573; color: #fff; box-shadow: 0 0 25px rgba(46, 213, 115, 0.4); }
 
-        /* ===== BARRA DE NAVEGACIÓN LIQUID GLASS (proporcionada por el usuario) ===== */
+        /* ===== BARRA DE NAVEGACIÓN LIQUID GLASS CON ICONOS ACTUALIZADOS ===== */
         .bottom-nav {
             position: fixed;
             bottom: 25px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(30, 30, 30, 0.8);
             backdrop-filter: blur(16px) saturate(180%);
             -webkit-backdrop-filter: blur(16px) saturate(180%);
             padding: 6px;
             border-radius: 60px;
             display: flex;
             gap: 4px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(200, 200, 200, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
             z-index: 1000;
             min-width: 280px;
             max-width: 90%;
@@ -354,11 +422,23 @@
             gap: 2px;
             padding: 6px 14px;
             border-radius: 40px;
-            color: #d6dfe5;
+            color: #aaa;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             font-family: inherit;
             position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn:active {
+            animation: clickPulse 0.3s ease;
+        }
+
+        @keyframes clickPulse {
+            0% { transform: scale(1); }
+            30% { transform: scale(0.95); }
+            60% { transform: scale(1.02); }
+            100% { transform: scale(1); }
         }
 
         .nav-btn svg {
@@ -372,6 +452,15 @@
             transition: all 0.3s ease;
         }
 
+        .nav-icon-img {
+            width: 22px;
+            height: 22px;
+            filter: brightness(0) invert(0.7);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            object-fit: contain;
+        }
+
         .nav-btn .label {
             font-size: 9px;
             font-weight: 600;
@@ -381,38 +470,66 @@
         }
 
         .nav-btn:hover {
-            color: #faffff;
+            color: #e0e0e0;
             transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .nav-btn:hover .nav-icon-img {
+            opacity: 1;
+            filter: brightness(0) invert(1);
+            transform: scale(1.1);
         }
 
         .nav-btn.active {
-            background: rgba(208, 215, 218, 0.15);
+            background: rgba(200, 200, 200, 0.1);
             backdrop-filter: blur(4px);
-            color: #faffff;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 25px rgba(186, 193, 200, 0.1);
+            color: #e0e0e0;
+            border: 1px solid rgba(200, 200, 200, 0.2);
+            box-shadow: 0 0 25px rgba(200, 200, 200, 0.05);
             transform: translateY(-3px);
         }
 
-        .nav-btn.active .label {
-            color: #faffff;
+        .nav-btn.active .nav-icon-img {
+            opacity: 1;
+            filter: brightness(0) invert(1);
         }
 
-        /* Animación de entrada */
+        .nav-btn.active .label {
+            color: #e0e0e0;
+        }
+
+        /* Animación de entrada de la barra */
         @keyframes fadeUp {
             from { opacity: 0; transform: translateX(-50%) translateY(20px); }
             to   { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
 
-        /* --- MODAL MEJORADO (grises, negro, blanco) --- */
+        /* Efecto de onda (ripple) más suave */
+        .nav-btn .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(0);
+            animation: rippleAnim 0.5s linear;
+            pointer-events: none;
+        }
+
+        @keyframes rippleAnim {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* ===== MODAL MEJORADO CON ANIMACIONES DE ENTRADA Y SALIDA ===== */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.92);
             backdrop-filter: blur(12px);
             z-index: 2000;
             display: none;
@@ -428,26 +545,46 @@
             opacity: 1;
         }
 
+        .modal-overlay.closing {
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
         .modal-content {
             background: #1a1a1a;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid #333;
             width: 100%;
-            max-width: 800px;
+            max-width: 850px;
             max-height: 90vh;
             overflow-y: auto;
             padding: 30px 25px;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.9);
             animation: modalIn 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
+            transform: scale(0.95);
+            opacity: 0;
+        }
+
+        .modal-overlay.active .modal-content {
+            animation: modalIn 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        .modal-overlay.closing .modal-content {
+            animation: modalOut 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
         }
 
         @keyframes modalIn {
             from { opacity: 0; transform: scale(0.95) translateY(30px); }
             to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @keyframes modalOut {
+            from { opacity: 1; transform: scale(1) translateY(0); }
+            to { opacity: 0; transform: scale(0.95) translateY(30px); }
         }
 
         .modal-close {
@@ -456,7 +593,7 @@
             right: 20px;
             font-size: 2rem;
             cursor: pointer;
-            color: #aaaaaa;
+            color: #555;
             transition: all 0.3s ease;
             background: none;
             border: none;
@@ -465,7 +602,7 @@
         }
 
         .modal-close:hover {
-            color: #ffffff;
+            color: #e0e0e0;
             transform: rotate(90deg) scale(1.2);
         }
 
@@ -474,41 +611,50 @@
             font-weight: 700;
             margin-top: 5px;
             margin-bottom: 15px;
-            color: #ffffff;
-            text-shadow: 0 0 20px rgba(255,255,255,0.05);
+            color: #e0e0e0;
+            text-shadow: 0 0 20px rgba(255,255,255,0.02);
             text-align: center;
             letter-spacing: -0.5px;
         }
 
         .modal-img {
             width: 100%;
-            max-width: 600px;
+            max-width: 700px;
             border-radius: 12px;
             margin-bottom: 20px;
             object-fit: contain;
-            max-height: 45vh;
+            max-height: 60vh;
             box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+            transition: transform 0.4s ease;
+        }
+
+        .modal-img:hover {
+            transform: scale(1.02);
         }
 
         .modal-desc {
             font-size: 1rem;
-            color: #cccccc;
+            color: #b0b0b0;
             margin-bottom: 20px;
             line-height: 1.6;
-            max-width: 600px;
+            max-width: 650px;
             text-align: center;
+            background: rgba(255,255,255,0.02);
+            padding: 12px 18px;
+            border-radius: 10px;
+            border-left: 3px solid #444;
         }
 
         .modal-reqs {
             font-size: 0.85rem;
-            color: #aaaaaa;
+            color: #999;
             margin-bottom: 20px;
             padding: 10px 16px;
-            background: rgba(255, 255, 255, 0.04);
+            background: #2a2a2a;
             border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid #444;
             white-space: pre-wrap;
-            max-width: 600px;
+            max-width: 650px;
             width: 100%;
             text-align: center;
         }
@@ -517,7 +663,7 @@
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
-            max-width: 600px;
+            max-width: 650px;
             width: 100%;
             justify-content: center;
             margin-top: 10px;
@@ -530,30 +676,39 @@
             max-width: 280px;
             text-align: center;
             padding: 14px 20px;
-            background: #333333;
-            color: #ffffff;
+            background: #2a2a2a;
+            color: #d0d0d0;
             text-decoration: none;
             border-radius: 12px;
             font-weight: 600;
             font-size: 0.95rem;
             transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .modal-link-btn:hover {
-            background: #444444;
+            background: #444;
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-            border-color: rgba(255,255,255,0.15);
+            border-color: #666;
         }
 
         .modal-link-btn.primary {
-            background: #d0d7da;
-            color: #1a1a1a;
+            background: #888;
+            color: #111;
+            border-color: #888;
         }
 
         .modal-link-btn.primary:hover {
-            background: #e7eaeb;
+            background: #aaa;
+        }
+
+        .flag-icon {
+            font-size: 1.2rem;
         }
 
         /* --- FORMULARIO DE PETICIONES --- */
@@ -562,52 +717,80 @@
             margin: 20px auto;
             max-width: 500px;
             padding: 24px;
-            background: rgba(20, 20, 20, 0.7);
+            background: rgba(25, 25, 25, 0.85);
             backdrop-filter: blur(8px);
             border-radius: 20px;
-            border: 1px solid rgba(186, 193, 200, 0.2);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            border: 1px solid rgba(200, 200, 200, 0.15);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
             animation: fadeUp 0.4s ease;
         }
 
         #requests-container.active { display: block; }
-        #requests-container h3 { color: #faffff; margin-bottom: 15px; font-weight: 400; letter-spacing: 1px; }
+        #requests-container h3 { color: #d0d0d0; margin-bottom: 15px; font-weight: 400; letter-spacing: 1px; }
         #requests-container textarea {
-            width: 100%; padding: 14px; background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(186, 193, 200, 0.3); border-radius: 12px;
-            color: #faffff; font-size: 1rem; resize: vertical; min-height: 100px;
+            width: 100%; padding: 14px; background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #444; border-radius: 12px;
+            color: #d0d0d0; font-size: 1rem; resize: vertical; min-height: 100px;
             transition: border-color 0.3s; font-family: inherit;
         }
         #requests-container textarea:focus {
-            outline: none; border-color: #bac1c8; background: rgba(255, 255, 255, 0.08);
+            outline: none; border-color: #888; background: rgba(255, 255, 255, 0.05);
         }
-        #requests-container textarea::placeholder { color: #b3c7d6; }
+        #requests-container textarea::placeholder { color: #777; }
         #requests-container .submit-btn {
-            margin-top: 12px; width: 100%; padding: 12px; background: #d0d7da;
-            border: none; border-radius: 12px; color: #1a1a1a; font-weight: 700;
+            margin-top: 12px; width: 100%; padding: 12px; background: #888;
+            border: none; border-radius: 12px; color: #111; font-weight: 700;
             font-size: 1rem; cursor: pointer; transition: all 0.3s ease;
         }
         #requests-container .submit-btn:hover {
-            background: #e7eaeb; transform: scale(1.03);
+            background: #aaa; transform: scale(1.03);
         }
-        #request-status { margin-top: 10px; font-size: 0.9rem; color: #d6dfe5; text-align: center; }
+        #request-status { margin-top: 10px; font-size: 0.9rem; color: #aaa; text-align: center; }
 
-        /* --- FOOTER CON TEMÁTICA PARAGUAYA --- */
+        /* --- FOOTER SIN TEMÁTICA PARAGUAYA --- */
         .footer {
             text-align: center; margin-top: 50px; padding: 20px;
-            color: #b3c7d6; font-size: 0.9rem; letter-spacing: 0.5px;
-            border-top: 2px solid transparent;
-            border-image: linear-gradient(90deg, #0033A0, #FFFFFF, #D52B1E) 1;
+            color: #777; font-size: 0.9rem; letter-spacing: 0.5px;
+            border-top: 1px solid #333;
             animation: fadeUp 1s ease;
+        }
+
+        /* ===== ANIMACIONES ADICIONALES ===== */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .card-img-wrapper .card-badge {
+            animation: pulseBadge 2.5s ease-in-out infinite, float 4s ease-in-out infinite;
+        }
+
+        /* Efecto de brillo sutil en las tarjetas al hacer hover */
+        .card:hover .card-img-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.05), transparent 70%);
+            pointer-events: none;
+            animation: shimmer 1s ease-out;
+        }
+
+        @keyframes shimmer {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
         @media (max-width: 480px) {
             .bottom-nav { padding: 4px; min-width: 200px; gap: 2px; bottom: 12px; }
             .nav-btn { padding: 4px 8px; }
             .nav-btn svg { width: 18px; height: 18px; }
+            .nav-icon-img { width: 18px; height: 18px; }
             .nav-btn .label { font-size: 7px; }
             .modal-title { font-size: 1.4rem; }
-            .modal-img { max-height: 35vh; }
+            .modal-img { max-height: 40vh; }
             .modal-link-btn { font-size: 0.9rem; padding: 10px; min-width: 100px; }
             .logo-icon { width: 55px; height: 55px; }
         }
@@ -642,7 +825,7 @@
         </div>
     </div>
 
-    <!-- ===== BARRA DE NAVEGACIÓN LIQUID GLASS (estructura proporcionada) ===== -->
+    <!-- ===== BARRA DE NAVEGACIÓN LIQUID GLASS CON ICONOS ACTUALIZADOS ===== -->
     <div class="bottom-nav">
         <!-- Botón 1: Todo -->
         <button class="nav-btn active" data-filter="all">
@@ -655,30 +838,15 @@
             <span class="label">Todo</span>
         </button>
 
-        <!-- Botón 2: Juegos -->
+        <!-- Botón 2: Juegos (con imagen) -->
         <button class="nav-btn" data-filter="games">
-            <svg viewBox="0 0 24 24">
-                <path d="M6 12h4v4H6z"></path>
-                <path d="M14 12h4v4h-4z"></path>
-                <path d="M8 8h8v4H8z"></path>
-                <path d="M4 16h16v2H4z"></path>
-                <circle cx="18" cy="10" r="1"></circle>
-                <circle cx="6" cy="10" r="1"></circle>
-                <path d="M12 12v-4"></path>
-            </svg>
+            <img src="https://icones.pro/wp-content/uploads/2022/07/icone-jeux-et-jeux-video-gris.png" alt="Juegos" class="nav-icon-img">
             <span class="label">Juegos</span>
         </button>
 
-        <!-- Botón 3: Películas -->
+        <!-- Botón 3: Películas (con imagen) -->
         <button class="nav-btn" data-filter="movies">
-            <svg viewBox="0 0 24 24">
-                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
-                <path d="M8 4v16"></path>
-                <path d="M16 4v16"></path>
-                <path d="M8 8h8"></path>
-                <path d="M8 12h8"></path>
-                <path d="M8 16h8"></path>
-            </svg>
+            <img src="https://images.icon-icons.com/3250/PNG/512/movies_and_tv_filled_icon_202065.png" alt="Películas" class="nav-icon-img">
             <span class="label">películas</span>
         </button>
 
@@ -726,67 +894,1037 @@
 
         const movies = [
             // ========== NUEVAS PELÍCULAS CON ETIQUETA "NEW" (prioridad máxima) ==========
-            { id: 'lifeofpi', title: 'La vida de Pi', poster: 'https://hips.hearstapps.com/hmg-prod/images/la-vida-de-pi-66ca0a8fd6346.jpg?crop=1xw:1xh;center,top', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7Va_RKkQ4Y6GbnnSLjjyIycvb-WHd3lo3J5TBYds8AQn91QQnYuXkOWrT&s=10', links: { mex: 'https://peliculaplay.com/es/detail/movie/M52ADxaTPhQFGp8n1hjmz-Life-of-Pi', usa: 'https://play.cuevana.life/es/detail/movie/Jtrrea5BvmemOwMYcsIqW-Life-of-Pi' }, desc: 'Un joven naufraga en el Pacífico y debe sobrevivir con un tigre llamado Richard Parker.', reqs: ["1080p", "Lat/Eng", "Aventura", "2012"], showNewBadge: true, type: 'movie', multiVersion: true, noEnglish: false },
-            { id: 'minionsmonster', title: 'Minions & Monster', poster: 'https://m.media-amazon.com/images/M/MV5BMDU2MTZlMzAtNzk1Mi00YmM4LWIyNDUtN2NhOTI1NWYyM2VjXkEyXkFqcGc@._V1_.jpg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQofUXR_yUVyqhehzVpFkVo7INNLDXLztVTBktS7UqP7vMerFcSz2rsTtsZ&s=10', links: { mex: 'https://ww20.321moviesfree.com/es/detail/movie/oJZ3yfNqc8s93g6h0eez3-Minions--Monsters', usa: 'https://play.cuevana.life/es/detail/movie/AmWtdx5b6zaltKtwH2w10-Minions--Monsters' }, desc: 'Los Minions se enfrentan a monstruos en una divertida aventura.', reqs: ["1080p", "Lat/Eng", "Animación", "2025"], showNewBadge: true, type: 'movie', multiVersion: true, noEnglish: false },
-            { id: 'obsession', title: 'Obsession', poster: 'https://images.contentstack.io/v3/assets/blt13adb7e2033fcee5/blt5c8bcbfee5dade5c/6a2b47a8c284bac540ef3353/Obsession_keyart_poster_2000x3000.jpg?width=2560', screen: 'https://m.media-amazon.com/images/S/pv-target-images/994789a22b07820e60a905f7e4dec1235c621b0c013bdc0e0baa57da4376ac2c._SX1080_FMjpg_.jpg', links: { mex: 'https://ww1.123flmsfree.com/es/detail/movie/81NqnKUKqaVF41lZfLlZ7-Obsession', usa: null }, desc: 'Un thriller psicológico donde la obsesión lleva a consecuencias mortales.', reqs: ["1080p", "Latino", "Suspenso", "2025"], showNewBadge: true, type: 'movie', multiVersion: true, noEnglish: true },
-            { id: 'mummypossession', title: 'La posesión de la Momia', poster: 'https://m.media-amazon.com/images/M/MV5BYjFiZjQ4MWUtM2Y0NC00NGZkLTllMmUtODllZDI5YTljZmZhXkEyXkFqcGc@._V1_.jpg', screen: 'https://media.gq.com.mx/photos/696689cf26895c3cd18985ab/16:9/w_2560%2Cc_limit/La%2520Momia.jpg', links: { mex: 'https://video.playspelis.com/es/detail/movie/ORMRWcEwY5HMWMj2FzTaA-Lee-Cronins-The-Mummy', usa: null }, desc: 'Una momia antigua despierta y causa terror en un pueblo.', reqs: ["1080p", "Latino", "Terror", "2025"], showNewBadge: true, type: 'movie', multiVersion: true, noEnglish: true },
-            { id: 'legallyblonde', title: 'Legalmente Rubia', poster: 'https://m.media-amazon.com/images/M/MV5BZTcwNzYzNTYtOGE3NS00ODViLTg1ZDAtNjY1M2QxMGM1NTk3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://m.media-amazon.com/images/S/pv-target-images/2ce695ac967ab3b7ca59abb6db4b757b1f1d3c9e2fd5113ff4acd100569c13ae._SX1080_FMjpg_.jpg', links: { mex: 'https://ww20.321moviesfree.com/es/detail/movie/1nUQyIYrkfiSadeBTRb39-Legally-Blonde', usa: 'https://es.cuevana4br.com/es/detail/movie/w154sr9022X25VNpNcA9r-Legally-Blonde' }, desc: 'Elle Woods demuestra que ser rubia no es un obstáculo para triunfar.', reqs: ["1080p", "Lat/Eng", "Comedia", "2001"], showNewBadge: true, type: 'movie', multiVersion: true, noEnglish: false },
-            { id: 'chum', title: 'Chum', poster: 'https://m.media-amazon.com/images/M/MV5BNGZhZDhhYjItYzI0OC00NWQ5LTk4ZTktOGM1Y2U3Y2I3YmVlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTn3yPyLqkdyncLB0Swxfexnq3EU09n--M6axKrhIlMOGkXVwBPwQ9Jrpk&s=10', links: { mex: 'https://www3.dramasfree.com/es/detail/movie/f9791qvq497yEf1TepeGY-Chum', usa: null }, desc: 'Un grupo de amigos se enfrenta a una criatura marina mortal.', reqs: ["1080p", "Latino", "Terror", "2025"], showNewBadge: true, type: 'movie', multiVersion: true, noEnglish: true },
-            { id: 'fiftyshades', title: '50 Sombras de Grey', poster: 'https://es.web.img2.acsta.net/c_310_420/pictures/14/11/14/11/16/546987.jpg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScpe6ncjHtC9tAJcPCZf5lDhL3O8OgFI5P6F66xq1TNbbTJGI-aiEkvYe5&s=10', links: { mex: 'https://peliculaplay.com/es/detail/movie/iLibJLOCwnyiVu97q9K0B-Fifty-Shades-of-Grey', usa: 'https://es.cuevana4br.com/es/detail/movie/AJr291d6smDyY4Kkt2s1Q-Fifty-Shades-of-Grey' }, desc: 'Una relación intensa entre una joven y un millonario atormentado.', reqs: ["1080p", "Lat/Eng", "Romance", "2015"], showNewBadge: true, type: 'movie', multiVersion: true, noEnglish: false },
-            { id: 'theywillkillyou', title: 'Te van a matar', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTxIhPY9XNFt3Ref6wxUlQngFvOlVby-MFyvNmt6lzeg&s=10', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0ZSfGnY5VAcIC0AiTQGXaH44z59n43EttRqpc_eUV3s3XytB_m-ozDJsX&s=10', links: { mex: 'https://ver.123pelicula.com/es/detail/movie/Q7lhrLfF1keGQmZEmAsDP-They-Will-Kill-You', usa: 'https://flixlat.com/es/detail/movie/ULtO7GcCYG94wePa5xZig-They-Will-Kill-You' }, desc: 'Una familia es aterrorizada por unos misteriosos asesinos.', reqs: ["1080p", "Lat/Eng", "Terror", "2025"], showNewBadge: true, type: 'movie', multiVersion: true, noEnglish: false },
+            // Shrek 1
+            {
+                id: 'shrek1',
+                title: 'Shrek',
+                poster: 'https://m.media-amazon.com/images/M/MV5BN2FkMTRkNTUtYTI0NC00ZjI4LWI5MzUtMDFmOGY0NmU2OGY1XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxz3iNjPh41-7wtHfU8XLhqeomCbYwMkoKZ3boUGlChRz6R95FKRcmNRDk&s=10',
+                links: { mex: 'https://ww20.321moviesfree.com/es/detail/movie/GYCE7CN7NaKvd1HLQkALS-Shrek-1', usa: null },
+                desc: 'Shrek, un ogro solitario y gruñón, ve su tranquilidad invadida cuando un montón de personajes de cuentos de hadas son desterrados a su pantano. Para recuperar su hogar, hace un trato con el malvado Lord Farquaad: rescatar a la princesa Fiona a cambio de su pantano. Pero Fiona guarda un secreto que cambiará su vida para siempre. Una divertida y conmovedora aventura que parodia los cuentos de hadas tradicionales.',
+                reqs: ["1080p", "Latino", "Animación", "2001"],
+                showNewBadge: true,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: true
+            },
+            // Shrek 2
+            {
+                id: 'shrek2',
+                title: 'Shrek 2',
+                poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRn04I4S1S6RZy3Mt5Z6lD1He5pgHLSKPmv2tt8Qrc4kAaAjU2UeAuzu638&s=10',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHtn8Je06AiS4OrFIZKteskLn3GB_BgKqy2MwIBNiTToNISmZEu79N-KTA&s=10',
+                links: { mex: 'https://video.playspelis.com/es/detail/movie/tL0vvE124qUEYQiXJP6BO-Shrek-2', usa: 'https://www3.dramasfree.com/es/detail/movie/J7fnJCf9SEgvL5ZdRl112-Shrek-2' },
+                desc: 'Shrek y Fiona regresan de su luna de miel y reciben una invitación del reino de Muy Muy Lejano, donde los padres de Fiona, el Rey Harold y la Reina Lilian, esperan conocer al nuevo esposo de su hija. Pero el Rey no está contento con que su hija se haya casado con un ogro y contrata al famoso Cazador de Ogros, el Gato con Botas, para deshacerse de Shrek.',
+                reqs: ["1080p", "Lat/Eng", "Animación", "2004"],
+                showNewBadge: true,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+            // Shrek 3 (portada actualizada)
+            {
+                id: 'shrek3',
+                title: 'Shrek 3',
+                poster: 'https://m.media-amazon.com/images/S/pv-target-images/5b38695d4ad8fd3f6d59c9dec6e58dcce5113dbe58ba079a5c6034104fad7a84.jpg',
+                screen: 'https://images.mubicdn.net/images/film/8790/cache-11430-1745489624/image-w1280.jpg?size=800x',
+                links: { mex: 'https://www3.dramasfree.com/es/detail/movie/dhKJjyRSBB8OsfOMBDx8M-Shrek-the-Third', usa: null },
+                desc: 'El Rey Harold está enfermo y Shrek debe asumir el trono de Muy Muy Lejano. Pero él no quiere ser rey, así que junto con Asno y el Gato con Botas emprende un viaje para encontrar al legítimo heredero: Arturo, un adolescente que no tiene idea de que es el próximo rey. Mientras tanto, el malvado Lord Farquaad y otros villanos planean tomar el control.',
+                reqs: ["1080p", "Latino", "Animación", "2007"],
+                showNewBadge: true,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: true
+            },
+            // Shrek 4
+            {
+                id: 'shrek4',
+                title: 'Shrek 4: Felices para siempre',
+                poster: 'https://m.media-amazon.com/images/M/MV5BNjQ3YWM1ZWUtNzAxNy00ZDE1LWExNWYtNmZiZjk0ZWZkNTM4XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
+                screen: 'https://cloudfront-us-east-1.images.arcpublishing.com/abccolor/NNK5JZWQF5B4XOWMNR6W6N2IVA.jpg',
+                links: { mex: 'https://flixlat.com/es/detail/movie/KbBstwx247XkFI9FFX1Ws-Shrek-4', usa: 'https://play.cuevana.life/es/detail/movie/V2hAjlrTyUKdLY1PKbGah-Shrek-Forever-After' },
+                desc: 'Shrek está harto de su vida familiar y firma un contrato con el duende Rumpelstiltskin para que le conceda un día como un ogro salvaje de nuevo. Pero el trato sale mal y Shrek se encuentra en una realidad alternativa donde nunca existió, y debe encontrar la manera de romper el hechizo y recuperar su vida original.',
+                reqs: ["1080p", "Lat/Eng", "Animación", "2010"],
+                showNewBadge: true,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+            // Harry Potter 1 (portada actualizada)
+            {
+                id: 'harry1',
+                title: 'Harry Potter y la piedra filosofal',
+                poster: 'https://play-lh.googleusercontent.com/AX7s9Y3EyhUCRwp_OUymBZhno9CFNl_h9KfLj64bHzQ1wBT-1HbI27ovhkL9RFsq0RRX52vAs7oALlLf8RU',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9rA-suU-lVVA6nEeUpTavdbe1bCnvhvxlFTa1BeGStB-90urewHIvMExo&s=10',
+                links: { mex: 'https://es.cuevana4br.com/es/detail/movie/MnPWUfrY9W6hT56Qlqy4P-Harry-Potter-and-the-Sorcerers-Stone', usa: 'https://peliculaplay.com/es/detail/movie/c8JMIdiUaaD8iexKGncPS-Harry-Potter-and-the-Sorcerers-Stone' },
+                desc: 'Harry Potter, un huérfano que vive con sus crueles tíos, descubre en su undécimo cumpleaños que es un mago y que ha sido aceptado en el Colegio Hogwarts de Magia y Hechicería. Allí hará amigos, aprenderá magia y se enfrentará a un misterioso peligro relacionado con una piedra filosofal que otorga la inmortalidad.',
+                reqs: ["1080p", "Lat/Eng", "Fantasía", "2001"],
+                showNewBadge: true,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+            // Harry Potter 2
+            {
+                id: 'harry2',
+                title: 'Harry Potter y la cámara secreta',
+                poster: 'https://m.media-amazon.com/images/M/MV5BMDE2ZjlmZGItODBiZS00NTVmLWI4YjItNzZmN2ZiMjg3NzI4XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
+                screen: 'https://m.media-amazon.com/images/S/pv-target-images/b283611632325363f0860e8ff884645765177968e6c1908df707048d0c31b588._SX1080_FMjpg_.jpg',
+                links: { mex: 'https://video.playspelis.com/es/detail/movie/7IGD9nHAxejzYstx8oauA-Harry-Potter-and-the-Chamber-of-Secrets', usa: 'https://play.cuevana.life/es/detail/movie/0dQbe7KK7cluKhxlBXaLI-Harry-Potter-and-the-Chamber-of-Secrets' },
+                desc: 'Harry regresa a Hogwarts para su segundo año y descubre que la Cámara de los Secretos ha sido abierta, liberando una criatura que petrifica a los estudiantes. Con la ayuda de sus amigos Ron y Hermione, Harry debe encontrar la cámara y enfrentar al heredero de Slytherin antes de que el colegio sea cerrado.',
+                reqs: ["1080p", "Lat/Eng", "Fantasía", "2002"],
+                showNewBadge: true,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+            // Harry Potter 3
+            {
+                id: 'harry3',
+                title: 'Harry Potter y el prisionero de Azkaban',
+                poster: 'https://m.media-amazon.com/images/M/MV5BMTY4NTIwODg0N15BMl5BanBnXkFtZTcwOTc0MjEzMw@@._V1_FMjpg_UX1000_.jpg',
+                screen: 'https://megustaelcine.com/wp-content/uploads/2024/06/Harry-Potter-3-1.jpg',
+                links: { mex: 'https://play.cuevana.life/es/detail/movie/Lx07zhenmquqkwnRIaX43-Harry-Potter-and-the-Prisoner-of-Azkaban', usa: 'https://ww20.321moviesfree.com/es/detail/movie/Q1VyGg3x2uCXLdMmmEcIA-Harry-Potter-and-the-Prisoner-of-Azkaban' },
+                desc: 'En su tercer año, Harry descubre que Sirius Black, un peligroso prisionero fugado de Azkaban, está tras él. Pero pronto descubre que Sirius no es quien parece ser y que su pasado está más conectado con Harry de lo que imaginaba. Con la ayuda de un nuevo profesor, Remus Lupin, Harry aprenderá a enfrentar sus miedos.',
+                reqs: ["1080p", "Lat/Eng", "Fantasía", "2004"],
+                showNewBadge: true,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+            // Harry Potter 4 (portada actualizada)
+            {
+                id: 'harry4',
+                title: 'Harry Potter y el cáliz de fuego',
+                poster: 'https://es.web.img2.acsta.net/pictures/14/04/30/11/29/268191.jpg',
+                screen: 'https://hips.hearstapps.com/hmg-prod/images/dumbledore-harry-potter-el-caliz-de-fuego-650b3bca70df4.jpg?crop=0.75xw:1xh;center,top&resize=1200:*',
+                links: { mex: 'https://es.cuevana4br.com/es/detail/movie/5PSbbDMj2q0fMrUFqUl7h-Harry-Potter-and-the-Goblet-of-Fire', usa: 'https://video.playspelis.com/es/detail/movie/OmsAaK53c8PFYtc4aIe2J-Harry-Potter-and-the-Goblet-of-Fire' },
+                desc: 'Harry es seleccionado para participar en el Torneo de los Tres Magos, una peligrosa competencia entre las tres escuelas de magia más importantes de Europa. Pero la competición es más siniestra de lo que parece, ya que alguien ha planeado que Harry participe para llevarlo a una trampa mortal.',
+                reqs: ["1080p", "Lat/Eng", "Fantasía", "2005"],
+                showNewBadge: true,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+            // Harry Potter 5
+            {
+                id: 'harry5',
+                title: 'Harry Potter y la orden del Fénix',
+                poster: 'https://m.media-amazon.com/images/M/MV5BYWJmM2M1YzItMjY1Ni00YzRmLTg5YWYtNDFmNTJjNzQ0ODkyXkEyXkFqcGc@._V1_.jpg',
+                screen: 'https://imagenes.20minutos.es/files/image_640_auto/uploads/imagenes/2022/07/16/harry-potter-y-la-orden-del-fenix-2007-11.jpeg',
+                links: { mex: 'https://www3.dramasfree.com/es/detail/movie/GH3Uf9dwLwcPBYa0UVDrt-Harry-Potter-and-the-Order-of-the-Phoenix', usa: 'https://ver.123pelicula.com/es/detail/movie/XIx88XJuKyoU7PM6R4et4-Harry-Potter-and-the-Order-of-the-Phoenix' },
+                desc: 'Harry se enfrenta a un nuevo año en Hogwarts mientras el Ministerio de Magia se niega a creer que Lord Voldemort ha regresado. Con la ayuda de sus amigos y la Orden del Fénix, Harry deberá luchar contra la opresión del Ministerio y entrenar a sus compañeros para la batalla que se avecina.',
+                reqs: ["1080p", "Lat/Eng", "Fantasía", "2007"],
+                showNewBadge: true,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+            // Harry Potter 6
+            {
+                id: 'harry6',
+                title: 'Harry Potter y el misterio del príncipe',
+                poster: 'https://m.media-amazon.com/images/M/MV5BMGMyYzQ0ZTgtYmM0NS00NzY3LWI2ODAtNTEyNjc3NTNmMWJkXkEyXkFqcGc@._V1_.jpg',
+                screen: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABTynjP3yLojCjCLdbcmb-L_3MFug8kY73RCyrZlatkI44N1d3com7I7TDjqb8hwHMcyWpJg4gSSGyaH6XISTORjr8lmgg3TVHYkJ.jpg?r=4a8',
+                links: { mex: 'https://ver.123pelicula.com/es/detail/movie/SJfkmmdAfMXm35sriguDA-Harry-Potter-and-the-Half-Blood-Prince', usa: 'https://play.cuevana.life/es/detail/movie/VLekybiM5kJtI49Q1hhQ1-Harry-Potter-and-the-Half-Blood-Prince' },
+                desc: 'En su sexto año, Harry descubre un antiguo libro de pociones que perteneció al misterioso "Príncipe Mestizo". Con la ayuda de Dumbledore, Harry explora los recuerdos de Voldemort para descubrir sus debilidades, mientras la amenaza del Señor Oscuro se intensifica.',
+                reqs: ["1080p", "Lat/Eng", "Fantasía", "2009"],
+                showNewBadge: true,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+            // Harry Potter 7 parte 1
+            {
+                id: 'harry7p1',
+                title: 'Harry Potter y las reliquias de la muerte (Parte 1)',
+                poster: 'https://es.web.img2.acsta.net/medias/nmedia/18/82/10/76/19599753.jpg',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTarofPW-eFi_uhvVGMLIaF34GDHRfXeKbaw1z64mGZc5sR7LwpYfYaaNA&s=10',
+                links: { mex: 'https://play.cuevana.life/es/detail/movie/UCV40uuETMLjTemd6EAkj-Harry-Potter-and-the-Deathly-Hallows-Part-1', usa: 'https://ver.123pelicula.com/es/detail/movie/4PsYjzNuNkHVbvdhnI8in-Harry-Potter-and-the-Deathly-Hallows-Part-1' },
+                desc: 'Harry, Ron y Hermione abandonan Hogwarts para buscar y destruir los Horrocruxes de Voldemort. En su peligroso viaje, descubren la existencia de las Reliquias de la Muerte y luchan por sobrevivir mientras el mundo mágico cae bajo el control del Señor Oscuro.',
+                reqs: ["1080p", "Lat/Eng", "Fantasía", "2010"],
+                showNewBadge: true,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+            // Harry Potter 7 parte 2
+            {
+                id: 'harry7p2',
+                title: 'Harry Potter y las reliquias de la muerte (Parte 2)',
+                poster: 'https://m.media-amazon.com/images/M/MV5BNDgxOTEyYzktOTg1NC00OWZmLWEzOTAtZTRhZGRkZTQzYWE5XkEyXkFqcGc@._V1_.jpg',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMvO0iGLNMgAVdk5NztngjSRzCicsXuu1U_PTr5YKyNSkCJPSPlkyholA&s=10',
+                links: { mex: 'https://es.cuevana4br.com/es/detail/movie/PH8TgYolOk8zn1gvDTllG-Harry-Potter-and-the-Deathly-Hallows-Part-2', usa: 'https://www3.dramasfree.com/es/detail/movie/N8ouk4YIGNZ6DlZq5Y8kc-Harry-Potter-and-the-Deathly-Hallows-Part-2' },
+                desc: 'La batalla final por Hogwarts comienza. Harry debe enfrentarse a Voldemort en una última confrontación mientras intenta destruir los Horrocruxes restantes. El destino del mundo mágico depende del resultado de esta épica batalla.',
+                reqs: ["1080p", "Lat/Eng", "Fantasía", "2011"],
+                showNewBadge: true,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+            // Donde están las rubias
+            {
+                id: 'whitechicks',
+                title: 'Donde están las rubias',
+                poster: 'https://m.media-amazon.com/images/S/pv-target-images/34b2d39ed55f6df09da8871919da835dba6e86d68af01079ab75635836f00200.jpg',
+                screen: 'https://images.mubicdn.net/images/film/37096/cache-26971-1745490171/image-w1280.jpg?size=800x',
+                links: { mex: 'https://www3.dramasfree.com/es/detail/movie/6AWoQRYo5hNh5YsCGoCym-White-Chicks', usa: 'https://play.cuevana.life/es/detail/movie/JnrGwP4UdgulNjymq3Bo2-White-Chicks' },
+                desc: 'Dos agentes del FBI, Marcus y Kevin, se disfrazan de dos hermanas rubias y adineradas para protegerlas de un secuestro. Pero su misión se complica cuando deben mantener el disfraz mientras investigan un caso de secuestro y se enfrentan a situaciones cómicas y peligrosas.',
+                reqs: ["1080p", "Lat/Eng", "Comedia", "2004"],
+                showNewBadge: true,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+            // King Kong
+            {
+                id: 'kingkong',
+                title: 'King Kong',
+                poster: 'https://m.media-amazon.com/images/M/MV5BMWY0NWE0ZjUtNjRlOS00ZDViLTgxNTQtMGMwN2FhNDY1YTg2XkEyXkFqcGc@._V1_.jpg',
+                screen: 'https://www.abc.com.py/resizer/v2/https%3A%2F%2Farc-anglerfish-arc2-prod-abccolor.s3.amazonaws.com%2Fpublic%2FXVKTAPPJENH7ZLMGAFBSH2A5YU.jpg?auth=92dfc7cafd167c03f77e3fc3d1e9288d34c55199e23d7739628ccd933685194a&width=1920&smart=true',
+                links: { mex: 'https://ver.123pelicula.com/es/detail/movie/JTvoQuLUeUj46kaAYwgcJ-King-Kong', usa: null },
+                desc: 'Un grupo de exploradores liderados por el director de cine Carl Denham viaja a una isla misteriosa donde encuentran a King Kong, un gigantesco gorila que se enamora de la actriz Ann Darrow. Kong es capturado y llevado a Nueva York, donde debe enfrentarse a la civilización moderna.',
+                reqs: ["1080p", "Latino", "Aventura", "2005"],
+                showNewBadge: true,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: true
+            },
+            // Moana Live Action
+            {
+                id: 'moana_live',
+                title: 'Moana (Live Action)',
+                poster: 'https://m.media-amazon.com/images/M/MV5BMTQ1OTQ2Y2UtMzllNS00ODFiLWFkNGItNGRjOWRlMjIwNTRlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
+                screen: 'https://cnbl-cdn.bamgrid.com/assets/8ca59ca1aa1cd2d7e9d6d6b4fae341a75076ae2fa941b5ee8375ddbb46e258db/original',
+                links: { mex: 'https://play.cuevana.life/es/detail/movie/dGWohgBn4Hm9pf9yyOcVc-Moana', usa: null },
+                desc: 'Adaptación en acción real de la historia de Moana, una valiente joven que navega por el océano para salvar a su aldea. Acompañada por el semidiós Maui, deberá devolver el corazón de Te Fiti y restaurar el equilibrio de la naturaleza.',
+                reqs: ["1080p", "Latino", "Aventura", "2026"],
+                showNewBadge: true,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: true
+            },
+            // Godzilla vs Kong (portada actualizada)
+            {
+                id: 'godzilla_vs_kong',
+                title: 'Godzilla vs Kong',
+                poster: 'https://chathamcommunique.com/wp-content/uploads/2021/04/dedtzt7-90a09188-c61a-418e-9f16-8e05244c7051.png',
+                screen: 'https://i.blogs.es/f7a706/godzilla-vs-kong/1366_2000.jpg',
+                links: { mex: 'https://ww1.123flmsfree.com/es/detail/movie/r2C3s7qjuMCcX2aNXUXmi-Godzilla-vs-Kong', usa: 'https://video.playspelis.com/es/detail/movie/u2Z4dtRvNIDYNqRYL5T9L-Godzilla-vs-Kong' },
+                desc: 'Dos de los más poderosos titanes del planeta se enfrentan en una batalla épica. Mientras las organizaciones humanas intentan controlar a estas bestias, Godzilla y Kong luchan por la supremacía, y sus destinos están entrelazados con un misterio que amenaza al mundo.',
+                reqs: ["4K", "Lat/Eng", "Acción", "2021"],
+                showNewBadge: true,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+
+            // ========== LAS 10 ANTERIORES CON "NEW" AHORA PASAN A FALSE ==========
+            {
+                id: 'theoriginals',
+                title: 'The Originals (T3)',
+                poster: 'https://i.postimg.cc/76vBfH2P/do-you-think-the-originals-is-worth-watching-especially-v0-ywu6f4w796ke1.jpg',
+                screen: 'https://fotografias.antena3.com/clipping/cmsimages01/2019/04/05/252F45EA-AF72-41EE-A0D4-7F81D2C5B389/69.jpg?crop=1280,720,x0,y0&width=1280&height=720&optimize=low&format=jpg',
+                links: { mex: 'https://video.playspelis.com/es/detail/drama/HPvmpcHWI9wpDbQGWIvza-The-Originals-Season-3', usa: null },
+                desc: 'La tercera temporada de "The Originals" sigue la épica lucha de los vampiros originales por el control de Nueva Orleans. Klaus, Elijah y Rebekah deben enfrentarse a nuevas amenazas sobrenaturales mientras protegen a la familia y descubren oscuros secretos del pasado.',
+                reqs: ["1080p", "Latino", "Serie", "T3"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: true
+            },
+            {
+                id: 'sheepdetectives',
+                title: 'Las ovejas detectives',
+                poster: 'https://www.sonypictures.es/statics/large_Cartel_poster_4x5_6af96cc09e.png',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFPjArGf4DoU1NjUWFfLd3Kg9H_m3ZhbPBYmB82lxG9LqjDmzFk37_L-LFbZ2WTUOchipNC0v3ybknJfhCovU9r422370YBRQNnwk6Zw&s=10',
+                links: { mex: 'https://ver.123pelicula.com/es/detail/movie/3cq8RA7W579HKWvzpDhEJ-The-Sheep-Detectives', usa: 'https://www3.dramasfree.com/es/detail/movie/KU9VPjgr1SznVFItJDNl8-The-Sheep-Detectives' },
+                desc: 'Un grupo de ovejas decide convertirse en detectives para resolver misterios en su granja. Con humor y astucia, descubren que el culpable de los extraños sucesos es más cercano de lo que creen.',
+                reqs: ["1080p", "Lat/Eng", "Animación", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+            {
+                id: 'corporateretreat',
+                title: 'Corporate Retreat',
+                poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRUU0quXsTpgeDXKCqBfiKVIBBTVU2hPkYOvKWLrKMLcmHfiWTiWfupXgv&s=10',
+                screen: 'https://cdn.prod.website-files.com/5c729f15fd0819dbaf8e66c6/638e5abfb5884073203d791d_Mount-Lofty-House%20(1).jpeg',
+                links: { mex: 'https://play.cuevana.life/es/detail/movie/bbUp1M7Vi62k29iyBIhx3-Corporate-Retreat', usa: null },
+                desc: 'Un grupo de empleados de una empresa asiste a un retiro corporativo en una mansión remota. Pronto descubren que el retiro es una trampa mortal donde deben luchar por sobrevivir mientras sus jefes los observan.',
+                reqs: ["1080p", "Latino", "Suspenso", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: true
+            },
+            {
+                id: 'strung',
+                title: 'Strung',
+                poster: 'https://m.media-amazon.com/images/M/MV5BNWRjNzNiMGEtNjgzMi00ZGRkLTk4YWYtOTQ5YWJjOWExOTM1XkEyXkFqcGc@._V1_.jpg',
+                screen: 'https://static01.nyt.com/images/2026/06/26/multimedia/26cul-strung-review-tkcq/26cul-strung-review-tkcq-articleLarge.jpg?quality=75&auto=webp&disable=upscale',
+                links: { mex: 'https://www3.dramasfree.com/es/detail/movie/TeQhq046yMeyHVSJFuVFU-Strung', usa: null },
+                desc: 'Un violinista prodigio descubre que su talento está vinculado a un oscuro pacto sobrenatural. Atrapado entre el éxito y la maldición, deberá encontrar una salida antes de que su alma sea consumida.',
+                reqs: ["1080p", "Latino", "Terror", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: true
+            },
+            {
+                id: 'backwoodsbloodfeud',
+                title: 'Backwoods Blood Feud',
+                poster: 'https://m.media-amazon.com/images/M/MV5BM2RhYzVhMzAtZjk1MC00YzIwLTk5NDQtY2YwMmY1YzY4MzA0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
+                screen: 'https://m.media-amazon.com/images/M/MV5BZTM2ODE5MzItMWQ4NC00NDYzLWJjYjMtNTYwMDcxOWUwOGJlXkEyXkFqcGc@._V1_.jpg',
+                links: { mex: 'https://latino.solo-latino.com/es/detail/movie/xX0AvCZddOYBP6Ph9GO2z-Backwoods-Blood-Feud', usa: null },
+                desc: 'Dos familias rivales en el bosque se enfrentan en una violenta disputa por un territorio. La venganza y la sangre marcan el destino de todos los involucrados en esta lucha sin cuartel.',
+                reqs: ["1080p", "Latino", "Acción", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: true
+            },
+            {
+                id: 'supergirl',
+                title: 'Supergirl',
+                poster: 'https://m.media-amazon.com/images/M/MV5BMmJkOTE0MWUtY2E5OS00NzEyLWI4NjEtYzQzYzFmMjk5ODE3XkEyXkFqcGc@._V1_.jpg',
+                screen: 'https://m.media-amazon.com/images/M/MV5BY2FkNDhhMzItM2JjMi00ODEwLWEzYjgtNmMzN2ZhODkxOWQ2XkEyXkFqcGdeQWFybm8@._V1_.jpg',
+                links: { mex: 'https://ver.123pelicula.com/es/detail/movie/EZLC1KgqiOOZuezJgXlHd-Supergirl-Woman-of-Tomorrow', usa: 'https://peliculaplay.com/es/detail/movie/FU9lFcFOWsKMsiOt2i2XQ-Supergirl-Woman-of-Tomorrow' },
+                desc: 'Supergirl enfrenta una nueva amenaza cósmica que pone en peligro la Tierra. Con su poder y determinación, deberá aliarse con viejos y nuevos héroes para salvar el planeta.',
+                reqs: ["4K", "Lat/Eng", "Superhéroes", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+            {
+                id: 'theinvite',
+                title: 'La invitación',
+                poster: 'https://m.media-amazon.com/images/M/MV5BMjI0MzJjMjctNmQzZi00Y2U4LWEwZGItMmE3NDUzNzk1YzY3XkEyXkFqcGc@._V1_.jpg',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-rywgvpuRD8nR5FBeilF6Af-DRx1_LB0fsfMX8GLn00ahzvWj0WQr1Bo&s=10',
+                links: { mex: 'https://peliculaplay.com/es/detail/movie/qGfsKmcBgxieiQX7KlKTZ-The-Invite', usa: null },
+                desc: 'Una joven recibe una misteriosa invitación a una fiesta exclusiva en una mansión. Pronto descubre que los anfitriones tienen oscuros planes y que ella es la pieza clave de un ritual ancestral.',
+                reqs: ["1080p", "Latino", "Terror", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: true
+            },
+            {
+                id: 'alertextincion',
+                title: 'Alerta Extinción',
+                poster: 'https://m.media-amazon.com/images/M/MV5BMDc4MzM3NTAtZWJiYy00MWVmLThkZDgtNTQxMTE1ZTI4ZGRkXkEyXkFqcGc@._V1_.jpg',
+                screen: 'https://m.media-amazon.com/images/S/pv-target-images/acff787a9c51759c3c7fefc4e28e1aebb14347fc2fb46f9c04aff10f2b16bb59._SX1080_FMpng_.png',
+                links: { mex: 'https://ver.123pelicula.com/es/detail/movie/XT6YWTS9m1DQsqB6oGQ4q-Cold-Storage', usa: 'https://play.cuevana.life/es/detail/movie/XQiuUI8NqbVzytdyvrQzW-Cold-Storage' },
+                desc: 'Un grupo de científicos en una base remota descubre un virus letal que amenaza con extinguir a la humanidad. Con el tiempo en su contra, deberán encontrar una cura antes de que sea demasiado tarde.',
+                reqs: ["4K", "Lat/Eng", "Ciencia Ficción", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+            {
+                id: 'wormtown',
+                title: 'WormTown',
+                poster: 'https://m.media-amazon.com/images/M/MV5BYjYzYWQ2MjAtMjA3My00NDE0LWJmYTctOTFjOThmODNjZWNhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxiOSuG8aNQIvQr0TgOOnNeeQfat_pq-2_HKAuDvq7S-s6YQWDE3woMgnH&s=10',
+                links: { mex: 'https://play.cuevana.life/es/detail/movie/UFEhST5wCAg2IeRz7S8ep-Wormtown', usa: 'https://ver.123pelicula.com/es/detail/movie/avtf1xXGUIYRvvpqELr0N-Wormtown' },
+                desc: 'En un pequeño pueblo, extraños gusanos mutantes comienzan a atacar a los habitantes. Un grupo de supervivientes debe descubrir el origen de la plaga y detenerla antes de que se extienda.',
+                reqs: ["1080p", "Lat/Eng", "Terror", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+            {
+                id: 'exterminio',
+                title: 'Exterminio: El templo de los huesos',
+                poster: 'https://m.media-amazon.com/images/M/MV5BZGU2M2Y1YTItMWYxNS00NDYxLThhOTYtNjNhOWUzNjA3MTYwXkEyXkFqcGc@._V1_.jpg',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrI0lpHobFiNjF-u64KTpROl_ZThC7Gh_NKh8_sffzPpKH0eJcIW2qZf18&s=10',
+                links: { mex: 'https://ww20.321moviesfree.com/es/detail/movie/YB8nbAjwPHSiwGP4aCLNQ-28-Years-Later-The-Bone-Temple', usa: 'https://flixlat.com/es/detail/movie/F2UE6GVr2Qn4fQeCWxrci-28-Years-Later-The-Bone-Temple' },
+                desc: '28 años después del brote del virus de la ira, un grupo de soldados se adentra en las ruinas de un templo sagrado donde los infectados se han convertido en una amenaza aún más peligrosa. La lucha por la supervivencia se intensifica.',
+                reqs: ["4K", "Lat/Eng", "Terror", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
 
             // ========== RESTO DE PELÍCULAS (sin etiqueta New) ==========
-            // Las que tenían New ahora las quitamos: miraculous6, enolaholmes1, enolaholmes2, enolaholmes3
-            { id: 'miraculous6', title: 'Miraculous 6', poster: 'https://static.wikia.nocookie.net/miraculousladybug/images/4/4d/Temporada_6_Poster_en_espa%C3%B1ol.png/revision/latest?cb=20260303224630&path-prefix=es', screen: 'https://i.ytimg.com/vi/aqIK8fsEcVY/maxresdefault.jpg', links: { mex: 'https://latino.solo-latino.com/es/detail/drama/6di6atgHQvKjbAkhnsDDY-Miraculous-Tales-of-Ladybug--Cat-Noir-Season-6', usa: null }, desc: 'Nueva temporada de las aventuras de Ladybug y Cat Noir.', reqs: ["1080p", "Latino", "Animación", "2026"], showNewBadge: false, type: 'movie', multiVersion: true, noEnglish: true },
-            { id: 'enolaholmes1', title: 'Enola Holmes', poster: 'https://m.media-amazon.com/images/M/MV5BMTRlYmI1NTMtYTVkYi00MjJkLWE3ZGItOThkYTdhNzBhMThhXkEyXkFqcGc@._V1_.jpg', screen: 'https://occ-0-8407-1001.1.nflxso.net/dnm/api/v6/9pS1daC2n6UGc3dUogvWIPMR_OU/AAAABQd0_bxda3LDRRAD0kvd3Ffyo7re6xiMBdhiH01nF3X5-9IkRxKN32gw34rVG3eB4nWJJ-ED5f95ariyFoBuR6H8HmcwtQ5wETa5zJgVV0RkfW8F_dNRP7DuZg.jpg?r=0c0', links: { mex: 'https://video.playspelis.com/es/detail/movie/H11bhsHeEElhMh8pFAJ6i-Enola-Holmes', usa: null }, desc: 'La hermana menor de Sherlock Holmes se embarca en su propia aventura.', reqs: ["1080p", "Latino", "Misterio", "2020"], showNewBadge: false, type: 'movie', multiVersion: true, noEnglish: true },
-            { id: 'enolaholmes2', title: 'Enola Holmes 2', poster: 'https://pics.filmaffinity.com/Enola_Holmes_2-610930550-large.jpg', screen: 'https://m.media-amazon.com/images/M/MV5BZjZjMGUyNTgtNWE2Yi00YTAyLTg5ZTMtYTVkMmNkNGFmMTRiXkEyXkFqcGdeQWFkcmllY2xh._V1_.jpg', links: { mex: 'https://ww1.123flmsfree.com/es/detail/movie/2Y6xJc8UPCmtBrGQ5nHI6-Enola-Holmes-2', usa: null }, desc: 'Enola Holmes regresa con un nuevo caso que resolver.', reqs: ["1080p", "Latino", "Misterio", "2022"], showNewBadge: false, type: 'movie', multiVersion: true, noEnglish: true },
-            { id: 'enolaholmes3', title: 'Enola Holmes 3', poster: 'https://m.media-amazon.com/images/M/MV5BYzVhNmQ0MzItNjg3Mi00MzM1LWI5MDUtOGZlMTFjNTJjMTM2XkEyXkFqcGc@._V1_.jpg', screen: 'https://s.yimg.com/ny/api/res/1.2/CFffImwyrVU5sUyJunE0dQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyNDI7aD03MzA7Y2Y9d2VicA--/https://media.zenfs.com/es/la_republica_articles_761/01e479b497c5919cc84a6d2f581c5ed3', links: { mex: 'https://www3.dramasfree.com/es/detail/movie/4C2qIVp2Q5F2KpgJpb7lH-Enola-Holmes-3', usa: null }, desc: 'La tercera entrega de las aventuras de Enola Holmes.', reqs: ["1080p", "Latino", "Misterio", "2025"], showNewBadge: false, type: 'movie', multiVersion: true, noEnglish: true },
-
-            // ========== RESTO DE PELÍCULAS (sin etiqueta New) ==========
-            { id: 'backrooms', title: 'Backrooms', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWtcaKUp8oor1JK53BsjRTWy6AhBbFrpgQSXPl3fBAH6IiIDnuCRJR51c&s=10', screen: 'https://media.gq.com.mx/photos/69a19d9de01d346af41238cc/16:9/w_2560%2Cc_limit/Backrooms.jpg', links: { mex: 'https://play.cuevana.life/es/detail/movie/jMCA2ZTBl5RdjojwQW1PM-Backrooms', usa: 'https://ww20.321moviesfree.com/es/detail/movie/kjirm6JvrTuQH9ioILVOW-Backrooms' }, desc: 'Una extraña puerta aparece en el sótano de una sala de exposición de muebles.', reqs: ["1080p", "Inglés Subtitulado", "Terror", "2024"], showNewBadge: false, type: 'movie', multiVersion: true, isLegend: true, hasWarning: false, noEnglish: false },
-            { id: 'fnaf_movie', title: 'Five Nights at Freddy\'s (2023)', poster: 'https://sm.ign.com/ign_latam/movie/f/five-night/five-nights-at-freddys-theater_j7c6.jpg', screen: 'https://www.billboard.com/wp-content/uploads/2023/10/five-nights-at-freddys-2023-billboard-1548.jpg', links: { mex: 'https://play.cuevana.life/es/detail/movie/UYbywBL7C14A5zAr5AzcS-Five-Nights-At-Freddys', usa: 'https://latino.solo-latino.com/es/detail/movie/O7syQYn4QhsdCbYVAHo8T-Five-Nights-At-Freddys' }, desc: 'Un guardia de seguridad comienza a trabajar en Freddy Fazbear\'s Pizza.', reqs: ["1080p", "Lat/Eng", "Multi", "2023"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'fnaf2_movie', title: 'Five Nights at Freddy\'s 2', poster: 'https://upload.wikimedia.org/wikipedia/en/1/11/Five_Nights_At_Freddy%27s_2_Movie_Poster.png', screen: 'https://m.media-amazon.com/images/M/MV5BM2E0NjViODYtZjk3ZS00MzI5LTk1NTctNWQ3MDZjNWNiY2E3XkEyXkFqcGc@._V1_.jpg', links: { mex: 'https://latino.solo-latino.com/es/detail/movie/QyFLAM7pTw8mzvuli420k-Five-Nights-At-Freddys-2', usa: 'https://ver.123pelicula.com/es/detail/movie/1TqlJllmAswrwSmrzHacI-Five-Nights-at-Freddys-2' }, desc: 'Secuela del terrorífico éxito de 2023.', reqs: ["1080p", "Lat/Eng", "2025"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'cassandra', title: 'Cassandra', poster: 'https://m.media-amazon.com/images/M/MV5BNmNlNTFiM2MtYjJhYy00NjBlLThhODEtOTNiZDJkNDBlMmRkXkEyXkFqcGc@._V1_.jpg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSahsX4IO4XxyxwqI6h0bQKaticeRCyhXXPQ1oGN6NmnucvBwemtVEkNRkI&s=10', links: { mex: 'https://video.playspelis.com/es/detail/drama/FBYOgc18fne4QiM6P9rxx-Cassandra', usa: 'https://play.cuevana.life/es/detail/drama/kg7xnH7QDaZjrsjJZD2XP-Cassandra' }, desc: 'Drama y misterio.', reqs: ["1080p", "Lat/Eng", "2024"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'insideout2', title: 'Intensamente 2', poster: 'https://lumiere-a.akamaihd.net/v1/images/1_intensamente_2_payoff_banner_pre_1_aa3d9114.png', screen: 'https://megustaelcine.com/wp-content/uploads/2024/06/Intensamente-2-1.jpeg', links: { mex: 'https://ww20.321moviesfree.com/es/detail/movie/5zOdq75PrEJYxX8Pm2bAw-Inside-Out-2', usa: 'https://flixlat.com/es/detail/movie/uu7dPYurYy5Xck5K0FIDB-Inside-Out-2' }, desc: 'Nuevas emociones llegan a la mente de Riley.', reqs: ["1080p", "Lat/Eng", "Animación", "2024"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'avatar2', title: 'Avatar: El sentido del agua', poster: 'https://m.media-amazon.com/images/S/pv-target-images/ae4816cade1a5b7f29787d0b89610132c72c7747041481c6619b9cc3302c0101.jpg', screen: 'https://i0.wp.com/www.ciencia-ficcion.com/cine/img2022/avatar02.jpg', links: { mex: 'https://video.playspelis.com/es/detail/movie/6I7u7wYHj4HIBuwgohTYS-Avatar-The-Way-of-Water', usa: 'https://ww20.321moviesfree.com/es/detail/movie/7pEXg0eUm0pg6oX6uyehO-Avatar-The-Way-of-Water' }, desc: 'Los Sully exploran los océanos de Pandora.', reqs: ["4K HDR", "Lat/Eng", "2022"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'cars', title: 'Cars', poster: 'https://static.wikia.nocookie.net/el-mundo-de-cars/images/0/00/Cars_-_poster.jpg/revision/latest?cb=20240314223709&path-prefix=es', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNTb_ZKnAjhe39UgJKMpGLCSMTUCWYGeiSKhy1vhvI2kCqCwK-yvANnQqu&s=10', links: { mex: 'https://video.playspelis.com/es/detail/movie/KDxG7OQihJJsd9SXy24yp-Cars', usa: 'https://latino.solo-latino.com/es/detail/movie/notIXzPcz2Z7eq9FdOvIr-Cars' }, desc: 'Un coche de carreras descubre el valor de la amistad.', reqs: ["1080p", "Lat/Eng", "Animación", "2006"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'kungfupanda', title: 'Kung Fu Panda (2008)', poster: 'https://i.pinimg.com/736x/64/47/ba/6447baace4d3a999609d525f912523b9.jpg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdt7CUJBJw_0lIzy-vnj3OqKc9ojRmxO2mLBxOlNMGrt3Pxlbl8Xxx65A&s=10', links: { mex: 'https://ww20.321moviesfree.com/es/detail/movie/VFlMETfaVjEWump0ytHjd-Kung-Fu-Panda', usa: 'https://latino.solo-latino.com/es/detail/movie/BHbfOIdAqLO9GVeDAEjFq-Kung-Fu-Panda' }, desc: 'Po el panda debe convertirse en el Guerrero Dragón.', reqs: ["1080p", "Latino", "2008"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'conjuring', title: 'El Conjuro', poster: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEil91uWcWktClfvIvmV6qtU11ZipAlkALkCOXzyuqv0XH8vNgmE_YErlx8nKvxP2nO6VWaJOw8Rgvgwm6XjILiH2jrbY6tZAG3QCrI8eYOwoUVOKYxXRPdRAV82UOmAx9R9nOwalinXt0Dg/s1600/the-conjuring-poster.jpg', screen: 'https://hips.hearstapps.com/hmg-prod/images/the-conjuring-house-exterior-640b0ba8d0674.jpg', links: { mex: 'https://ver.123pelicula.com/es/detail/movie/ffz7uuSSVGduhexvYi3PT-The-Conjuring', usa: 'https://latino.solo-latino.com/es/detail/movie/65v3IVkB70OsSEzoUEwpq-The-Conjuring' }, desc: 'Ed y Lorraine Warren ayudan a una familia aterrorizada.', reqs: ["1080p", "Latino", "2013"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'merlina', title: 'Merlina (T1)', poster: 'https://m.media-amazon.com/images/M/MV5BNDM2ZTA0NjQtMjk4Ni00ODkyLTk3ZjMtYzFjZThjYzQzNWViXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://clxicons.com/wp-content/uploads/2025/08/Que-paso-en-Merlina-Temporada-1-Todo-lo-que-debes-saber-antes-de-ver-la-segunda.jpg', links: { mex: 'https://video.playspelis.com/es/detail/drama/j5LWeaJpNFW159I98DsqD-Wednesday-Season-1', usa: 'https://www3.dramasfree.com/es/detail/drama/DvYnRKXduQdxuZ9oo7yqi-Wednesday' }, desc: 'Merlina Addams investiga una ola de asesinatos.', reqs: ["1080p", "Netflix", "2022"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'spiderman_miles', title: 'Across the Spider-Verse', poster: 'https://m.media-amazon.com/images/M/MV5BMjZmZTZmMjgtMzNjYS00MDE5LTljODAtZTg4YTg5NWI3MjMxXkEyXkFqcGc@._V1_.jpg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu1anYbL7KBmxwxEFKZlPIWlFibVB9tz872XHJvxTm3r_L9h1z63ABvCI&s=10', links: { mex: 'https://es.cuevana4br.com/es/detail/movie/sPOK62Ynj684BOtt3TybZ-Spider-Man-Across-the-Spider-Verse', usa: 'https://www3.dramasfree.com/es/detail/movie/34648-Spider-Man-Across-the-Spider-Verse' }, desc: 'Miles Morales se lanza al Multiverso.', reqs: ["1080p", "Latino", "2023"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'substance', title: 'La Sustancia (2024)', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4UC3Bidf2pWudrBiMfRj2Yz1FEy5Eb8XuWNHbnA042R_zb42tyuHpOQdH&s=10', screen: 'https://ichef.bbci.co.uk/ace/ws/640/cpsprodpb/37e0/live/0d33ac10-f5e9-11ef-9e7b-21c750c82d19.png.webp', links: { mex: 'https://play.cuevana.life/es/detail/movie/6sRswmczORzjTeHdRH0ee-The-Substance', usa: 'https://www3.dramasfree.com/es/detail/movie/kB2rMrjg3ujfNQZX4wPAf-The-Substance' }, desc: 'Una celebridad usa una droga del mercado negro.', reqs: ["1080p", "Latino", "2024"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'minecraft_movie', title: 'Minecraft (2025)', poster: 'https://m.media-amazon.com/images/M/MV5BYzFjMzNjOTktNDBlNy00YWZhLWExYTctZDcxNDA4OWVhOTJjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://i.blogs.es/6554f1/miencraft-pelicula/500_333.jpeg', links: { mex: 'https://video.playspelis.com/es/detail/movie/PI97tF4VKHGs7NkDVVnLR-A-Minecraft-Movie', usa: 'https://play.cuevana.life/es/detail/movie/5rwwUZygR9iyoZcphRQL4-A-Minecraft-Movie' }, desc: 'Adaptación oficial del videojuego.', reqs: ["HD Digital", "2025"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'interstellar', title: 'Interstellar (2014)', poster: 'https://m.media-amazon.com/images/M/MV5BYzdjMDAxZGItMjI2My00ODA1LTlkNzItOWFjMDU5ZDJlYWY3XkEyXkFqcGc@._V1_.jpg', screen: 'https://i.ytimg.com/vi/LYS2O1nl9iM/hq720.jpg', links: { mex: 'https://ww20.321moviesfree.com/es/detail/movie/bTfmR7SjycdIeayEJPdeq-Interstellar', usa: 'https://ww1.123flmsfree.com/es/detail/movie/Yi62KrQCdeBosqZi2kMuG-Interstellar' }, desc: 'Un equipo viaja fuera de la galaxia.', reqs: ["4K HDR", "Multi", "2014"], multiVersion: true, showNewBadge: false, type: 'movie' },
-            { id: 'toystory1', title: 'Toy Story 1 (1995)', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbTvEhXVX22zg-10CRne40OsvgBSZpCUnIpQpc4AW-oA&s=10', screen: 'https://megustaelcine.com/wp-content/uploads/2025/09/Toy-Story-1995-5-1024x683.jpg', links: { mex: 'https://es.cuevana4br.com/es/detail/movie/QsuHEb8AU6FC9ndjBx6ED-Toy-Story-1', usa: 'https://ver.123pelicula.com/es/detail/movie/5OCDxud5zHdqkG4Us8XW2-Toy-Story' }, desc: 'Woody y Buzz Lightyear lideran un grupo de juguetes que cobran vida.', reqs: ["1080p", "Latino/Inglés", "Clásico", "1995"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'swapped', title: 'Intercambio', poster: 'https://es.web.img3.acsta.net/img/69/bc/69bc34d1b35cfc50c04d87159e75b134.jpg', screen: 'https://static01.nyt.com/images/2026/05/01/multimedia/01cul-swapped-review1-bklq/01cul-swapped-review1-bklq-articleLarge.jpg?quality=75&auto=webp&disable=upscale', links: { mex: 'https://ww20.321moviesfree.com/es/detail/movie/o05HFJ82mOEYEuwbPeMhF-Swapped', usa: 'https://flixlat.com/es/detail/movie/gwYFaM80eixfesROUOCkY-Swapped' }, desc: 'Una divertida comedia de intercambio de cuerpos.', reqs: ["1080p", "Lat/Eng", "Comedia", "2025"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'flow', title: 'Flow', poster: 'https://m.media-amazon.com/images/M/MV5BOTM5ODBlOTAtYjcwZi00YzkzLWIzODEtMTM2MTZlNDFmMWU2XkEyXkFqcGc@._V1_.jpg', screen: 'https://cdn.elfarandi.com/wp-content/uploads/2025/02/flow-entrevista-2.webp', links: { mex: 'https://flixlat.com/es/detail/movie/3EmtD7NC7w4FOvs1QanXb-Flow', usa: 'https://latino.solo-latino.com/es/detail/movie/6Dp631HKHbVuYeOf3Y37h-Flow' }, desc: 'Un viaje emocional único.', reqs: ["1080p", "Lat/Eng", "Animación", "2025"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'hoppers', title: 'Hoppers', poster: 'https://lumiere-a.akamaihd.net/v1/images/image_eec56fad.jpeg?region=0%2C0%2C540%2C810&width=320', screen: 'https://m.media-amazon.com/images/M/MV5BZjY0N2FmYmEtMGZjNC00MTBjLTkyY2ItNjgwMjE5ZDUwYjdlXkEyXkFqcGdeQVRoaXJkUGFydHlJbmdlc3Rpb25Xb3JrZmxvdw@@._V1_QL75_UX500_CR0,0,500,281_.jpg', links: { mex: 'https://www3.dramasfree.com/es/detail/movie/drHHSEoReio5Ntozg0p3I-Hoppers', usa: 'https://ww1.123flmsfree.com/es/detail/movie/cJ4ztYW8oxFk2uEUW9RrU-Hoppers' }, desc: 'Aventura animada llena de saltos.', reqs: ["1080p", "Lat/Eng", "Animación", "2025"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'moana', title: 'Moana', poster: 'https://lumiere-a.akamaihd.net/v1/images/p_moana_20530_214883e3.jpeg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKTYKHDsGiIUsr8XHLdxxMFtU3DpOzSHseroC6XA7_SMe4ry5Vvb0Ree8&s=10', links: { mex: 'https://latino.solo-latino.com/es/detail/movie/Wt0CMHAnaGOZ7RxIiqdcY-Moana', usa: 'https://www3.dramasfree.com/es/detail/movie/7mGcqtHl8EPawrtTwNYl0-Moana' }, desc: 'Una valiente joven se embarca en una misión para salvar a su pueblo.', reqs: ["4K", "Lat/Eng", "Animación", "2016"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'thepurge', title: 'The Purge (T1)', poster: 'https://images.justwatch.com/poster/196446122/s718/temporada-1.jpg', screen: 'https://s3.amazonaws.com/dam.smashmexico.com.mx/wp-content/uploads/2024/01/la-purga-the-purge-como-ver-orden-cronologico.jpg', links: { mex: 'https://es.cuevana4br.com/es/detail/drama/cq2m20AetGXe4dgXn54YJ-The-Purge-Season-1', usa: 'https://ver.123pelicula.com/es/detail/drama/H1eBCBxaX831EMpkli4Oz-The-Purge-Season-1' }, desc: 'Serie basada en la franquicia de terror.', reqs: ["1080p", "Lat/Eng", "Serie", "2018"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'fastfurious1', title: 'Fast And Furious 1', poster: 'https://static.wikia.nocookie.net/fastandfurious/images/8/87/Fast_One_Poster.jpg/revision/latest?cb=20200205060103', screen: 'https://m.media-amazon.com/images/M/MV5BMTQ2NDczNzAwNF5BMl5BanBnXkFtZTgwMTA2NzUwOTE@._V1_.jpg', links: { mex: 'https://es.cuevana4br.com/es/detail/movie/XADcAL21CyH6QcPuLjnSV-The-Fast-and-the-Furious', usa: null }, desc: 'La primera película de la saga de velocidad.', reqs: ["1080p", "Latino", "Acción", "2001"], showNewBadge: false, type: 'movie', multiVersion: true, noEnglish: true },
-            { id: 'supermariogalaxy', title: 'Super Mario Galaxy', poster: 'https://resizing.flixster.com/HAAN4N8Iq2P5RWAU3LpQeP3Rp1k=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzhjZWE4M2NjLWIxYjItNGVhNC04YTc0LTliN2FjZDA1NzI2Mi5qcGc=', screen: 'https://www.denofgeek.com/wp-content/uploads/2025/11/Rosalina-Super-Mario-Galaxy-Movie.png?resize=768%2C432', links: { mex: 'https://ww20.321moviesfree.com/es/detail/movie/WontRDJoNb9FigkbJWBUq-The-Super-Mario-Galaxy-Movie', usa: 'https://www3.dramasfree.com/es/detail/movie/0SDwWjF4nJZP3wZYAwTYW-The-Super-Mario-Galaxy-Movie' }, desc: 'Mario viaja por el espacio para salvar a la Princesa Peach.', reqs: ["4K", "Lat/Eng", "Animación", "2025"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'zootopia2', title: 'Zootopia 2', poster: 'https://m.media-amazon.com/images/M/MV5BYjg1Mjc3MjQtMTZjNy00YWVlLWFhMWEtMWI3ZTgxYjJmNmRlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://statcdn.fandango.com/MPX/image/NBCU_Fandango/514/639/thumb_74C7AB2A-1E02-4104-AA36-6D7FCFC2046C.jpg', links: { mex: 'https://es.cuevana4br.com/es/detail/movie/OmKA0o94bf16x4RsPNud1-Zootopia-2', usa: 'https://video.playspelis.com/es/detail/movie/EHhZNJJL3NZ0VwGiSQgOH-Zootopia-2' }, desc: 'Judy y Nick regresan en una nueva aventura.', reqs: ["1080p", "Lat/Eng", "Animación", "2025"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'kpopdemon', title: 'Kpop Demon Hunters', poster: 'https://m.media-amazon.com/images/M/MV5BNTBiYWJlMjQtOTIyMy00NTY4LWFhOWItOWZhNzc3NGMyMjc2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://es.hollywoodreporter.com/wp-content/uploads/2025/07/El-fenomeno-global-de-KPop-Demon-Hunters-trasciende-la-pantalla.jpg', links: { mex: 'https://ver.123pelicula.com/es/detail/movie/dUcNtPZ10VrGovtl6Ei4Q-KPop-Demon-Hunters', usa: 'https://ver.123pelicula.com/es/detail/movie/FT74btLlY2aETlrOS3D8g-K-Pop-Demon-Hunters' }, desc: 'Un grupo de idols cazadores de demonios.', reqs: ["1080p", "Lat/Eng", "Acción", "2025"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'garfield2', title: 'Garfield 2', poster: 'https://play-lh.googleusercontent.com/bV6A4ze48XefmpT7wqbVSacZ7RVerGwljS2oGP6YT6EIqVvtc6mJRK-Q1I5Iv2UA17ULPg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwAPaBt8lhwbTtC5Ly12rqPjOQOCwC06pUa4B9d5juP2sv_0VLFNVKMqo&s=10', links: { mex: 'https://ww20.321moviesfree.com/es/detail/movie/IEG509OTPzI4AhsH7dVhM-Garfield-A-Tail-of-Two-Kitties', usa: 'https://video.playspelis.com/es/detail/movie/ReG26oNCFsLzFQNlavaq7-Garfield-A-Tail-of-Two-Kitties' }, desc: 'Garfield viaja a Londres y se encuentra con su doble real.', reqs: ["1080p", "Lat/Eng", "Animación", "2006"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'us', title: 'Us', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyHi1Mlkncd_qMgrEanZTikrsgok7DXfnrLCIdn1sY1o5AI2IT9Rlph-um&s=10', screen: 'https://media.gq.com.mx/photos/5c992ecccb60c0d1f9ade41e/master/pass/us.jpg', links: { mex: 'https://es.cuevana4br.com/es/detail/movie/rmjuxLx8jiLuyWv0FJMdV-Us', usa: 'https://www3.dramasfree.com/es/detail/movie/URzczuIn46Kqg7PWoR8sL-Us' }, desc: 'Una familia se enfrenta a sus propios doppelgängers.', reqs: ["4K", "Lat/Eng", "Terror", "2019"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'michaeljackson', title: 'Michael Jackson', poster: 'https://m.media-amazon.com/images/M/MV5BNzllNmRlN2EtMDQyOC00ODJjLTg4OWQtZDNmNGU3YzlkNjc1XkEyXkFqcGc@._V1_.jpg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpZRMEXjHdwi4FsMpyPLkiBHVeuMltqUv8mnS7gjC8BxkNgf_uK751222S&s=10', links: { mex: 'https://ww20.321moviesfree.com/es/detail/movie/qztQ1T9u5SsDb7fkzVD3D-Michael', usa: 'https://peliculaplay.com/es/detail/movie/JEg8jBK5ztJgZO1GrVd6e-Michael' }, desc: 'Biopic del Rey del Pop, Michael Jackson.', reqs: ["4K", "Lat/Eng", "Biopic", "2025"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'from_series', title: 'From (Serie Completa)', poster: 'https://es.web.img3.acsta.net/img/7f/5b/7f5b275c23162a85b46befa8bba36176.jpg', screen: 'https://hips.hearstapps.com/hmg-prod/images/from-temporada-2-649ec0a7cb33a.jpg?crop=1xw:0.845427435387674xh;center,top&resize=1200:*', desc: 'Serie de terror y misterio. Selecciona la temporada abajo.', reqs: ["1080p", "Lat/Eng", "Serie", "2022-2025"], showNewBadge: false, type: 'movie', isSeries: true, seasons: fromSeasons },
-            { id: 'duckduckgoose', title: 'Duck Duck Goose', poster: 'https://m.media-amazon.com/images/M/MV5BMGYzNmI3M2EtMzBmYy00Njg2LWE2NDQtZDlkYTA0ZjBjODE1XkEyXkFqcGc@._V1_.jpg', screen: 'https://statcdn.fandango.com/MPX/image/NBCU_Fandango/207/334/thumb_47795138-BFD6-4A78-878A-66C62EDA020E.jpg', links: { mex: 'https://es.cuevana4br.com/es/detail/movie/8GNH9uG44vzxBbyd8D03e-Duck-Duck-Goose', usa: 'https://es.cuevana4br.com/es/detail/movie/63pT2KvVoYIchR7ckLF52-Duck-Duck-Goose' }, desc: 'Un pato solitario aprende el valor de la familia.', reqs: ["1080p", "Lat/Eng", "Animación", "2018"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'elio', title: 'Elio', poster: 'https://m.media-amazon.com/images/M/MV5BMDFjNDQ5YTctMGE4MS00MGQyLTg4NTktYWNhZWM3NjA3OGE5XkEyXkFqcGc@._V1_.jpg', screen: 'https://es.hollywoodreporter.com/wp-content/uploads/2025/06/Elio.jpg', links: { mex: 'https://play.cuevana.life/es/detail/movie/ixNkQTutut7SZNKZIc2Ul-Elio', usa: 'https://ww20.321moviesfree.com/es/detail/movie/Rntl6et7PsSVB7bAivq86-Elio' }, desc: 'Un niño es transportado al espacio exterior.', reqs: ["4K", "Lat/Eng", "Animación", "2025"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'nahual', title: 'El ritual del nahual', poster: 'https://m.media-amazon.com/images/M/MV5BZjkyZGI0ZDMtOGVkOC00NzZjLThjMjEtODkxNGFkZjk0M2M3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxnx4Q2bJTnUsMQYEjBGwL8VG-wq1BpqVSGN1e5OhmHU_Gv-LUt_xrcicS&s=10', links: { mex: 'https://play.cuevana.life/es/detail/movie/ANM5QDEZMiuKRvz0jGohJ-TEKENCHU-THE-RITE-OF-THE-NAHUALES', usa: null }, desc: 'Un misterioso ritual ancestral en la selva.', reqs: ["1080p", "Latino", "Terror", "2025"], showNewBadge: false, type: 'movie', multiVersion: true, noEnglish: true },
-            { id: 'thrash', title: 'Embestida', poster: 'https://m.media-amazon.com/images/M/MV5BODMxNjdhMWQtMmJhYS00MDc1LTkyYzAtYTgzZTFhMmI1ODEyXkEyXkFqcGc@._V1_.jpg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSe2io_uYTQJZeCB5Aj31CHt-FfRxe05Yp3P4LHFCda6GI9qT6zBV9kBRo&s=10', links: { mex: 'https://flixlat.com/es/detail/movie/nnzUvXldjywuQKuyLSl11-Thrash', usa: 'https://flixlat.com/es/detail/movie/rywWImRFMrLeAVbkWFI49-Thrash' }, desc: 'Acción y suspenso en una carrera contra el tiempo.', reqs: ["1080p", "Lat/Eng", "Acción", "2026"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'stuartlittle', title: 'Stuart Little', poster: 'https://static.wikia.nocookie.net/doblaje/images/0/0b/StuartLittle.jpg/revision/latest?cb=20200731144201&path-prefix=es', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1qi-mAJ8Zzk8ga0Ok0kLFqleIheT2ePLhSVJ9xnucbgKvLqiocrs5Eo2g&s=10', links: { mex: 'https://peliculaplay.com/es/detail/movie/s4dW1eeeK6HAYLEUer9F5-Stuart-Little-1', usa: null }, desc: 'La divertida aventura del ratón más famoso.', reqs: ["1080p", "Latino", "Familiar", "1999"], showNewBadge: false, type: 'movie', multiVersion: true, noEnglish: true },
-            { id: 'gooddinosaur', title: 'Un gran dinosaurio', poster: 'https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p11822260_p_v13_am.jpg', screen: 'https://statcdn.fandango.com/MPX/image/NBCU_Fandango/748/607/TheGoodDinosaur_20YearsTrailer.jpg', links: { mex: 'https://video.playspelis.com/es/detail/movie/EqJnRCPzFNDNlq82T1enM-The-Good-Dinosaur', usa: 'https://www3.dramasfree.com/es/detail/movie/YMFcTMbiNFmdG1jwZZOX8-The-Good-Dinosaur' }, desc: 'Un dinosaurio aprende el valor de la amistad.', reqs: ["4K", "Lat/Eng", "Animación", "2015"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'mama', title: 'Mamá', poster: 'https://m.media-amazon.com/images/M/MV5BNmY2OGQwYjUtNmJjYi00MjI1LWIwYTItNDVkNzdiNzU0ZWRmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://m.media-amazon.com/images/M/MV5BMTUzODU4MTYwOV5BMl5BanBnXkFtZTgwMDY5NDkyMzE@._V1_.jpg', links: { mex: 'https://es.cuevana4br.com/es/detail/movie/UaZxWV4wht1be5VNqgrj4-Mama', usa: 'https://play.cuevana.life/es/detail/movie/0CvTkRfMfEitdfxRCILVJ-Mama' }, desc: 'Una terrorífica historia de una madre fantasma.', reqs: ["1080p", "Lat/Eng", "Terror", "2013"], showNewBadge: false, type: 'movie', multiVersion: true },
-            { id: 'it', title: 'IT', poster: 'https://m.media-amazon.com/images/M/MV5BZGZmOTZjNzUtOTE4OS00OGM3LWJiNGEtZjk4Yzg2M2Q1YzYxXkEyXkFqcGc@._V1_.jpg', screen: 'https://ichef.bbci.co.uk/ace/ws/640/cpsprodpb/66D3/production/_98032362_mediaitem98014584.jpg.webp', links: { mex: 'https://www3.dramasfree.com/es/detail/movie/TL9fg2TEFkYy6UE4qo2kh-It-Chapter-One', usa: 'https://www3.dramasfree.com/es/detail/movie/SY2qrXk1ShOo7UdvyALxT-It-Chapter-One' }, desc: 'Un payaso aterroriza a un grupo de niños.', reqs: ["4K", "Lat/Eng", "Terror", "2017"], showNewBadge: false, type: 'movie', multiVersion: true },
-
-            // Las siguientes ya no tienen la etiqueta "New"
-            { id: 'fall', title: 'Fall', poster: 'https://m.media-amazon.com/images/M/MV5BYmZjYjAxMDEtOTE2My00MmM5LTkyYjctOWRjMjgyM2JhMDI0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://m.media-amazon.com/images/M/MV5BZmY5MjRjY2ItMzFmOC00NjAyLTg2MGYtYmQxZmMwNDYwOGFhXkEyXkFqcGc@._V1_.jpg', links: { mex: 'https://flixlat.com/es/detail/movie/HGsEo12DCkUvSm37QjPmn-Fall', usa: 'https://flixlat.com/es/detail/movie/4tinAmcV9JtPS7f0krjE9-Fall' }, desc: 'Dos amigas se quedan atrapadas en una torre de radio de 600 metros.', reqs: ["1080p", "Lat/Eng", "Suspenso", "2022"], showNewBadge: false, type: 'movie', multiVersion: true, noEnglish: false },
-            { id: 'pans_labyrinth', title: 'El laberinto del fauno', poster: 'https://pics.filmaffinity.com/El_laberinto_del_fauno-354857383-large.jpg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4B_y_zJZNzCh4WYCON3pptxVipd5e5o0mWXFwX3LKrd7kc7RIUVt2uIM&s=10', links: { mex: 'https://flixlat.com/es/detail/movie/V9UDU2L7EQ9ecVrHpYSXh-Pans-Labyrinth', usa: null }, desc: 'En la España de 1944, una niña descubre un mundo mágico.', reqs: ["1080p", "Latino", "Fantasía", "2006"], showNewBadge: false, type: 'movie', multiVersion: true, noEnglish: true },
-            { id: 'matrix', title: 'Matrix', poster: 'https://m.media-amazon.com/images/M/MV5BN2NmN2VhMTQtMDNiOS00NDlhLTliMjgtODE2ZTY0ODQyNDRhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', screen: 'https://m.media-amazon.com/images/M/MV5BNzM4OTkzMjcxOF5BMl5BanBnXkFtZTgwMTkxMjI1MTI@._V1_.jpg', links: { mex: 'https://ww20.321moviesfree.com/es/detail/movie/xdxYYCIesNjd8F3OIETwx-The-Matrix', usa: 'https://www3.dramasfree.com/es/detail/movie/wZ9bNJvIYHCQqGbwozrQH-The-Matrix' }, desc: 'Un hacker descubre que la realidad es una simulación.', reqs: ["4K", "Lat/Eng", "Ciencia Ficción", "1999"], showNewBadge: false, type: 'movie', multiVersion: true, noEnglish: false },
-            { id: 'ready_or_not_2', title: 'Ready or Not 2', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxCKu00pK_6a1rs0Afwe0rV_h_43buDG2jHyr_hGvU36HTqZenyfU1HtM&s=10', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmeZry935U8HVbxAzXNKBZsKh9FTuFXiiGPayunZ7YrWVwT2_d7YrnG41o&s=10', links: { mex: 'https://es.cuevana4br.com/es/detail/movie/Scen4HIQ82DEwa1aXDYgf-Ready-or-Not-2-Here-I-Come', usa: 'https://es.cuevana4br.com/es/detail/movie/Jn55IIy8fEAsPPOMmb5mm-Ready-or-Not-2-Here-I-Come' }, desc: 'La secuela del sangriento juego de la boda.', reqs: ["1080p", "Lat/Eng", "Terror", "2025"], showNewBadge: false, type: 'movie', multiVersion: true, noEnglish: false },
-            { id: 'shawshank', title: 'Sueño de fuga', poster: 'https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_.jpg', screen: 'https://m.media-amazon.com/images/M/MV5BMTQ5NTI4NDAxMV5BMl5BanBnXkFtZTgwMTQxNDY3Mw@@._V1_.jpg', links: { mex: 'https://play.cuevana.life/es/detail/movie/ETRCPqhmI1ut2TExltM6u-The-Shawshank-Redemption', usa: 'https://play.cuevana.life/es/detail/movie/LBH1u34QUL1cZTa9W8owU-The-Shawshank-Redemption' }, desc: 'Un banquero inocente es condenado a cadena perpetua.', reqs: ["4K", "Lat/Eng", "Drama", "1994"], showNewBadge: false, type: 'movie', multiVersion: true, noEnglish: false },
-            { id: 'toystory5', title: 'Toy Story 5', poster: 'https://lumiere-a.akamaihd.net/v1/images/alta_pre_int_intl_payoff_peeking_cmyk_v2_a283fa09.png', screen: 'https://estaticos-cdn.prensaiberica.es/clip/30d95a69-70d3-487a-b6bb-65a220eaffb5_16-9-discover-aspect-ratio_default_0_x1080y388.jpg', links: { mex: 'https://video.playspelis.com/es/detail/movie/yN0aGFrdc4n4TsPf0wZ5C-Toy-Story-5', usa: 'https://ver.123pelicula.com/es/detail/movie/cAx1n7IcoOanmND8zoEc3-Toy-Story-5' }, desc: 'La nueva aventura de Woody, Buzz y sus amigos.', reqs: ["4K", "Lat/Eng", "Animación", "2026"], showNewBadge: false, type: 'movie', multiVersion: true, noEnglish: false }
+            {
+                id: 'lifeofpi',
+                title: 'La vida de Pi',
+                poster: 'https://hips.hearstapps.com/hmg-prod/images/la-vida-de-pi-66ca0a8fd6346.jpg?crop=1xw:1xh;center,top',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7Va_RKkQ4Y6GbnnSLjjyIycvb-WHd3lo3J5TBYds8AQn91QQnYuXkOWrT&s=10',
+                links: { mex: 'https://peliculaplay.com/es/detail/movie/M52ADxaTPhQFGp8n1hjmz-Life-of-Pi', usa: 'https://play.cuevana.life/es/detail/movie/Jtrrea5BvmemOwMYcsIqW-Life-of-Pi' },
+                desc: 'Un joven naufraga en el Pacífico y debe sobrevivir con un tigre llamado Richard Parker.',
+                reqs: ["1080p", "Lat/Eng", "Aventura", "2012"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+            {
+                id: 'minionsmonster',
+                title: 'Minions & Monster',
+                poster: 'https://m.media-amazon.com/images/M/MV5BMDU2MTZlMzAtNzk1Mi00YmM4LWIyNDUtN2NhOTI1NWYyM2VjXkEyXkFqcGc@._V1_.jpg',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQofUXR_yUVyqhehzVpFkVo7INNLDXLztVTBktS7UqP7vMerFcSz2rsTtsZ&s=10',
+                links: { mex: 'https://ww20.321moviesfree.com/es/detail/movie/oJZ3yfNqc8s93g6h0eez3-Minions--Monsters', usa: 'https://play.cuevana.life/es/detail/movie/AmWtdx5b6zaltKtwH2w10-Minions--Monsters' },
+                desc: 'Los Minions se enfrentan a monstruos en una divertida aventura.',
+                reqs: ["1080p", "Lat/Eng", "Animación", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+            {
+                id: 'obsession',
+                title: 'Obsession',
+                poster: 'https://images.contentstack.io/v3/assets/blt13adb7e2033fcee5/blt5c8bcbfee5dade5c/6a2b47a8c284bac540ef3353/Obsession_keyart_poster_2000x3000.jpg?width=2560',
+                screen: 'https://m.media-amazon.com/images/S/pv-target-images/994789a22b07820e60a905f7e4dec1235c621b0c013bdc0e0baa57da4376ac2c._SX1080_FMjpg_.jpg',
+                links: { mex: 'https://ww1.123flmsfree.com/es/detail/movie/81NqnKUKqaVF41lZfLlZ7-Obsession', usa: null },
+                desc: 'Un thriller psicológico donde la obsesión lleva a consecuencias mortales.',
+                reqs: ["1080p", "Latino", "Suspenso", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: true
+            },
+            {
+                id: 'mummypossession',
+                title: 'La posesión de la Momia',
+                poster: 'https://m.media-amazon.com/images/M/MV5BYjFiZjQ4MWUtM2Y0NC00NGZkLTllMmUtODllZDI5YTljZmZhXkEyXkFqcGc@._V1_.jpg',
+                screen: 'https://media.gq.com.mx/photos/696689cf26895c3cd18985ab/16:9/w_2560%2Cc_limit/La%2520Momia.jpg',
+                links: { mex: 'https://video.playspelis.com/es/detail/movie/ORMRWcEwY5HMWMj2FzTaA-Lee-Cronins-The-Mummy', usa: null },
+                desc: 'Una momia antigua despierta y causa terror en un pueblo.',
+                reqs: ["1080p", "Latino", "Terror", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: true
+            },
+            {
+                id: 'legallyblonde',
+                title: 'Legalmente Rubia',
+                poster: 'https://m.media-amazon.com/images/M/MV5BZTcwNzYzNTYtOGE3NS00ODViLTg1ZDAtNjY1M2QxMGM1NTk3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
+                screen: 'https://m.media-amazon.com/images/S/pv-target-images/2ce695ac967ab3b7ca59abb6db4b757b1f1d3c9e2fd5113ff4acd100569c13ae._SX1080_FMjpg_.jpg',
+                links: { mex: 'https://ww20.321moviesfree.com/es/detail/movie/1nUQyIYrkfiSadeBTRb39-Legally-Blonde', usa: 'https://es.cuevana4br.com/es/detail/movie/w154sr9022X25VNpNcA9r-Legally-Blonde' },
+                desc: 'Elle Woods demuestra que ser rubia no es un obstáculo para triunfar.',
+                reqs: ["1080p", "Lat/Eng", "Comedia", "2001"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+            {
+                id: 'chum',
+                title: 'Chum',
+                poster: 'https://m.media-amazon.com/images/M/MV5BNGZhZDhhYjItYzI0OC00NWQ5LTk4ZTktOGM1Y2U3Y2I3YmVlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTn3yPyLqkdyncLB0Swxfexnq3EU09n--M6axKrhIlMOGkXVwBPwQ9Jrpk&s=10',
+                links: { mex: 'https://www3.dramasfree.com/es/detail/movie/f9791qvq497yEf1TepeGY-Chum', usa: null },
+                desc: 'Un grupo de amigos se enfrenta a una criatura marina mortal.',
+                reqs: ["1080p", "Latino", "Terror", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: true
+            },
+            {
+                id: 'fiftyshades',
+                title: '50 Sombras de Grey',
+                poster: 'https://es.web.img2.acsta.net/c_310_420/pictures/14/11/14/11/16/546987.jpg',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScpe6ncjHtC9tAJcPCZf5lDhL3O8OgFI5P6F66xq1TNbbTJGI-aiEkvYe5&s=10',
+                links: { mex: 'https://peliculaplay.com/es/detail/movie/iLibJLOCwnyiVu97q9K0B-Fifty-Shades-of-Grey', usa: 'https://es.cuevana4br.com/es/detail/movie/AJr291d6smDyY4Kkt2s1Q-Fifty-Shades-of-Grey' },
+                desc: 'Una relación intensa entre una joven y un millonario atormentado.',
+                reqs: ["1080p", "Lat/Eng", "Romance", "2015"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+            {
+                id: 'theywillkillyou',
+                title: 'Te van a matar',
+                poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTxIhPY9XNFt3Ref6wxUlQngFvOlVby-MFyvNmt6lzeg&s=10',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0ZSfGnY5VAcIC0AiTQGXaH44z59n43EttRqpc_eUV3s3XytB_m-ozDJsX&s=10',
+                links: { mex: 'https://ver.123pelicula.com/es/detail/movie/Q7lhrLfF1keGQmZEmAsDP-They-Will-Kill-You', usa: 'https://flixlat.com/es/detail/movie/ULtO7GcCYG94wePa5xZig-They-Will-Kill-You' },
+                desc: 'Una familia es aterrorizada por unos misteriosos asesinos.',
+                reqs: ["1080p", "Lat/Eng", "Terror", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+            {
+                id: 'miraculous6',
+                title: 'Miraculous 6',
+                poster: 'https://static.wikia.nocookie.net/miraculousladybug/images/4/4d/Temporada_6_Poster_en_espa%C3%B1ol.png/revision/latest?cb=20260303224630&path-prefix=es',
+                screen: 'https://i.ytimg.com/vi/aqIK8fsEcVY/maxresdefault.jpg',
+                links: { mex: 'https://latino.solo-latino.com/es/detail/drama/6di6atgHQvKjbAkhnsDDY-Miraculous-Tales-of-Ladybug--Cat-Noir-Season-6', usa: null },
+                desc: 'Nueva temporada de las aventuras de Ladybug y Cat Noir.',
+                reqs: ["1080p", "Latino", "Animación", "2026"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: true
+            },
+            {
+                id: 'enolaholmes1',
+                title: 'Enola Holmes',
+                poster: 'https://m.media-amazon.com/images/M/MV5BMTRlYmI1NTMtYTVkYi00MjJkLWE3ZGItOThkYTdhNzBhMThhXkEyXkFqcGc@._V1_.jpg',
+                screen: 'https://occ-0-8407-1001.1.nflxso.net/dnm/api/v6/9pS1daC2n6UGc3dUogvWIPMR_OU/AAAABQd0_bxda3LDRRAD0kvd3Ffyo7re6xiMBdhiH01nF3X5-9IkRxKN32gw34rVG3eB4nWJJ-ED5f95ariyFoBuR6H8HmcwtQ5wETa5zJgVV0RkfW8F_dNRP7DuZg.jpg?r=0c0',
+                links: { mex: 'https://video.playspelis.com/es/detail/movie/H11bhsHeEElhMh8pFAJ6i-Enola-Holmes', usa: null },
+                desc: 'La hermana menor de Sherlock Holmes se embarca en su propia aventura.',
+                reqs: ["1080p", "Latino", "Misterio", "2020"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: true
+            },
+            {
+                id: 'enolaholmes2',
+                title: 'Enola Holmes 2',
+                poster: 'https://pics.filmaffinity.com/Enola_Holmes_2-610930550-large.jpg',
+                screen: 'https://m.media-amazon.com/images/M/MV5BZjZjMGUyNTgtNWE2Yi00YTAyLTg5ZTMtYTVkMmNkNGFmMTRiXkEyXkFqcGdeQWFkcmllY2xh._V1_.jpg',
+                links: { mex: 'https://ww1.123flmsfree.com/es/detail/movie/2Y6xJc8UPCmtBrGQ5nHI6-Enola-Holmes-2', usa: null },
+                desc: 'Enola Holmes regresa con un nuevo caso que resolver.',
+                reqs: ["1080p", "Latino", "Misterio", "2022"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: true
+            },
+            {
+                id: 'enolaholmes3',
+                title: 'Enola Holmes 3',
+                poster: 'https://m.media-amazon.com/images/M/MV5BYzVhNmQ0MzItNjg3Mi00MzM1LWI5MDUtOGZlMTFjNTJjMTM2XkEyXkFqcGc@._V1_.jpg',
+                screen: 'https://s.yimg.com/ny/api/res/1.2/CFffImwyrVU5sUyJunE0dQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyNDI7aD03MzA7Y2Y9d2VicA--/https://media.zenfs.com/es/la_republica_articles_761/01e479b497c5919cc84a6d2f581c5ed3',
+                links: { mex: 'https://www3.dramasfree.com/es/detail/movie/4C2qIVp2Q5F2KpgJpb7lH-Enola-Holmes-3', usa: null },
+                desc: 'La tercera entrega de las aventuras de Enola Holmes.',
+                reqs: ["1080p", "Latino", "Misterio", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: true
+            },
+            {
+                id: 'backrooms',
+                title: 'Backrooms',
+                poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWtcaKUp8oor1JK53BsjRTWy6AhBbFrpgQSXPl3fBAH6IiIDnuCRJR51c&s=10',
+                screen: 'https://media.gq.com.mx/photos/69a19d9de01d346af41238cc/16:9/w_2560%2Cc_limit/Backrooms.jpg',
+                links: { mex: 'https://play.cuevana.life/es/detail/movie/jMCA2ZTBl5RdjojwQW1PM-Backrooms', usa: 'https://ww20.321moviesfree.com/es/detail/movie/kjirm6JvrTuQH9ioILVOW-Backrooms' },
+                desc: 'Una extraña puerta aparece en el sótano de una sala de exposición de muebles.',
+                reqs: ["1080p", "Inglés Subtitulado", "Terror", "2024"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                isLegend: true,
+                hasWarning: false,
+                noEnglish: false
+            },
+            {
+                id: 'fnaf_movie',
+                title: 'Five Nights at Freddy\'s (2023)',
+                poster: 'https://sm.ign.com/ign_latam/movie/f/five-night/five-nights-at-freddys-theater_j7c6.jpg',
+                screen: 'https://www.billboard.com/wp-content/uploads/2023/10/five-nights-at-freddys-2023-billboard-1548.jpg',
+                links: { mex: 'https://play.cuevana.life/es/detail/movie/UYbywBL7C14A5zAr5AzcS-Five-Nights-At-Freddys', usa: 'https://latino.solo-latino.com/es/detail/movie/O7syQYn4QhsdCbYVAHo8T-Five-Nights-At-Freddys' },
+                desc: 'Un guardia de seguridad comienza a trabajar en Freddy Fazbear\'s Pizza.',
+                reqs: ["1080p", "Lat/Eng", "Multi", "2023"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'fnaf2_movie',
+                title: 'Five Nights at Freddy\'s 2',
+                poster: 'https://upload.wikimedia.org/wikipedia/en/1/11/Five_Nights_At_Freddy%27s_2_Movie_Poster.png',
+                screen: 'https://m.media-amazon.com/images/M/MV5BM2E0NjViODYtZjk3ZS00MzI5LTk1NTctNWQ3MDZjNWNiY2E3XkEyXkFqcGc@._V1_.jpg',
+                links: { mex: 'https://latino.solo-latino.com/es/detail/movie/QyFLAM7pTw8mzvuli420k-Five-Nights-At-Freddys-2', usa: 'https://ver.123pelicula.com/es/detail/movie/1TqlJllmAswrwSmrzHacI-Five-Nights-at-Freddys-2' },
+                desc: 'Secuela del terrorífico éxito de 2023.',
+                reqs: ["1080p", "Lat/Eng", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'cassandra',
+                title: 'Cassandra',
+                poster: 'https://m.media-amazon.com/images/M/MV5BNmNlNTFiM2MtYjJhYy00NjBlLThhODEtOTNiZDJkNDBlMmRkXkEyXkFqcGc@._V1_.jpg',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSahsX4IO4XxyxwqI6h0bQKaticeRCyhXXPQ1oGN6NmnucvBwemtVEkNRkI&s=10',
+                links: { mex: 'https://video.playspelis.com/es/detail/drama/FBYOgc18fne4QiM6P9rxx-Cassandra', usa: 'https://play.cuevana.life/es/detail/drama/kg7xnH7QDaZjrsjJZD2XP-Cassandra' },
+                desc: 'Drama y misterio.',
+                reqs: ["1080p", "Lat/Eng", "2024"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'insideout2',
+                title: 'Intensamente 2',
+                poster: 'https://lumiere-a.akamaihd.net/v1/images/1_intensamente_2_payoff_banner_pre_1_aa3d9114.png',
+                screen: 'https://megustaelcine.com/wp-content/uploads/2024/06/Intensamente-2-1.jpeg',
+                links: { mex: 'https://ww20.321moviesfree.com/es/detail/movie/5zOdq75PrEJYxX8Pm2bAw-Inside-Out-2', usa: 'https://flixlat.com/es/detail/movie/uu7dPYurYy5Xck5K0FIDB-Inside-Out-2' },
+                desc: 'Nuevas emociones llegan a la mente de Riley.',
+                reqs: ["1080p", "Lat/Eng", "Animación", "2024"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'avatar2',
+                title: 'Avatar: El sentido del agua',
+                poster: 'https://m.media-amazon.com/images/S/pv-target-images/ae4816cade1a5b7f29787d0b89610132c72c7747041481c6619b9cc3302c0101.jpg',
+                screen: 'https://i0.wp.com/www.ciencia-ficcion.com/cine/img2022/avatar02.jpg',
+                links: { mex: 'https://video.playspelis.com/es/detail/movie/6I7u7wYHj4HIBuwgohTYS-Avatar-The-Way-of-Water', usa: 'https://ww20.321moviesfree.com/es/detail/movie/7pEXg0eUm0pg6oX6uyehO-Avatar-The-Way-of-Water' },
+                desc: 'Los Sully exploran los océanos de Pandora.',
+                reqs: ["4K HDR", "Lat/Eng", "2022"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'cars',
+                title: 'Cars',
+                poster: 'https://static.wikia.nocookie.net/el-mundo-de-cars/images/0/00/Cars_-_poster.jpg/revision/latest?cb=20240314223709&path-prefix=es',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNTb_ZKnAjhe39UgJKMpGLCSMTUCWYGeiSKhy1vhvI2kCqCwK-yvANnQqu&s=10',
+                links: { mex: 'https://video.playspelis.com/es/detail/movie/KDxG7OQihJJsd9SXy24yp-Cars', usa: 'https://latino.solo-latino.com/es/detail/movie/notIXzPcz2Z7eq9FdOvIr-Cars' },
+                desc: 'Un coche de carreras descubre el valor de la amistad.',
+                reqs: ["1080p", "Lat/Eng", "Animación", "2006"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'kungfupanda',
+                title: 'Kung Fu Panda (2008)',
+                poster: 'https://i.pinimg.com/736x/64/47/ba/6447baace4d3a999609d525f912523b9.jpg',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdt7CUJBJw_0lIzy-vnj3OqKc9ojRmxO2mLBxOlNMGrt3Pxlbl8Xxx65A&s=10',
+                links: { mex: 'https://ww20.321moviesfree.com/es/detail/movie/VFlMETfaVjEWump0ytHjd-Kung-Fu-Panda', usa: 'https://latino.solo-latino.com/es/detail/movie/BHbfOIdAqLO9GVeDAEjFq-Kung-Fu-Panda' },
+                desc: 'Po el panda debe convertirse en el Guerrero Dragón.',
+                reqs: ["1080p", "Latino", "2008"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'conjuring',
+                title: 'El Conjuro',
+                poster: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEil91uWcWktClfvIvmV6qtU11ZipAlkALkCOXzyuqv0XH8vNgmE_YErlx8nKvxP2nO6VWaJOw8Rgvgwm6XjILiH2jrbY6tZAG3QCrI8eYOwoUVOKYxXRPdRAV82UOmAx9R9nOwalinXt0Dg/s1600/the-conjuring-poster.jpg',
+                screen: 'https://hips.hearstapps.com/hmg-prod/images/the-conjuring-house-exterior-640b0ba8d0674.jpg',
+                links: { mex: 'https://ver.123pelicula.com/es/detail/movie/ffz7uuSSVGduhexvYi3PT-The-Conjuring', usa: 'https://latino.solo-latino.com/es/detail/movie/65v3IVkB70OsSEzoUEwpq-The-Conjuring' },
+                desc: 'Ed y Lorraine Warren ayudan a una familia aterrorizada.',
+                reqs: ["1080p", "Latino", "2013"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'merlina',
+                title: 'Merlina (T1)',
+                poster: 'https://m.media-amazon.com/images/M/MV5BNDM2ZTA0NjQtMjk4Ni00ODkyLTk3ZjMtYzFjZThjYzQzNWViXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
+                screen: 'https://clxicons.com/wp-content/uploads/2025/08/Que-paso-en-Merlina-Temporada-1-Todo-lo-que-debes-saber-antes-de-ver-la-segunda.jpg',
+                links: { mex: 'https://video.playspelis.com/es/detail/drama/j5LWeaJpNFW159I98DsqD-Wednesday-Season-1', usa: 'https://www3.dramasfree.com/es/detail/drama/DvYnRKXduQdxuZ9oo7yqi-Wednesday' },
+                desc: 'Merlina Addams investiga una ola de asesinatos.',
+                reqs: ["1080p", "Netflix", "2022"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'spiderman_miles',
+                title: 'Across the Spider-Verse',
+                poster: 'https://m.media-amazon.com/images/M/MV5BMjZmZTZmMjgtMzNjYS00MDE5LTljODAtZTg4YTg5NWI3MjMxXkEyXkFqcGc@._V1_.jpg',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu1anYbL7KBmxwxEFKZlPIWlFibVB9tz872XHJvxTm3r_L9h1z63ABvCI&s=10',
+                links: { mex: 'https://es.cuevana4br.com/es/detail/movie/sPOK62Ynj684BOtt3TybZ-Spider-Man-Across-the-Spider-Verse', usa: 'https://www3.dramasfree.com/es/detail/movie/34648-Spider-Man-Across-the-Spider-Verse' },
+                desc: 'Miles Morales se lanza al Multiverso.',
+                reqs: ["1080p", "Latino", "2023"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'substance',
+                title: 'La Sustancia (2024)',
+                poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4UC3Bidf2pWudrBiMfRj2Yz1FEy5Eb8XuWNHbnA042R_zb42tyuHpOQdH&s=10',
+                screen: 'https://ichef.bbci.co.uk/ace/ws/640/cpsprodpb/37e0/live/0d33ac10-f5e9-11ef-9e7b-21c750c82d19.png.webp',
+                links: { mex: 'https://play.cuevana.life/es/detail/movie/6sRswmczORzjTeHdRH0ee-The-Substance', usa: 'https://www3.dramasfree.com/es/detail/movie/kB2rMrjg3ujfNQZX4wPAf-The-Substance' },
+                desc: 'Una celebridad usa una droga del mercado negro.',
+                reqs: ["1080p", "Latino", "2024"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'minecraft_movie',
+                title: 'Minecraft (2025)',
+                poster: 'https://m.media-amazon.com/images/M/MV5BYzFjMzNjOTktNDBlNy00YWZhLWExYTctZDcxNDA4OWVhOTJjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
+                screen: 'https://i.blogs.es/6554f1/miencraft-pelicula/500_333.jpeg',
+                links: { mex: 'https://video.playspelis.com/es/detail/movie/PI97tF4VKHGs7NkDVVnLR-A-Minecraft-Movie', usa: 'https://play.cuevana.life/es/detail/movie/5rwwUZygR9iyoZcphRQL4-A-Minecraft-Movie' },
+                desc: 'Adaptación oficial del videojuego.',
+                reqs: ["HD Digital", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'interstellar',
+                title: 'Interstellar (2014)',
+                poster: 'https://m.media-amazon.com/images/M/MV5BYzdjMDAxZGItMjI2My00ODA1LTlkNzItOWFjMDU5ZDJlYWY3XkEyXkFqcGc@._V1_.jpg',
+                screen: 'https://i.ytimg.com/vi/LYS2O1nl9iM/hq720.jpg',
+                links: { mex: 'https://ww20.321moviesfree.com/es/detail/movie/bTfmR7SjycdIeayEJPdeq-Interstellar', usa: 'https://ww1.123flmsfree.com/es/detail/movie/Yi62KrQCdeBosqZi2kMuG-Interstellar' },
+                desc: 'Un equipo viaja fuera de la galaxia.',
+                reqs: ["4K HDR", "Multi", "2014"],
+                multiVersion: true,
+                showNewBadge: false,
+                type: 'movie'
+            },
+            {
+                id: 'toystory1',
+                title: 'Toy Story 1 (1995)',
+                poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbTvEhXVX22zg-10CRne40OsvgBSZpCUnIpQpc4AW-oA&s=10',
+                screen: 'https://megustaelcine.com/wp-content/uploads/2025/09/Toy-Story-1995-5-1024x683.jpg',
+                links: { mex: 'https://es.cuevana4br.com/es/detail/movie/QsuHEb8AU6FC9ndjBx6ED-Toy-Story-1', usa: 'https://ver.123pelicula.com/es/detail/movie/5OCDxud5zHdqkG4Us8XW2-Toy-Story' },
+                desc: 'Woody y Buzz Lightyear lideran un grupo de juguetes que cobran vida.',
+                reqs: ["1080p", "Latino/Inglés", "Clásico", "1995"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'swapped',
+                title: 'Intercambio',
+                poster: 'https://es.web.img3.acsta.net/img/69/bc/69bc34d1b35cfc50c04d87159e75b134.jpg',
+                screen: 'https://static01.nyt.com/images/2026/05/01/multimedia/01cul-swapped-review1-bklq/01cul-swapped-review1-bklq-articleLarge.jpg?quality=75&auto=webp&disable=upscale',
+                links: { mex: 'https://ww20.321moviesfree.com/es/detail/movie/o05HFJ82mOEYEuwbPeMhF-Swapped', usa: 'https://flixlat.com/es/detail/movie/gwYFaM80eixfesROUOCkY-Swapped' },
+                desc: 'Una divertida comedia de intercambio de cuerpos.',
+                reqs: ["1080p", "Lat/Eng", "Comedia", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'flow',
+                title: 'Flow',
+                poster: 'https://m.media-amazon.com/images/M/MV5BOTM5ODBlOTAtYjcwZi00YzkzLWIzODEtMTM2MTZlNDFmMWU2XkEyXkFqcGc@._V1_.jpg',
+                screen: 'https://cdn.elfarandi.com/wp-content/uploads/2025/02/flow-entrevista-2.webp',
+                links: { mex: 'https://flixlat.com/es/detail/movie/3EmtD7NC7w4FOvs1QanXb-Flow', usa: 'https://latino.solo-latino.com/es/detail/movie/6Dp631HKHbVuYeOf3Y37h-Flow' },
+                desc: 'Un viaje emocional único.',
+                reqs: ["1080p", "Lat/Eng", "Animación", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'hoppers',
+                title: 'Hoppers',
+                poster: 'https://lumiere-a.akamaihd.net/v1/images/image_eec56fad.jpeg?region=0%2C0%2C540%2C810&width=320',
+                screen: 'https://m.media-amazon.com/images/M/MV5BZjY0N2FmYmEtMGZjNC00MTBjLTkyY2ItNjgwMjE5ZDUwYjdlXkEyXkFqcGdeQVRoaXJkUGFydHlJbmdlc3Rpb25Xb3JrZmxvdw@@._V1_QL75_UX500_CR0,0,500,281_.jpg',
+                links: { mex: 'https://www3.dramasfree.com/es/detail/movie/drHHSEoReio5Ntozg0p3I-Hoppers', usa: 'https://ww1.123flmsfree.com/es/detail/movie/cJ4ztYW8oxFk2uEUW9RrU-Hoppers' },
+                desc: 'Aventura animada llena de saltos.',
+                reqs: ["1080p", "Lat/Eng", "Animación", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'moana',
+                title: 'Moana',
+                poster: 'https://lumiere-a.akamaihd.net/v1/images/p_moana_20530_214883e3.jpeg',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKTYKHDsGiIUsr8XHLdxxMFtU3DpOzSHseroC6XA7_SMe4ry5Vvb0Ree8&s=10',
+                links: { mex: 'https://latino.solo-latino.com/es/detail/movie/Wt0CMHAnaGOZ7RxIiqdcY-Moana', usa: 'https://www3.dramasfree.com/es/detail/movie/7mGcqtHl8EPawrtTwNYl0-Moana' },
+                desc: 'Una valiente joven se embarca en una misión para salvar a su pueblo.',
+                reqs: ["4K", "Lat/Eng", "Animación", "2016"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'thepurge',
+                title: 'The Purge (T1)',
+                poster: 'https://images.justwatch.com/poster/196446122/s718/temporada-1.jpg',
+                screen: 'https://s3.amazonaws.com/dam.smashmexico.com.mx/wp-content/uploads/2024/01/la-purga-the-purge-como-ver-orden-cronologico.jpg',
+                links: { mex: 'https://es.cuevana4br.com/es/detail/drama/cq2m20AetGXe4dgXn54YJ-The-Purge-Season-1', usa: 'https://ver.123pelicula.com/es/detail/drama/H1eBCBxaX831EMpkli4Oz-The-Purge-Season-1' },
+                desc: 'Serie basada en la franquicia de terror.',
+                reqs: ["1080p", "Lat/Eng", "Serie", "2018"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'fastfurious1',
+                title: 'Fast And Furious 1',
+                poster: 'https://static.wikia.nocookie.net/fastandfurious/images/8/87/Fast_One_Poster.jpg/revision/latest?cb=20200205060103',
+                screen: 'https://m.media-amazon.com/images/M/MV5BMTQ2NDczNzAwNF5BMl5BanBnXkFtZTgwMTA2NzUwOTE@._V1_.jpg',
+                links: { mex: 'https://es.cuevana4br.com/es/detail/movie/XADcAL21CyH6QcPuLjnSV-The-Fast-and-the-Furious', usa: null },
+                desc: 'La primera película de la saga de velocidad.',
+                reqs: ["1080p", "Latino", "Acción", "2001"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: true
+            },
+            {
+                id: 'supermariogalaxy',
+                title: 'Super Mario Galaxy',
+                poster: 'https://resizing.flixster.com/HAAN4N8Iq2P5RWAU3LpQeP3Rp1k=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzhjZWE4M2NjLWIxYjItNGVhNC04YTc0LTliN2FjZDA1NzI2Mi5qcGc=',
+                screen: 'https://www.denofgeek.com/wp-content/uploads/2025/11/Rosalina-Super-Mario-Galaxy-Movie.png?resize=768%2C432',
+                links: { mex: 'https://ww20.321moviesfree.com/es/detail/movie/WontRDJoNb9FigkbJWBUq-The-Super-Mario-Galaxy-Movie', usa: 'https://www3.dramasfree.com/es/detail/movie/0SDwWjF4nJZP3wZYAwTYW-The-Super-Mario-Galaxy-Movie' },
+                desc: 'Mario viaja por el espacio para salvar a la Princesa Peach.',
+                reqs: ["4K", "Lat/Eng", "Animación", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'zootopia2',
+                title: 'Zootopia 2',
+                poster: 'https://m.media-amazon.com/images/M/MV5BYjg1Mjc3MjQtMTZjNy00YWVlLWFhMWEtMWI3ZTgxYjJmNmRlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
+                screen: 'https://statcdn.fandango.com/MPX/image/NBCU_Fandango/514/639/thumb_74C7AB2A-1E02-4104-AA36-6D7FCFC2046C.jpg',
+                links: { mex: 'https://es.cuevana4br.com/es/detail/movie/OmKA0o94bf16x4RsPNud1-Zootopia-2', usa: 'https://video.playspelis.com/es/detail/movie/EHhZNJJL3NZ0VwGiSQgOH-Zootopia-2' },
+                desc: 'Judy y Nick regresan en una nueva aventura.',
+                reqs: ["1080p", "Lat/Eng", "Animación", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'kpopdemon',
+                title: 'Kpop Demon Hunters',
+                poster: 'https://m.media-amazon.com/images/M/MV5BNTBiYWJlMjQtOTIyMy00NTY4LWFhOWItOWZhNzc3NGMyMjc2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
+                screen: 'https://es.hollywoodreporter.com/wp-content/uploads/2025/07/El-fenomeno-global-de-KPop-Demon-Hunters-trasciende-la-pantalla.jpg',
+                links: { mex: 'https://ver.123pelicula.com/es/detail/movie/dUcNtPZ10VrGovtl6Ei4Q-KPop-Demon-Hunters', usa: 'https://ver.123pelicula.com/es/detail/movie/FT74btLlY2aETlrOS3D8g-K-Pop-Demon-Hunters' },
+                desc: 'Un grupo de idols cazadores de demonios.',
+                reqs: ["1080p", "Lat/Eng", "Acción", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'garfield2',
+                title: 'Garfield 2',
+                poster: 'https://play-lh.googleusercontent.com/bV6A4ze48XefmpT7wqbVSacZ7RVerGwljS2oGP6YT6EIqVvtc6mJRK-Q1I5Iv2UA17ULPg',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwAPaBt8lhwbTtC5Ly12rqPjOQOCwC06pUa4B9d5juP2sv_0VLFNVKMqo&s=10',
+                links: { mex: 'https://ww20.321moviesfree.com/es/detail/movie/IEG509OTPzI4AhsH7dVhM-Garfield-A-Tail-of-Two-Kitties', usa: 'https://video.playspelis.com/es/detail/movie/ReG26oNCFsLzFQNlavaq7-Garfield-A-Tail-of-Two-Kitties' },
+                desc: 'Garfield viaja a Londres y se encuentra con su doble real.',
+                reqs: ["1080p", "Lat/Eng", "Animación", "2006"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'us',
+                title: 'Us',
+                poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyHi1Mlkncd_qMgrEanZTikrsgok7DXfnrLCIdn1sY1o5AI2IT9Rlph-um&s=10',
+                screen: 'https://media.gq.com.mx/photos/5c992ecccb60c0d1f9ade41e/master/pass/us.jpg',
+                links: { mex: 'https://es.cuevana4br.com/es/detail/movie/rmjuxLx8jiLuyWv0FJMdV-Us', usa: 'https://www3.dramasfree.com/es/detail/movie/URzczuIn46Kqg7PWoR8sL-Us' },
+                desc: 'Una familia se enfrenta a sus propios doppelgängers.',
+                reqs: ["4K", "Lat/Eng", "Terror", "2019"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'michaeljackson',
+                title: 'Michael Jackson',
+                poster: 'https://m.media-amazon.com/images/M/MV5BNzllNmRlN2EtMDQyOC00ODJjLTg4OWQtZDNmNGU3YzlkNjc1XkEyXkFqcGc@._V1_.jpg',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpZRMEXjHdwi4FsMpyPLkiBHVeuMltqUv8mnS7gjC8BxkNgf_uK751222S&s=10',
+                links: { mex: 'https://ww20.321moviesfree.com/es/detail/movie/qztQ1T9u5SsDb7fkzVD3D-Michael', usa: 'https://peliculaplay.com/es/detail/movie/JEg8jBK5ztJgZO1GrVd6e-Michael' },
+                desc: 'Biopic del Rey del Pop, Michael Jackson.',
+                reqs: ["4K", "Lat/Eng", "Biopic", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'from_series',
+                title: 'From (Serie Completa)',
+                poster: 'https://es.web.img3.acsta.net/img/7f/5b/7f5b275c23162a85b46befa8bba36176.jpg',
+                screen: 'https://hips.hearstapps.com/hmg-prod/images/from-temporada-2-649ec0a7cb33a.jpg?crop=1xw:0.845427435387674xh;center,top&resize=1200:*',
+                desc: 'Serie de terror y misterio. Selecciona la temporada abajo.',
+                reqs: ["1080p", "Lat/Eng", "Serie", "2022-2025"],
+                showNewBadge: false,
+                type: 'movie',
+                isSeries: true,
+                seasons: fromSeasons
+            },
+            {
+                id: 'duckduckgoose',
+                title: 'Duck Duck Goose',
+                poster: 'https://m.media-amazon.com/images/M/MV5BMGYzNmI3M2EtMzBmYy00Njg2LWE2NDQtZDlkYTA0ZjBjODE1XkEyXkFqcGc@._V1_.jpg',
+                screen: 'https://statcdn.fandango.com/MPX/image/NBCU_Fandango/207/334/thumb_47795138-BFD6-4A78-878A-66C62EDA020E.jpg',
+                links: { mex: 'https://es.cuevana4br.com/es/detail/movie/8GNH9uG44vzxBbyd8D03e-Duck-Duck-Goose', usa: 'https://es.cuevana4br.com/es/detail/movie/63pT2KvVoYIchR7ckLF52-Duck-Duck-Goose' },
+                desc: 'Un pato solitario aprende el valor de la familia.',
+                reqs: ["1080p", "Lat/Eng", "Animación", "2018"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'elio',
+                title: 'Elio',
+                poster: 'https://m.media-amazon.com/images/M/MV5BMDFjNDQ5YTctMGE4MS00MGQyLTg4NTktYWNhZWM3NjA3OGE5XkEyXkFqcGc@._V1_.jpg',
+                screen: 'https://es.hollywoodreporter.com/wp-content/uploads/2025/06/Elio.jpg',
+                links: { mex: 'https://play.cuevana.life/es/detail/movie/ixNkQTutut7SZNKZIc2Ul-Elio', usa: 'https://ww20.321moviesfree.com/es/detail/movie/Rntl6et7PsSVB7bAivq86-Elio' },
+                desc: 'Un niño es transportado al espacio exterior.',
+                reqs: ["4K", "Lat/Eng", "Animación", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'nahual',
+                title: 'El ritual del nahual',
+                poster: 'https://m.media-amazon.com/images/M/MV5BZjkyZGI0ZDMtOGVkOC00NzZjLThjMjEtODkxNGFkZjk0M2M3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxnx4Q2bJTnUsMQYEjBGwL8VG-wq1BpqVSGN1e5OhmHU_Gv-LUt_xrcicS&s=10',
+                links: { mex: 'https://play.cuevana.life/es/detail/movie/ANM5QDEZMiuKRvz0jGohJ-TEKENCHU-THE-RITE-OF-THE-NAHUALES', usa: null },
+                desc: 'Un misterioso ritual ancestral en la selva.',
+                reqs: ["1080p", "Latino", "Terror", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: true
+            },
+            {
+                id: 'thrash',
+                title: 'Embestida',
+                poster: 'https://m.media-amazon.com/images/M/MV5BODMxNjdhMWQtMmJhYS00MDc1LTkyYzAtYTgzZTFhMmI1ODEyXkEyXkFqcGc@._V1_.jpg',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSe2io_uYTQJZeCB5Aj31CHt-FfRxe05Yp3P4LHFCda6GI9qT6zBV9kBRo&s=10',
+                links: { mex: 'https://flixlat.com/es/detail/movie/nnzUvXldjywuQKuyLSl11-Thrash', usa: 'https://flixlat.com/es/detail/movie/rywWImRFMrLeAVbkWFI49-Thrash' },
+                desc: 'Acción y suspenso en una carrera contra el tiempo.',
+                reqs: ["1080p", "Lat/Eng", "Acción", "2026"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'stuartlittle',
+                title: 'Stuart Little',
+                poster: 'https://static.wikia.nocookie.net/doblaje/images/0/0b/StuartLittle.jpg/revision/latest?cb=20200731144201&path-prefix=es',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1qi-mAJ8Zzk8ga0Ok0kLFqleIheT2ePLhSVJ9xnucbgKvLqiocrs5Eo2g&s=10',
+                links: { mex: 'https://peliculaplay.com/es/detail/movie/s4dW1eeeK6HAYLEUer9F5-Stuart-Little-1', usa: null },
+                desc: 'La divertida aventura del ratón más famoso.',
+                reqs: ["1080p", "Latino", "Familiar", "1999"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: true
+            },
+            {
+                id: 'gooddinosaur',
+                title: 'Un gran dinosaurio',
+                poster: 'https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p11822260_p_v13_am.jpg',
+                screen: 'https://statcdn.fandango.com/MPX/image/NBCU_Fandango/748/607/TheGoodDinosaur_20YearsTrailer.jpg',
+                links: { mex: 'https://video.playspelis.com/es/detail/movie/EqJnRCPzFNDNlq82T1enM-The-Good-Dinosaur', usa: 'https://www3.dramasfree.com/es/detail/movie/YMFcTMbiNFmdG1jwZZOX8-The-Good-Dinosaur' },
+                desc: 'Un dinosaurio aprende el valor de la amistad.',
+                reqs: ["4K", "Lat/Eng", "Animación", "2015"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'mama',
+                title: 'Mamá',
+                poster: 'https://m.media-amazon.com/images/M/MV5BNmY2OGQwYjUtNmJjYi00MjI1LWIwYTItNDVkNzdiNzU0ZWRmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
+                screen: 'https://m.media-amazon.com/images/M/MV5BMTUzODU4MTYwOV5BMl5BanBnXkFtZTgwMDY5NDkyMzE@._V1_.jpg',
+                links: { mex: 'https://es.cuevana4br.com/es/detail/movie/UaZxWV4wht1be5VNqgrj4-Mama', usa: 'https://play.cuevana.life/es/detail/movie/0CvTkRfMfEitdfxRCILVJ-Mama' },
+                desc: 'Una terrorífica historia de una madre fantasma.',
+                reqs: ["1080p", "Lat/Eng", "Terror", "2013"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'it',
+                title: 'IT',
+                poster: 'https://m.media-amazon.com/images/M/MV5BZGZmOTZjNzUtOTE4OS00OGM3LWJiNGEtZjk4Yzg2M2Q1YzYxXkEyXkFqcGc@._V1_.jpg',
+                screen: 'https://ichef.bbci.co.uk/ace/ws/640/cpsprodpb/66D3/production/_98032362_mediaitem98014584.jpg.webp',
+                links: { mex: 'https://www3.dramasfree.com/es/detail/movie/TL9fg2TEFkYy6UE4qo2kh-It-Chapter-One', usa: 'https://www3.dramasfree.com/es/detail/movie/SY2qrXk1ShOo7UdvyALxT-It-Chapter-One' },
+                desc: 'Un payaso aterroriza a un grupo de niños.',
+                reqs: ["4K", "Lat/Eng", "Terror", "2017"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true
+            },
+            {
+                id: 'fall',
+                title: 'Fall',
+                poster: 'https://m.media-amazon.com/images/M/MV5BYmZjYjAxMDEtOTE2My00MmM5LTkyYjctOWRjMjgyM2JhMDI0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
+                screen: 'https://m.media-amazon.com/images/M/MV5BZmY5MjRjY2ItMzFmOC00NjAyLTg2MGYtYmQxZmMwNDYwOGFhXkEyXkFqcGc@._V1_.jpg',
+                links: { mex: 'https://flixlat.com/es/detail/movie/HGsEo12DCkUvSm37QjPmn-Fall', usa: 'https://flixlat.com/es/detail/movie/4tinAmcV9JtPS7f0krjE9-Fall' },
+                desc: 'Dos amigas se quedan atrapadas en una torre de radio de 600 metros.',
+                reqs: ["1080p", "Lat/Eng", "Suspenso", "2022"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+            // Laberinto del fauno (portada actualizada)
+            {
+                id: 'pans_labyrinth',
+                title: 'El laberinto del fauno',
+                poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaF97WlFHvodrvTmlRj0i7yOJjPW6Debq803-ochitIIvV0Z-TJIeaTWY&s=10',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4B_y_zJZNzCh4WYCON3pptxVipd5e5o0mWXFwX3LKrd7kc7RIUVt2uIM&s=10',
+                links: { mex: 'https://flixlat.com/es/detail/movie/V9UDU2L7EQ9ecVrHpYSXh-Pans-Labyrinth', usa: null },
+                desc: 'En la España de 1944, una niña descubre un mundo mágico.',
+                reqs: ["1080p", "Latino", "Fantasía", "2006"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: true
+            },
+            {
+                id: 'matrix',
+                title: 'Matrix',
+                poster: 'https://m.media-amazon.com/images/M/MV5BN2NmN2VhMTQtMDNiOS00NDlhLTliMjgtODE2ZTY0ODQyNDRhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
+                screen: 'https://m.media-amazon.com/images/M/MV5BNzM4OTkzMjcxOF5BMl5BanBnXkFtZTgwMTkxMjI1MTI@._V1_.jpg',
+                links: { mex: 'https://ww20.321moviesfree.com/es/detail/movie/xdxYYCIesNjd8F3OIETwx-The-Matrix', usa: 'https://www3.dramasfree.com/es/detail/movie/wZ9bNJvIYHCQqGbwozrQH-The-Matrix' },
+                desc: 'Un hacker descubre que la realidad es una simulación.',
+                reqs: ["4K", "Lat/Eng", "Ciencia Ficción", "1999"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+            {
+                id: 'ready_or_not_2',
+                title: 'Ready or Not 2',
+                poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxCKu00pK_6a1rs0Afwe0rV_h_43buDG2jHyr_hGvU36HTqZenyfU1HtM&s=10',
+                screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmeZry935U8HVbxAzXNKBZsKh9FTuFXiiGPayunZ7YrWVwT2_d7YrnG41o&s=10',
+                links: { mex: 'https://es.cuevana4br.com/es/detail/movie/Scen4HIQ82DEwa1aXDYgf-Ready-or-Not-2-Here-I-Come', usa: 'https://es.cuevana4br.com/es/detail/movie/Jn55IIy8fEAsPPOMmb5mm-Ready-or-Not-2-Here-I-Come' },
+                desc: 'La secuela del sangriento juego de la boda.',
+                reqs: ["1080p", "Lat/Eng", "Terror", "2025"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+            {
+                id: 'shawshank',
+                title: 'Sueño de fuga',
+                poster: 'https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_.jpg',
+                screen: 'https://m.media-amazon.com/images/M/MV5BMTQ5NTI4NDAxMV5BMl5BanBnXkFtZTgwMTQxNDY3Mw@@._V1_.jpg',
+                links: { mex: 'https://play.cuevana.life/es/detail/movie/ETRCPqhmI1ut2TExltM6u-The-Shawshank-Redemption', usa: 'https://play.cuevana.life/es/detail/movie/LBH1u34QUL1cZTa9W8owU-The-Shawshank-Redemption' },
+                desc: 'Un banquero inocente es condenado a cadena perpetua.',
+                reqs: ["4K", "Lat/Eng", "Drama", "1994"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            },
+            {
+                id: 'toystory5',
+                title: 'Toy Story 5',
+                poster: 'https://lumiere-a.akamaihd.net/v1/images/alta_pre_int_intl_payoff_peeking_cmyk_v2_a283fa09.png',
+                screen: 'https://estaticos-cdn.prensaiberica.es/clip/30d95a69-70d3-487a-b6bb-65a220eaffb5_16-9-discover-aspect-ratio_default_0_x1080y388.jpg',
+                links: { mex: 'https://video.playspelis.com/es/detail/movie/yN0aGFrdc4n4TsPf0wZ5C-Toy-Story-5', usa: 'https://ver.123pelicula.com/es/detail/movie/cAx1n7IcoOanmND8zoEc3-Toy-Story-5' },
+                desc: 'La nueva aventura de Woody, Buzz y sus amigos.',
+                reqs: ["4K", "Lat/Eng", "Animación", "2026"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: false
+            }
         ];
 
         const games = [
@@ -805,35 +1943,6 @@
             { id: 'fnafsotm', title: 'FNaF Secret of the Mimic', poster: 'https://static.wikia.nocookie.net/triple-a-fazbear/images/c/cb/SecretoftheMimic_CoverKeyArt.jpg/revision/latest?cb=20250213034421', screen: 'https://img.apkvision.org/five-nights-at-freddys-secret-of-the-mimic/five-nights-at-freddys-secret-of-the-mimic-10.webp', link: 'https://download2389.mediafire.com/blz1demeye5gZAQRqphYEvnLNNVOXtfSksNDmRP8p0JJUNjt9jVxVycFot2-Xx-NSIxv5scmz0tRtHpM_dmj1gMtYuyivW_u48wTDjsyZz9pIovlHBetV6kHibY4MOKMSyaTpOJdpH_8_qNDPaSkARhHCSimVpOz7HISKdBt0WvTgV8/q73wqvyyjisxaqw/fnaf+sotm+mobile+v0.1.9+-+espacioapk.com.apk', desc: 'Explora los secretos del Mimic.', reqs: ["4GB RAM", "Octa-Core 2.4", "2.5GB", "10+"], type: 'game' },
             { id: 'ln1', title: 'Little Nightmares', poster: 'https://image.api.playstation.com/vulcan/ap/rnd/202505/2806/bf55ecf7705258517e66f19128536c4835ec475a25ec1cf8.jpg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ25onFavqxqCa9TzWTPI6AHrWvU3s3-uiJKDgzevnywPviKusX2fs7X4Lu&s=10', link: 'https://download2436.mediafire.com/06npzj2kkyogijmvX5Z3GlkhrR4d-zRP31vdhVT2OncmDk7UZ3l4i73JWUp6tuEP_kQ8fi4GD2QyvbF2n9DTPT5fi0yH7GiOqn6PdlIYEGmfAABh2J5ZAyBL89vGdc1sEHEDE4-gLyjgjeUdyNguN3q_2mMj3Q1X3WH3mO3zXYBvkuU/y7hznysx5ube1sy/Litle+Naightmares_%E2%9C%85SIN+VIRUS.apk', desc: 'Ayuda a Seis a escapar.', reqs: ["4GB RAM", "Octa-Core 2.0", "1.5GB", "9.0+"], type: 'game' },
             { id: 'hff', title: 'Human Fall Flat', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLgujSbYHhalK_BA7ViEBzgbyTsdjquFxBPGz4AQROeG6t8fs_8Xo5-kmN&s=10', screen: 'https://img.apkvision.org/human-fall-flat/human-fall-flat-5.webp', link: 'https://download2393.mediafire.com/juxht3ku9fog1zmPAw5vWZv1ANuUbywxhMUOn8tVXhQbGVNaAKrVy5XnxrN19GRqXKYYHeA9-xgNIMOQNND3EQUsaT7yeLE_7Whbp4b81vL2BZDcUjnX7dZ9Kv6WnuE4flns3Lb-jXJmj-WPVRNP2f2KnW4fBoWJna93huuxUYtU5ME/6gyc9xlhng29hps/Human-Fall-Flat-v2.5.1-full-apkvision.apk', desc: 'Divertido juego de puzles con física.', reqs: ["3GB RAM", "1.8GHz", "800MB", "9.0+"], type: 'game' },
-            { id: 'gtav', title: 'Grand Theft Auto V', poster: 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Grand_Theft_Auto_V.png/250px-Grand_Theft_Auto_V.png', screen: 'https://root-nation.com/wp-content/uploads/2021/08/GTA5-Mobile-APK-02.jpg', link: 'https://download2389.mediafire.com/u6d6yje090tgoxg5iijecH20XypblqLzfwYFryiMeozS6bD76PnGqyUzIiwS2NzQUmmTid5W16mKLjAZx86uoDY7UcG4WV0ZyQ9QmTR2reFn17mILLv_b6tu8eGIyHkOPE55nq_36iqv2ZGodDn5EPtZ-ux8xJ5rFDUI-3KroBbnGoc/hjoahu9to2lyal0/Grand+Theft+Auto+V+-+espacioapk.com.apk', desc: 'Puerto móvil del clásico de Rockstar.', reqs: ["2GB RAM", "1.5GHz", "500MB", "8.0+"], type: 'game' },
-            { id: 'fnafsb', title: 'FNaF Security Breach', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlLcK2U0rmkMIKo7BDuYMM8vpJFmzJ68dJd7IuoRMO4ZLzi7qqlauQ7icKX7Y4gyKMKxi3a6WYA4QS5gEVPHvD7hIPuQh_ctq6LJZndg&s=10', screen: 'https://unreal-play-studio.com/asset/fnaf-security-breach-mobile/7xm6jD.webp', link: 'https://download2438.mediafire.com/c41li4v2ttpgq7IP0SzVJl8i78LJ0Lll2Vvc_fqUmP4yknc2FtxatDge2OHDSvVbjXfm9uG2nnEo79Gzx_PDh4M5_6v3V1gNGyAx8K6EkILfgB7VVhryzyyrbfIaVtJXL6XMnMprDgnthlaEJ8DJeY9DClUw3KGSql_7fcv1oFxDZn0/8tnjgy3i2u4ho60/fnaf+security+breach+v1.7.0.1+-+espacioapk.com.apk', desc: 'Terror en el Pizzaplex.', reqs: ["4GB RAM", "2.0GHz", "2GB", "9.0+"], type: 'game' },
-            { id: 'pvzfusion', title: 'PvZ Fusion', poster: 'https://thepvzfusion.pro/wp-content/uploads/2026/02/images-12-1.webp', screen: 'https://imgcdn.latestmodapks.com/api/resize?url=https://www.latestmodapks.com/wp-content/uploads/2024/10/pvz-fusion-3-media.webp', link: 'https://file.pvzfusionapk.mx/pvz-fusion-v3.4.2-pvzfusionapk.mx.apk', desc: 'Nueva versión con mecánicas de fusión.', reqs: ["2GB RAM", "Octa-Core 1.8", "600MB", "7.0+"], type: 'game' },
-            { id: 'gtasa', title: 'GTA San Andreas', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0HDsIEYbbjaj7Ga-y6R7ubG_XRz4wC2DI9g&s', screen: 'https://images.igdb.com/igdb/image/upload/t_720p/sc7aot.jpg', link: 'https://download2443.mediafire.com/itlmicpzebgMBogY-jCfIBRmWkh1HWyrEkejDMdlycF5xTkWgt16TmW3AOguA3D69OoA3zcNo8ICitq91-wYS30LmhPbj4ga0CSGa8T7nnorUImnXplp8e2VONcjRYtAMpZL_kDNgTCHAqvS8OACJGry3BRqjVprYrBfh4WldFlvQE/5brnv5qxhtng8no/gta+san+andreas+v2.11.277+-+espacioapk.com.apk', desc: 'Únete a CJ en Los Santos.', reqs: ["3GB RAM", "Quad-Core 1.8", "3GB", "9.0+"], type: 'game' },
-            { id: 'gtavc', title: 'GTA: Vice City', poster: 'https://static.wikia.nocookie.net/esgta/images/0/0f/Grand_Theft_Auto_Vice_City.JPG/revision/latest/scale-to-width-down/1200?cb=20161127222945', screen: 'https://img.apkvision.org/grand-theft-auto-vice-city/grand-theft-auto-vice-city-1.webp', link: 'https://dl.apkvision.org/grand-theft-auto-vice-city/GTA-VC-v1.12.259-full-apkvision.apk', desc: 'Revive los 80 en Vice City.', reqs: ["2GB RAM", "1.5GHz", "1.5GB", "8.0+"], type: 'game' },
-            { id: 'subn_bz', title: 'Subnautica: BZ', poster: 'https://store-images.s-microsoft.com/image/apps.25913.13546341381523259.8f30b71b-aac8-4816-a999-212ef85f8876.1b6b3f4d-3d78-409e-acc2-57b4950505b7', screen: 'https://img.apkvision.org/subnautica-below-zero/subnautica-below-zero-1.webp', link: 'https://dl.apkvision.org/subnautica-below-zero/Subnautica-Below-Zero-v1.22.55044-full-apkvision.apk', desc: 'Supervivencia en un mundo gélido.', reqs: ["4GB RAM", "2.4GHz", "3GB", "9.0+"], type: 'game' },
-            { id: 'p4', title: 'Poppy Playtime 4', poster: 'https://assetsio.gnwcdn.com/Poppy-Playtime-Chapter-4-promo-image-showing-a-toy-character-extending-its-hand-towards-the-camera.jpg?width=1200&height=1200&fit=crop&quality=100&format=png&enable=upscale&auto=webp', screen: 'https://img.itch.zone/aW1hZ2UvMzQxOTQ2MC8yMDQxODI1NC5wbmc=/original/hVzrVs.png', link: 'https://piro775.itch.io/toy-factory-chapter-4', desc: 'Vuelve a la fábrica Playtime.', reqs: ["6GB RAM", "2.8GHz", "2GB", "10+"], type: 'game' },
-            { id: 'silksong', title: 'HK Silksong', poster: 'https://westshoreroar.com/wp-content/uploads/2025/10/silksong.jpg', screen: 'https://img.apkvision.org/hollow-knight-silksong/hollow-knight-silksong-2.webp', link: 'https://download2447.mediafire.com/w84peg5sx8fgBc-7cVVmCeWeTHT7srV5XEq4NbfMtzlim6gxgE54Vr-cxARCyg2zmDRL5j6HiNz_i9PGgKqstW7i9WWZow41PaBe8omyaRLz7n8BeztpmXVbOQMB2-2soj3Z3mjB1Tu100nj-S6iMiqkIH5w3aDUGplF1Y7s_4zHS4I/h18frmho5yk6liy/HW+Silksing+v1.20+-+espacioapk.com.apk', desc: 'La esperada aventura de Hornet.', reqs: ["4GB RAM", "2.0GHz", "2GB", "9.0+authorized"], type: 'game' },
-            { id: 'p3', title: 'Poppy Playtime 3', poster: 'https://http2.mlstatic.com/D_NQ_NP_615692-MLM96301603984_102025-O.webp', screen: 'https://unreal-play-studio.com/asset/poppy-playtime-3/o4ozI7.webp', link: 'https://unreal-play-studio.com/games/poppy-playtime-chapter-3', desc: 'Investiga el orfanato Playcare.', reqs: ["SD 855", "4GB RAM", "3GB", "8.0+"], type: 'game' },
-            { id: 'descenders', title: 'Descenders', poster: 'https://upload.wikimedia.org/wikipedia/en/8/8a/Descenders_cover.jpg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlSbLwRzT8Cn947R3Ri4_XsF3XIxA9m7RRxKyTX_Ncp0b_ywc0ng6X7hbK&s=10', link: 'https://apks.trulhost.com/Descenders-v1.10.3-Mod.apk', desc: 'Ciclismo extremo de montaña.', reqs: ["4GB RAM", "2.2GHz", "2.5GB", "9.0+"], type: 'game' },
-            { id: 'miles', title: 'Miles Morales', poster: 'https://static.wikia.nocookie.net/ficcion-sin-limites/images/7/73/Miles_Morales.jpg/revision/latest?cb=20220320020218&path-prefix=es', screen: 'https://img.itch.zone/aW1hZ2UvMzA4ODY5MS8xODQ3MDY1OC5qcGc=/original/EOiKUx.jpg', link: 'https://download2448.mediafire.com/doaqi0p34hbgSi7mQcuB9wuZxs99BBxGjSznCCWArLig-alMXAYJ1289MM8fTj8lmAEVy47CyBZ9eRoboCUtyVFqs1I1zTuqOmVsfsrH7m9XUO5lnXwPK9DewQOm_w8vSTLkVYz5KOCfPa83rTTI2s-Gg1QoF3o-4ziGQgpfMtKAJnw/kqarkaqmh0nhrtx/Spiderman_Miles_Morales_v1_%5Bwww.AndroSU.com%5D.apk', desc: 'Conviértete en Spiderman en tu móvil.', reqs: ["2GB RAM", "1.8GHz", "400MB", "8.0+"], type: 'game' },
-            { id: 'fnaf', title: 'FNaF Spanish', poster: 'https://images.genius.com/b49240eb5e510bb0b56d5abd7b45270d.512x512x1.png', screen: 'https://imag.malavida.com/mvimgbig/download-fs/five-nights-at-freddys-14759-1.jpg', link: 'https://download2391.mediafire.com/4awsa1pfuqkg_ojkGcYFDme4_OXIyK-uykrHLpBkHiOAI8rIJOBB2iqmYFxLLMjIcEJYXvXELlHNavqV-7pg7Ey1fKuzwDK2_-VrYI2f3wbVKBc4JyLVNOPBgDKnmVTqgIuvVrgbv8in3yE9erjX7GMgZUOJD0CgDOOYlvCI7XjU6Ik/7nysoswlpi8cm9l/Five+Nights+at+Freddy%C2%B4s+%28Spanish%29+-+espacioapk.com.apk', desc: 'Terror clásico en español.', reqs: ["2GB RAM", "2.0GHz", "1GB", "8.0+"], type: 'game' },
-            { id: 'cuphead', title: 'Cuphead + DLC', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSToa5X0umhuLw7OvUtiq8Wu_XVqSPOhfHDYlgq1Be7kg&s=10', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhyD7O9v9JpZqpkl9s6b0_h88E83M5HZeB_aUwaWcVmg&s', link: 'https://download2390.mediafire.com/2apu3aa59cqgUW8WOTsFRW_CNVJY0mQbikGsRMsccfTvqx0mCA1VsOVFXpWHxy6-rjpxC8_t-EuexMVwQ4sy4PBUTuqFcGRcAGx0ZYHszUXnQbCtGC7y0RrkB5KUQsVHYURU8LRC09zUrxTOjL-MeeOO3yfMWCKne3w9LjJY7G88g7A/vdlzhn68ru3nuo5/Cuphead+%2B+DLC+-+v1.0.3+-+VPR.apk', desc: 'Acción retro de los años 30.', reqs: ["3GB RAM", "2.0GHz", "2.5GB", "9.0+"], type: 'game' },
-            { id: 'hollow', title: 'Hollow Knight', poster: 'https://store-images.s-microsoft.com/image/apps.58959.13847644057609868.8865d2a2-5e11-4424-85ce-1db30a161bd9.41ca3834-331c-4d34-b2c9-7dfe318fd168', screen: 'https://i.ytimg.com/vi/KHsAue9ufQY/maxresdefault.jpg', link: 'https://download2447.mediafire.com/6pwcinoz923g4rm5JW4aO8IZ_LGG0dAEVgbihR-sUpiB4F0lE7n6fdMoQGQARq9I5bs_sN36Jsr-FWjFeTkRQnYOJi-_gJO5PjE4_Aj1kh58gzoMnZG-KRhbPw99mpzUDNmnVM41SPbQHK8g-cmdjWolJi0kUlk7W3g7vxgPdIEXYP8/bsqgq7dnvz6w187/HKVulkanV2.7z', desc: 'Épica aventura metroidvania.', reqs: ["3GB RAM", "2.0GHz", "1.2GB", "9.0+"], type: 'game' },
-            { id: 'subnautica', title: 'Subnautica', poster: 'https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/subnautica_cover.JPG', screen: 'https://i.ytimg.com/vi/n4-L-xK59C8/maxresdefault.jpg', link: 'https://download2444.mediafire.com/7i63ty3ufoygSuk3mCe12Re1SXEgAcrulrZRKZXjof3D6ebEB6Lg8GRETd2-RrOl-yHYJ6RblW-LkwnHttGmSSv9wA3lz5bm6rRBywV9hem4mEZf4BUQHcPlh4OsT0KIsrCntqEKals7nOewT19kwsrxjpnPsDNk36ohAu1gxq4hP2g/yxk9uno0d6hq45c/Subnautica+v1.22.83315-espacioapk.com.apk', desc: 'Explora un mar alienígena.', reqs: ["4GB RAM", "2.2GHz", "2.5GB", "9.0+"], type: 'game' },
-            { id: 'p1', title: 'Poppy Playtime 1', poster: 'https://plusgami.store/cdn/shop/files/Poppy-Playtime-Chapter-1-Juego-Digital-600x748.webp?v=1755981188', screen: 'https://i.ytimg.com/vi/R2u5n-eX_xY/maxresdefault.jpg', link: 'https://download2441.mediafire.com/igmoapc1gtwgA-0TiHJ97w7lu_cCjFWdCe9UNvEtG0VjznLDpeUmlMdXWtKXi-MA8OUaT48VL8nPaWKlyfmepiGF8PILQsX1kaHSBCOnwBsQv5_XKqY6HFVBfK_Qz6n8nFbHHxUamAEqfsw3rbFKhCpcSdldZHtwdKTaEz9u_F9fCck/cc1338960hyor1h/poppy+playtime+v1.0.18+-+espacioapk.com.apk', desc: 'Terror en la fábrica de juguetes.', reqs: ["3GB RAM", "2.0GHz", "1.5GB", "9.0+"], type: 'game' },
-            { id: 'fnaf2_lat', title: 'FNaF 2 Latino', poster: 'https://es.pickgamer.com/media/3888/Five-Nights-at-Freddy%27s-2-285x380.jpg', screen: 'https://i.ytimg.com/vi/aC896jZ-yK0/maxresdefault.jpg', link: 'https://download2443.mediafire.com/7yhnowyobazg12rakflefBZyxiYZw7oFyVsSFWTDlABYDmTtHtnDBday11_cNW22Can6iYDDGygPlX98cbsgGwQ8fQUt_QO1VEjEntucQYTSSne94csxl43JtmaAVirQ5zkrgSJCmwyMYsl3Dw8FSXoJilrqCEue6mYOL_yWvVFML0k/qxuqjfb86v0d5kd/Five+Nights+at+Freddys+2+%28Spanish%29+-+espacioapk.com.apk', desc: 'FNaF 2 con voces latinas.', reqs: ["2GB RAM", "1.5GHz", "400MB", "8.0+"], type: 'game' },
-            { id: 'gta4', title: 'Grand Theft Auto IV', poster: 'https://upload.wikimedia.org/wikipedia/en/b/b7/Grand_Theft_Auto_IV_cover.jpg', screen: 'https://root-nation.com/wp-content/uploads/2021/09/GTA-4-Mobile-01.jpg', link: 'https://download2437.mediafire.com/uoxh6nolgbmgmy22EJxRGPTZiGORGcZC0YoPkArAI1EXvSZ46HIs3u0V-TgybrgHCjqZMT482qR36qAXujwldZVUOs3hmKAQaPz1_CejN2TOSHL4Vj9uqwUL97HQnmXy_w7NQoc1g495fx3pOWsgHtD5qaJufFTwHPPsNGtU7Atdwt16/eq042b72t11in8z/GTA+4+Mobile+%28Fanmade%29+v1.0+-+espacioapk.com.apk', desc: 'Fanmade GTA IV para Android. Pesa 400MB.', reqs: ["400MB", "Android 8.0+", "3GB RAM"], showNewBadge: false, type: 'game' },
-            { id: 'fnaf4', title: 'Five Nights at Freddy\'s 4', poster: 'https://m.media-amazon.com/images/M/MV5BMWJmMjQ0MmEtNjI5ZS00YjVhLTkxMGEtZmIzOTcxOGI4MGNkXkEyXkFqcGc@._V1_.jpg', screen: 'https://m.gjcdn.net/game-screenshot/500/2712840-ujbrdn2q-v4.webp', link: 'https://download2390.mediafire.com/ooyqn5qm7ilgE0FME6VoTCto3j_yNoN7sZJdIvTiR37KRsZadr7QYLhfPjmrL5MHu5dB5DFagCXwMFsAt_HbFN3uUBHrGf-DSfUU4elvzS7OpnPskLAP0gFXLggHohVg_30uLxECZIfdfy9Jb5JccwBHmLdAQLG1knRAAbrP4z2P_EKF/ik1rahsd8yzcps6/Five+Nights+at+Freddy%C2%B4s+4+%28Spanish%29+-+espacioapk.com.apk', desc: 'Terror en tu propia habitación. Pesa 500MB.', reqs: ["500MB", "Android 8.0+", "2GB RAM"], showNewBadge: false, type: 'game' },
-            { id: 'terraria', title: 'Terraria', poster: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/1a/Terraria_Steam_artwork.jpg/250px-Terraria_Steam_artwork.jpg', screen: 'https://play-lh.googleusercontent.com/NpMliVjbQx0qLgZHLk0YHaxdjTaLEzxbCxoAOsGJbzYmsCN7ZFBSBWHDHF4tqCqsx84=w526-h296-rw', link: 'https://download.terariaapk.com/Terraria-v1.4.5.6.4terariaapk.com.apk', desc: 'Aventura y construcción en un mundo pixelado. Pesa 300MB.', reqs: ["300MB", "Android 8.0+", "2GB RAM"], showNewBadge: false, type: 'game' },
-            { id: 'theroom', title: 'The Room', poster: 'https://play-lh.googleusercontent.com/5nc0gBE_3fxx0nPKjTjF3O-l53tDiNaDGJjCGHqwXvb1Imsno1MDhcpYZYNEgC3vqs0', screen: 'https://play-lh.googleusercontent.com/rScxTE1cFaTKXHD5IgV-MgPS5qG4LRGbdd_L9pNhMP2ilp_XmfI7EzcgTvyYqWO8JNw=w526-h296-rw', link: 'https://dl.apkvision.org/the-room/The-Room-v1.11-full-apkvision.apk', desc: 'Resuelve misteriosos puzzles en 3D.', reqs: ["200MB", "Android 6.0+", "1.5GB RAM"], showNewBadge: false, type: 'game' },
-            { id: 'geometrydash', title: 'Geometry Dash', poster: 'https://play-lh.googleusercontent.com/ixHXzBWPmmKWIBxDMfjbIXK10UQCTDvIYOcs_uLXHCRbdsz2siJFYfb7MqckU8eC3Ks', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReBcdqRIGU8Y0KgQWZSyU69DFvS8cclyXznBeZv0KDzYBth2ODHtuxXMU&s=10', link: 'https://vexfile.com/d_bucket/rIASsd4uhd', desc: 'Ritmo y habilidad en un juego desafiante.', reqs: ["150MB", "Android 5.0+", "1GB RAM"], showNewBadge: false, type: 'game' },
-            { id: 'arknova', title: 'Ark Nova', poster: 'https://www.malditogames.com/wp-content/uploads/FT_ArkNova-1.jpg', screen: 'https://img.apkvision.org/Ark-Nova/Ark-Nova-2.webp', link: 'https://dl.apkvision.org/ark-nova/Ark-Nova-v1.0.4-full-apkvision.apk', desc: 'Construye el mejor zoológico moderno del mundo.', reqs: ["400MB", "Android 8.0+", "3GB RAM"], showNewBadge: false, type: 'game' },
-            { id: 'rushrally3', title: 'Rush Rally 3', poster: 'https://content-assets.eneba.games/clp/ce15ef81-de2a-4824-9ff6-2055e4a5d4b5.jpg', screen: 'https://minireview.io/common/uploads/cache/review/1-900-506-asddadasda-0579361.webp', link: 'https://download2388.mediafire.com/5vho76y1jnbgVhgAvP7JG6uZBeBPH1H9aZ5nusVXECFSu3WfGD9EeLDMEMus4bvuGpk0zc7ferSVbCUD072I8zReuuCtXbsZzlX4UqJnI944wW3LIR0HXzhkUyNmLpX8TWEmJjJrE_rMmtTWrhKVRVdyo6xai7d4biaA0Z1aUn4ARdM/6pyz6jsm47qrxk5/rush+rally+3+mod+v1.157+-+espacioapk.com.apk', desc: 'Juego de rally extremo con gráficos impresionantes.', reqs: ["300MB", "Android 8.0+", "2GB RAM"], showNewBadge: false, type: 'game' },
-            { id: 'driftride', title: 'Drift Ride', poster: 'https://cdn-bgp.bluestacks.com/BGP/latam/gametiles_com.carxtech.driftride.jpg', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb36taJdTReBSWbEEMdjRILKyPGlER8W2yzoliZlWtWypC19JGAD9mVa8&s=10', link: 'https://files.an1.net/drift-ride-mod_1.52-an1.com.apk', desc: 'Juego de drifting con gráficos realistas.', reqs: ["300MB", "Android 8.0+", "2GB RAM"], showNewBadge: false, type: 'game' },
-            { id: 'gridlegends', title: 'Grid Legends Mobile', poster: 'https://upload.wikimedia.org/wikipedia/en/2/2a/GRID_Legends_cover_art.jpeg', screen: 'https://play-lh.googleusercontent.com/L_4c_ITdYtMCCa97AoX9vexGlvD9STmOCwb_lpLIMknKVceUeNkrFOwX6tr-cFyLnCw=w526-h296-rw', link: 'https://cdn.9mod.cloud/GRID%20Legends%20Deluxe%20Edition/grid-legends-deluxe-edition-v1.1.4RC7-unlocked.apks?token=TVRjM09EWTBOVE0yTVE9PQ%3D%3D', desc: 'El mejor juego de carreras para móvil.', reqs: ["1.5GB", "Android 10.0+", "4GB RAM"], showNewBadge: false, type: 'game' },
-            { id: 'scritchyscratchy', title: 'Scritchy Scratchy', poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5HLiEZ4cH0hdhjIIvNEfkn2RyT5DcqBnWIczLCA88OFPi8YZdDfKyFcA&s=10', screen: 'https://images.squarespace-cdn.com/content/v1/5f5a3ad1b3aa75691878d2a5/d6f12626-8834-4b4b-b4f2-a6275ee49404/scritchy-scratchy-1.webp', link: 'https://dl.apkvision.org/scritchy-scratchy/Scritchy-Scratchy-v1.1.18-unlocked-apkvision.apk', desc: 'Juego de raspar y ganar premios increíbles.', reqs: ["200MB", "Android 7.0+", "2GB RAM"], showNewBadge: false, type: 'game' },
-            { id: 'naruto', title: 'NARUTO: Ultimate Ninja STORM', poster: 'https://m.media-amazon.com/images/M/MV5BNzg5OTZhZjUtMmEwOC00ZGI1LTljOTgtNDMzMTA1YjlhNDA2XkEyXkFqcGc@._V1_.jpg', screen: 'https://img.apkvision.org/NARUTO-Ultimate-Ninja-STORM/NARUTO-Ultimate-Ninja-STORM-4.webp', link: 'https://dl.apkvision.org/naruto-ultimate-ninja-storm/Ultimate-Ninja-STORM-v1.2.9-full-apkvision.apk', desc: 'El famoso juego de lucha de Naruto llega a Android.', reqs: ["4GB RAM", "Snapdragon 660", "1.5GB", "9.0+"], showNewBadge: false, isMostWanted: false, type: 'game' },
-            { id: 'nova_legacy', title: 'Nova Legacy', poster: 'https://pic.bittopup.com/apiUpload/40929b010921c42c5c77274e9442c2dc.png?imageView2/0/format/webp/ignore-error/1', screen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKvLLvhjiElobOzMYHEGogoAioX5yxU3YBu40r169YFA--tCPMwvp6__5y&s=10', link: 'https://download2303.mediafire.com/46uuxgge18lgc30YoE7Wntt5yA66U0kSRWZ37OjqJY6XOJRznp_JP7XGVXATt2C1vRtrttGuNAS-VMYgLgERcj2vZig9rSCP0cL5ZmaV6OLAhdCx44awbSKOaFbhqMXDQq7rjGznmp_7gzdYBeLap76ex_vRBD3s246vcLTe-GqHbjrg/p0t9hoi018p3bks/N.O.V.A.+Legacy+v5.8.4a+-+espacioapk.com.apk', desc: 'El legendario juego de acción y ciencia ficción para móviles.', reqs: ["2GB RAM", "Snapdragon 660", "500MB", "8.0+"], showNewBadge: false, isMostWanted: false, type: 'game' }
         ];
 
         // ==================== WEBHOOKS ====================
@@ -849,7 +1958,7 @@
         function notifyDownload(item, type) {
             const embed = {
                 title: "📥 Nueva Descarga",
-                color: 0xbac1c8,
+                color: 0x888888,
                 fields: [
                     { name: "🎬 Contenido", value: item.title, inline: true },
                     { name: "📂 Tipo", value: type === 'game' ? "🎮 Juego" : "🎬 Película/Serie", inline: true },
@@ -951,6 +2060,10 @@
 
             if (!modal || !title || !img || !desc || !reqs || !links) { return; }
 
+            // Remover clases previas
+            modal.classList.remove('closing');
+            modal.classList.add('active');
+
             title.textContent = item.title;
             img.src = item.screen || item.poster || 'https://via.placeholder.com/300x400?text=Sin+Captura';
             img.alt = item.title;
@@ -968,10 +2081,10 @@
                     btn.className = 'modal-link-btn primary';
                     btn.href = item.link;
                     btn.target = '_blank';
-                    btn.textContent = 'Descargar APK';
+                    btn.textContent = '⬇️ Descargar APK';
                     btn.onclick = function(e) { notifyDownload(item, type); };
                     links.appendChild(btn);
-                } else { links.innerHTML = `<p style="color:#888;">Enlace no disponible</p>`; }
+                } else { links.innerHTML = `<p style="color:#555;">Enlace no disponible</p>`; }
             } else {
                 if (item.links) {
                     if (item.links.mex && item.links.mex !== 'No disponible en español') {
@@ -979,7 +2092,7 @@
                         btnMex.className = 'modal-link-btn';
                         btnMex.href = item.links.mex;
                         btnMex.target = '_blank';
-                        btnMex.textContent = 'Ver en Latino';
+                        btnMex.innerHTML = `<span class="flag-icon">🇲🇽</span> Latino`;
                         btnMex.onclick = function(e) { notifyDownload(item, type); };
                         links.appendChild(btnMex);
                     }
@@ -988,17 +2101,32 @@
                         btnUsa.className = 'modal-link-btn';
                         btnUsa.href = item.links.usa;
                         btnUsa.target = '_blank';
-                        btnUsa.textContent = 'Ver en Inglés';
+                        btnUsa.innerHTML = `<span class="flag-icon">🇺🇸</span> Inglés`;
                         btnUsa.onclick = function(e) { notifyDownload(item, type); };
                         links.appendChild(btnUsa);
                     }
-                    if (!item.links.mex && !item.links.usa) { links.innerHTML = `<p style="color:#888;">Enlace no disponible</p>`; }
-                } else { links.innerHTML = `<p style="color:#888;">Enlace no disponible</p>`; }
+                    if (!item.links.mex && !item.links.usa) { links.innerHTML = `<p style="color:#555;">Enlace no disponible</p>`; }
+                } else { links.innerHTML = `<p style="color:#555;">Enlace no disponible</p>`; }
             }
 
             modal.style.display = 'flex';
-            modal.classList.add('active');
+            // Asegurar que la animación de entrada se ejecute
+            setTimeout(() => {
+                modal.classList.add('active');
+            }, 10);
             document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+            modal.classList.add('closing');
+            // Esperar a que termine la animación para ocultar
+            setTimeout(() => {
+                modal.style.display = 'none';
+                modal.classList.remove('closing');
+            }, 400);
+            document.body.style.overflow = '';
         }
 
         // ==================== FILTROS Y BÚSQUEDA ====================
@@ -1033,7 +2161,7 @@
         document.getElementById('searchInput').addEventListener('input', filterCards);
 
         document.querySelectorAll('.nav-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function(e) {
                 const filter = this.dataset.filter;
 
                 if (filter === 'app') {
@@ -1041,6 +2169,18 @@
                     return;
                 }
 
+                // Efecto de onda (ripple) más suave
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
+                ripple.style.top = (e.clientY - rect.top - size/2) + 'px';
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 500);
+
+                // Cambiar estado activo
                 document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
                 filterCards();
@@ -1054,13 +2194,13 @@
             const status = document.getElementById('request-status');
             if (!text) {
                 status.textContent = '❌ Escribe algo antes de enviar.';
-                status.style.color = '#bac1c8';
+                status.style.color = '#888';
                 return;
             }
 
             const embed = {
                 title: "📩 Nueva Petición",
-                color: 0xd0d7da,
+                color: 0x888888,
                 fields: [
                     { name: "👤 Usuario", value: "Anónimo", inline: true },
                     { name: "📝 Contenido", value: text, inline: false }
@@ -1070,25 +2210,18 @@
 
             sendWebhookBackground(WEBHOOK_REQUESTS, { embeds: [embed] });
             status.textContent = '✅ Petición enviada con éxito.';
-            status.style.color = '#faffff';
+            status.style.color = '#aaa';
             document.getElementById('requestText').value = '';
             setTimeout(() => { status.textContent = ''; }, 4000);
         });
 
         // ==================== MODAL CLOSE ====================
 
-        document.getElementById('modalClose').addEventListener('click', function() {
-            const modal = document.getElementById('modal');
-            modal.classList.remove('active');
-            modal.style.display = 'none';
-            document.body.style.overflow = '';
-        });
+        document.getElementById('modalClose').addEventListener('click', closeModal);
 
         document.getElementById('modal').addEventListener('click', function(e) {
             if (e.target === this) {
-                this.classList.remove('active');
-                this.style.display = 'none';
-                document.body.style.overflow = '';
+                closeModal();
             }
         });
 
@@ -1113,4 +2246,4 @@
         });
     </script>
 </body>
-</html>
+    </html>
