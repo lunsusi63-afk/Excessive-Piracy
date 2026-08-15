@@ -893,7 +893,36 @@
         ];
 
         const movies = [
-            // ========== NUEVAS PELÍCULAS CON ETIQUETA "NEW" (prioridad máxima) ==========
+            // ========== NUEVA SERIE AGREGADA (con etiqueta NEW) ==========
+            {
+                id: 'thementalist_s1',
+                title: 'El Mentalista (T1)',
+                poster: 'https://n.uguu.se/MsulCJQg.jpeg',
+                screen: 'https://pics.filmaffinity.com/El_mentalista_Serie_de_TV-184904864-large.jpg',
+                links: { mex: 'https://es.cuevana4br.com/es/detail/drama/TuPRcG1aDXlnKO2vn9M67-The-Mentalist-Season-1', usa: null },
+                desc: 'Patrick Jane, un ex falso médium, trabaja como consultor para el CBI (Oficina de Investigación de California) utilizando su increíble capacidad de observación y su aguda inteligencia para resolver casos. Aunque su don para leer a las personas y su carisma lo convierten en un activo invaluable, su pasado trágico —la muerte de su esposa e hija a manos del asesino en serie Red John— lo atormenta y lo impulsa a buscar venganza. Esta primera temporada presenta casos intrigantes mientras Jane y el equipo del CBI, liderado por la agente Teresa Lisbon, se enfrentan a criminales complejos y a sus propias tensiones internas.',
+                reqs: ["1080p", "Latino", "Serie", "T1"],
+                showNewBadge: true,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: true
+            },
+
+            // ========== LAS DEMÁS PELÍCULAS/SERIES (sin etiqueta New) ==========
+            // Spider-Man (YA NO ES NUEVO)
+            {
+                id: 'spiderman_nowayhome',
+                title: 'Spider-Man: Sin camino a casa',
+                poster: 'https://www.ecartelera.com/images/noticias/fotos/70100/70190/1.jpg',
+                screen: 'https://disney.images.edge.bamgrid.com/ripcut-delivery/v2/variant/disney/019b29a9-3cf3-7339-ad8e-513baa325095/compose?format=webp&width=2560',
+                links: { mex: 'https://play.cuevana.life/es/detail/movie/mMtxCySrAv62Pou8OY32l-Spider-Man-No-Way-Home', usa: null },
+                desc: 'Peter Parker, desesperado por la revelación de su identidad secreta, pide ayuda al Doctor Strange para restaurar su anonimato. Pero un hechizo sale mal y abre el multiverso, trayendo a villanos de otras realidades que pondrán a prueba al joven héroe. Una aventura épica donde Spider-Man enfrenta las consecuencias de sus actos y descubre lo que realmente significa ser un héroe.',
+                reqs: ["4K", "Latino", "Acción", "2021"],
+                showNewBadge: false,
+                type: 'movie',
+                multiVersion: true,
+                noEnglish: true
+            },
             // Shrek 1
             {
                 id: 'shrek1',
@@ -903,7 +932,7 @@
                 links: { mex: 'https://ww20.321moviesfree.com/es/detail/movie/GYCE7CN7NaKvd1HLQkALS-Shrek-1', usa: null },
                 desc: 'Shrek, un ogro solitario y gruñón, ve su tranquilidad invadida cuando un montón de personajes de cuentos de hadas son desterrados a su pantano. Para recuperar su hogar, hace un trato con el malvado Lord Farquaad: rescatar a la princesa Fiona a cambio de su pantano. Pero Fiona guarda un secreto que cambiará su vida para siempre. Una divertida y conmovedora aventura que parodia los cuentos de hadas tradicionales.',
                 reqs: ["1080p", "Latino", "Animación", "2001"],
-                showNewBadge: true,
+                showNewBadge: false,
                 type: 'movie',
                 multiVersion: true,
                 noEnglish: true
@@ -917,7 +946,7 @@
                 links: { mex: 'https://video.playspelis.com/es/detail/movie/tL0vvE124qUEYQiXJP6BO-Shrek-2', usa: 'https://www3.dramasfree.com/es/detail/movie/J7fnJCf9SEgvL5ZdRl112-Shrek-2' },
                 desc: 'Shrek y Fiona regresan de su luna de miel y reciben una invitación del reino de Muy Muy Lejano, donde los padres de Fiona, el Rey Harold y la Reina Lilian, esperan conocer al nuevo esposo de su hija. Pero el Rey no está contento con que su hija se haya casado con un ogro y contrata al famoso Cazador de Ogros, el Gato con Botas, para deshacerse de Shrek.',
                 reqs: ["1080p", "Lat/Eng", "Animación", "2004"],
-                showNewBadge: true,
+                showNewBadge: false,
                 type: 'movie',
                 multiVersion: true,
                 noEnglish: false
@@ -931,7 +960,7 @@
                 links: { mex: 'https://www3.dramasfree.com/es/detail/movie/dhKJjyRSBB8OsfOMBDx8M-Shrek-the-Third', usa: null },
                 desc: 'El Rey Harold está enfermo y Shrek debe asumir el trono de Muy Muy Lejano. Pero él no quiere ser rey, así que junto con Asno y el Gato con Botas emprende un viaje para encontrar al legítimo heredero: Arturo, un adolescente que no tiene idea de que es el próximo rey. Mientras tanto, el malvado Lord Farquaad y otros villanos planean tomar el control.',
                 reqs: ["1080p", "Latino", "Animación", "2007"],
-                showNewBadge: true,
+                showNewBadge: false,
                 type: 'movie',
                 multiVersion: true,
                 noEnglish: true
@@ -945,7 +974,7 @@
                 links: { mex: 'https://flixlat.com/es/detail/movie/KbBstwx247XkFI9FFX1Ws-Shrek-4', usa: 'https://play.cuevana.life/es/detail/movie/V2hAjlrTyUKdLY1PKbGah-Shrek-Forever-After' },
                 desc: 'Shrek está harto de su vida familiar y firma un contrato con el duende Rumpelstiltskin para que le conceda un día como un ogro salvaje de nuevo. Pero el trato sale mal y Shrek se encuentra en una realidad alternativa donde nunca existió, y debe encontrar la manera de romper el hechizo y recuperar su vida original.',
                 reqs: ["1080p", "Lat/Eng", "Animación", "2010"],
-                showNewBadge: true,
+                showNewBadge: false,
                 type: 'movie',
                 multiVersion: true,
                 noEnglish: false
@@ -959,7 +988,7 @@
                 links: { mex: 'https://es.cuevana4br.com/es/detail/movie/MnPWUfrY9W6hT56Qlqy4P-Harry-Potter-and-the-Sorcerers-Stone', usa: 'https://peliculaplay.com/es/detail/movie/c8JMIdiUaaD8iexKGncPS-Harry-Potter-and-the-Sorcerers-Stone' },
                 desc: 'Harry Potter, un huérfano que vive con sus crueles tíos, descubre en su undécimo cumpleaños que es un mago y que ha sido aceptado en el Colegio Hogwarts de Magia y Hechicería. Allí hará amigos, aprenderá magia y se enfrentará a un misterioso peligro relacionado con una piedra filosofal que otorga la inmortalidad.',
                 reqs: ["1080p", "Lat/Eng", "Fantasía", "2001"],
-                showNewBadge: true,
+                showNewBadge: false,
                 type: 'movie',
                 multiVersion: true,
                 noEnglish: false
@@ -973,7 +1002,7 @@
                 links: { mex: 'https://video.playspelis.com/es/detail/movie/7IGD9nHAxejzYstx8oauA-Harry-Potter-and-the-Chamber-of-Secrets', usa: 'https://play.cuevana.life/es/detail/movie/0dQbe7KK7cluKhxlBXaLI-Harry-Potter-and-the-Chamber-of-Secrets' },
                 desc: 'Harry regresa a Hogwarts para su segundo año y descubre que la Cámara de los Secretos ha sido abierta, liberando una criatura que petrifica a los estudiantes. Con la ayuda de sus amigos Ron y Hermione, Harry debe encontrar la cámara y enfrentar al heredero de Slytherin antes de que el colegio sea cerrado.',
                 reqs: ["1080p", "Lat/Eng", "Fantasía", "2002"],
-                showNewBadge: true,
+                showNewBadge: false,
                 type: 'movie',
                 multiVersion: true,
                 noEnglish: false
@@ -987,7 +1016,7 @@
                 links: { mex: 'https://play.cuevana.life/es/detail/movie/Lx07zhenmquqkwnRIaX43-Harry-Potter-and-the-Prisoner-of-Azkaban', usa: 'https://ww20.321moviesfree.com/es/detail/movie/Q1VyGg3x2uCXLdMmmEcIA-Harry-Potter-and-the-Prisoner-of-Azkaban' },
                 desc: 'En su tercer año, Harry descubre que Sirius Black, un peligroso prisionero fugado de Azkaban, está tras él. Pero pronto descubre que Sirius no es quien parece ser y que su pasado está más conectado con Harry de lo que imaginaba. Con la ayuda de un nuevo profesor, Remus Lupin, Harry aprenderá a enfrentar sus miedos.',
                 reqs: ["1080p", "Lat/Eng", "Fantasía", "2004"],
-                showNewBadge: true,
+                showNewBadge: false,
                 type: 'movie',
                 multiVersion: true,
                 noEnglish: false
@@ -1001,7 +1030,7 @@
                 links: { mex: 'https://es.cuevana4br.com/es/detail/movie/5PSbbDMj2q0fMrUFqUl7h-Harry-Potter-and-the-Goblet-of-Fire', usa: 'https://video.playspelis.com/es/detail/movie/OmsAaK53c8PFYtc4aIe2J-Harry-Potter-and-the-Goblet-of-Fire' },
                 desc: 'Harry es seleccionado para participar en el Torneo de los Tres Magos, una peligrosa competencia entre las tres escuelas de magia más importantes de Europa. Pero la competición es más siniestra de lo que parece, ya que alguien ha planeado que Harry participe para llevarlo a una trampa mortal.',
                 reqs: ["1080p", "Lat/Eng", "Fantasía", "2005"],
-                showNewBadge: true,
+                showNewBadge: false,
                 type: 'movie',
                 multiVersion: true,
                 noEnglish: false
@@ -1015,7 +1044,7 @@
                 links: { mex: 'https://www3.dramasfree.com/es/detail/movie/GH3Uf9dwLwcPBYa0UVDrt-Harry-Potter-and-the-Order-of-the-Phoenix', usa: 'https://ver.123pelicula.com/es/detail/movie/XIx88XJuKyoU7PM6R4et4-Harry-Potter-and-the-Order-of-the-Phoenix' },
                 desc: 'Harry se enfrenta a un nuevo año en Hogwarts mientras el Ministerio de Magia se niega a creer que Lord Voldemort ha regresado. Con la ayuda de sus amigos y la Orden del Fénix, Harry deberá luchar contra la opresión del Ministerio y entrenar a sus compañeros para la batalla que se avecina.',
                 reqs: ["1080p", "Lat/Eng", "Fantasía", "2007"],
-                showNewBadge: true,
+                showNewBadge: false,
                 type: 'movie',
                 multiVersion: true,
                 noEnglish: false
@@ -1029,7 +1058,7 @@
                 links: { mex: 'https://ver.123pelicula.com/es/detail/movie/SJfkmmdAfMXm35sriguDA-Harry-Potter-and-the-Half-Blood-Prince', usa: 'https://play.cuevana.life/es/detail/movie/VLekybiM5kJtI49Q1hhQ1-Harry-Potter-and-the-Half-Blood-Prince' },
                 desc: 'En su sexto año, Harry descubre un antiguo libro de pociones que perteneció al misterioso "Príncipe Mestizo". Con la ayuda de Dumbledore, Harry explora los recuerdos de Voldemort para descubrir sus debilidades, mientras la amenaza del Señor Oscuro se intensifica.',
                 reqs: ["1080p", "Lat/Eng", "Fantasía", "2009"],
-                showNewBadge: true,
+                showNewBadge: false,
                 type: 'movie',
                 multiVersion: true,
                 noEnglish: false
@@ -1043,7 +1072,7 @@
                 links: { mex: 'https://play.cuevana.life/es/detail/movie/UCV40uuETMLjTemd6EAkj-Harry-Potter-and-the-Deathly-Hallows-Part-1', usa: 'https://ver.123pelicula.com/es/detail/movie/4PsYjzNuNkHVbvdhnI8in-Harry-Potter-and-the-Deathly-Hallows-Part-1' },
                 desc: 'Harry, Ron y Hermione abandonan Hogwarts para buscar y destruir los Horrocruxes de Voldemort. En su peligroso viaje, descubren la existencia de las Reliquias de la Muerte y luchan por sobrevivir mientras el mundo mágico cae bajo el control del Señor Oscuro.',
                 reqs: ["1080p", "Lat/Eng", "Fantasía", "2010"],
-                showNewBadge: true,
+                showNewBadge: false,
                 type: 'movie',
                 multiVersion: true,
                 noEnglish: false
@@ -1057,7 +1086,7 @@
                 links: { mex: 'https://es.cuevana4br.com/es/detail/movie/PH8TgYolOk8zn1gvDTllG-Harry-Potter-and-the-Deathly-Hallows-Part-2', usa: 'https://www3.dramasfree.com/es/detail/movie/N8ouk4YIGNZ6DlZq5Y8kc-Harry-Potter-and-the-Deathly-Hallows-Part-2' },
                 desc: 'La batalla final por Hogwarts comienza. Harry debe enfrentarse a Voldemort en una última confrontación mientras intenta destruir los Horrocruxes restantes. El destino del mundo mágico depende del resultado de esta épica batalla.',
                 reqs: ["1080p", "Lat/Eng", "Fantasía", "2011"],
-                showNewBadge: true,
+                showNewBadge: false,
                 type: 'movie',
                 multiVersion: true,
                 noEnglish: false
@@ -1071,7 +1100,7 @@
                 links: { mex: 'https://www3.dramasfree.com/es/detail/movie/6AWoQRYo5hNh5YsCGoCym-White-Chicks', usa: 'https://play.cuevana.life/es/detail/movie/JnrGwP4UdgulNjymq3Bo2-White-Chicks' },
                 desc: 'Dos agentes del FBI, Marcus y Kevin, se disfrazan de dos hermanas rubias y adineradas para protegerlas de un secuestro. Pero su misión se complica cuando deben mantener el disfraz mientras investigan un caso de secuestro y se enfrentan a situaciones cómicas y peligrosas.',
                 reqs: ["1080p", "Lat/Eng", "Comedia", "2004"],
-                showNewBadge: true,
+                showNewBadge: false,
                 type: 'movie',
                 multiVersion: true,
                 noEnglish: false
@@ -1085,7 +1114,7 @@
                 links: { mex: 'https://ver.123pelicula.com/es/detail/movie/JTvoQuLUeUj46kaAYwgcJ-King-Kong', usa: null },
                 desc: 'Un grupo de exploradores liderados por el director de cine Carl Denham viaja a una isla misteriosa donde encuentran a King Kong, un gigantesco gorila que se enamora de la actriz Ann Darrow. Kong es capturado y llevado a Nueva York, donde debe enfrentarse a la civilización moderna.',
                 reqs: ["1080p", "Latino", "Aventura", "2005"],
-                showNewBadge: true,
+                showNewBadge: false,
                 type: 'movie',
                 multiVersion: true,
                 noEnglish: true
@@ -1099,7 +1128,7 @@
                 links: { mex: 'https://play.cuevana.life/es/detail/movie/dGWohgBn4Hm9pf9yyOcVc-Moana', usa: null },
                 desc: 'Adaptación en acción real de la historia de Moana, una valiente joven que navega por el océano para salvar a su aldea. Acompañada por el semidiós Maui, deberá devolver el corazón de Te Fiti y restaurar el equilibrio de la naturaleza.',
                 reqs: ["1080p", "Latino", "Aventura", "2026"],
-                showNewBadge: true,
+                showNewBadge: false,
                 type: 'movie',
                 multiVersion: true,
                 noEnglish: true
@@ -1113,13 +1142,13 @@
                 links: { mex: 'https://ww1.123flmsfree.com/es/detail/movie/r2C3s7qjuMCcX2aNXUXmi-Godzilla-vs-Kong', usa: 'https://video.playspelis.com/es/detail/movie/u2Z4dtRvNIDYNqRYL5T9L-Godzilla-vs-Kong' },
                 desc: 'Dos de los más poderosos titanes del planeta se enfrentan en una batalla épica. Mientras las organizaciones humanas intentan controlar a estas bestias, Godzilla y Kong luchan por la supremacía, y sus destinos están entrelazados con un misterio que amenaza al mundo.',
                 reqs: ["4K", "Lat/Eng", "Acción", "2021"],
-                showNewBadge: true,
+                showNewBadge: false,
                 type: 'movie',
                 multiVersion: true,
                 noEnglish: false
             },
 
-            // ========== LAS 10 ANTERIORES CON "NEW" AHORA PASAN A FALSE ==========
+            // ========== LAS 10 ANTERIORES CON "NEW" AHORA PASAN A FALSE (ya lo están) ==========
             {
                 id: 'theoriginals',
                 title: 'The Originals (T3)',
@@ -2246,4 +2275,4 @@
         });
     </script>
 </body>
-    </html>
+</html>
